@@ -11,10 +11,10 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('authors', [{
+    await queryInterface.bulkInsert('authors', [{
       first_name: 'Patrick',
       family_name: 'Rothfuss',
-      date_of_birth: new Date(1973, 06, 06),
+      date_of_birth: new Date(1973, 6, 6),
       date_of_death: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -49,5 +49,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+     await queryInterface.bulkDelete('authors', null, {});
   }
 };

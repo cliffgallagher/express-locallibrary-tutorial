@@ -24,8 +24,6 @@ module.exports = sequelize.define('Author', {
     date_of_death: {
         type: DataTypes.DATE
     }
-}, {
-    tableName: authors
 });
 
 /*const test = async () => {

@@ -17,8 +17,6 @@ module.exports = sequelize.define('Genre', {
             len: [3, 100]
         }
     }
-}, {
-    tableName: genres
 });
 
 /*const test = async () => {

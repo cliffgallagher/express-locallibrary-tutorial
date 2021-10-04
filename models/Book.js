@@ -16,8 +16,8 @@ module.exports = sequelize.define('Book', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    author: {
-        type: DataTypes.STRING,
+    author_id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: Author,
@@ -32,16 +32,14 @@ module.exports = sequelize.define('Book', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    genre: {
-        type: DataTypes.STRING,
+    genre_id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: Genre,
             key: 'genre_id'
         }
     }
-}, {
-    tableName: books
 });
 
 /*const test = async () => {

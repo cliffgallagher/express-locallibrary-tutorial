@@ -11,8 +11,8 @@ module.exports = sequelize.define('BookInstance', {
         primaryKey: true,
         autoIncrement: true
     },
-    book: {
-        type: Book,
+    book_id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: Book,
@@ -30,8 +30,6 @@ module.exports = sequelize.define('BookInstance', {
             type: DataTypes.DATE, defaultValue: DataTypes.NOW
         }
     }
-}, {
-    tableName: book_instances
 });
 
 /*const test = async () => {

@@ -25,7 +25,7 @@ module.exports = sequelize.define('Book', {
         }
     },
     summary: {
-        type: DataTypes.LONGTEXT,
+        type: DataTypes.TEXT('long'),
         allowNull: false
     },
     isbn: {

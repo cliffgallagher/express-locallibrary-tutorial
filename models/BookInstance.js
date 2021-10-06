@@ -1,10 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const Book = require('./Book');
-const sequelize = new Sequelize('local_library', 'root', 'JosieOvechkin89!', {
-    dialect: 'mysql'
-});
+const db = require("../config/database");
 
-module.exports = sequelize.define('BookInstance', {
+module.exports = db.define('BookInstance', {
     book_instance_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

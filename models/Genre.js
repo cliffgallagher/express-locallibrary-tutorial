@@ -1,9 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('local_library', 'root', 'JosieOvechkin89!', {
-    dialect: 'mysql'
-});
+const db = require("../config/database");
 
-module.exports = sequelize.define('Genre', {
+module.exports = db.define('Genre', {
     genre_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

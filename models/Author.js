@@ -1,9 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('local_library', 'root', 'JosieOvechkin89!', {
-    dialect: 'mysql'
-});
+const db = require("../config/database");
 
-module.exports = sequelize.define('Author', {
+module.exports = db.define('Author', {
     author_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -28,12 +26,12 @@ module.exports = sequelize.define('Author', {
 
 /*const test = async () => {
 try {
-    await sequelize.authenticate();
+    await db.authenticate();
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
-  sequelize.close();
+  db.close();
 };
 
 test();*/

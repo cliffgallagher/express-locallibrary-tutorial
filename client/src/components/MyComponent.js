@@ -1,20 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const MyComponent = () => {
-    const myArray = [1, 2, 3];
-    const grabArray = async () => {
+    const [string, setString] = useState("");
+
+    const getData = async () => {
         try {
             const promise = await fetch("/catalog");
-            const json = await promise.json();
-            console.log(json);
+            const javascriptObject = await promise.json();
+            console.log(javascriptObject);
+            setString(javascriptObject.toString());
         } catch (e) {
             console.log(e);
         }
     }
 
+    getData();
+
     return(
         <div>
-            <p>{myArray}</p>
+            <p>{string}</p>
         </div>
     );
 

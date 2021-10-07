@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 
 const MyComponent = () => {
-    const [array, setArray] = useState("");
+    const [string, setString] = useState("");
 
     const getData = async () => {
         try {
             const promise = await fetch("/catalog");
-            const array = await promise.text();
-            console.log(array);
-            setArray(array);
+            const stringFromJSON = await promise.text();
+            setString(stringFromJSON);
             /*for (item in array) {
                 for (attribute in object) {
                     setArray((prevState) => {
@@ -25,7 +24,7 @@ const MyComponent = () => {
 
     return(
         <div>
-            <p>{array}</p>
+            <p>{string}</p>
         </div>
     );
 

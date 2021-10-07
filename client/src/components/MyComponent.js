@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
 
 const MyComponent = () => {
-    const [string, setString] = useState("");
+    const [array, setArray] = useState("");
 
     const getData = async () => {
         try {
             const promise = await fetch("/catalog");
-            const javascriptObject = await promise.json();
-            console.log(javascriptObject);
-            setString(javascriptObject.toString());
+            const array = await promise.text();
+            console.log(array);
+            setArray(array);
+            /*for (item in array) {
+                for (attribute in object) {
+                    setArray((prevState) => {
+                        return [...prevState, object[attribute]];
+                    });
+                }
+            }*/
         } catch (e) {
             console.log(e);
         }
@@ -18,7 +25,7 @@ const MyComponent = () => {
 
     return(
         <div>
-            <p>{string}</p>
+            <p>{array}</p>
         </div>
     );
 

@@ -1,7 +1,8 @@
 var Book = require('../models/Book');
 
-exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: Site Home Page');
+exports.index = async function(req, res) {
+    const promise = await Book.findAll();
+    res.send(promise);
 };
 
 // Display list of all books.

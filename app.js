@@ -40,4 +40,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+/*const port = process.env.PORT || 3001;
+app.listen(port, function(err){
+  if (err) console.log("Error in server setup")
+  console.log(`Server listening on port ${port}`);
+})*/
+
 module.exports = app;

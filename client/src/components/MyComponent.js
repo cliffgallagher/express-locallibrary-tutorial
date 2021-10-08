@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import DataItem from './DataItem';
+import NewBook from './NewBook';
 
 const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
@@ -23,6 +24,7 @@ const MyComponent = () => {
 
     return(
         <div>
+            <NewBook />
             {myArray}
         </div>
     );

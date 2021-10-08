@@ -1,6 +1,6 @@
 var Book = require('../models/Book');
-import { body, validationResult } from 'express-validator';
-import Author from '../models/Author';
+const { body, validationResult } = require('express-validator');
+const Author = require('../models/Author');
 
 exports.index = async function(req, res) {
     const promise = await Book.findAll();

@@ -1,30 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState } from 'react';
+import DataItem from './DataItem';
 
 const MyComponent = () => {
-    const [string, setString] = useState("");
+    const [myArray, setMyArray] = useState([]);
 
     const getData = async () => {
         try {
             const promise = await fetch("/catalog");
-            const stringFromJSON = await promise.text();
-            setString(stringFromJSON);
-            /*for (item in array) {
-                for (attribute in object) {
-                    setArray((prevState) => {
-                        return [...prevState, object[attribute]];
-                    });
-                }
-            }*/
+            const arrayFromJSON = await promise.json();
+            console.log(arrayFromJSON.length);
+            setMyArray((prevState) => {
+                return [...prevState, arrayFromJSON.map((element) => <DataItem book_id={arrayFromJSON.length} />)]
+            })       
         } catch (e) {
             console.log(e);
         }
     }
 
-    getData();
+    useEffect(() => {
+        getData();
+    }, []);
 
     return(
         <div>
-            <p>{string}</p>
+            {myArray}
         </div>
     );
 

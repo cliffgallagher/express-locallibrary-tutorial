@@ -8,9 +8,9 @@ const MyComponent = () => {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();
-            console.log(arrayFromJSON.length);
+            console.log(arrayFromJSON);
             setMyArray((prevState) => {
-                return [...prevState, arrayFromJSON.map((element) => <DataItem book_id={arrayFromJSON.length} />)]
+                return [...prevState, arrayFromJSON.map((element) => <DataItem book_id={element.book_id} />)]
             })       
         } catch (e) {
             console.log(e);

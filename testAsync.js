@@ -36,16 +36,32 @@ console.log("hello cliff");
 
  
 //Not quite doing what I want but not returning errors
-async.parallel({
+/*async.parallel({
     author_ids: function(callback) {
-        Author.findAll({
+        callback(null, Author.findAll({
             attributes: ['author_id']
-        })
+        }));
     },
     genre_ids: function(callback) {
-        Genre.findAll({
+        callback(null, Genre.findAll({
             attributes: ['genre_id']
-        })
+        }));
+    }
+}, function(err, results) {
+    if (err) {
+        console.log("Error from final callback function: " + err);
+    }
+    console.log("results from final callback function: " + JSON.stringify(results));
+})*/
+
+async.parallel({
+    author_ids: function(callback) {
+        callback(null, fetch('/'));
+    },
+    genre_ids: function(callback) {
+        callback(null, Genre.findAll({
+            attributes: ['genre_id']
+        }));
     }
 }, function(err, results) {
     if (err) {
@@ -53,3 +69,12 @@ async.parallel({
     }
     console.log("results from final callback function: " + JSON.stringify(results));
 })
+
+/*const myString = async () => {
+    let promise = await Author.findAll({
+        attributes: ['author_id']
+    });
+    return JSON.stringify(promise);
+}
+
+console.log(myString());*/

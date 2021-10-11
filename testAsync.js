@@ -3,6 +3,7 @@ const database = require('./config/database');
 const parallel = require('async/parallel');
 const Author = require('./models/Author.js');
 const Genre = require('./models/Genre');
+var book_controller = require('./controllers/bookController');
 
 console.log("hello cliff");
 
@@ -55,13 +56,17 @@ console.log("hello cliff");
 })*/
 
 async.parallel({
-    author_ids: function(callback) {
-        callback(null, fetch('/'));
+    author_ids: async function() {
+        const res = await Author.findAll({
+            attributes: ['author_id']
+        });
+        return res;
     },
-    genre_ids: function(callback) {
-        callback(null, Genre.findAll({
+    genre_ids: async function() {
+        const res = await Genre.findAll({
             attributes: ['genre_id']
-        }));
+        });
+        return res;
     }
 }, function(err, results) {
     if (err) {
@@ -69,12 +74,3 @@ async.parallel({
     }
     console.log("results from final callback function: " + JSON.stringify(results));
 })
-
-/*const myString = async () => {
-    let promise = await Author.findAll({
-        attributes: ['author_id']
-    });
-    return JSON.stringify(promise);
-}
-
-console.log(myString());*/

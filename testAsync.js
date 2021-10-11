@@ -75,6 +75,6 @@ async.parallel({
     console.log("results from final callback function: " + JSON.stringify(results));
 
     /*for (item in results) {
-    console.log(results[item][0].dataValues);*/
-    }
+    console.log(results[item][0].dataValues);
+    }*/
 })

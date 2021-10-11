@@ -73,4 +73,8 @@ async.parallel({
         console.log("Error from final callback function: " + err);
     }
     console.log("results from final callback function: " + JSON.stringify(results));
+
+    /*for (item in results) {
+    console.log(results[item][0].dataValues);*/
+    }
 })

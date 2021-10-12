@@ -25,7 +25,7 @@ const MyComponent = () => {
     return(
         <div>
             <NewBook />
-            {myArray}
+            <ul>{myArray}</ul>
         </div>
     );
 

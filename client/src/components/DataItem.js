@@ -4,7 +4,7 @@ import './DataItem.css';
 const DataItem = (props) => {
     return (
         <div className='dataItem'>
-            <p>{props.key}</p><p>{props.title}</p><p>{props.isbn}</p><p>{props.summary}</p>      
+            <p>{props.title}</p><p>{props.isbn}</p><p>{props.summary}</p>      
         </div>
     );
 }

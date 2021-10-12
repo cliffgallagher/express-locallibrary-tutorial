@@ -11,7 +11,7 @@ const MyComponent = () => {
             const arrayFromJSON = await promise.json();
             console.log(arrayFromJSON);
             setMyArray((prevState) => {
-                return [...prevState, arrayFromJSON.map((element) => <DataItem key={element.book_id} book_id={element.book_id} title={element.title} author_id={element.author_id}/>)]
+                return [...prevState, arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)]
             })       
         } catch (e) {
             console.log(e);

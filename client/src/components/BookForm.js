@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 const BookForm = (props) => {
     console.log("BookForm rendered");
-    const [authorOptions, setAuthorOptions] = useState();
+    const [authorOptions, setAuthorOptions] = useState([<option key='0' value='0'>Select Author</option>]);
     const [genreOptions, setGenreOptions] = useState();
 
     const getAuthorsFromDatabase = async () => {
         const authorsResponse = await fetch('/catalog/authors');
         const authorObjectArray = await authorsResponse.json();
-        setAuthorOptions(() => {
-            return authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>);
+        setAuthorOptions((prevState) => {
+            return [...prevState, authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
         })     
     }
 

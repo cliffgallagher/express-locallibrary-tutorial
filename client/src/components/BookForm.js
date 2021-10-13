@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
 
 const BookForm = (props) => {
+    console.log("rendering BookForm");
 
     const [authorOptions, setAuthorOptions] = useState();
 
     const options = [
         {
+            key: 0,
+            text: "Select One",
+            value: ""
+        },
+        {
+            key: 1,
             text: "Herman Melville",
             value: "1"
         }, {
+            key: 2,
             text: "James Joyce",
             value: "2"
         }, {
+            key: 3,
             text: "Mitch Albom",
             value: "3"
         }
@@ -31,7 +40,7 @@ const BookForm = (props) => {
     
     useEffect(() => {
         setAuthorOptions(() => {
-            return options.map(option => <option value={option.value}>{option.text}</option>);
+            return options.map(option => <option key={option.key} value={option.value}>{option.text}</option>);
         })
     }, [])
     

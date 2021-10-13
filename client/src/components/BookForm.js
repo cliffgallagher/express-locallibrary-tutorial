@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const BookForm = (props) => {
     console.log("BookForm rendered");
     const [authorOptions, setAuthorOptions] = useState([<option key='0' value='0'>Select Author</option>]);
-    const [genreOptions, setGenreOptions] = useState();
+    const [genreOptions, setGenreOptions] = useState([<option key='0' value='0'>Select Genre</option>]);
 
     const getAuthorsFromDatabase = async () => {
         const authorsResponse = await fetch('/catalog/authors');
@@ -16,8 +16,8 @@ const BookForm = (props) => {
     const getGenresFromDatabase = async () => {
         const genresResponse = await fetch('/catalog/genres');
         const genreObjectArray = await genresResponse.json();
-        setGenreOptions(() => {
-            return genreObjectArray.map(element => <option key={element.genre_id} value={element.genre_id}>{element.name}</option>);
+        setGenreOptions((prevState) => {
+            return [...prevState, genreObjectArray.map(element => <option key={element.genre_id} value={element.genre_id}>{element.name}</option>)];
         })     
     }
 

@@ -4,7 +4,7 @@ import DataItem from './DataItem';
 const BookList = () => {
     const [myArray, setMyArray] = useState([]);
 
-    const getData = async () => {
+    const getBookList = async () => {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();
@@ -18,7 +18,7 @@ const BookList = () => {
     }
 
     useEffect(() => {
-        getData();
+        getBookList();
     }, []);
 
     return (

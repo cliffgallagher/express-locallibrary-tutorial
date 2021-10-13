@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
 const BookForm = (props) => {
-    console.log("rendering BookForm");
-
+    console.log("BookForm rendered");
     const [authorOptions, setAuthorOptions] = useState();
+
+    const getAuthorsFromDatabase = async () => {
+        const authorsResponse = await fetch('/catalog/authors');
+        const authorObjectArray = await authorsResponse.json();
+        console.log(authorObjectArray);
+    }
+
+    getAuthorsFromDatabase();
 
     const options = [
         {

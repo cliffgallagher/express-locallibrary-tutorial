@@ -8,6 +8,7 @@ app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // GET catalog home page.
 app.use('/catalog', catalogRouter);
+app.use('/catalog/*', catalogRouter);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));

@@ -7,7 +7,7 @@
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart",
     "client": "node start-client.js",
-    "prod_start": "concurrently \"node ./bin/www\" \"node productionServe"
+    "prodstart": "concurrently \"node ./bin/www\" \"node productionServe"
   },
   "dependencies": {
     "async": "^3.2.1",

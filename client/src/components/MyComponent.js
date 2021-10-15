@@ -7,6 +7,7 @@ const MyComponent = () => {
 
     return(
         <div>
+            <p>new paragraph</p>
             <NewBook />
             <BookList />
         </div>

@@ -35,7 +35,8 @@ exports.book_create_get = function(req, res) {
 
 // Handle book create on POST.
 exports.book_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book create POST');
+    //res.send('NOT IMPLEMENTED: Book create POST');
+    console.log(req.body);
 };
 
 // Display book delete form on GET.

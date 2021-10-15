@@ -40,9 +40,15 @@ const BookForm = (props) => {
             isbn: {isbnInput},
             genre_id: {genreInput}
         }
-        console.log(userInputData);
+        //console.log(userInputData);
         
-        //console.log("submitted");
+        fetch('catalog/book/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userInputData)
+        })
     }
 
     function titleInputChangeHandler(event) {

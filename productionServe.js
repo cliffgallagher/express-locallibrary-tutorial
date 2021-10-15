@@ -6,7 +6,7 @@ const catalogRouter = require('./routes/catalog');  //Import routes for "catalog
 
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-// GET catalog home page.
+// GET catalog calls
 app.use('/catalog', catalogRouter);
 app.use('/catalog/*', catalogRouter);
 

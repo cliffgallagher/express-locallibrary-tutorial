@@ -34,9 +34,17 @@ exports.book_create_get = function(req, res) {
 };
 
 // Handle book create on POST.
-exports.book_create_post = function(req, res) {
+exports.book_create_post = async function(req, res) {
     //res.send('NOT IMPLEMENTED: Book create POST');
-    console.log(req.body);
+    //console.log(req.body);
+    const newBook = await Book.create({
+        title: req.body.title.titleInput,
+        author_id: req.body.author_id.authorInput,
+        isbn: req.body.isbn.isbnInput,
+        genre_id: req.body.genre_id.genreInput,
+        summary: req.body.summary.summaryInput
+    });
+    console.log(JSON.stringify(newBook));
 };
 
 // Display book delete form on GET.

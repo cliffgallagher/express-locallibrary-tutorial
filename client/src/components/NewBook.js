@@ -14,7 +14,7 @@ const NewBook = () => {
     }
     
     return <div>
-        {!isEditing && <button onClick={newBookButtonHandler}>Add New Book</button>}
+        {!isEditing && <div><button onClick={newBookButtonHandler}>Add New Book</button><button>Update Existing Record</button></div>}
         {isEditing && <BookForm onCancel={newBookCancelHandler}/>}
     </div>;
 }

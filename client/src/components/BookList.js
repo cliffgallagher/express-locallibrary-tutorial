@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import DataItem from './DataItem';
 
-const BookList = () => {
-    const [myArray, setMyArray] = useState([]);
+const BookList = (props) => {
+    //const [myArray, setMyArray] = useState([]);
 
-    const getBookList = async () => {
+    console.log("rendered BookList component");
+
+    /*const getBookList = async () => {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();
@@ -15,15 +17,15 @@ const BookList = () => {
         } catch (e) {
             console.log(e);
         }
-    }
+    }*/
 
     useEffect(() => {
-        getBookList();
+        props.getBookList();
     }, []);
 
     return (
         <div>
-            <ul>{myArray}</ul>
+            <ul>{props.myArray}</ul>
         </div>
     )
 }

@@ -22,7 +22,7 @@ const MyComponent = () => {
     return(
         <div>
             <p>new paragraph</p>
-            <NewBook />
+            <NewBook getBookList={getBookList}/>
             <BookList getBookList={getBookList} myArray={myArray}/>
         </div>
     );

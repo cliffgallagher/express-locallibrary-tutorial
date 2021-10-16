@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BookForm from './BookForm';
 
-const NewBook = () => {
+const NewBook = (props) => {
     const [isEditing, setIsEditing] = useState(false);
 
     function newBookButtonHandler(event) {
@@ -15,7 +15,7 @@ const NewBook = () => {
     
     return <div>
         {!isEditing && <div><button onClick={newBookButtonHandler}>Add New Book</button><button>Update Existing Record</button></div>}
-        {isEditing && <BookForm onCancel={newBookCancelHandler}/>}
+        {isEditing && <BookForm onCancel={newBookCancelHandler} getBookList={props.getBookList}/>}
     </div>;
 }
 

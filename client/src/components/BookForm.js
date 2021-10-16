@@ -48,7 +48,8 @@ const BookForm = (props) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userInputData)
-        })
+        });
+        props.getBookList();
     }
 
     function titleInputChangeHandler(event) {

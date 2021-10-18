@@ -49,7 +49,9 @@ const BookForm = (props) => {
             },
             body: JSON.stringify(userInputData)
         });
-        props.getBookList();
+        console.log("userInputData at BookForm level: " + JSON.stringify(userInputData));
+        props.liftUserInputFromBookForm(userInputData);
+
     }
 
     function titleInputChangeHandler(event) {

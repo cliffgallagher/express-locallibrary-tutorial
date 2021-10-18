@@ -24,7 +24,7 @@ const BookList = (props) => {
     }*/
 
     return <ul>
-    {props.myArray.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)}
+    {props.myArray}
     </ul>
 }
 

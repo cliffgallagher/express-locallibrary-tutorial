@@ -19,15 +19,13 @@ const BookList = (props) => {
         }
     }*/
 
-    useEffect(() => {
-        props.getBookList();
-    }, []);
+    /*() => {
+        return [arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)]
+    }*/
 
-    return (
-        <div>
-            <ul>{props.myArray}</ul>
-        </div>
-    )
+    return <ul>
+    {props.myArray.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)}
+    </ul>
 }
 
 export default BookList;

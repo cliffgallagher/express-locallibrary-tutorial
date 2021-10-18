@@ -10,14 +10,16 @@ const MyComponent = () => {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();
-            console.log(arrayFromJSON);
-            setMyArray((prevState) => {
-                return [...prevState, arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)]
-            })       
+            //console.log(arrayFromJSON);
+            setMyArray(arrayFromJSON)      
         } catch (e) {
             console.log(e);
         }
     }
+
+    useEffect(() => {
+        getBookList();
+    }, []);
 
     return(
         <div>

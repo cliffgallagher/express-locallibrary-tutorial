@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import DataItem from './DataItem';
+import React from 'react';
 
 const BookList = (props) => {
     //const [myArray, setMyArray] = useState([]);
@@ -22,6 +21,7 @@ const BookList = (props) => {
     /*() => {
         return [arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)]
     }*/
+    
 
     return <ul>
     {props.myArray}

@@ -45,18 +45,27 @@ const BookForm = (props) => {
         
         async.series({
             post: async function() {
-                fetch('catalog/book/create', {
+                const response = await fetch('catalog/book/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(userInputData)
                 });
-                console.log("posted book to database");
+
+                const data = await response.json();
+                //console.log("posted book to database");
+                return data;
+
             },
             find: async function() {
-                props.getBookListNewBookToBookForm();
-                console.log("fetched Books from database");
+                const response = await props.getBookListNewBookToBookForm();
+                //console.log("fetched Books from database");
+                const data = await response.json();
+                return data;
+            },
+            print: async function () {
+                console.log("Third function firing.")
             }
         }, function(err, results) {
             if (err) {

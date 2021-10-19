@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import async from 'async';
 
 const BookForm = (props) => {
     const [authorOptions, setAuthorOptions] = useState([<option key='0' value='0'>Select Author</option>]);
@@ -42,16 +43,28 @@ const BookForm = (props) => {
         }
         //console.log(userInputData);
         
-        fetch('catalog/book/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
+        async.series({
+            post: async function() {
+                fetch('catalog/book/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userInputData)
+                });
+                console.log("posted book to database");
             },
-            body: JSON.stringify(userInputData)
-        });
-        console.log("userInputData at BookForm level: " + JSON.stringify(userInputData));
-        props.liftUserInputFromBookForm(userInputData);
-
+            find: async function() {
+                props.getBookListNewBookToBookForm();
+                console.log("fetched Books from database");
+            }
+        }, function(err, results) {
+            if (err) {
+                console.log("Error from final callback function: " + err);
+            }
+            console.log("results from final callback function: " + JSON.stringify(results));
+        
+        })
     }
 
     function titleInputChangeHandler(event) {

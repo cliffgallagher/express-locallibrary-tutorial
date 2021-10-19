@@ -10,9 +10,10 @@ const MyComponent = () => {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();
+            console.log("arrayFromJSON: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
-            setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>);
+            setMyArray((prevState) => {
+                return [prevState, arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)];
             })      
         } catch (e) {
             console.log(e);
@@ -23,11 +24,6 @@ const MyComponent = () => {
         getBookList();
     }, []);
 
-    const onChangeBookList = (userInput) => {
-        setMyArray((prevState) => {
-            return [...prevState, <DataItem key={225} title={userInput.title.titleInput} isbn={userInput.isbn.isbnInput} summary={userInput.summary.summaryInput}/>];
-        })
-    }
 
     /*const printUserInfo = (userInfo) => {
         console.log("userInfo at MyComponent level: " + JSON.stringify(userInfo));
@@ -36,8 +32,8 @@ const MyComponent = () => {
     return(
         <div>
             <p>new paragraph</p>
-            <NewBook liftUserInputToMyComponent={onChangeBookList}/>
-            <BookList myArray={myArray}/>
+            <NewBook getBookListMyComponentToNewBook={getBookList}/>
+            <BookList myArray={myArray} />
         </div>
     );
 

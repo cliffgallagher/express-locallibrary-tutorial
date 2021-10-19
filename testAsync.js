@@ -102,11 +102,4 @@ async.parallel({
     }
     console.log("results from final callback function: " + JSON.stringify(results));
 
-    /*for (item in results) {
-        for (let i = 0; i < results[item].length; i++) {
-            console.log(results[item][i].dataValues);
-        }
-
-    }*/
-
 })

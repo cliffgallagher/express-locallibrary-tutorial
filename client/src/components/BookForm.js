@@ -43,37 +43,15 @@ const BookForm = (props) => {
         }
         //console.log(userInputData);
         
-        async.series({
-            post: async function() {
-                const response = await fetch('catalog/book/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(userInputData)
-                });
-
-                const data = await response.json();
-                //console.log("posted book to database");
-                return data;
-
+        fetch('catalog/book/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            find: async function() {
-                const response = await props.getBookListNewBookToBookForm();
-                //console.log("fetched Books from database");
-                const data = await response.json();
-                return data;
-            },
-            print: async function () {
-                console.log("Third function firing.")
-            }
-        }, function(err, results) {
-            if (err) {
-                console.log("Error from final callback function: " + err);
-            }
-            console.log("results from final callback function: " + JSON.stringify(results));
-        
-        })
+            body: JSON.stringify(userInputData)
+        });
+
+        props.getBookListNewBookToBookForm();
     }
 
     function titleInputChangeHandler(event) {

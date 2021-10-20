@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import async from 'async';
 
 const BookForm = (props) => {
     const [authorOptions, setAuthorOptions] = useState([<option key='0' value='0'>Select Author</option>]);
@@ -43,15 +42,21 @@ const BookForm = (props) => {
         }
         //console.log(userInputData);
         
-        fetch('catalog/book/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userInputData)
-        });
+        const insertBook = async () => {
+            const response = await fetch('catalog/book/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userInputData)
+            });
 
-        console.log("passed the insertion point of code, before retreiving the list of all books");
+            return response;
+        }
+        
+        console.log("coming up on inserBook");
+        insertBook();
+        console.log("past insertBook");
         props.getBookListNewBookToBookForm();
     }
 

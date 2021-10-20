@@ -50,14 +50,13 @@ const BookForm = (props) => {
                 },
                 body: JSON.stringify(userInputData)
             });
+            props.getBookListNewBookToBookForm();
 
             return response;
         }
-        
-        console.log("coming up on inserBook");
+
         insertBook();
-        console.log("past insertBook");
-        props.getBookListNewBookToBookForm();
+        
     }
 
     function titleInputChangeHandler(event) {

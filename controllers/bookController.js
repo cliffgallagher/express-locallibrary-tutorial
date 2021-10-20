@@ -45,7 +45,7 @@ exports.book_create_post = async function(req, res) {
         summary: req.body.summary.summaryInput
     });
 
-    return newBook;
+    res.json(newBook);
     //console.log(JSON.stringify(newBook));
 };
 

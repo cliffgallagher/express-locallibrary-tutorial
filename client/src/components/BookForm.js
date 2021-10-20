@@ -51,6 +51,7 @@ const BookForm = (props) => {
             body: JSON.stringify(userInputData)
         });
 
+        console.log("passed the insertion point of code, before retreiving the list of all books");
         props.getBookListNewBookToBookForm();
     }
 

@@ -10,7 +10,7 @@ const MyComponent = () => {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();
-            console.log("arrayFromJSON: " + JSON.stringify(arrayFromJSON));
+            console.log("getBookList running: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
             setMyArray((prevState) => {
                 return [prevState, arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>)];

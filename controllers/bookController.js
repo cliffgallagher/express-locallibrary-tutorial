@@ -20,7 +20,7 @@ exports.book_detail = function(req, res) {
 // Display book create form on GET.
 exports.book_create_get = function(req, res) {
     // Get all authors and genres, which we can use for adding to our book.
-    async.parallel({
+    /*async.parallel({
         authors: function(callback) {
             Author.find(callback);
         },
@@ -30,7 +30,7 @@ exports.book_create_get = function(req, res) {
     }, function(err, results) {
         if (err) { return next(err); }
         res.render('book_form', { title: 'Create Book', authors: results.authors, genres: results.genres });
-    });
+    });*/
 };
 
 // Handle book create on POST.
@@ -44,7 +44,9 @@ exports.book_create_post = async function(req, res) {
         genre_id: req.body.genre_id.genreInput,
         summary: req.body.summary.summaryInput
     });
-    console.log(JSON.stringify(newBook));
+
+    return newBook;
+    //console.log(JSON.stringify(newBook));
 };
 
 // Display book delete form on GET.

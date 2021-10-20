@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const BookForm = (props) => {
+const NewBookForm = (props) => {
     const [authorOptions, setAuthorOptions] = useState([<option key='0' value='0'>Select Author</option>]);
     const [genreOptions, setGenreOptions] = useState([<option key='0' value='0'>Select Genre</option>]);
     const [titleInput, setTitleInput] = useState("");
@@ -91,4 +91,4 @@ const BookForm = (props) => {
         </form>
 }
 
-export default BookForm;
+export default NewBookForm;

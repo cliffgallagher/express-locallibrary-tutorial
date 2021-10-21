@@ -6,6 +6,7 @@ var book_controller = require('../controllers/bookController');
 var author_controller = require('../controllers/authorController');
 var genre_controller = require('../controllers/genreController');
 var book_instance_controller = require('../controllers/bookinstanceController');
+const { nextTick } = require('async');
 
 /// BOOK ROUTES ///
 
@@ -16,7 +17,10 @@ router.get('/', book_controller.index);
 router.get('/book/create', book_controller.book_create_get);
 
 // POST request for creating Book.
-router.post('/book/create', book_controller.book_create_post);
+router.post('/book/create', function(req, res, next) {
+    console.log("request body in /book/create in catalog.js: " + req.body)
+    next()
+}, book_controller.book_create_post)
 
 // GET request to delete Book.
 router.get('/book/:id/delete', book_controller.book_delete_get);

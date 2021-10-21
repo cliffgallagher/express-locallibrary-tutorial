@@ -40,9 +40,10 @@ const NewBookForm = (props) => {
             isbn: {isbnInput},
             genre_id: {genreInput}
         }
-        //console.log(userInputData);
+
         
         const insertBook = async () => {
+            console.log("entered insertBook");
             const response = await fetch('catalog/book/create', {
                 method: 'POST',
                 headers: {
@@ -51,7 +52,8 @@ const NewBookForm = (props) => {
                 body: JSON.stringify(userInputData)
             });
             props.getBookListNewBookToBookForm();
-
+            console.log("user input data: " + JSON.stringify(userInputData));
+            console.log("response in NewBookForm: " + JSON.stringify(response));
             return response;
         }
 

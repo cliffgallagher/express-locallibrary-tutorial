@@ -9,8 +9,12 @@ const DataItem = (props) => {
         setMouseIsPresent(true);
     }
 
+    function mouseLeaveHandler() {
+        setMouseIsPresent(false);
+    }
+
     return (
-        <div className='dataItem' onMouseEnter={mouseEnterHandler}>
+        <div className='dataItem' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
             {!mouseIsPresent && <BookInfo title={props.title} isbn={props.isbn} summary={props.summary} onMouseEnter={mouseEnterHandler}/>}
             {mouseIsPresent && <div>
                 <BookInfo title={props.title} isbn={props.isbn} summary={props.summary}/>

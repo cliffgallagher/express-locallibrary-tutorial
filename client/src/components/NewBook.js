@@ -15,20 +15,9 @@ const NewBook = (props) => {
         setIsAddingNewBook(false);
     }
 
-    function updateBookButtonHandler() {
-        console.log("you clicked update button");
-        setIsUpdatingExistinBook(true);
-    }
-
-    function updateBookCancelHandler() {
-        setIsUpdatingExistinBook(false);
-    }
-
-
     return <div>
-        {!isAddingNewBook && !isUpdatingExistingBook && <div><button onClick={newBookButtonHandler}>Add New Book</button><button onClick={updateBookButtonHandler}>Update Existing Record</button></div>}
+        {!isAddingNewBook && <div><button onClick={newBookButtonHandler}>Add New Book</button></div>}
         {isAddingNewBook && <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentToNewBook}/>}
-        {isUpdatingExistingBook && <div><BookUpdateForm onCancel={updateBookCancelHandler}/></div>}
     </div>;
 }
 

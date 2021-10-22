@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import BookInfo from './BookInfo';
 import './DataItem.css';
+import PopupForUpdate from './PopupForUpdate';
 
 const DataItem = (props) => {
     const [mouseIsPresent, setMouseIsPresent] = useState(false);
+    const [triggerStatus, setTriggerStatus] = useState(false);
 
     function mouseEnterHandler() {
         setMouseIsPresent(true);
@@ -13,13 +15,21 @@ const DataItem = (props) => {
         setMouseIsPresent(false);
     }
 
+    function updateBookButtonClickHandler(event) {
+        setMouseIsPresent(false);
+        setTriggerStatus(true);
+    }
+
     return (
         <div className='dataItem' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
             {!mouseIsPresent && <BookInfo title={props.title} isbn={props.isbn} summary={props.summary} onMouseEnter={mouseEnterHandler}/>}
             {mouseIsPresent && <div>
                 <BookInfo title={props.title} isbn={props.isbn} summary={props.summary}/>
-                <button>Update Book</button><button>Delete Book</button>
+                <button onClick={updateBookButtonClickHandler}>Update Book</button><button>Delete Book</button>
             </div>}
+            {triggerStatus && <div>
+               <PopupForUpdate /> 
+                </div>}
         </div>
     );
 }

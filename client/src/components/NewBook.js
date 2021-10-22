@@ -23,7 +23,8 @@ const NewBook = (props) => {
     function updateBookCancelHandler() {
         setIsUpdatingExistinBook(false);
     }
-    
+
+
     return <div>
         {!isAddingNewBook && !isUpdatingExistingBook && <div><button onClick={newBookButtonHandler}>Add New Book</button><button onClick={updateBookButtonHandler}>Update Existing Record</button></div>}
         {isAddingNewBook && <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentToNewBook}/>}

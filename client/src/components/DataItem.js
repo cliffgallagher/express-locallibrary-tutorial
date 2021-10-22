@@ -6,12 +6,11 @@ const DataItem = (props) => {
     const [mouseIsPresent, setMouseIsPresent] = useState(false);
 
     function mouseEnterHandler() {
-        console.log("entered mouse enter handler");
         setMouseIsPresent(true);
     }
 
     return (
-        <div className='dataItem'>
+        <div className='dataItem' onMouseEnter={mouseEnterHandler}>
             {!mouseIsPresent && <BookInfo title={props.title} isbn={props.isbn} summary={props.summary} onMouseEnter={mouseEnterHandler}/>}
             {mouseIsPresent && <div>
                 <BookInfo title={props.title} isbn={props.isbn} summary={props.summary}/>

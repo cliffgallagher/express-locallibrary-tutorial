@@ -2,9 +2,11 @@ import React, {useEffect, useState } from 'react';
 import NewBook from './NewBook';
 import BookList from './BookList';
 import DataItem from './DataItem';
+import PopupForUpdate from './PopupForUpdate';
 
 const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
+    const [displayPopupForUpdate, setDisplayPopupForUpdate] = useState(false);
     
     const getBookList = async () => {
         try {
@@ -13,7 +15,7 @@ const MyComponent = () => {
             console.log("getBookList running: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
             setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary}/>);
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler}/>);
             });
         } catch (e) {
             console.log(e);
@@ -29,12 +31,23 @@ const MyComponent = () => {
         console.log("userInfo at MyComponent level: " + JSON.stringify(userInfo));
     }*/
 
-    return(
-        <div>
+    function popupForUpdateHandler(boolean) {
+        setDisplayPopupForUpdate(boolean);
+    }
+
+    return <div>
+        {!displayPopupForUpdate && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-        </div>
-    );
+        </div>}
+        {displayPopupForUpdate && <div>
+            <NewBook getBookListMyComponentToNewBook={getBookList}/>
+            <BookList myArray={myArray} />
+        <PopupForUpdate />
+        </div>}
+    </div>
+        
+    
 
 }
 

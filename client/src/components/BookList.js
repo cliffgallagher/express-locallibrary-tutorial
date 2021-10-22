@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PopupForUpdate from './PopupForUpdate';
 
 const BookList = (props) => {
     //const [myArray, setMyArray] = useState([]);
 
     console.log("rendered BookList component");
+
 
     /*const getBookList = async () => {
         try {
@@ -23,9 +25,11 @@ const BookList = (props) => {
     }*/
     
 
-    return <ul>
-    {props.myArray}
-    </ul>
+    return (
+        <div>
+            <ul>{props.myArray}</ul>
+        </div>
+    )
 }
 
 export default BookList;

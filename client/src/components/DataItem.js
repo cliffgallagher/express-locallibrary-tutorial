@@ -17,7 +17,7 @@ const DataItem = (props) => {
 
     function updateBookButtonClickHandler(event) {
         setMouseIsPresent(false);
-        setTriggerStatus(true);
+        props.triggerPopupForUpdate(true);
     }
 
     return (
@@ -27,9 +27,6 @@ const DataItem = (props) => {
                 <BookInfo title={props.title} isbn={props.isbn} summary={props.summary}/>
                 <button onClick={updateBookButtonClickHandler}>Update Book</button><button>Delete Book</button>
             </div>}
-            {triggerStatus && <div>
-               <PopupForUpdate /> 
-                </div>}
         </div>
     );
 }

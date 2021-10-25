@@ -6,12 +6,13 @@ const NewBookForm = (props) => {
     const [titleInput, setTitleInput] = useState("");
     const [isbnInput, setISBNInput] = useState("");
     const [summaryInput, setSummaryInput] = useState("");
-    const [authorInput, setAuthorInput] = useState();
+    const [authorInput, setAuthorInput] = useState("0");
     const [genreInput, setGenreInput] = useState();
 
     const getAuthorsFromDatabase = async () => {
         const authorsResponse = await fetch('/catalog/authors');
         const authorObjectArray = await authorsResponse.json();
+        console.log(JSON.stringify(authorObjectArray));
         setAuthorOptions((prevState) => {
             return [...prevState, authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
         })     
@@ -22,7 +23,7 @@ const NewBookForm = (props) => {
         const genreObjectArray = await genresResponse.json();
         setGenreOptions((prevState) => {
             return [...prevState, genreObjectArray.map(element => <option key={element.genre_id} value={element.genre_id}>{element.name}</option>)];
-        })     
+        })   
     }
 
     useEffect(() => {
@@ -44,8 +45,8 @@ const NewBookForm = (props) => {
         setTitleInput("");
         setISBNInput("");
         setSummaryInput("");
-        setAuthorInput();
-        setGenreInput();
+        setAuthorInput(0);
+        setGenreInput(0);
 
         
         const insertBook = async () => {
@@ -58,8 +59,8 @@ const NewBookForm = (props) => {
                 body: JSON.stringify(userInputData)
             });
             props.getBookListNewBookToBookForm();
-            console.log("user input data: " + JSON.stringify(userInputData));
-            console.log("response in NewBookForm: " + JSON.stringify(response));
+            //console.log("user input data: " + JSON.stringify(userInputData));
+           // console.log("response in NewBookForm: " + JSON.stringify(response));
             return response;
         }
 
@@ -92,8 +93,8 @@ const NewBookForm = (props) => {
             <label>Title<input type='text' name='titleField' value={titleInput} onChange={titleInputChangeHandler} /></label>
             <label>ISBN<input type='text' name='isbnField' value={isbnInput} onChange={isbnInputChangeHandler}/></label>
             <label>Summary<input type='text' name='summaryField' value={summaryInput} onChange={summaryInputChangeHandler}/></label>
-            <label>Author<select name='authors' onChange={authorInputChangeHandler}>{authorOptions}</select></label>
-            <label>Genre<select name='genres' onChange={genreInputChangeHandler}>{genreOptions}</select></label>
+            <label>Author<select name='authors' value ={authorInput} onChange={authorInputChangeHandler}>{authorOptions}</select></label>
+            <label>Genre<select name='genres' value={genreInput} onChange={genreInputChangeHandler}>{genreOptions}</select></label>
             <button onClick={props.onCancel}>Cancel</button>
             <button type='submit'>Submit</button>
         </form>

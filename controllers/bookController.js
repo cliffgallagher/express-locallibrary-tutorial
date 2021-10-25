@@ -68,12 +68,9 @@ exports.book_update_get = async function(req, res) {
           book_id: req.params.book_id
         }
       });
-      console.log(JSON.stringify(bookToUpdate));
-    /*const bookInfoToUpdate = await Book.findAll({
-        where: {
-          authorId: req.
-        }
-      });*/
+    //console.log(JSON.stringify(bookToUpdate));
+    res.json(bookToUpdate);
+
 };
 
 // Handle book update on POST.

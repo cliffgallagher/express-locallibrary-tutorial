@@ -19,13 +19,16 @@ const DataItem = (props) => {
         setMouseIsPresent(false);
         props.triggerPopupForUpdate(true);
         props.recieveBookIDFromDataItem(props.bookID);
+        
         try {
             const response = await fetch(`catalog/book/${props.bookID}/update`);
+            const data = await response.json();
+            console.log("bookToUpdate: " + data[0].book_id);
+            
         } catch(e) {
             console.log(e);
         }
     }
-
 
     return (
         <div className='dataItem' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>

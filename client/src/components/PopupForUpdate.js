@@ -6,6 +6,15 @@ const PopupForUpdate = (props) => {
     const [updateFormISBNInput, setUpdateFormISBNInput] = useState("");
     const [updateFormSummaryInput, setUpdateFormSummaryInput] = useState("");
 
+    async function popupForUpdateSubmitHandler(event) {
+        event.preventDefault();
+        try {
+            const response = await fetch('catalog/book/:book_id/update');
+        } catch(e) {
+            console.log(e);
+        }
+    }
+    
     function updateFormTitleInputChangeHandler(event) {
         setUpdateFormTitleInput(event.target.value);
     }
@@ -24,7 +33,7 @@ const PopupForUpdate = (props) => {
 
     return <div className='popup'>
         <div className='popup-inner'>
-            <form>
+            <form onSubmit={popupForUpdateSubmitHandler}>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Summary<input type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>

@@ -15,10 +15,15 @@ const DataItem = (props) => {
         setMouseIsPresent(false);
     }
 
-    function updateBookButtonClickHandler(event) {
+    async function updateBookButtonClickHandler(event) {
         setMouseIsPresent(false);
         props.triggerPopupForUpdate(true);
         props.recieveBookIDFromDataItem(props.bookID);
+        try {
+            const response = await fetch(`catalog/book/${props.bookID}/update`);
+        } catch(e) {
+            console.log(e);
+        }
     }
 
 

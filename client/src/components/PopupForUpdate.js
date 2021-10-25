@@ -8,11 +8,11 @@ const PopupForUpdate = (props) => {
 
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();
-        try {
+        /*try {
             const response = await fetch(`catalog/book/${props.bookID}/update`);
         } catch(e) {
             console.log(e);
-        }
+        }*/
     }
     
     function updateFormTitleInputChangeHandler(event) {

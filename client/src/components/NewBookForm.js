@@ -41,6 +41,12 @@ const NewBookForm = (props) => {
             genre_id: {genreInput}
         }
 
+        setTitleInput("");
+        setISBNInput("");
+        setSummaryInput("");
+        setAuthorInput();
+        setGenreInput();
+
         
         const insertBook = async () => {
             console.log("entered insertBook");

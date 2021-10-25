@@ -16,7 +16,7 @@ const MyComponent = () => {
             console.log("getBookList running: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
             setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} recieveBookIDFromDataItem={passBookIDToPopupForUpdate}/>);
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} recieveBookIDFromDataItem={passBookIDToPopupForUpdate} receiveBookToUpdateFromDataItem={passBookToUpdateToPopupForUpdate}/>);
             });
         } catch (e) {
             console.log(e);
@@ -38,6 +38,10 @@ const MyComponent = () => {
 
     function passBookIDToPopupForUpdate(integer) {
         setBookID(integer);
+    }
+
+    function passBookToUpdateToPopupForUpdate(object) {
+        console.log("data in MyComponent: " + object.book_id);
     }
 
     return <div>

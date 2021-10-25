@@ -23,7 +23,8 @@ const DataItem = (props) => {
         try {
             const response = await fetch(`catalog/book/${props.bookID}/update`);
             const data = await response.json();
-            console.log("bookToUpdate: " + data[0].book_id);
+            //console.log("bookToUpdate: " + data[0].book_id);
+            props.receiveBookToUpdateFromDataItem(data[0]);
             
         } catch(e) {
             console.log(e);

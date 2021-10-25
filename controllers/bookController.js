@@ -69,7 +69,8 @@ exports.book_update_get = async function(req, res) {
         }
       });
     //console.log(JSON.stringify(bookToUpdate));
-    res.json(bookToUpdate);
+    //res.json(bookToUpdate);
+    res.send(bookToUpdate);
 
 };
 

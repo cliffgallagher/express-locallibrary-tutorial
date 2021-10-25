@@ -60,10 +60,15 @@ exports.book_delete_post = function(req, res) {
 };
 
 // Display book update form on GET.
-exports.book_update_get = function(req, res) {
+exports.book_update_get = async function(req, res) {
     //res.send('NOT IMPLEMENTED: Book update GET');
-    console.log("you made it");
-    //console.log(req.params.bookID);
+    console.log("book_id in bookController: " + req.params.book_id);
+    const bookToUpdate = await Book.findAll({
+        where: {
+          book_id: req.params.book_id
+        }
+      });
+      console.log(JSON.stringify(bookToUpdate));
     /*const bookInfoToUpdate = await Book.findAll({
         where: {
           authorId: req.

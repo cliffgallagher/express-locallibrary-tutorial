@@ -33,6 +33,7 @@ const PopupForUpdate = (props) => {
 
     return <div className='popup'>
         <div className='popup-inner'>
+            <p>{props.bookID}</p>
             <form onSubmit={popupForUpdateSubmitHandler}>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>

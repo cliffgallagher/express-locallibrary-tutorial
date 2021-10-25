@@ -18,7 +18,9 @@ const DataItem = (props) => {
     function updateBookButtonClickHandler(event) {
         setMouseIsPresent(false);
         props.triggerPopupForUpdate(true);
+        props.recieveBookIDFromDataItem(props.bookID);
     }
+
 
     return (
         <div className='dataItem' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>

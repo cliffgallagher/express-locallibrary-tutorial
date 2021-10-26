@@ -17,7 +17,7 @@ const MyComponent = () => {
             console.log("getBookList running: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
             setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} recieveBookIDFromDataItem={passBookIDToPopupForUpdate} receiveBookToUpdateFromDataItem={passBookToUpdateToPopupForUpdate}/>);
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookToUpdateFromDataItem={passBookToUpdateToPopupForUpdate}/>);
             });
         } catch (e) {
             console.log(e);
@@ -37,10 +37,6 @@ const MyComponent = () => {
         setDisplayPopupForUpdate(boolean);
     }
 
-    function passBookIDToPopupForUpdate(integer) {
-        setBookID(integer);
-    }
-
     function passBookToUpdateToPopupForUpdate(bookObject) {
         console.log("data in MyComponent: " + bookObject.book_id);
         setBookToUpdate(bookObject);
@@ -54,7 +50,7 @@ const MyComponent = () => {
         {displayPopupForUpdate && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} bookID={bookID} bookToUpdate={bookToUpdate}/>
+        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} bookToUpdate={bookToUpdate}/>
         </div>}
     </div>
         

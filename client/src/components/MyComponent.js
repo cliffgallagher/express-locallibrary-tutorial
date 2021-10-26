@@ -8,6 +8,7 @@ const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
     const [displayPopupForUpdate, setDisplayPopupForUpdate] = useState(false);
     const [bookID, setBookID] = useState();
+    const [bookToUpdate, setBookToUpdate] = useState();
     
     const getBookList = async () => {
         try {
@@ -40,8 +41,9 @@ const MyComponent = () => {
         setBookID(integer);
     }
 
-    function passBookToUpdateToPopupForUpdate(object) {
-        console.log("data in MyComponent: " + object.book_id);
+    function passBookToUpdateToPopupForUpdate(bookObject) {
+        console.log("data in MyComponent: " + bookObject.book_id);
+        setBookToUpdate(bookObject);
     }
 
     return <div>
@@ -52,7 +54,7 @@ const MyComponent = () => {
         {displayPopupForUpdate && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} bookID={bookID}/>
+        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} bookID={bookID} bookToUpdate={bookToUpdate}/>
         </div>}
     </div>
         

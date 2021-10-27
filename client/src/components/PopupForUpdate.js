@@ -6,7 +6,7 @@ const PopupForUpdate = (props) => {
     const [updateFormISBNInput, setUpdateFormISBNInput] = useState("");
     const [updateFormSummaryInput, setUpdateFormSummaryInput] = useState("");
 
-    console.log("bookToUpdate in PopupForUpdate: " + props.bookToUpdate);
+    console.log("bookToUpdate in PopupForUpdate: " + props.bookToUpdate.book_id);
 
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();

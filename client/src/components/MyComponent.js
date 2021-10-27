@@ -14,7 +14,7 @@ const MyComponent = () => {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();
-            console.log("getBookList running: " + JSON.stringify(arrayFromJSON));
+            console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
             setMyArray(() => {
                 return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookToUpdateFromDataItem={passBookToUpdateToPopupForUpdate}/>);

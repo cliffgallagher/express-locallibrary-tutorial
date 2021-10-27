@@ -10,7 +10,7 @@ const MyComponent = () => {
     const [bookID, setBookID] = useState();
     const [bookToUpdate, setBookToUpdate] = useState();
     
-    const getBookList = async (controller) => {
+    async function getBookList(controller) {
         try {
             const promise = await fetch("/catalog", {
                 signal: controller.signal
@@ -22,7 +22,7 @@ const MyComponent = () => {
                 return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookToUpdateFromDataItem={passBookToUpdateToPopupForUpdate}/>);
             });
             controller = null;
-            return controller;
+            //return controller;
         } catch (e) {
             console.log(e);
         }

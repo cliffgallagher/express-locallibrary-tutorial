@@ -31,6 +31,7 @@ const MyComponent = () => {
     useEffect(() => {
         let controller = new AbortController();
         getBookList(controller);
+        console.log("controller status: " + controller);
         return () => controller?.abort();
     }, []);
 

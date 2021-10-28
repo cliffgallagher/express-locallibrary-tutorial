@@ -89,5 +89,5 @@ exports.book_update_post = async function(req, res) {
         }
       });
     //res.json(bookToUpdate);
-    res.send("updated");
+    res.send(bookToUpdate);
 };

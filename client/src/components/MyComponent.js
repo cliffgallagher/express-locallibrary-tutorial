@@ -50,7 +50,7 @@ const MyComponent = () => {
         {displayPopupForUpdate && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} bookID={bookID}/>
+        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID}/>
         </div>}
     </div>
         

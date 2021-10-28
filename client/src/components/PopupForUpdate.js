@@ -43,14 +43,13 @@ const PopupForUpdate = (props) => {
                 body: JSON.stringify(updatedBookInfo)
             });
             console.log("have received response from post in PopupForUpdate");
-            //props.getBookListNewBookToBookForm();
-            //console.log("user input data: " + JSON.stringify(userInputData));
-           // console.log("response in NewBookForm: " + JSON.stringify(response));
+            
             return response;
         }
 
         updateBook();
-        
+        props.popupForUpdateHandler(false);
+        props.getBookListToPopupForUpdate();
     }
     
     function updateFormTitleInputChangeHandler(event) {
@@ -65,7 +64,7 @@ const PopupForUpdate = (props) => {
         setUpdateFormSummaryInput(event.target.value);
     }
 
-    function popupForUpdateCancelButtonHandler(event) {
+    function popupForUpdateCloseButtonHandler(event) {
         props.popupForUpdateHandler(false);
     }
 
@@ -76,7 +75,7 @@ const PopupForUpdate = (props) => {
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Summary<input type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>
                 <button type="submit">Update Book</button>
-                <button className='close-button' onClick={popupForUpdateCancelButtonHandler}>Cancel</button>
+                <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
             </form>
             {props.children}
         </div>

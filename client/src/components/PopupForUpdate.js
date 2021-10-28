@@ -77,7 +77,6 @@ const PopupForUpdate = (props) => {
                 <button type="submit">Update Book</button>
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
             </form>
-            {props.children}
         </div>
     </div>
 }

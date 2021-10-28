@@ -3,12 +3,14 @@ import NewBook from './NewBook';
 import BookList from './BookList';
 import DataItem from './DataItem';
 import PopupForUpdate from './PopupForUpdate';
+import PopupForDelete from './PopupForDelete';
 
 const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
     const [displayPopupForUpdate, setDisplayPopupForUpdate] = useState(false);
     const [bookID, setBookID] = useState();
     //const [bookID, setBookToUpdate] = useState();
+    const [displayPopupForDelete, setDisplayPopupForDelete] = useState(false);
     
     async function getBookList() {
         try {
@@ -17,7 +19,7 @@ const MyComponent = () => {
             console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
             setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate}/>);
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
             });
         } catch (e) {
             console.log(e);
@@ -42,8 +44,12 @@ const MyComponent = () => {
         setBookID(bookID);
     }
 
+    function popupForDeleteHandler(boolean) {
+        setDisplayPopupForDelete(boolean);
+    }
+
     return <div>
-        {!displayPopupForUpdate && <div>
+        {!displayPopupForUpdate && !displayPopupForDelete && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
         </div>}
@@ -51,6 +57,11 @@ const MyComponent = () => {
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
         <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID}/>
+        </div>}
+        {displayPopupForDelete && <div>
+            <NewBook getBookListMyComponentToNewBook={getBookList}/>
+            <BookList myArray={myArray} />
+            <PopupForDelete popupForDeleteHandler={popupForDeleteHandler}/>
         </div>}
     </div>
         

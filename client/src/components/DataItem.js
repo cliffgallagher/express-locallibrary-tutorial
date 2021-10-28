@@ -21,6 +21,11 @@ const DataItem = (props) => {
         props.receiveBookIDFromDataItem(props.bookID);
     }
 
+    function deleteBookButtonClickHandler() {
+        setMouseIsPresent(false);
+        props.triggerPopupForDelete(true); 
+    }
+
     /*async function bookObjectDataItemToMyComponent() {
         try {
             const response = await fetch(`catalog/book/${props.bookID}/update`);
@@ -33,12 +38,14 @@ const DataItem = (props) => {
         }
     }*/
 
+
+
     return (
         <div className='dataItem' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
             {!mouseIsPresent && <BookInfo title={props.title} isbn={props.isbn} summary={props.summary} onMouseEnter={mouseEnterHandler}/>}
             {mouseIsPresent && <div>
                 <BookInfo title={props.title} isbn={props.isbn} summary={props.summary}/>
-                <button onClick={updateBookButtonClickHandler}>Update Book</button><button>Delete Book</button>
+                <button onClick={updateBookButtonClickHandler}>Update Book</button><button onClick={deleteBookButtonClickHandler}>Delete Book</button>
             </div>}
         </div>
     );

@@ -61,7 +61,7 @@ const MyComponent = () => {
         {displayPopupForDelete && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-            <PopupForDelete popupForDeleteHandler={popupForDeleteHandler} bookID={bookID}/>
+            <PopupForDelete popupForDeleteHandler={popupForDeleteHandler} getBookListToPopupForDelete={getBookList} bookID={bookID}/>
         </div>}
     </div>
         

@@ -25,7 +25,10 @@ router.post('/book/create', function(req, res, next) {
 router.get('/book/:book_id/delete', book_controller.book_delete_get);
 
 // POST request to delete Book.
-router.post('/book/:book_id/delete', book_controller.book_delete_post);
+router.post('/book/:book_id/delete', function(req, res, next) {
+    console.log("request body in POST /book/delete in catalog.js: " + req.body)
+    next()
+}, book_controller.book_delete_post)
 
 // GET request to update Book.
 router.get('/book/:book_id/update', book_controller.book_update_get);

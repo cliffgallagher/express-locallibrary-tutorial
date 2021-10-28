@@ -27,13 +27,35 @@ const PopupForDelete = (props) => {
         props.popupForDeleteHandler(false);
     }
 
+    async function deleteBookHandler(event) {
+        event.preventDefault();
+        console.log("bookID in delete button handler: " + props.bookID);
+        const bookIDAsObject = {
+            bookIDattribute: props.bookID
+        };
+        const response = await fetch(`catalog/book/${props.bookID}/delete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookIDAsObject)
+        });
+        props.popupForDeleteHandler(false);
+        props.getBookListToPopupForDelete();
+        console.log("have received response from post in PopupForDelete");
+        
+
+        return response;
+    }
+
     return <div className='popup'>
         <div className='popup-inner'>
-            <h1>Are you sure you want to delete this book?</h1>
-            <h3>Title: {titleToDelete}</h3>
-            <h3>ISBN: {isbnToDelete}</h3>
-            <h3>Summary: {summaryToDelete}</h3>
-            <button onClick={popupForDeleteCloseButtonHandler}>Close</button>
+            <form onSubmit={deleteBookHandler}>
+                <h1>Are you sure you want to delete this book?</h1>
+                <h3>Title: {titleToDelete}</h3>
+                <h3>ISBN: {isbnToDelete}</h3>
+                <button type="submit">Delete</button><button onClick={popupForDeleteCloseButtonHandler}>Close</button>
+            </form>
         </div>
     </div>
 }

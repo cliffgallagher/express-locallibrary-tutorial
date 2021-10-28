@@ -63,8 +63,14 @@ exports.book_delete_get = async function(req, res) {
     res.send(bookToDelete);
 };
 // Handle book delete on POST.
-exports.book_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book delete POST');
+exports.book_delete_post = async function(req, res) {
+    console.log("book_id in book_delete_post: " + req.params.book_id);
+    const deletedBook = await Book.destroy({
+        where: {
+          book_id: req.params.book_id
+        }
+      });
+    res.send("book deleted");
 };
 
 // Display book update form on GET.

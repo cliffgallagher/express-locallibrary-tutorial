@@ -50,10 +50,18 @@ exports.book_create_post = async function(req, res) {
 };
 
 // Display book delete form on GET.
-exports.book_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book delete GET');
+exports.book_delete_get = async function(req, res) {
+    //res.send('NOT IMPLEMENTED: Book update GET');
+    console.log("book_id in bookController: " + req.params.book_id);
+    const bookToDelete = await Book.findAll({
+        where: {
+          book_id: req.params.book_id
+        }
+      });
+    //console.log(JSON.stringify(bookToUpdate));
+    //res.json(bookToUpdate);
+    res.send(bookToDelete);
 };
-
 // Handle book delete on POST.
 exports.book_delete_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Book delete POST');

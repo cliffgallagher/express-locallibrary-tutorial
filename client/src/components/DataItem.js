@@ -24,6 +24,7 @@ const DataItem = (props) => {
     function deleteBookButtonClickHandler() {
         setMouseIsPresent(false);
         props.triggerPopupForDelete(true); 
+        props.receiveBookIDFromDataItem(props.bookID);
     }
 
     /*async function bookObjectDataItemToMyComponent() {

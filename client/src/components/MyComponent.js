@@ -40,7 +40,7 @@ const MyComponent = () => {
     }
 
     function passBookIDToPopupForUpdate(bookID) {
-        //console.log("data in MyComponent: " + bookID);
+        console.log("data in MyComponent: " + bookID);
         setBookID(bookID);
     }
 
@@ -61,7 +61,7 @@ const MyComponent = () => {
         {displayPopupForDelete && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-            <PopupForDelete popupForDeleteHandler={popupForDeleteHandler}/>
+            <PopupForDelete popupForDeleteHandler={popupForDeleteHandler} bookID={bookID}/>
         </div>}
     </div>
         

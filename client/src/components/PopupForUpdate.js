@@ -27,6 +27,13 @@ const PopupForUpdate = (props) => {
 
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();
+        const updatedBookInfo = {
+            title: updateFormTitleInput,
+            isbn: updateFormISBNInput,
+            summary: updateFormSummaryInput
+        }
+
+        
         
     }
     

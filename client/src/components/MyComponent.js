@@ -8,7 +8,7 @@ const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
     const [displayPopupForUpdate, setDisplayPopupForUpdate] = useState(false);
     const [bookID, setBookID] = useState();
-    const [bookToUpdate, setBookToUpdate] = useState();
+    //const [bookID, setBookToUpdate] = useState();
     
     async function getBookList(controller) {
         try {
@@ -19,7 +19,7 @@ const MyComponent = () => {
             console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
             setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookToUpdateFromDataItem={passBookToUpdateToPopupForUpdate}/>);
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate}/>);
             });
             controller = null;
             //return controller;
@@ -44,9 +44,9 @@ const MyComponent = () => {
         setDisplayPopupForUpdate(boolean);
     }
 
-    function passBookToUpdateToPopupForUpdate(bookObject) {
-        console.log("data in MyComponent: " + bookObject.book_id);
-        setBookToUpdate(bookObject);
+    function passBookIDToPopupForUpdate(bookID) {
+        //console.log("data in MyComponent: " + bookID);
+        setBookID(bookID);
     }
 
     return <div>
@@ -57,7 +57,7 @@ const MyComponent = () => {
         {displayPopupForUpdate && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} bookToUpdate={bookToUpdate}/>
+        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} bookID={bookID}/>
         </div>}
     </div>
         

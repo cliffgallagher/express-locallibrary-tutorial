@@ -6,7 +6,20 @@ const PopupForUpdate = (props) => {
     const [updateFormISBNInput, setUpdateFormISBNInput] = useState("");
     const [updateFormSummaryInput, setUpdateFormSummaryInput] = useState("");
 
-    console.log("bookToUpdate in PopupForUpdate: " + props.bookToUpdate.book_id);
+    //console.log("bookToUpdate in PopupForUpdate: " + props.bookID);
+
+    async function fetchBook() {
+        try {
+            const response = await fetch(`catalog/book/${props.bookID}/update`);
+            const data = await response.json();
+            console.log("bookToUpdate in PopupForUpdate: " + JSON.stringify(data));
+            
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    fetchBook();
 
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();

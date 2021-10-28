@@ -33,7 +33,23 @@ const PopupForUpdate = (props) => {
             summary: updateFormSummaryInput
         }
 
-        
+        const updateBook = async () => {
+            console.log("entered updateBook");
+            const response = await fetch(`catalog/book/${props.bookID}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedBookInfo)
+            });
+            console.log("have received response from post in PopupForUpdate");
+            //props.getBookListNewBookToBookForm();
+            //console.log("user input data: " + JSON.stringify(userInputData));
+           // console.log("response in NewBookForm: " + JSON.stringify(response));
+            return response;
+        }
+
+        updateBook();
         
     }
     

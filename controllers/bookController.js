@@ -62,7 +62,7 @@ exports.book_delete_post = function(req, res) {
 // Display book update form on GET.
 exports.book_update_get = async function(req, res) {
     //res.send('NOT IMPLEMENTED: Book update GET');
-    console.log("book_id in bookController: " + req.params.book_id);
+    //console.log("book_id in bookController: " + req.params.book_id);
     const bookToUpdate = await Book.findAll({
         where: {
           book_id: req.params.book_id
@@ -75,6 +75,19 @@ exports.book_update_get = async function(req, res) {
 };
 
 // Handle book update on POST.
-exports.book_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book update POST');
+exports.book_update_post = async function(req, res) {
+    //res.send('NOT IMPLEMENTED: Book update POST');
+    console.log("update request in POST handler: " + JSON.stringify(req.body));
+    console.log("book_id in POST bookController: " + req.params.book_id);
+    const bookToUpdate = await Book.update({ 
+        title: req.body.title,
+        isbn: req.body.isbn,
+        summary: req.body.summary 
+    }, {
+        where: {
+          book_id: req.params.book_id
+        }
+      });
+    //res.json(bookToUpdate);
+    res.send("updated");
 };

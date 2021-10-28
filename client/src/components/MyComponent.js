@@ -10,7 +10,7 @@ const MyComponent = () => {
     const [bookID, setBookID] = useState();
     //const [bookID, setBookToUpdate] = useState();
     
-    async function getBookList(controller) {
+    async function getBookList() {
         try {
             const promise = await fetch("/catalog");
             const arrayFromJSON = await promise.json();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './PopupForUpdate.css';
 
 const PopupForUpdate = (props) => {
@@ -11,15 +11,19 @@ const PopupForUpdate = (props) => {
     async function fetchBook() {
         try {
             const response = await fetch(`catalog/book/${props.bookID}/update`);
-            const data = await response.json();
-            console.log("bookToUpdate in PopupForUpdate: " + JSON.stringify(data));
+            const bodyOfResponse = await response.json();
+            setUpdateFormTitleInput(bodyOfResponse[0].title);
+            setUpdateFormISBNInput(bodyOfResponse[0].isbn);
+            setUpdateFormSummaryInput(bodyOfResponse[0].summary);
             
         } catch(e) {
             console.log(e);
         }
     }
 
-    fetchBook();
+    useEffect(() => {
+        fetchBook();
+    }, []);
 
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();

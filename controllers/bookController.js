@@ -32,8 +32,7 @@ exports.enhanced = async function(req, res) {
             }, {
                 attributes: [],
                 model: Genre
-            }],
-            raw:true
+            }]
         });
         console.log(JSON.stringify(promise));
         //res.json(promise);  

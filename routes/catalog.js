@@ -10,10 +10,17 @@ var book_instance_controller = require('../controllers/bookinstanceController');
 /// BOOK ROUTES ///
 
 // GET catalog home page.
-router.get('/', book_controller.index);
+//router.get('/', book_controller.index);
+router.get('/', function(req, res, next) {
+    console.log("entered index route");
+    next()
+}, book_controller.index);
 
 // GET books plus genre and author names
-router.get('/enhanced', book_controller.enhanced);
+router.get('/enhanced', function(req, res, next) {
+    console.log("entered enhanced route");
+    next()
+}, book_controller.enhanced);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
 router.get('/book/create', book_controller.book_create_get);
@@ -22,7 +29,7 @@ router.get('/book/create', book_controller.book_create_get);
 router.post('/book/create', function(req, res, next) {
     console.log("request body in /book/create in catalog.js: " + req.body)
     next()
-}, book_controller.book_create_post)
+}, book_controller.book_create_post);
 
 // GET request to delete Book.
 router.get('/book/:book_id/delete', book_controller.book_delete_get);
@@ -31,7 +38,7 @@ router.get('/book/:book_id/delete', book_controller.book_delete_get);
 router.post('/book/:book_id/delete', function(req, res, next) {
     console.log("request body in POST /book/delete in catalog.js: " + req.body)
     next()
-}, book_controller.book_delete_post)
+}, book_controller.book_delete_post);
 
 // GET request to update Book.
 router.get('/book/:book_id/update', book_controller.book_update_get);

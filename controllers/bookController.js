@@ -24,7 +24,7 @@ exports.enhanced = async function(req, res) {
     console.log("Is book a Book? " + (Book === sequelize.models.Book)); // returned "Yes"
 
     try {
-        const promise = await Book.findAll({
+        const response = await Book.findAll({
             attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
             include: [{
                 attributes: [],
@@ -32,10 +32,11 @@ exports.enhanced = async function(req, res) {
             }, {
                 attributes: [],
                 model: Genre
-            }]
+            }],
+            raw: 'true'
         });
-        console.log(JSON.stringify(promise));
-        //res.json(promise);  
+        console.log(JSON.stringify(response));
+        res.json(response);  
     } catch(e) {
         console.log(e);
     }

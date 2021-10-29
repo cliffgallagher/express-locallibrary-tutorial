@@ -4,6 +4,11 @@ const Author = require('../models/Author');
 const Genre = require('../models/Genre');
 const { sequelize } = require('../models/Author');
 
+Book.belongsTo(Author, {foreignKey: 'author_id', targetKey: 'author_id'});
+Author.hasMany(Book);
+Book.belongsTo(Genre, {foreignKey: 'genre_id', targetKey: 'genre_id'});
+Genre.hasMany(Book);
+
 exports.index = async function(req, res) {
     try {
         const promise = await Book.findAll();
@@ -17,10 +22,7 @@ exports.index = async function(req, res) {
 exports.enhanced = async function(req, res) {
     //console.log("you are in the enhanced controller method");
     console.log("Is book a Book? " + (Book === sequelize.models.Book)); // returned "Yes"
-    Book.belongsTo(Author, {foreignKey: 'author_id', targetKey: 'author_id'});
-    Author.hasMany(Book);
-    Book.belongsTo(Genre, {foreignKey: 'genre_id', targetKey: 'genre_id'});
-    Genre.hasMany(Book);
+
     try {
         const promise = await Book.findAll({
             attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],

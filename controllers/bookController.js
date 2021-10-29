@@ -1,11 +1,46 @@
 var Book = require('../models/Book');
 const { body, validationResult } = require('express-validator');
 const Author = require('../models/Author');
+const Genre = require('../models/Genre');
+const { sequelize } = require('../models/Author');
 
 exports.index = async function(req, res) {
-    const promise = await Book.findAll();
-    res.send(promise);
+    try {
+        const promise = await Book.findAll();
+        res.send(promise);
+    } catch(e) {
+        console.log(e);
+    }
 };
+
+// display all books with genre and author names
+exports.enhanced = async function(req, res) {
+    //console.log("you are in the enhanced controller method");
+    console.log("Is book a Book? " + (Book === sequelize.models.Book)); // returned "Yes"
+    Book.belongsTo(Author, {foreignKey: 'author_id', targetKey: 'author_id'});
+    Author.hasMany(Book);
+    Book.belongsTo(Genre, {foreignKey: 'genre_id', targetKey: 'genre_id'});
+    Genre.hasMany(Book);
+    try {
+        const promise = await Book.findAll({
+            attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
+            include: [{
+                attributes: [],
+                model: Author
+            }, {
+                attributes: [],
+                model: Genre
+            }],
+            raw:true
+        });
+        console.log(JSON.stringify(promise));
+        //res.json(promise);  
+    } catch(e) {
+        console.log(e);
+    }
+    
+};
+
 
 // Display list of all books.
 exports.book_list = function(req, res) {
@@ -35,9 +70,11 @@ exports.book_create_get = function(req, res) {
 
 // Handle book create on POST.
 exports.book_create_post = async function(req, res) {
-    //res.send('NOT IMPLEMENTED: Book create POST');
-    console.log("req.body in controller: " + req.body);
-    const newBook = await Book.create({
+    
+    try {
+        //res.send('NOT IMPLEMENTED: Book create POST');
+        console.log("req.body in controller: " + req.body);
+        const newBook = await Book.create({
         title: req.body.title.titleInput,
         author_id: req.body.author_id.authorInput,
         isbn: req.body.isbn.isbnInput,
@@ -47,61 +84,88 @@ exports.book_create_post = async function(req, res) {
 
     res.json(newBook);
     //console.log(JSON.stringify(newBook));
+    } catch (e) {
+        console.log(e);
+    }
+    
 };
 
 // Display book delete form on GET.
 exports.book_delete_get = async function(req, res) {
+    
+    try {
     //res.send('NOT IMPLEMENTED: Book update GET');
-    console.log("book_id in bookController: " + req.params.book_id);
-    const bookToDelete = await Book.findAll({
-        where: {
-          book_id: req.params.book_id
-        }
-      });
-    //console.log(JSON.stringify(bookToUpdate));
-    //res.json(bookToUpdate);
-    res.send(bookToDelete);
+        console.log("book_id in bookController: " + req.params.book_id);
+        const bookToDelete = await Book.findAll({
+            where: {
+            book_id: req.params.book_id
+            }
+        });
+        //console.log(JSON.stringify(bookToUpdate));
+        //res.json(bookToUpdate);
+        res.send(bookToDelete);  
+    } catch(e) {
+        console.log(e);
+    }
+    
 };
+
 // Handle book delete on POST.
 exports.book_delete_post = async function(req, res) {
-    console.log("book_id in book_delete_post: " + req.params.book_id);
-    const deletedBook = await Book.destroy({
-        where: {
-          book_id: req.params.book_id
-        }
-      });
-    res.send("book deleted");
+    try {
+        console.log("book_id in book_delete_post: " + req.params.book_id);
+        const deletedBook = await Book.destroy({
+            where: {
+            book_id: req.params.book_id
+            }
+        });
+        res.send("book deleted");
+    } catch(e) {
+        console.log(e);
+    }
+    
 };
 
 // Display book update form on GET.
 exports.book_update_get = async function(req, res) {
-    //res.send('NOT IMPLEMENTED: Book update GET');
-    //console.log("book_id in bookController: " + req.params.book_id);
-    const bookToUpdate = await Book.findAll({
-        where: {
-          book_id: req.params.book_id
-        }
-      });
-    //console.log(JSON.stringify(bookToUpdate));
-    //res.json(bookToUpdate);
-    res.send(bookToUpdate);
+    try {
+        //res.send('NOT IMPLEMENTED: Book update GET');
+        //console.log("book_id in bookController: " + req.params.book_id);
+        const bookToUpdate = await Book.findAll({
+            where: {
+            book_id: req.params.book_id
+            }
+        });
+        //console.log(JSON.stringify(bookToUpdate));
+        //res.json(bookToUpdate);
+        res.send(bookToUpdate);
+    } catch(e) {
+        console.log(e);
+    }
+    
 
 };
 
 // Handle book update on POST.
 exports.book_update_post = async function(req, res) {
+
+    try {
+        console.log("update request in POST handler: " + JSON.stringify(req.body));
+        console.log("book_id in POST bookController: " + req.params.book_id);
+        const bookToUpdate = await Book.update({ 
+            title: req.body.title,
+            isbn: req.body.isbn,
+            summary: req.body.summary 
+            }, {
+            where: {
+                book_id: req.params.book_id
+            }
+        });
+        //res.json(bookToUpdate);
+        res.send(bookToUpdate);
+    } catch(e) {
+        console.log(e);
+    }
     //res.send('NOT IMPLEMENTED: Book update POST');
-    console.log("update request in POST handler: " + JSON.stringify(req.body));
-    console.log("book_id in POST bookController: " + req.params.book_id);
-    const bookToUpdate = await Book.update({ 
-        title: req.body.title,
-        isbn: req.body.isbn,
-        summary: req.body.summary 
-    }, {
-        where: {
-          book_id: req.params.book_id
-        }
-      });
-    //res.json(bookToUpdate);
-    res.send(bookToUpdate);
+    
 };

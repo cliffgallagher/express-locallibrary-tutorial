@@ -14,13 +14,13 @@ const MyComponent = () => {
     
     async function getBookList() {
         try {
-            const promise = await fetch("/catalog");
+            const promise = await fetch("/catalog/enhanced");
             const arrayFromJSON = await promise.json();
             console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
             //console.log(arrayFromJSON);
-            setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} isbn={element.isbn} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
-            });
+            /*setMyArray(() => {
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} author={element.author_id} isbn={element.isbn} genre={element.genre_id} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
+            });*/
         } catch (e) {
             console.log(e);
         }

@@ -43,9 +43,9 @@ const DataItem = (props) => {
 
     return (
         <div className='dataItem' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
-            {!mouseIsPresent && <BookInfo title={props.title} isbn={props.isbn} summary={props.summary} onMouseEnter={mouseEnterHandler}/>}
+            {!mouseIsPresent && <BookInfo title={props.title} author={props.author} isbn={props.isbn} genre={props.genre} summary={props.summary} onMouseEnter={mouseEnterHandler}/>}
             {mouseIsPresent && <div>
-                <BookInfo title={props.title} isbn={props.isbn} summary={props.summary}/>
+                <BookInfo title={props.title} author={props.author} isbn={props.isbn} genre={props.genre} summary={props.summary}/>
                 <button onClick={updateBookButtonClickHandler}>Update Book</button><button onClick={deleteBookButtonClickHandler}>Delete Book</button>
             </div>}
         </div>

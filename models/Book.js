@@ -40,6 +40,7 @@ module.exports = db.define('Book', {
     }
 });
 
+
 /*const test = async () => {
 try {
     await sequelize.authenticate();

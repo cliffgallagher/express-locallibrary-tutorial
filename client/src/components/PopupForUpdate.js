@@ -43,13 +43,12 @@ const PopupForUpdate = (props) => {
                 body: JSON.stringify(updatedBookInfo)
             });
             console.log("have received response from post in PopupForUpdate");
-            
+            props.popupForUpdateHandler(false);
+            props.getBookListToPopupForUpdate();
             return response;
         }
 
         updateBook();
-        props.popupForUpdateHandler(false);
-        props.getBookListToPopupForUpdate();
     }
     
     function updateFormTitleInputChangeHandler(event) {

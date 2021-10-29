@@ -16,11 +16,7 @@ module.exports = db.define('Book', {
     },
     author_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Author,
-            key: 'author_id'
-        }
+        allowNull: false
     },
     summary: {
         type: DataTypes.TEXT('long'),
@@ -32,11 +28,7 @@ module.exports = db.define('Book', {
     },
     genre_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Genre,
-            key: 'genre_id'
-        }
+        allowNull: false
     }
 });
 

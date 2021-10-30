@@ -99,9 +99,18 @@ exports.book_delete_get = async function(req, res) {
     //res.send('NOT IMPLEMENTED: Book update GET');
         console.log("book_id in bookController: " + req.params.book_id);
         const bookToDelete = await Book.findAll({
+            attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
+            include: [{
+                attributes: [],
+                model: Author
+            }, {
+                attributes: [],
+                model: Genre
+            }],
+            raw: 'true',
             where: {
-            book_id: req.params.book_id
-            }
+                book_id: req.params.book_id
+                }
         });
         //console.log(JSON.stringify(bookToUpdate));
         //res.json(bookToUpdate);
@@ -132,11 +141,20 @@ exports.book_delete_post = async function(req, res) {
 exports.book_update_get = async function(req, res) {
     try {
         //res.send('NOT IMPLEMENTED: Book update GET');
-        //console.log("book_id in bookController: " + req.params.book_id);
+        console.log("book_id in bookController: " + req.params.book_id);
         const bookToUpdate = await Book.findAll({
+            attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
+            include: [{
+                attributes: [],
+                model: Author
+            }, {
+                attributes: [],
+                model: Genre
+            }],
+            raw: 'true',
             where: {
-            book_id: req.params.book_id
-            }
+                book_id: req.params.book_id
+                }
         });
         //console.log(JSON.stringify(bookToUpdate));
         //res.json(bookToUpdate);

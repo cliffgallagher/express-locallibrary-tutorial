@@ -14,7 +14,7 @@ const PopupForUpdate = (props) => {
         try {
             const authorsResponse = await fetch('/catalog/authors');
             const authorObjectArray = await authorsResponse.json();
-            console.log('authorList in popup for update: ' + JSON.stringify(authorObjectArray));
+            //console.log('authorList in popup for update: ' + JSON.stringify(authorObjectArray));
             setUpdateFormAuthorOptions(() => {
                 return [authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
             }); 
@@ -27,7 +27,7 @@ const PopupForUpdate = (props) => {
         try {
             const response = await fetch(`catalog/book/${props.bookID}/update`);
             const bodyOfResponse = await response.json();
-            console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
+            //console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
             setUpdateFormSummaryInput(bodyOfResponse[0].summary);
@@ -39,7 +39,7 @@ const PopupForUpdate = (props) => {
     }
 
     useEffect(async () => {
-        console.log("author ID is: " + props.authorID);
+        //console.log("author ID is: " + props.authorID);
         fetchBook();
         await getAuthorsFromDatabase();
         setUpdateFormAuthorInput(props.authorID);
@@ -49,13 +49,13 @@ const PopupForUpdate = (props) => {
         event.preventDefault();
         const updatedBookInfo = {
             title: updateFormTitleInput,
-            author: updateFormAuthorInput,
+            authorID: updateFormAuthorInput,
             isbn: updateFormISBNInput,
             summary: updateFormSummaryInput
         }
 
         const updateBook = async () => {
-            console.log("entered updateBook");
+            //console.log("entered updateBook");
             const response = await fetch(`catalog/book/${props.bookID}/update`, {
                 method: 'POST',
                 headers: {
@@ -63,7 +63,7 @@ const PopupForUpdate = (props) => {
                 },
                 body: JSON.stringify(updatedBookInfo)
             });
-            console.log("have received response from post in PopupForUpdate");
+            //console.log("have received response from post in PopupForUpdate");
             props.popupForUpdateHandler(false);
             props.getBookListToPopupForUpdate();
             return response;
@@ -74,6 +74,10 @@ const PopupForUpdate = (props) => {
     
     function updateFormTitleInputChangeHandler(event) {
         setUpdateFormTitleInput(event.target.value);
+    }
+
+    function updateFormAuthorInputChangeHandler(event) {
+        setUpdateFormAuthorInput(event.target.value);
     }
 
     function updateFormISBNInputChangeHandler(event) {
@@ -92,7 +96,7 @@ const PopupForUpdate = (props) => {
         <div className='popup-inner'>
             <form onSubmit={popupForUpdateSubmitHandler}>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
-                <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput}>{updateFormAuthorOptions}</select></label>
+                <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Summary<input type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>
                 <button type="submit">Update Book</button>

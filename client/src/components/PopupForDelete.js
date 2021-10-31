@@ -8,7 +8,7 @@ const PopupForDelete = (props) => {
 
     async function fetchDeleteBookInfo() {
         try {
-            console.log("bookID in delete popup: " + props.bookID);
+            //console.log("bookID in delete popup: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/delete`);
             const bodyOfResponse = await response.json();
             setTitleToDelete(bodyOfResponse[0].title);
@@ -29,7 +29,7 @@ const PopupForDelete = (props) => {
 
     async function deleteBookHandler(event) {
         event.preventDefault();
-        console.log("bookID in delete button handler: " + props.bookID);
+        //console.log("bookID in delete button handler: " + props.bookID);
         const bookIDAsObject = {
             bookIDattribute: props.bookID
         };
@@ -42,7 +42,7 @@ const PopupForDelete = (props) => {
         });
         props.popupForDeleteHandler(false);
         props.getBookListToPopupForDelete();
-        console.log("have received response from post in PopupForDelete");
+        //console.log("have received response from post in PopupForDelete");
         
 
         return response;

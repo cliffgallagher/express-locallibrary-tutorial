@@ -21,7 +21,7 @@ exports.index = async function(req, res) {
 // display all books with genre and author names
 exports.enhanced = async function(req, res) {
     //console.log("you are in the enhanced controller method");
-    console.log("Is book a Book? " + (Book === sequelize.models.Book)); // returned "Yes"
+    //console.log("Is book a Book? " + (Book === sequelize.models.Book)); // returned "Yes"
 
     try {
         const response = await Book.findAll({
@@ -35,7 +35,7 @@ exports.enhanced = async function(req, res) {
             }],
             raw: 'true'
         });
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         res.json(response);  
     } catch(e) {
         console.log(e);
@@ -75,7 +75,7 @@ exports.book_create_post = async function(req, res) {
     
     try {
         //res.send('NOT IMPLEMENTED: Book create POST');
-        console.log("req.body in controller: " + req.body);
+        //console.log("req.body in controller: " + req.body);
         const newBook = await Book.create({
         title: req.body.title.titleInput,
         author_id: req.body.author_id.authorInput,
@@ -97,7 +97,7 @@ exports.book_delete_get = async function(req, res) {
     
     try {
     //res.send('NOT IMPLEMENTED: Book update GET');
-        console.log("book_id in bookController: " + req.params.book_id);
+        //console.log("book_id in bookController: " + req.params.book_id);
         const bookToDelete = await Book.findAll({
             attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
             include: [{
@@ -124,7 +124,7 @@ exports.book_delete_get = async function(req, res) {
 // Handle book delete on POST.
 exports.book_delete_post = async function(req, res) {
     try {
-        console.log("book_id in book_delete_post: " + req.params.book_id);
+        //console.log("book_id in book_delete_post: " + req.params.book_id);
         const deletedBook = await Book.destroy({
             where: {
             book_id: req.params.book_id
@@ -141,7 +141,7 @@ exports.book_delete_post = async function(req, res) {
 exports.book_update_get = async function(req, res) {
     try {
         //res.send('NOT IMPLEMENTED: Book update GET');
-        console.log("book_id in bookController: " + req.params.book_id);
+        //console.log("book_id in bookController: " + req.params.book_id);
         const bookToUpdate = await Book.findAll({
             attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
             include: [{
@@ -174,6 +174,7 @@ exports.book_update_post = async function(req, res) {
         //console.log("book_id in POST bookController: " + req.params.book_id);
         const bookToUpdate = await Book.update({ 
             title: req.body.title,
+            author_id: req.body.authorID,
             isbn: req.body.isbn,
             summary: req.body.summary 
             }, {

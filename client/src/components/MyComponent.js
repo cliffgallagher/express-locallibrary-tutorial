@@ -17,7 +17,7 @@ const MyComponent = () => {
         try {
             const promise = await fetch("/catalog/enhanced");
             const arrayFromJSON = await promise.json();
-            console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
+            //console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
             setMyArray(() => {
                 return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genre={element.name} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
             });
@@ -40,7 +40,7 @@ const MyComponent = () => {
     }
 
     function passBookIDToPopupForUpdate(bookID, authorID) {
-        console.log("bookID in MyComponent: " + bookID + ", authorID in my component: " + authorID);
+        //console.log("bookID in MyComponent: " + bookID + ", authorID in my component: " + authorID);
         setBookID(bookID);
         setAuthorID(authorID);
     }

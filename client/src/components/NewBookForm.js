@@ -12,7 +12,7 @@ const NewBookForm = (props) => {
     const getAuthorsFromDatabase = async () => {
         const authorsResponse = await fetch('/catalog/authors');
         const authorObjectArray = await authorsResponse.json();
-        console.log(JSON.stringify(authorObjectArray));
+        //console.log(JSON.stringify(authorObjectArray));
         setAuthorOptions(() => {
             return [authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
         })     
@@ -50,7 +50,7 @@ const NewBookForm = (props) => {
 
         
         const insertBook = async () => {
-            console.log("entered insertBook");
+            //console.log("entered insertBook");
             const response = await fetch('catalog/book/create', {
                 method: 'POST',
                 headers: {

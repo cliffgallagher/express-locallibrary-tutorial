@@ -176,6 +176,7 @@ exports.book_update_post = async function(req, res) {
             title: req.body.title,
             author_id: req.body.authorID,
             isbn: req.body.isbn,
+            genre_id: req.body.genreID,
             summary: req.body.summary 
             }, {
             where: {

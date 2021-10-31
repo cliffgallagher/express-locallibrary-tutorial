@@ -64,6 +64,7 @@ const PopupForUpdate = (props) => {
             title: updateFormTitleInput,
             authorID: updateFormAuthorInput,
             isbn: updateFormISBNInput,
+            genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
 
@@ -97,6 +98,10 @@ const PopupForUpdate = (props) => {
         setUpdateFormISBNInput(event.target.value);
     }
 
+    function updateFormGenreInputChangeHandler(event) {
+        setUpdateFormGenreInput(event.target.value);
+    }
+
     function updateFormSummaryInputChangeHandler(event) {
         setUpdateFormSummaryInput(event.target.value);
     }
@@ -111,7 +116,7 @@ const PopupForUpdate = (props) => {
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
                 <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
-                <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput}>{updateFormGenreOptions}</select></label>
+                <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput} onChange={updateFormGenreInputChangeHandler}>{updateFormGenreOptions}</select></label>
                 <label>Summary<input type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>
                 <button type="submit">Update Book</button>
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>

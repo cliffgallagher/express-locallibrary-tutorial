@@ -9,6 +9,7 @@ const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
     const [displayPopupForUpdate, setDisplayPopupForUpdate] = useState(false);
     const [bookID, setBookID] = useState();
+    const [authorID, setAuthorID] = useState();
     //const [bookID, setBookToUpdate] = useState();
     const [displayPopupForDelete, setDisplayPopupForDelete] = useState(false);
     
@@ -18,7 +19,7 @@ const MyComponent = () => {
             const arrayFromJSON = await promise.json();
             console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
             setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genre={element.name} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genre={element.name} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
             });
         } catch (e) {
             console.log(e);
@@ -38,9 +39,10 @@ const MyComponent = () => {
         setDisplayPopupForUpdate(boolean);
     }
 
-    function passBookIDToPopupForUpdate(bookID) {
-        console.log("data in MyComponent: " + bookID);
+    function passBookIDToPopupForUpdate(bookID, authorID) {
+        console.log("bookID in MyComponent: " + bookID + ", authorID in my component: " + authorID);
         setBookID(bookID);
+        setAuthorID(authorID);
     }
 
     function popupForDeleteHandler(boolean) {
@@ -55,7 +57,7 @@ const MyComponent = () => {
         {displayPopupForUpdate && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID}/>
+        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID} authorID={authorID}/>
         </div>}
         {displayPopupForDelete && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>

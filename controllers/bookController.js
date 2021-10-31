@@ -25,7 +25,7 @@ exports.enhanced = async function(req, res) {
 
     try {
         const response = await Book.findAll({
-            attributes: ['book_id', 'title', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
+            attributes: ['book_id', 'title', 'author_id', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
             include: [{
                 attributes: [],
                 model: Author
@@ -171,7 +171,7 @@ exports.book_update_post = async function(req, res) {
 
     try {
         console.log("update request in POST handler: " + JSON.stringify(req.body));
-        console.log("book_id in POST bookController: " + req.params.book_id);
+        //console.log("book_id in POST bookController: " + req.params.book_id);
         const bookToUpdate = await Book.update({ 
             title: req.body.title,
             isbn: req.body.isbn,

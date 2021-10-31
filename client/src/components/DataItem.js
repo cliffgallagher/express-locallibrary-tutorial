@@ -18,7 +18,7 @@ const DataItem = (props) => {
     function updateBookButtonClickHandler() {
         setMouseIsPresent(false);
         props.triggerPopupForUpdate(true);   
-        props.receiveBookIDFromDataItem(props.bookID);
+        props.receiveBookIDFromDataItem(props.bookID, props.authorID);
     }
 
     function deleteBookButtonClickHandler() {

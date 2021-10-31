@@ -2,33 +2,54 @@ import React, { useEffect, useState } from 'react';
 import './PopupForUpdate.css';
 
 const PopupForUpdate = (props) => {
+    const [updateFormAuthorOptions, setUpdateFormAuthorOptions] = useState([])
     const [updateFormTitleInput, setUpdateFormTitleInput] = useState("");
     const [updateFormISBNInput, setUpdateFormISBNInput] = useState("");
     const [updateFormSummaryInput, setUpdateFormSummaryInput] = useState("");
+    const [updateFormAuthorInput, setUpdateFormAuthorInput] = useState();
 
     //console.log("bookToUpdate in PopupForUpdate: " + props.bookID);
 
+    const getAuthorsFromDatabase = async () => {
+        try {
+            const authorsResponse = await fetch('/catalog/authors');
+            const authorObjectArray = await authorsResponse.json();
+            console.log('authorList in popup for update: ' + JSON.stringify(authorObjectArray));
+            setUpdateFormAuthorOptions(() => {
+                return [authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
+            }); 
+        } catch(e) {
+            console.log(e);
+        }     
+    }
+    
     async function fetchBook() {
         try {
             const response = await fetch(`catalog/book/${props.bookID}/update`);
             const bodyOfResponse = await response.json();
+            console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
             setUpdateFormSummaryInput(bodyOfResponse[0].summary);
+            
             
         } catch(e) {
             console.log(e);
         }
     }
 
-    useEffect(() => {
+    useEffect(async () => {
+        console.log("author ID is: " + props.authorID);
         fetchBook();
+        await getAuthorsFromDatabase();
+        setUpdateFormAuthorInput(props.authorID);
     }, []);
 
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();
         const updatedBookInfo = {
             title: updateFormTitleInput,
+            author: updateFormAuthorInput,
             isbn: updateFormISBNInput,
             summary: updateFormSummaryInput
         }
@@ -71,6 +92,7 @@ const PopupForUpdate = (props) => {
         <div className='popup-inner'>
             <form onSubmit={popupForUpdateSubmitHandler}>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
+                <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Summary<input type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>
                 <button type="submit">Update Book</button>

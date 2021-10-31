@@ -25,7 +25,7 @@ exports.enhanced = async function(req, res) {
 
     try {
         const response = await Book.findAll({
-            attributes: ['book_id', 'title', 'author_id', 'summary', 'isbn', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
+            attributes: ['book_id', 'title', 'author_id', 'summary', 'isbn', 'genre_id', 'createdAt', 'updatedAt', 'Author.first_name', 'Author.family_name', 'Genre.name'],
             include: [{
                 attributes: [],
                 model: Author

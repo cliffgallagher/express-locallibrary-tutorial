@@ -10,6 +10,7 @@ const MyComponent = () => {
     const [displayPopupForUpdate, setDisplayPopupForUpdate] = useState(false);
     const [bookID, setBookID] = useState();
     const [authorID, setAuthorID] = useState();
+    const [genreID, setGenreID] = useState();
     //const [bookID, setBookToUpdate] = useState();
     const [displayPopupForDelete, setDisplayPopupForDelete] = useState(false);
     
@@ -17,9 +18,9 @@ const MyComponent = () => {
         try {
             const promise = await fetch("/catalog/enhanced");
             const arrayFromJSON = await promise.json();
-            //console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
+            console.log("getBookList in MyComponent retrieved this list from MySQL: " + JSON.stringify(arrayFromJSON));
             setMyArray(() => {
-                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genre={element.name} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
+                return arrayFromJSON.map((element) => <DataItem key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genre={element.name} genreID={element.genre_id} summary={element.summary} triggerPopupForUpdate={popupForUpdateHandler} receiveBookIDFromDataItem={passBookIDToPopupForUpdate} triggerPopupForDelete={popupForDeleteHandler}/>);
             });
         } catch (e) {
             console.log(e);
@@ -39,10 +40,11 @@ const MyComponent = () => {
         setDisplayPopupForUpdate(boolean);
     }
 
-    function passBookIDToPopupForUpdate(bookID, authorID) {
+    function passBookIDToPopupForUpdate(bookID, authorID, genreID) {
         //console.log("bookID in MyComponent: " + bookID + ", authorID in my component: " + authorID);
         setBookID(bookID);
         setAuthorID(authorID);
+        setGenreID(genreID);
     }
 
     function popupForDeleteHandler(boolean) {
@@ -57,7 +59,7 @@ const MyComponent = () => {
         {displayPopupForUpdate && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>
             <BookList myArray={myArray} />
-        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID} authorID={authorID}/>
+        <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID} authorID={authorID}genreID={genreID}/>
         </div>}
         {displayPopupForDelete && <div>
             <NewBook getBookListMyComponentToNewBook={getBookList}/>

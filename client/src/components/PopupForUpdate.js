@@ -54,6 +54,8 @@ const PopupForUpdate = (props) => {
         await getAuthorsFromDatabase();
         setUpdateFormAuthorInput(props.authorID);
         await getGenresFromDatabase();
+        setUpdateFormGenreInput(props.genreID);
+
     }, []);
 
     async function popupForUpdateSubmitHandler(event) {
@@ -109,7 +111,7 @@ const PopupForUpdate = (props) => {
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
                 <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
-                <label>Genre<select name='updateFormGenreField'>{updateFormGenreOptions}</select></label>
+                <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput}>{updateFormGenreOptions}</select></label>
                 <label>Summary<input type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>
                 <button type="submit">Update Book</button>
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>

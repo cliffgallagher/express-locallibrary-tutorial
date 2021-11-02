@@ -1,14 +1,12 @@
 import React from 'react';
 import './BookListElement.css'
+import BookInfo from './BookInfo';
 
 const BookListElement = (props) => {
+
     return (
         <div className='bookListElement'>
-            <p>{props.title}</p>
-            <p>{props.author}</p>
-            <p>{props.isbn}</p>
-            <p>{props.genreName}</p>
-            <p>{props.summary}</p>
+            <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
         </div>
     );
 }

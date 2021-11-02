@@ -3,7 +3,7 @@ import BookList from './book_components/BookList';
 import NewBook from './book_components/NewBook';
 import BookListElement from './book_components/BookListElement';
 
-const MyComponentNew = () => {
+const BookComponent = () => {
     const [displayBooks, setDisplayBooks] = useState(true);
     const [bookArray, setBookArray] = useState();
 
@@ -36,4 +36,4 @@ const MyComponentNew = () => {
     )
 }
 
-export default MyComponentNew;
+export default BookComponent;

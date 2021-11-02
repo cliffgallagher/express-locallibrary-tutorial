@@ -1,14 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import MyComponent from './components/MyComponent';
-import MyComponentNew from './components/MyComponentNew';
+import BookComponent from './components/MyComponentNew';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <MyComponentNew />
+        <BookComponent />
       </header>
     </div>
   );

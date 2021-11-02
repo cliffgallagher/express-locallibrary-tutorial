@@ -5,6 +5,7 @@ import DataItem from './DataItem';
 import PopupForUpdate from './PopupForUpdate';
 import PopupForDelete from './PopupForDelete';
 import NewAuthor from './NewAuthor';
+import NewGenre from './NewGenre';
 
 const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
@@ -54,16 +55,16 @@ const MyComponent = () => {
 
     return <div>
         {!displayPopupForUpdate && !displayPopupForDelete && <div>
-            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor />
+            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor /><NewGenre />
             <BookList myArray={myArray} />
         </div>}
         {displayPopupForUpdate && <div>
-            <NewBook getBookListMyComponentToNewBook={getBookList}/>
+            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor />
             <BookList myArray={myArray} />
         <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID} authorID={authorID}genreID={genreID}/>
         </div>}
         {displayPopupForDelete && <div>
-            <NewBook getBookListMyComponentToNewBook={getBookList}/>
+            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor />
             <BookList myArray={myArray} />
             <PopupForDelete popupForDeleteHandler={popupForDeleteHandler} getBookListToPopupForDelete={getBookList} bookID={bookID}/>
         </div>}

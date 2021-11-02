@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react';
-import NewBook from './NewBook';
-import BookList from './BookList';
+import NewBook from '../components/book_components/NewBook';
+import BookList from './book_components/BookList';
 import DataItem from './DataItem';
 import PopupForUpdate from './PopupForUpdate';
 import PopupForDelete from './PopupForDelete';

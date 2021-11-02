@@ -42,12 +42,7 @@ const NewBookForm = (props) => {
             genre_id: {genreInput}
         }
 
-        setTitleInput("");
-        setISBNInput("");
-        setSummaryInput("");
-        setAuthorInput(0);
-        setGenreInput(0);
-
+        //console.log("userInput in new book form: " + JSON.stringify(userInputData));
         
         const insertBook = async () => {
             //console.log("entered insertBook");
@@ -65,7 +60,11 @@ const NewBookForm = (props) => {
         }
 
         insertBook();
-        
+        setTitleInput("");
+        setISBNInput("");
+        setSummaryInput("");
+        setAuthorInput(0);
+        setGenreInput(0);
     }
 
     function titleInputChangeHandler(event) {

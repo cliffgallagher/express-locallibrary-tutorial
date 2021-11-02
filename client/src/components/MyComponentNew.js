@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import BookList from './BookList';
-import DataItem from './DataItem';
-import NewBook from './NewBook';
-import BookListElement from './BookListElement';
+import BookList from './book_components/BookList';
+import NewBook from './book_components/NewBook';
+import BookListElement from './book_components/BookListElement';
 
 const MyComponentNew = () => {
     const [displayBooks, setDisplayBooks] = useState(true);
@@ -29,7 +28,7 @@ const MyComponentNew = () => {
             <button>Genres</button>
             {displayBooks && (
                 <div>
-                    <NewBook />
+                    <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
                     <BookList bookArray={bookArray}/>
                 </div>
             )}

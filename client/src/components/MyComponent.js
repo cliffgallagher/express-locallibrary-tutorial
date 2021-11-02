@@ -59,12 +59,12 @@ const MyComponent = () => {
             <BookList myArray={myArray} />
         </div>}
         {displayPopupForUpdate && <div>
-            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor />
+            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor /><NewGenre />
             <BookList myArray={myArray} />
         <PopupForUpdate popupForUpdateHandler={popupForUpdateHandler} getBookListToPopupForUpdate={getBookList} bookID={bookID} authorID={authorID}genreID={genreID}/>
         </div>}
         {displayPopupForDelete && <div>
-            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor />
+            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor /><NewGenre />
             <BookList myArray={myArray} />
             <PopupForDelete popupForDeleteHandler={popupForDeleteHandler} getBookListToPopupForDelete={getBookList} bookID={bookID}/>
         </div>}

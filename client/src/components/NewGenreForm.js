@@ -3,12 +3,21 @@ import React, { useState } from 'react';
 const NewGenreForm = (props) => {
     const [newGenreName, setNewGenreName] = useState("");
     
-    function newGenreFormSubmitHandler(event) {
+    async function newGenreFormSubmitHandler(event) {
         event.preventDefault();
         let newGenreInput = {
             genreName: {newGenreName}
         }
-        console.log(newGenreInput);
+        //console.log(newGenreInput);
+
+        await fetch('catalog/genre/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newGenreInput)
+        });
+        setNewGenreName("");
     }
     
     function newGenreNameChangeHandler(event) {

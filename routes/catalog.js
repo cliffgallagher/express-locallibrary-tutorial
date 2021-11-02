@@ -87,7 +87,10 @@ router.get('/authors', author_controller.author_list);
 router.get('/genre/create', genre_controller.genre_create_get);
 
 //POST request for creating Genre.
-router.post('/genre/create', genre_controller.genre_create_post);
+router.post('/genre/create', function(req, res, next) {
+    console.log('req body in genre/create: ' + JSON.stringify(req.body))
+    next()
+}, genre_controller.genre_create_post);
 
 // GET request to delete Genre.
 router.get('/genre/:id/delete', genre_controller.genre_delete_get);

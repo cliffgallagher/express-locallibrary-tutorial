@@ -5,12 +5,19 @@ import BookInfo from './BookInfo';
 const BookListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
 
+    console.log("bookID in BookListElement: " + props.bookID);
+
     function showUpdateAndDeleteButtons() {
         setDisplayUpdateAndDeleteButtons(true);
     }
 
     function hideUpdateAndDeleteButtons() {
         setDisplayUpdateAndDeleteButtons(false);
+    }
+
+    function updateBookButtonClickHandler() {
+        props.setDisplayBookPopupForUpdate(true);
+        props.bookIDFromBookListElementToBookComponent(props.bookID);
     }
 
     return (
@@ -23,7 +30,7 @@ const BookListElement = (props) => {
             {displayUpdateAndDeleteButtons && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
-                <button>Update Book</button><button>Delete Book</button>
+                <button onClick={updateBookButtonClickHandler}>Update Book</button><button>Delete Book</button>
                 </div>    
             )}
         </div>

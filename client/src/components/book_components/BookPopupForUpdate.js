@@ -10,7 +10,7 @@ const BookPopupForUpdate = (props) => {
     const [updateFormAuthorInput, setUpdateFormAuthorInput] = useState();
     const [updateFormGenreInput, setUpdateFormGenreInput] = useState();
 
-    //console.log("bookToUpdate in PopupForUpdate: " + props.bookID);
+    //console.log("rendered BookPOpupForUpdate");
 
     const getAuthorsFromDatabase = async () => {
         try {
@@ -35,6 +35,7 @@ const BookPopupForUpdate = (props) => {
     
     async function fetchBook() {
         try {
+            //console.log("bookID in BookPopupForUpdate: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/update`);
             const bodyOfResponse = await response.json();
             //console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
@@ -49,7 +50,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     useEffect(async () => {
-        //console.log("author ID is: " + props.authorID);
+        console.log("book ID is: " + props.bookID);
         fetchBook();
         await getAuthorsFromDatabase();
         setUpdateFormAuthorInput(props.authorID);

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PopupForUpdate from './PopupForUpdate';
+import React from 'react';
 
 const BookList = (props) => {
     //const [myArray, setMyArray] = useState([]);
@@ -27,7 +26,7 @@ const BookList = (props) => {
 
     return (
         <div>
-            <ul>{props.myArray}</ul>
+            <ul>{props.bookArray}</ul>
         </div>
     )
 }

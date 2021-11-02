@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import BookList from './book_components/BookList';
-import NewBook from './book_components/NewBook';
-import BookListElement from './book_components/BookListElement';
+import BookList from './BookList';
+import NewBook from './NewBook';
+import BookListElement from './BookListElement';
 
 const BookComponent = () => {
     const [displayBooks, setDisplayBooks] = useState(true);

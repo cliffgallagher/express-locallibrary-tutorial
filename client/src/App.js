@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import BookComponent from './components/MyComponentNew';
+import BookComponent from './components/book_components/BookComponent';
 
 function App() {
   return (

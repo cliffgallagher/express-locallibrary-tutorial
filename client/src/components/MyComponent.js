@@ -4,6 +4,7 @@ import BookList from './BookList';
 import DataItem from './DataItem';
 import PopupForUpdate from './PopupForUpdate';
 import PopupForDelete from './PopupForDelete';
+import NewAuthor from './NewAuthor';
 
 const MyComponent = () => {
     const [myArray, setMyArray] = useState([]);
@@ -53,7 +54,7 @@ const MyComponent = () => {
 
     return <div>
         {!displayPopupForUpdate && !displayPopupForDelete && <div>
-            <NewBook getBookListMyComponentToNewBook={getBookList}/>
+            <NewBook getBookListMyComponentToNewBook={getBookList}/><NewAuthor />
             <BookList myArray={myArray} />
         </div>}
         {displayPopupForUpdate && <div>

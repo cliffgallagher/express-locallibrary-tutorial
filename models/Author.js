@@ -17,10 +17,10 @@ module.exports = db.define('Author', {
         allowNull: true
     },
     date_of_birth: {
-        type: DataTypes.DATE
+        type: DataTypes.DATEONLY
     },
     date_of_death: {
-        type: DataTypes.DATE
+        type: DataTypes.DATEONLY
     }
 });
 

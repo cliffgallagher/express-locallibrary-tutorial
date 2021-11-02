@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './PopupForUpdate.css';
+import './BookPopupForUpdate.css';
 
-const PopupForUpdate = (props) => {
+const BookPopupForUpdate = (props) => {
     const [updateFormAuthorOptions, setUpdateFormAuthorOptions] = useState([]);
     const [updateFormGenreOptions, setUpdateFormGenreOptions] = useState([])
     const [updateFormTitleInput, setUpdateFormTitleInput] = useState("");
@@ -125,4 +125,4 @@ const PopupForUpdate = (props) => {
     </div>
 }
 
-export default PopupForUpdate;
+export default BookPopupForUpdate;

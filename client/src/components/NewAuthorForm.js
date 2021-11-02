@@ -47,8 +47,8 @@ const NewAuthorForm = (props) => {
             });
             setNewAuthorFirstName("");
             setNewAuthorFamilyName("");
-            setNewAuthorBirthDate(null);
-            setNewAuthorDeathDate(null);
+            setNewAuthorBirthDate("");
+            setNewAuthorDeathDate("");
         } catch(e) {
             console.log(e);
         }

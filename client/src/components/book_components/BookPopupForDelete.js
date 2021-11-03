@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './PopupForUpdate.css';
+import './BookPopupForUpdate.css';
 
-const PopupForDelete = (props) => {
+const BookPopupForDelete = (props) => {
     const [titleToDelete, setTitleToDelete] = useState("");
     const [isbnToDelete, setISBNToDelete] = useState("");
-    const [summaryToDelete, setSummaryToDelete] = useState("");
+    const [authorToDelete, setAuthorToDelete] = useState("");
 
     async function fetchDeleteBookInfo() {
         try {
@@ -13,7 +13,7 @@ const PopupForDelete = (props) => {
             const bodyOfResponse = await response.json();
             setTitleToDelete(bodyOfResponse[0].title);
             setISBNToDelete(bodyOfResponse[0].isbn);
-            setSummaryToDelete(bodyOfResponse[0].summary);
+            setAuthorToDelete(`${bodyOfResponse[0].first_name} ${bodyOfResponse[0].family_name}`);
         } catch(e) {
             console.log(e);
         }
@@ -24,7 +24,7 @@ const PopupForDelete = (props) => {
     }, []);
 
     function popupForDeleteCloseButtonHandler() {
-        props.popupForDeleteHandler(false);
+        props.setDisplayBookPopupForDelete(false);
     }
 
     async function deleteBookHandler(event) {
@@ -53,6 +53,7 @@ const PopupForDelete = (props) => {
             <form onSubmit={deleteBookHandler}>
                 <h1>Are you sure you want to delete this book?</h1>
                 <h3>Title: {titleToDelete}</h3>
+                <h3>Author: {authorToDelete}</h3>
                 <h3>ISBN: {isbnToDelete}</h3>
                 <button type="submit">Delete</button><button onClick={popupForDeleteCloseButtonHandler}>Close</button>
             </form>
@@ -60,4 +61,4 @@ const PopupForDelete = (props) => {
     </div>
 }
 
-export default PopupForDelete;
+export default BookPopupForDelete;

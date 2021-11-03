@@ -3,11 +3,13 @@ import BookList from './BookList';
 import NewBook from './NewBook';
 import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
+import BookPopupForDelete from './BookPopupForDelete';
 
 const BookComponent = () => {
     const [displayBooks, setDisplayBooks] = useState(true);
     const [bookArray, setBookArray] = useState();
     const [displayBookPopupForUpdate, setDisplayBookPopupForUpdate] = useState(false);
+    const [displayBookPopupForDelete, setDisplayBookPopupForDelete] = useState(false);
     const [bookIDForBookPopupForUpdate, setbookIDForBookPopupForUpdate] = useState();
     const [authorIDForBookPopupForUpdate, setAuthorIDForBookPopupForUpdate] = useState();
     const [genreIDForBookPopupForUpdate, setGenreIDForBookPopupForUpdate] = useState();
@@ -21,7 +23,7 @@ const BookComponent = () => {
         const body = await response.json();
         //console.log("body before setBookArray: " + JSON.stringify(body));
         setBookArray(() => {
-            return body.map(element => <BookListElement key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genreName={element.name} genreID={element.genre_id} summary={element.summary} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} bookPropsFromBookListElementToBookComponent={bookPropsFromBookListElementToBookComponent}/>);
+            return body.map(element => <BookListElement key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genreName={element.name} genreID={element.genre_id} summary={element.summary} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} bookPropsFromBookListElementToBookComponent={bookPropsFromBookListElementToBookComponent} setDisplayBookPopupForDelete={setDisplayBookPopupForDelete}/>);
         });
         console.log(bookArray);
     }
@@ -30,6 +32,8 @@ const BookComponent = () => {
         setbookIDForBookPopupForUpdate(bookID);
         setAuthorIDForBookPopupForUpdate(authorID);
         setGenreIDForBookPopupForUpdate(genreID);
+
+
     }
 
     useEffect(() => {
@@ -41,7 +45,7 @@ const BookComponent = () => {
             <button>Books</button>
             <button>Authors</button>
             <button>Genres</button>
-            {displayBooks && !displayBookPopupForUpdate && (
+            {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
                     <BookList bookArray={bookArray}/>
@@ -52,6 +56,13 @@ const BookComponent = () => {
                     <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
                     <BookList bookArray={bookArray}/>
                     <BookPopupForUpdate bookID={bookIDForBookPopupForUpdate} authorID={authorIDForBookPopupForUpdate} genreID={genreIDForBookPopupForUpdate} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} getBookList={getBookList}/>
+                </div>
+            )}
+            {displayBookPopupForDelete && (
+                <div>
+                    <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
+                    <BookList bookArray={bookArray}/>
+                    <BookPopupForDelete getBookList={getBookList} bookID={bookIDForBookPopupForUpdate} authorID={authorIDForBookPopupForUpdate} genreID={genreIDForBookPopupForUpdate} setDisplayBookPopupForDelete={setDisplayBookPopupForDelete}/>
                 </div>
             )}
         </div>

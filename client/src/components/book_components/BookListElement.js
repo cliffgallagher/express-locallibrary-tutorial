@@ -20,6 +20,10 @@ const BookListElement = (props) => {
         props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
     }
 
+    function deleteBookButtonClickHandler() {
+        props.setDisplayBookPopupForDelete(true);
+    }
+
     return (
         <div className='bookListElement' onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}>
             {!displayUpdateAndDeleteButtons && (
@@ -30,7 +34,7 @@ const BookListElement = (props) => {
             {displayUpdateAndDeleteButtons && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
-                <button onClick={updateBookButtonClickHandler}>Update Book</button><button>Delete Book</button>
+                <button onClick={updateBookButtonClickHandler}>Update Book</button><button onClick={deleteBookButtonClickHandler}>Delete Book</button>
                 </div>    
             )}
         </div>

@@ -79,8 +79,8 @@ const BookPopupForUpdate = (props) => {
                 body: JSON.stringify(updatedBookInfo)
             });
             //console.log("have received response from post in PopupForUpdate");
-            props.popupForUpdateHandler(false);
-            props.getBookListToPopupForUpdate();
+            props.setDisplayBookPopupForUpdate(false);
+            props.getBookList();
             return response;
         }
 

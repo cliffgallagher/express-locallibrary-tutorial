@@ -51,7 +51,7 @@ const BookComponent = () => {
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
                     <BookList bookArray={bookArray}/>
-                    <BookPopupForUpdate bookID={bookIDForBookPopupForUpdate} authorID={authorIDForBookPopupForUpdate} genreID={genreIDForBookPopupForUpdate}/>
+                    <BookPopupForUpdate bookID={bookIDForBookPopupForUpdate} authorID={authorIDForBookPopupForUpdate} genreID={genreIDForBookPopupForUpdate} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} getBookList={getBookList}/>
                 </div>
             )}
         </div>

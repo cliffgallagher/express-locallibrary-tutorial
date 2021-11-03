@@ -4,8 +4,9 @@ import NewBook from './NewBook';
 import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
+import DisplaySelector from '../DisplaySelector';
 
-const BookComponent = () => {
+const BookComponent = (props) => {
     const [displayBooks, setDisplayBooks] = useState(true);
     const [bookArray, setBookArray] = useState();
     const [displayBookPopupForUpdate, setDisplayBookPopupForUpdate] = useState(false);
@@ -42,9 +43,7 @@ const BookComponent = () => {
 
     return (
         <div>
-            <button>Books</button>
-            <button>Authors</button>
-            <button>Genres</button>
+            <DisplaySelector />
             {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList}/>

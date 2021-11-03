@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './BookListElement.css'
+import '../ListElement.css'
 import BookInfo from './BookInfo';
 
 const BookListElement = (props) => {
@@ -26,7 +26,7 @@ const BookListElement = (props) => {
     }
 
     return (
-        <div className='bookListElement' onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}>
+        <div className='listElement' onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}>
             {!displayUpdateAndDeleteButtons && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>

@@ -4,8 +4,8 @@ const AuthorInfo = (props) => {
     return (
         <div>
             <p>{`${props.familyName}, ${props.firstName}`}</p>
-            <p>Born: {props.dateOfBirth}</p>
-            <p>Died: {props.dateOfDeath}</p>
+            <p>Born: </p><date>{props.dateOfBirth}</date>
+            <p>Died: </p><date>{props.dateOfDeath}</date>
         </div>
     )
 }

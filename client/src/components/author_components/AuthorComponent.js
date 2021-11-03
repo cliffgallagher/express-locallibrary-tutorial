@@ -22,7 +22,7 @@ const AuthorComponent = () => {
 
     return (
         <div>
-            <NewAuthor />
+            <NewAuthor getAuthorList={getAuthorList}/>
             <AuthorList authorArray={authorArray}/>
         </div>
     )

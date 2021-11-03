@@ -1,7 +1,6 @@
 import React from "react";
 
 const AuthorInfo = (props) => {
-    console.log(props.dateOfDeath);
 
     return (
         <div>

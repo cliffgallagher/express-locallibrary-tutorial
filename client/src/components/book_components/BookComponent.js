@@ -43,7 +43,6 @@ const BookComponent = (props) => {
 
     return (
         <div>
-            <DisplaySelector />
             {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList}/>

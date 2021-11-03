@@ -108,7 +108,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     function popupForUpdateCloseButtonHandler(event) {
-        props.popupForUpdateHandler(false);
+        props.setDisplayBookPopupForUpdate(false);
     }
 
     return <div className='popup'>

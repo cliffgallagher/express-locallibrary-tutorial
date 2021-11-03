@@ -10,11 +10,11 @@ const AuthorPopupForUpdate = (props) => {
     async function getInitialValues() {
         const response = await fetch(`catalog/author/${props.authorID}/update`);
         const data = await response.json();
-        //console.log(data);
+        console.log(data);
         setAuthorUpdateFormFirstNameValue(data[0].first_name);
         setAuthorUpdateFormFamilyNameValue(data[0].family_name);
-        setAuthorUpdateFormBirthValue(data[0].date_of_birth);
-        setAuthorUpdateFormDeathValue(data[0].date_of_death);
+        setAuthorUpdateFormBirthValue((data[0].date_of_birth).slice(0, 10));
+        data[0].date_of_death && setAuthorUpdateFormDeathValue((data[0].date_of_death).slice(0, 10));
     }
 
     useEffect(() => {

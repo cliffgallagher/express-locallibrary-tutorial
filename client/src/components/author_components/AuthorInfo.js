@@ -1,11 +1,13 @@
 import React from "react";
 
 const AuthorInfo = (props) => {
+    console.log(props.dateOfDeath);
+
     return (
         <div>
             <p>{`${props.familyName}, ${props.firstName}`}</p>
-            <p>Born: </p><date>{props.dateOfBirth}</date>
-            <p>Died: </p><date>{props.dateOfDeath}</date>
+            <p>Born: {new Date(props.dateOfBirth).toLocaleDateString()}</p>
+            <p>Died: {props.dateOfDeath && new Date(props.dateOfDeath).toLocaleDateString()}</p>
         </div>
     )
 }

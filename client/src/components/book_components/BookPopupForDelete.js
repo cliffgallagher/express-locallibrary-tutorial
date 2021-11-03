@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './BookPopupForUpdate.css';
+import '../Popup.css';
 
 const BookPopupForDelete = (props) => {
     const [titleToDelete, setTitleToDelete] = useState("");

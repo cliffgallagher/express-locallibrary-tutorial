@@ -13,14 +13,14 @@ const AuthorListElement = (props) => {
         setDisplayUpdateAndDeleteButtons(false);
     }
 
-    function updateBookButtonClickHandler() {
-        props.setDisplayBookPopupForUpdate(true);
-        props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
+    function updateAuthorButtonClickHandler() {
+        props.setDisplayAuthorPopupForUpdate(true);
+        //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
     }
 
-    function deleteBookButtonClickHandler() {
-        props.setDisplayBookPopupForDelete(true);
-        props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
+    function deleteAuthorButtonClickHandler() {
+        //props.setDisplayAuthorPopupForDelete(true);
+        //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
     }
     
     return (
@@ -29,7 +29,7 @@ const AuthorListElement = (props) => {
             {displayUpdateAndDeleteButtons && (
                 <div>
                     <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>
-                    <button>Update Author</button><button>Delete Author</button>
+                    <button onClick={updateAuthorButtonClickHandler}>Update Author</button><button>Delete Author</button>
                 </div>
             )}
         </div>

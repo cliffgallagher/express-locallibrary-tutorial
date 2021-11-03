@@ -41,8 +41,8 @@ const BookPopupForDelete = (props) => {
             },
             body: JSON.stringify(bookIDAsObject)
         });
-        props.popupForDeleteHandler(false);
-        props.getBookListToPopupForDelete();
+        props.setDisplayBookPopupForDelete(false);
+        props.getBookList();
         //console.log("have received response from post in PopupForDelete");
         
 

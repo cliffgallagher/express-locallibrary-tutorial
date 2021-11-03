@@ -5,6 +5,7 @@ import '../ListElement.css'
 const AuthorListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
 
+    console.log('date of birth in AuthorListElement: ' + props.dateOfBirth);
     function showUpdateAndDeleteButtons() {
         setDisplayUpdateAndDeleteButtons(true);
     }

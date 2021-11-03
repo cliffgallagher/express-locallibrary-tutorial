@@ -29,7 +29,7 @@ exports.author_create_post = async function(req, res) {
         date_of_birth: req.body.dateOfBirth,
         date_of_death: req.body.dateOfDeath
     })
-    res.send('new author created');
+    res.json(newAuthor);
 }
 
 // Display Author delete form on GET
@@ -55,7 +55,7 @@ exports.author_update_get = async function(req, res) {
 
 // Handle Author update on POST.
 exports.author_update_post = async function(req, res) {
-    //console.log('req body in author_update_post: ' + JSON.stringify(req.body));
+    console.log('req body in author_update_post: ' + JSON.stringify(req.body));
     const authorObject = await Author.update({
         first_name: req.body.firstName,
         family_name: req.body.familyName,

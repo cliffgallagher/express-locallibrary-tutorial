@@ -9,6 +9,8 @@ const BookComponent = () => {
     const [bookArray, setBookArray] = useState();
     const [displayBookPopupForUpdate, setDisplayBookPopupForUpdate] = useState(false);
     const [bookIDForBookPopupForUpdate, setbookIDForBookPopupForUpdate] = useState();
+    const [authorIDForBookPopupForUpdate, setAuthorIDForBookPopupForUpdate] = useState();
+    const [genreIDForBookPopupForUpdate, setGenreIDForBookPopupForUpdate] = useState();
 
     /*function bookListElementMouseEnterHandler() {
         setDisplayBookPopupForUpdate(true);
@@ -19,13 +21,15 @@ const BookComponent = () => {
         const body = await response.json();
         //console.log("body before setBookArray: " + JSON.stringify(body));
         setBookArray(() => {
-            return body.map(element => <BookListElement key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genreName={element.name} genreID={element.genre_id} summary={element.summary} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} bookIDFromBookListElementToBookComponent={bookIDFromBookListElementToBookComponent}/>);
+            return body.map(element => <BookListElement key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genreName={element.name} genreID={element.genre_id} summary={element.summary} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} bookPropsFromBookListElementToBookComponent={bookPropsFromBookListElementToBookComponent}/>);
         });
         console.log(bookArray);
     }
 
-    function bookIDFromBookListElementToBookComponent(bookID) {
+    function bookPropsFromBookListElementToBookComponent(bookID, authorID, genreID) {
         setbookIDForBookPopupForUpdate(bookID);
+        setAuthorIDForBookPopupForUpdate(authorID);
+        setGenreIDForBookPopupForUpdate(genreID);
     }
 
     useEffect(() => {
@@ -47,7 +51,7 @@ const BookComponent = () => {
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
                     <BookList bookArray={bookArray}/>
-                    <BookPopupForUpdate bookID={bookIDForBookPopupForUpdate}/>
+                    <BookPopupForUpdate bookID={bookIDForBookPopupForUpdate} authorID={authorIDForBookPopupForUpdate} genreID={genreIDForBookPopupForUpdate}/>
                 </div>
             )}
         </div>

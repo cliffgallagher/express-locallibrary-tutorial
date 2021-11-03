@@ -50,7 +50,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     useEffect(async () => {
-        console.log("book ID is: " + props.bookID);
+        //console.log("book ID is: " + props.bookID);
         fetchBook();
         await getAuthorsFromDatabase();
         setUpdateFormAuthorInput(props.authorID);

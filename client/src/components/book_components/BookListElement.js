@@ -17,7 +17,7 @@ const BookListElement = (props) => {
 
     function updateBookButtonClickHandler() {
         props.setDisplayBookPopupForUpdate(true);
-        props.bookIDFromBookListElementToBookComponent(props.bookID);
+        props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
     }
 
     return (

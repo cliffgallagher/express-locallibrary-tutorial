@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-const AuthorList = () => {
-    const [authorArray, setAuthorArray] = useState();
+const AuthorList = (props) => {
     
     return (
         <div>
-            <ul>{authorArray}</ul>
+            <ul>{props.authorArray}</ul>
         </div>
     )
 }

@@ -17,7 +17,7 @@ const AuthorPopupForUpdate = (props) => {
         data[0].date_of_death && setAuthorUpdateFormDeathValue((data[0].date_of_death).slice(0, 10));
     }
 
-    function authorUpdateFormSubmitHandler(event) {
+    async function authorUpdateFormSubmitHandler(event) {
         event.preventDefault();
         const updatedAuthorData = {
             firstName: authorUpdateFormFirstNameValue,
@@ -25,7 +25,16 @@ const AuthorPopupForUpdate = (props) => {
             birthDate: authorUpdateFormBirthValue,
             deathDate: authorUpdateFormDeathValue
         }
-        console.log(JSON.stringify(updatedAuthorData));
+        //console.log(JSON.stringify(updatedAuthorData));
+        await fetch(`catalog/author/${props.authorID}/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedAuthorData)
+        });
+        props.setDisplayAuthorPopupForUpdate(false);
+        props.getAuthorList();
     }
 
     useEffect(() => {

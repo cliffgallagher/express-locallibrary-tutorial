@@ -54,6 +54,17 @@ exports.author_update_get = async function(req, res) {
 }
 
 // Handle Author update on POST.
-exports.author_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author update POST');
+exports.author_update_post = async function(req, res) {
+    //console.log('req body in author_update_post: ' + JSON.stringify(req.body));
+    const authorObject = await Author.update({
+        first_name: req.body.firstName,
+        family_name: req.body.familyName,
+        date_of_birth: req.body.birthDate,
+        date_of_death: req.body.deathDate
+    }, {
+        where: {
+            author_id: req.params.id
+        }
+    })
+    res.json(authorObject);
 }

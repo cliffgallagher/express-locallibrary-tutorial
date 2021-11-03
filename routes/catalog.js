@@ -70,7 +70,11 @@ router.get('/author/:id/delete', author_controller.author_delete_get);
 router.post('/author/:id/delete', author_controller.author_delete_post);
 
 // GET request to update Author.
-router.get('/author/:id/update', author_controller.author_update_get);
+
+router.get('/author/:id/update', function(req, res, next) {
+    console.log('authorID in author_update_get: ' + req.params.id)
+    next()
+}, author_controller.author_update_get);
 
 // POST request to update Author.
 router.post('/author/:id/update', author_controller.author_update_post);

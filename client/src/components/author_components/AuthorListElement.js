@@ -16,6 +16,7 @@ const AuthorListElement = (props) => {
     function updateAuthorButtonClickHandler() {
         props.setDisplayAuthorPopupForUpdate(true);
         //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
+        props.authorInfoToAuthorComponent(props.authorID);
     }
 
     function deleteAuthorButtonClickHandler() {

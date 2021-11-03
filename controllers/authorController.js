@@ -43,8 +43,14 @@ exports.author_delete_post = function(req, res) {
 }
 
 // Display Author update form on GET
-exports.author_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author update GET');
+exports.author_update_get = async function(req, res) {
+    const authorData = await Author.findAll({
+        where: {
+            author_id: req.params.id
+        }
+    });
+    res.json(authorData);
+    //res.send('NOT IMPLEMENTED: Author update GET');
 }
 
 // Handle Author update on POST.

@@ -17,9 +17,36 @@ const AuthorPopupForUpdate = (props) => {
         data[0].date_of_death && setAuthorUpdateFormDeathValue((data[0].date_of_death).slice(0, 10));
     }
 
+    function authorUpdateFormSubmitHandler(event) {
+        event.preventDefault();
+        const updatedAuthorData = {
+            firstName: authorUpdateFormFirstNameValue,
+            familyName: authorUpdateFormFamilyNameValue,
+            birthDate: authorUpdateFormBirthValue,
+            deathDate: authorUpdateFormDeathValue
+        }
+        console.log(JSON.stringify(updatedAuthorData));
+    }
+
     useEffect(() => {
         getInitialValues();
     }, [])
+
+    function authorUpdateFormFirstNameChangeHandler(event) {
+        setAuthorUpdateFormFirstNameValue(event.target.value);
+    }
+
+    function authorUpdateFormFamilyNameChangeHandler(event) {
+        setAuthorUpdateFormFamilyNameValue(event.target.value);
+    }
+
+    function authorUpdateFormBirthDateChangeHandler(event) {
+        setAuthorUpdateFormBirthValue(event.target.value);
+    }
+
+    function authorUpdateFormDeathDateChangeHandler(event) {
+        setAuthorUpdateFormDeathValue(event.target.value);
+    }
     
     function popupForUpdateCloseButtonHandler() {
         props.setDisplayAuthorPopupForUpdate(false);
@@ -27,11 +54,11 @@ const AuthorPopupForUpdate = (props) => {
     
     return <div className='popup'>
         <div className='popup-inner'>
-            <form>
-                <label>First Name<input type='text' name='authorUpdateFormFirstNameInput' value={authorUpdateFormFirstNameValue}/></label>
-                <label>Family Name<input type='text' name='authorUpdateFormFamilyNameInput' value={authorUpdateFormFamilyNameValue}/></label>
-                <label>Date of Birth<input type='date' name='authorUpdateFormBirthInput' value={authorUpdateFormBirthValue}/></label>
-                <label>Date of Death<input type='date' name='authorUpdateFormDeathInput'value={authorUpdateFormDeathValue}/></label>
+            <form onSubmit={authorUpdateFormSubmitHandler}>
+                <label>First Name<input type='text' name='authorUpdateFormFirstNameInput' value={authorUpdateFormFirstNameValue} onChange={authorUpdateFormFirstNameChangeHandler}/></label>
+                <label>Family Name<input type='text' name='authorUpdateFormFamilyNameInput' value={authorUpdateFormFamilyNameValue} onChange={authorUpdateFormFamilyNameChangeHandler}/></label>
+                <label>Date of Birth<input type='date' name='authorUpdateFormBirthInput' value={authorUpdateFormBirthValue} onChange={authorUpdateFormBirthDateChangeHandler}/></label>
+                <label>Date of Death<input type='date' name='authorUpdateFormDeathInput'value={authorUpdateFormDeathValue} onChange={authorUpdateFormDeathDateChangeHandler}/></label>
                 <button type="submit">Update Author</button>
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
             </form>

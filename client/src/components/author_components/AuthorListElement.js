@@ -21,7 +21,7 @@ const AuthorListElement = (props) => {
     }
 
     function deleteAuthorButtonClickHandler() {
-        //props.setDisplayAuthorPopupForDelete(true);
+        props.setDisplayAuthorPopupForDelete(true);
         //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
     }
     
@@ -31,7 +31,7 @@ const AuthorListElement = (props) => {
             {displayUpdateAndDeleteButtons && (
                 <div>
                     <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>
-                    <button onClick={updateAuthorButtonClickHandler}>Update Author</button><button>Delete Author</button>
+                    <button onClick={updateAuthorButtonClickHandler}>Update Author</button><button onClick={deleteAuthorButtonClickHandler}>Delete Author</button>
                 </div>
             )}
         </div>

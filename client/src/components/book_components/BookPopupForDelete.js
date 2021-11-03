@@ -11,6 +11,7 @@ const BookPopupForDelete = (props) => {
             //console.log("bookID in delete popup: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/delete`);
             const bodyOfResponse = await response.json();
+            //console.log("delete info in popup for delete: " + JSON.stringify(bodyOfResponse))
             setTitleToDelete(bodyOfResponse[0].title);
             setISBNToDelete(bodyOfResponse[0].isbn);
             setAuthorToDelete(`${bodyOfResponse[0].first_name} ${bodyOfResponse[0].family_name}`);

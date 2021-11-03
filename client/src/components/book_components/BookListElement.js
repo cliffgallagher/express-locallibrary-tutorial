@@ -22,6 +22,7 @@ const BookListElement = (props) => {
 
     function deleteBookButtonClickHandler() {
         props.setDisplayBookPopupForDelete(true);
+        props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
     }
 
     return (

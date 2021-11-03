@@ -112,9 +112,9 @@ exports.book_delete_get = async function(req, res) {
                 book_id: req.params.book_id
                 }
         });
-        //console.log(JSON.stringify(bookToUpdate));
+        console.log("book to delete in book controller: " + JSON.stringify(bookToDelete));
         //res.json(bookToUpdate);
-        res.send(bookToDelete);  
+        res.json(bookToDelete);  
     } catch(e) {
         console.log(e);
     }

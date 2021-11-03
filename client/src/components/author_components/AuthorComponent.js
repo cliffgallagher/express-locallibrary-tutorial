@@ -1,7 +1,12 @@
 import React from 'react';
+import NewAuthor from './NewAuthor';
 
 const AuthorComponent = () => {
-    return 'i am author component';
+    return (
+        <div>
+            <NewAuthor />
+        </div>
+    )
 }
 
 export default AuthorComponent;

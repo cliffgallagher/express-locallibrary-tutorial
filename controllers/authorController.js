@@ -33,8 +33,14 @@ exports.author_create_post = async function(req, res) {
 }
 
 // Display Author delete form on GET
-exports.author_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author delete GET');
+exports.author_delete_get = async function(req, res) {
+    const authorObject = await Author.findAll({
+        where: {
+            author_id: req.params.id
+        }
+    });
+    //console.log('author object in authorController: ' +JSON.stringify(authorObject));
+    res.json(authorObject);
 }
 
 // Handle Author delete on POST

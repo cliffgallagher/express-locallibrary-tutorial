@@ -5,7 +5,7 @@ import '../ListElement.css'
 const AuthorListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
 
-    console.log('date of birth in AuthorListElement: ' + props.dateOfBirth);
+    //console.log('date of birth in AuthorListElement: ' + props.dateOfBirth);
     function showUpdateAndDeleteButtons() {
         setDisplayUpdateAndDeleteButtons(true);
     }
@@ -23,6 +23,7 @@ const AuthorListElement = (props) => {
     function deleteAuthorButtonClickHandler() {
         props.setDisplayAuthorPopupForDelete(true);
         //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
+        props.authorInfoToAuthorComponent(props.authorID);
     }
     
     return (

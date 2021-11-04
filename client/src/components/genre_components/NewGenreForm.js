@@ -20,7 +20,7 @@ const NewGenreForm = (props) => {
             },
             body: JSON.stringify(genreName)
         });
-        
+        props.setAddNewGenre(false);
         props.getGenreList();
     }
     

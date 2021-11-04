@@ -7,14 +7,6 @@ const NewGenre = (props) => {
     function addNewGenreButtonClickHandler() {
         setAddNewGenre(true);
     }
-
-    /*const setAddNewGenreToFalse = () => {
-        setAddNewGenre(false);
-    }
-
-    function sendAddNewGenreToGenreComponent() {
-        props.receiveAddNewGenre(setAddNewGenreToFalse);
-    }*/
     
     return (
         <div>

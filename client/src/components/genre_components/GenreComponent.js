@@ -1,7 +1,12 @@
 import React from 'react';
+import NewGenre from './NewGenre';
 
 const GenreComponent = () => {
-    return 'i am genre component';
+    return (
+        <div>
+            <NewGenre />
+        </div>
+    )
 }
 
 export default GenreComponent;

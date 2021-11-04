@@ -4,6 +4,7 @@ const AuthorPopupForDelete = (props) => {
     const [authorNameOnDeleteForm, setAuthorNameOnDeleteForm] = useState();
     const [authorBirthDateOnDeleteForm, setAuthorBirthDateOnDeleteForm] = useState();
     const [authorDeathDateOnDeleteForm, setAuthorDeathDateOnDeleteForm] = useState();
+    const [receivedForeignKeyConstraintError, setReceivedForeignKeyConstraintError] = useState(false);
 
     
     async function getInitialValues() {
@@ -31,9 +32,10 @@ const AuthorPopupForDelete = (props) => {
                 }
             });
             const data = await response.json();
-            //console.log(JSON.stringify(data));
-            if (JSON.stringify(data) === 'SequelizeForeignKeyConstraintError') {
-
+            //console.log('typeof data: ' + typeof data);
+            if (data === 'SequelizeForeignKeyConstraintError') {
+                //console.log('entered if block');
+                setReceivedForeignKeyConstraintError(true);
             } else {
                 props.displayAuthorPopupForDelete(false);
                 props.getAuthorList();
@@ -51,17 +53,29 @@ const AuthorPopupForDelete = (props) => {
     function popupForDeleteCloseButtonHandler() {
         props.displayAuthorPopupForDelete(false);
     }
+
+    function foreignKeyWarningCloseButtonHandler() {
+        props.displayAuthorPopupForDelete(false);
+        setReceivedForeignKeyConstraintError(false);
+    }
     
     return <div className='popup'>
     <div className='popup-inner'>
-        <form onSubmit={deleteAuthorFormSubmitHandler}>
+        {!receivedForeignKeyConstraintError && <form onSubmit={deleteAuthorFormSubmitHandler}>
             <h1>Are you sure you want to delete this author?</h1>
             <h3>Name: {authorNameOnDeleteForm}</h3>
             <h3>Date of Birth: {authorBirthDateOnDeleteForm}</h3>
             <h3>Died: {authorDeathDateOnDeleteForm}</h3>
             <button type="submit">Delete Author</button>
             <button className='close-button' onClick={popupForDeleteCloseButtonHandler}>Close</button>
-        </form>
+        </form>}
+        {receivedForeignKeyConstraintError && (
+            <form>
+                <h3>You're attempting to delete an author who wrote a book currently stored in the database.</h3>
+                <h3>Please delete the book or update it with a different author before deleting this author.</h3>
+                <button onClick={foreignKeyWarningCloseButtonHandler}>Close</button>
+            </form>
+        )}
     </div>
 </div>
 }

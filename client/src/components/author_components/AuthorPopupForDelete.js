@@ -33,8 +33,9 @@ const AuthorPopupForDelete = (props) => {
             props.displayAuthorPopupForDelete(false);
             props.getAuthorList();
         } catch(e) {
-            console.log(e);
+            console.log("error in popupForDelete: " + e);
         }
+        
     }
 
     useEffect(() => {

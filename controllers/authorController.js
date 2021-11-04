@@ -56,7 +56,7 @@ exports.author_delete_get = async function(req, res) {
 }
 
 // Handle Author delete on POST
-exports.author_delete_post = async function(req, res) {
+exports.author_delete_post = async function(req, res, next) {
     try {
         const deletedAuthor = await Author.destroy({
             where: {
@@ -65,7 +65,8 @@ exports.author_delete_post = async function(req, res) {
         });
         res.json(deletedAuthor);
     } catch(e) {
-        console.log(e);
+        console.log("error message in authorController: " + e)
+        next(e)
     }
 }
 
@@ -104,3 +105,4 @@ exports.author_update_post = async function(req, res) {
     }
 
 }
+

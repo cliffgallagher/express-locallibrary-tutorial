@@ -24,7 +24,7 @@ exports.genre_create_get = function(req, res) {
 // Handle Genre create on POST.
 exports.genre_create_post = async function(req, res) {
     const newGenre = await Genre.create({
-        name: req.body.genreName.newGenreName
+        name: req.body.genreName
     })
     
     res.send(newGenre);

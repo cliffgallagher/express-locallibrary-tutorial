@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import NewGenreForm from "./NewGenreForm";
 
-const NewGenre = () => {
+const NewGenre = (props) => {
     const [addNewGenre, setAddNewGenre] = useState(false);
 
     function addNewGenreButtonClickHandler() {
         setAddNewGenre(true);
     }
+
+    /*const setAddNewGenreToFalse = () => {
+        setAddNewGenre(false);
+    }
+
+    function sendAddNewGenreToGenreComponent() {
+        props.receiveAddNewGenre(setAddNewGenreToFalse);
+    }*/
     
     return (
         <div>
@@ -17,7 +25,7 @@ const NewGenre = () => {
             )}
             {addNewGenre && (
                 <div>
-                    <NewGenreForm setAddNewGenre={setAddNewGenre}/>
+                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList}/>
                 </div>
             )}
         </div>

@@ -21,7 +21,7 @@ const GenreComponent = () => {
     
     return (
         <div>
-            <NewGenre />
+            <NewGenre getGenreList={getGenreList}/>
             <GenreList genreArray={genreArray}/>
         </div>
     )

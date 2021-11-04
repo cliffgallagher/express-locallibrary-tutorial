@@ -2,6 +2,7 @@ var Genre = require('../models/Genre');
 
 // Display list of all Genre.
 exports.genre_list = async function(req, res) {
+    console.log('entered correct controller');
     const promise = await Genre.findAll({
         order: [
             ['name', 'ASC']

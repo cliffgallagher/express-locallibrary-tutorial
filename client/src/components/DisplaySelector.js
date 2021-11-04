@@ -3,21 +3,15 @@ import React, { useState } from 'react';
 const DisplaySelector = (props) => {
 
     function booksButtonClickHandler() {
-        props.setDisplayBookComponent(true);
-        props.setDisplayAuthorComponent(false);
-        props.setDisplayGenreComponent(false);
+        props.displayBookComponentFunction();
     }
 
     function authorsButtonClickHandler() {
-        props.setDisplayBookComponent(false);
-        props.setDisplayAuthorComponent(true);
-        props.setDisplayGenreComponent(false);
+        props.displayAuthorComponentFunction();
     }
 
     function genresButtonClickHandler() {
-        props.setDisplayBookComponent(false);
-        props.setDisplayAuthorComponent(false);
-        props.setDisplayGenreComponent(true);
+        props.displayGenreComponentFunction();
     }
     
     return (

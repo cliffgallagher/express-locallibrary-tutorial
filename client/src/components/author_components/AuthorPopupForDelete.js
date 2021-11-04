@@ -29,7 +29,7 @@ const AuthorPopupForDelete = (props) => {
                     'Content-Type': 'application/json'
                 }
             });
-            props.getAuthorList();
+            props.displayAuthorComponentFunction();
         } catch(e) {
             console.log(e);
         }

@@ -31,9 +31,13 @@ const AuthorPopupForDelete = (props) => {
                 }
             });
             const data = await response.json();
-            console.log(JSON.stringify(data));
-            props.displayAuthorPopupForDelete(false);
-            props.getAuthorList();
+            //console.log(JSON.stringify(data));
+            if (JSON.stringify(data) === 'SequelizeForeignKeyConstraintError') {
+
+            } else {
+                props.displayAuthorPopupForDelete(false);
+                props.getAuthorList();
+            }
         } catch(e) {
             console.log("error in popupForDelete: " + e);
         }

@@ -21,7 +21,8 @@ const AuthorPopupForDelete = (props) => {
         
     }
 
-    async function deleteAuthorFormSubmitHandler() {
+    async function deleteAuthorFormSubmitHandler(event) {
+        event.preventDefault();
         try {
             await fetch(`catalog/author/${props.authorID}/delete`, {
                 method: 'POST',
@@ -29,7 +30,8 @@ const AuthorPopupForDelete = (props) => {
                     'Content-Type': 'application/json'
                 }
             });
-            props.displayAuthorComponentFunction();
+            props.displayAuthorPopupForDelete(false);
+            props.getAuthorList();
         } catch(e) {
             console.log(e);
         }

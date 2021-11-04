@@ -8,13 +8,18 @@ const AuthorPopupForUpdate = (props) => {
     const [authorUpdateFormDeathValue, setAuthorUpdateFormDeathValue] = useState();
 
     async function getInitialValues() {
-        const response = await fetch(`catalog/author/${props.authorID}/update`);
-        const data = await response.json();
-        //console.log(data);
-        setAuthorUpdateFormFirstNameValue(data[0].first_name);
-        setAuthorUpdateFormFamilyNameValue(data[0].family_name);
-        setAuthorUpdateFormBirthValue((data[0].date_of_birth).slice(0, 10));
-        data[0].date_of_death && setAuthorUpdateFormDeathValue((data[0].date_of_death).slice(0, 10));
+        try {
+            const response = await fetch(`catalog/author/${props.authorID}/update`);
+            const data = await response.json();
+            //console.log(data);
+            setAuthorUpdateFormFirstNameValue(data[0].first_name);
+            setAuthorUpdateFormFamilyNameValue(data[0].family_name);
+            setAuthorUpdateFormBirthValue((data[0].date_of_birth).slice(0, 10));
+            data[0].date_of_death && setAuthorUpdateFormDeathValue((data[0].date_of_death).slice(0, 10));
+        } catch(e) {
+            console.log(e);
+        }
+        
     }
 
     async function authorUpdateFormSubmitHandler(event) {
@@ -26,13 +31,17 @@ const AuthorPopupForUpdate = (props) => {
             deathDate: authorUpdateFormDeathValue
         }
         //console.log(JSON.stringify(updatedAuthorData));
-        await fetch(`catalog/author/${props.authorID}/update`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedAuthorData)
-        });
+        try {
+            await fetch(`catalog/author/${props.authorID}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedAuthorData)
+            });
+        } catch(e) {
+            console.log(e);
+        }
         props.setDisplayAuthorPopupForUpdate(false);
         props.getAuthorList();
     }

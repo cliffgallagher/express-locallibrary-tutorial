@@ -33,7 +33,10 @@ exports.enhanced = async function(req, res) {
                 attributes: [],
                 model: Genre
             }],
-            raw: 'true'
+            raw: 'true',
+            order: [
+                ['title', 'ASC']
+            ]
         });
         //console.log(JSON.stringify(response));
         res.json(response);  

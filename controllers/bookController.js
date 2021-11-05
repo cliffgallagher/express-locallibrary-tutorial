@@ -81,11 +81,11 @@ exports.book_create_post = async function(req, res) {
         //res.send('NOT IMPLEMENTED: Book create POST');
         //console.log("req.body in controller: " + req.body);
         const newBook = await Book.create({
-        title: req.body.title.titleInput,
-        author_id: req.body.author_id.authorInput,
-        isbn: req.body.isbn.isbnInput,
-        genre_id: req.body.genre_id.genreInput,
-        summary: req.body.summary.summaryInput
+        title: req.body.title,
+        author_id: req.body.author_i,
+        isbn: req.body.isbn,
+        genre_id: req.body.genre_id,
+        summary: req.body.summary
     });
 
     res.json(newBook);

@@ -31,8 +31,17 @@ exports.genre_create_post = async function(req, res) {
 };
 
 // Display Genre delete form on GET.
-exports.genre_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete GET');
+exports.genre_delete_get = async function(req, res) {
+    try {
+        const genreToDelete = await Genre.findAll({
+            where: {
+                genre_id: req.params.id
+            }
+        });
+        res.json(genreToDelete);
+    } catch(e) {
+        console.log(e);
+    }
 };
 
 // Handle Genre delete on POST.

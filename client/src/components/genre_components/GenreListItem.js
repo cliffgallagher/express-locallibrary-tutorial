@@ -20,6 +20,7 @@ const GenreListItem = (props) => {
 
     function deleteGenreButtonHandler() {
         props.setDisplayGenrePopupForDelete(true);
+        props.receiveGenreID(props.genreID);
     }
     
     return (

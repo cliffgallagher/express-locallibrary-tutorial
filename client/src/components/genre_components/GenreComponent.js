@@ -3,11 +3,13 @@ import NewGenre from './NewGenre';
 import GenreList from './GenreList';
 import GenreListItem from './GenreListItem';
 import GenrePopupForUpdate from './GenrePopupForUpdate';
+import GenrePopupForDelete from './GenrePopupForDelete';
 
 const GenreComponent = () => {
     const [genreArray, setGenreArray] = useState();
     const [displayGenrePopupForUpdate, setDisplayGenrePopupForUpdate] = useState(false);
     const [genreIDInPopups, setGenreIDInPopups] = useState();
+    const [displayGenrePopupForDelete, setDisplayGenrePopupForDelete] = useState(false);
 
     async function getGenreList() {
         const response = await fetch('catalog/genres');
@@ -28,7 +30,7 @@ const GenreComponent = () => {
     
     return (
         <div>
-            {!displayGenrePopupForUpdate && <div>
+            {!displayGenrePopupForUpdate && !displayGenrePopupForDelete && <div>
                 <NewGenre getGenreList={getGenreList}/>
                 <GenreList genreArray={genreArray}/>    
             </div>}
@@ -36,6 +38,11 @@ const GenreComponent = () => {
                 <NewGenre getGenreList={getGenreList}/>
                 <GenreList genreArray={genreArray}/> 
                 <GenrePopupForUpdate setDisplayGenrePopupForUpdate={setDisplayGenrePopupForUpdate} genreID={genreIDInPopups} getGenreList={getGenreList}/>   
+            </div>}
+            {displayGenrePopupForDelete && <div>
+                <NewGenre getGenreList={getGenreList}/>
+                <GenreList genreArray={genreArray}/> 
+                <GenrePopupForDelete genreID={genreIDInPopups} getGenreList={getGenreList}/>   
             </div>}
         </div>
     )

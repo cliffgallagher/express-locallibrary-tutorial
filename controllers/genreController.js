@@ -2,7 +2,7 @@ var Genre = require('../models/Genre');
 
 // Display list of all Genre.
 exports.genre_list = async function(req, res) {
-    console.log('entered correct controller');
+    //console.log('entered correct controller');
     const promise = await Genre.findAll({
         order: [
             ['name', 'ASC']
@@ -45,8 +45,19 @@ exports.genre_delete_get = async function(req, res) {
 };
 
 // Handle Genre delete on POST.
-exports.genre_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete POST');
+exports.genre_delete_post = async function(req, res, next) {
+    console.log("entered genre_delete_post controller");
+    try {
+        const deletedGenre = await Genre.destroy({
+            where: {
+                genre_id: req.params.id
+            }
+        })
+        res.json(deletedGenre);
+    } catch(e) {
+        console.log("entered catch block in delete_post controller")
+        next(e);
+    }
 };
 
 // Display Genre update form on GET.

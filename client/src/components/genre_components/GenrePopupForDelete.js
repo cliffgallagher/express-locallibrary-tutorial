@@ -3,6 +3,7 @@ import '../Popup.css';
 
 const GenrePopupForDelete = (props) => {
     const [genreToDelete, setGenreToDelete] = useState();
+    const [receivedForeignKeyConstraintError, setReceivedForeignKeyConstraintError] = useState(false);
 
     async function getGenreDeleteFormValues() {
         try {
@@ -26,7 +27,7 @@ const GenrePopupForDelete = (props) => {
         const data = await response.json();
         console.log(JSON.stringify(data));
         if (data === "SequelizeForeignKeyConstraintError") {
-            
+            setReceivedForeignKeyConstraintError(true);
         } else {
             props.setDisplayGenrePopupForDelete(false);
             props.getGenreList();
@@ -41,14 +42,29 @@ const GenrePopupForDelete = (props) => {
         props.setDisplayGenrePopupForDelete(false);
     }
 
+    function foreignKeyWarningCloseButtonHandler() {
+        setReceivedForeignKeyConstraintError(false);
+        props.setDisplayGenrePopupForDelete(false);
+    }
+
     return (
         <div className='popup'>
             <div className='popup-inner'>
-                <form onSubmit={genreDeleteFormSubmitHandler}>
-                    <p>Are you sure you wish to delete this genre?</p>
-                    <h1>{genreToDelete}</h1>
-                    <button type='submit'>Delete</button><button onClick={genreDeleteFormCancelHandler}>Cancel</button>
+                {!receivedForeignKeyConstraintError && (
+                    <form onSubmit={genreDeleteFormSubmitHandler}>
+                        <p>Are you sure you wish to delete this genre?</p>
+                        <h1>{genreToDelete}</h1>
+                        <button type='submit'>Delete</button><button onClick={genreDeleteFormCancelHandler}>Cancel</button>
                 </form>
+                )}
+                {receivedForeignKeyConstraintError && (
+                    <form>
+                        <h3>You're attempting to delete the genre of a book currently stored in the database.</h3>
+                        <h3>Please delete the book or update it with a different genre before deleting this genre.</h3>
+                        <button onClick={foreignKeyWarningCloseButtonHandler}>Close</button>
+                    </form>
+                )}
+                
             </div>
         </div>
     )

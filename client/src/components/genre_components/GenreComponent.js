@@ -35,7 +35,7 @@ const GenreComponent = () => {
             {displayGenrePopupForUpdate && <div>
                 <NewGenre getGenreList={getGenreList}/>
                 <GenreList genreArray={genreArray}/> 
-                <GenrePopupForUpdate setDisplayGenrePopupForUpdate={setDisplayGenrePopupForUpdate} genreID={genreIDInPopups}/>   
+                <GenrePopupForUpdate setDisplayGenrePopupForUpdate={setDisplayGenrePopupForUpdate} genreID={genreIDInPopups} getGenreList={getGenreList}/>   
             </div>}
         </div>
     )

@@ -56,6 +56,17 @@ exports.genre_update_get = async function(req, res) {
 };
 
 // Handle Genre update on POST.
-exports.genre_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update POST');
+exports.genre_update_post = async function(req, res) {
+    try {
+        const updatedGenre = await Genre.update({
+          name: req.body.genreName  
+        }, {
+            where: {
+                genre_id: req.params.id
+            }
+        })
+        res.json(updatedGenre);
+    } catch(e) {
+        console.log(e);
+    }
 };

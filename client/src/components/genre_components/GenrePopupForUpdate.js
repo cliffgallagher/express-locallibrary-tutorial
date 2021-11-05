@@ -18,15 +18,40 @@ const GenrePopupForUpdate = (props) => {
         props.setDisplayGenrePopupForUpdate(false);
     }
 
+    function genreUpdateFormNameChangeHandler(event) {
+        setGenreUpdateFormNameValue(event.target.value);
+    }
+
+    async function genreUpdateFormSubmitHandler(event) {
+        event.preventDefault();
+        const genreName = {
+            genreName: genreUpdateFormNameValue
+        };
+        try {
+            await fetch(`catalog/genre/${props.genreID}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(genreName)
+            });
+            props.setDisplayGenrePopupForUpdate(false);
+            props.getGenreList();
+        } catch(e) {
+            console.log(e);
+        }
+
+    }
+
     useEffect(() => {
         getInitialGenreValues();
     }, []);
     
     return <div className='popup'>
     <div className='popup-inner'>
-        <form>
-            <label>Genre Name<input type='text' name='genreUpdateFormNameField' value={genreUpdateFormNameValue}/></label>
-            <button>Update</button><button onClick={genreUpdateFormCancelButtonClickHandler}>Cancel</button>
+        <form onSubmit={genreUpdateFormSubmitHandler}>
+            <label>Genre Name<input type='text' name='genreUpdateFormNameField' value={genreUpdateFormNameValue} onChange={genreUpdateFormNameChangeHandler}/></label>
+            <button type='submit'>Update</button><button onClick={genreUpdateFormCancelButtonClickHandler}>Cancel</button>
         </form>
     </div>
 </div>

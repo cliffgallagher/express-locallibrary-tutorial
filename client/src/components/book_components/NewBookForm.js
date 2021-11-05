@@ -35,11 +35,11 @@ const NewBookForm = (props) => {
     function bookFormSubmitHandler(event) {
         event.preventDefault();
         const userInputData = {
-            title: {titleInput},
-            author_id: {authorInput},
-            summary: {summaryInput},
-            isbn: {isbnInput},
-            genre_id: {genreInput}
+            title: titleInput,
+            author_id: authorInput,
+            summary: summaryInput,
+            isbn: isbnInput,
+            genre_id: genreInput
         }
 
         //console.log("userInput in new book form: " + JSON.stringify(userInputData));

@@ -39,6 +39,7 @@ exports.enhanced = async function(req, res) {
             ]
         });
         //console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         res.json(response);  
     } catch(e) {
         console.log(e);

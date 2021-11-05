@@ -22,7 +22,7 @@ const BookComponent = (props) => {
     async function getBookList() {
         const response = await fetch('catalog/enhanced');
         const body = await response.json();
-        //console.log("body before setBookArray: " + JSON.stringify(body));
+        console.log("body before setBookArray: " + JSON.stringify(body));
         setBookArray(() => {
             return body.map(element => <BookListElement key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genreName={element.name} genreID={element.genre_id} summary={element.summary} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} bookPropsFromBookListElementToBookComponent={bookPropsFromBookListElementToBookComponent} setDisplayBookPopupForDelete={setDisplayBookPopupForDelete}/>);
         });

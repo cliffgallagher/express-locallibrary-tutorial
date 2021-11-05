@@ -6,6 +6,7 @@ var book_controller = require('../controllers/bookController');
 var author_controller = require('../controllers/authorController');
 var genre_controller = require('../controllers/genreController');
 var book_instance_controller = require('../controllers/bookinstanceController');
+var binarySearchController = require('../controllers/binarySearchController');
 
 /// BOOK ROUTES ///
 
@@ -26,10 +27,15 @@ router.get('/enhanced', function(req, res, next) {
 router.get('/book/create', book_controller.book_create_get);
 
 // POST request for creating Book.
+router.post('/book/create', binarySearchController.search_for_existing_title);
+
+/*** OLD POST REQUEST FOR CREATING BOOK
 router.post('/book/create', function(req, res, next) {
     console.log("request body in /book/create in catalog.js: " + req.body)
     next()
 }, book_controller.book_create_post);
+***/
+
 
 // GET request to delete Book.
 router.get('/book/:book_id/delete', book_controller.book_delete_get);

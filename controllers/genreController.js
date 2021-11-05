@@ -41,8 +41,18 @@ exports.genre_delete_post = function(req, res) {
 };
 
 // Display Genre update form on GET.
-exports.genre_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update GET');
+exports.genre_update_get = async function(req, res) {
+    try {
+        const genreObject = await Genre.findAll({
+            where: {
+                genre_id: req.params.id
+            }
+        })
+        //console.log('genreObject in controller: ' + JSON.stringify(genreObject));
+        res.json(genreObject);
+    } catch(e) {
+        console.log(e);
+    }
 };
 
 // Handle Genre update on POST.

@@ -15,6 +15,7 @@ const GenreListItem = (props) => {
 
     function updateGenreButtonClickHandler() {
         props.setDisplayGenrePopupForUpdate(true);
+        props.receiveGenreID(props.genreID);
     }
     
     return (

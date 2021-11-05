@@ -17,6 +17,10 @@ const GenreListItem = (props) => {
         props.setDisplayGenrePopupForUpdate(true);
         props.receiveGenreID(props.genreID);
     }
+
+    function deleteGenreButtonHandler() {
+        props.setDisplayGenrePopupForDelete(true);
+    }
     
     return (
         <div className='listElement' onMouseEnter={mouseEnterGenreListItemHandler} onMouseLeave={mouseLeaveGenreListItemHandler}>
@@ -24,7 +28,7 @@ const GenreListItem = (props) => {
             {showUpdateAndDeleteButtons && (
                 <div>
                     <GenreInfo genreName={props.genreName}/>
-                    <button onClick={updateGenreButtonClickHandler}>Update Genre</button><button>Delete Genre</button>
+                    <button onClick={updateGenreButtonClickHandler}>Update Genre</button><button onClick={deleteGenreButtonHandler}>Delete Genre</button>
                 </div>
             )}
         </div>

@@ -3,17 +3,16 @@ arr is the array you're searching, l is begininning index (0), r is ending index
 */
 
 function binarySearchBookObjects(arr, l, r, x, k){
-    //console.log("arr: " + arr);
-    console.log("arr is: " + arr);
+    /*console.log("arr is: " + arr);
     console.log("l: " + l);
     console.log("r: " + r);
     console.log("i am looking for: " + x);
-    console.log("k is: " + k);
+    console.log("k is: " + k);*/
     if (r >= l) {
         let mid = l + Math.floor((r - l) / 2);
-        console.log("mid: " + mid);
+        /*console.log("mid: " + mid);
         console.log("arr[mid] is: " + arr[mid]);
-        console.log("arr[mid][k] is: " + arr[mid][`${k}`]);
+        console.log("arr[mid][k] is: " + arr[mid][`${k}`]);*/
         // If the element is present at the middle
         // itself
         if (arr[mid][k] === x)

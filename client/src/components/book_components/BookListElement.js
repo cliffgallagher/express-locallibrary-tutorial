@@ -5,7 +5,7 @@ import BookInfo from './BookInfo';
 const BookListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
 
-    console.log("bookID in BookListElement: " + props.bookID);
+    //console.log("bookID in BookListElement: " + props.bookID);
 
     function showUpdateAndDeleteButtons() {
         setDisplayUpdateAndDeleteButtons(true);

@@ -27,7 +27,7 @@ router.get('/enhanced', function(req, res, next) {
 router.get('/book/create', book_controller.book_create_get);
 
 // POST request for creating Book.
-router.post('/book/create', binarySearchController.search_for_existing_title);
+router.post('/book/create', binarySearchController.search_for_existing_title, book_controller.book_create_post);
 
 /*** OLD POST REQUEST FOR CREATING BOOK
 router.post('/book/create', function(req, res, next) {

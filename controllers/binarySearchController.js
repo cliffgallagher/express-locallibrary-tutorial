@@ -28,7 +28,7 @@ exports.search_for_existing_title = async function(req, res, next) {
         next()
     } else {
         console.log("title already in database");
-        res.end()
+        res.json("title already present in database");
     }
 }
 

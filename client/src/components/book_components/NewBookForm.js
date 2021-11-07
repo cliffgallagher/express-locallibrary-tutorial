@@ -53,10 +53,12 @@ const NewBookForm = (props) => {
                 },
                 body: JSON.stringify(userInputData)
             });
+            const data = await response.json();
+            console.log("data in NewBookForm: " + data);
             props.getBookListNewBookToBookForm();
             //console.log("user input data: " + JSON.stringify(userInputData));
            // console.log("response in NewBookForm: " + JSON.stringify(response));
-            return response;
+            return data;
         }
 
         insertBook();

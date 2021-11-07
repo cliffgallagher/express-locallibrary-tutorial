@@ -20,9 +20,6 @@ exports.search_for_existing_title = async function(req, res) {
             ['title', 'ASC']
         ]
     })
-    const arrayToSearch = JSON.stringify(initialArray)
-    //console.log("arrayToSearch: " + arrayToSearch)
-    //console.log(req.body.title);
-    console.log(BinarySearch(arrayToSearch, 0, arrayToSearch.length-1, "Apes and Angels", "title"));
+    console.log(BinarySearch(initialArray, 0, 6, "Title 6", "title"));
 }
 

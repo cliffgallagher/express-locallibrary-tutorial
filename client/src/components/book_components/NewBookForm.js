@@ -58,7 +58,7 @@ const NewBookForm = (props) => {
                 body: JSON.stringify(userInputData)
             });
             const data = await response.json();
-            console.log("data in NewBookForm: " + data);
+            //console.log("data in NewBookForm: " + data);
             return data;
         }
 

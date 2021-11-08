@@ -13,15 +13,22 @@ const NewGenreForm = (props) => {
             genreName: newGenreFormNameValue
         }
 
-        await fetch('catalog/genre/create', {
+        const response = await fetch('catalog/genre/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(genreName)
         });
-        props.setAddNewGenre(false);
-        props.getGenreList();
+        const data = await response.json();
+        console.log("data in newGenreForm: " + JSON.stringify(data));
+        if (data === 'SequelizeUniqueConstraintError') {
+            console.log("you did it");
+        } else {
+            props.setAddNewGenre(false);
+            props.getGenreList();
+        }
+        return data;
     }
     
     function newGenreFormCancelButtonHandler() {

@@ -32,23 +32,29 @@ app.use(function(req, res, next) {
 // handle SequelizeForeignKeyConstraint errors
 app.use((error, req, res, next) => {
   if (error.name === 'SequelizeForeignKeyConstraintError') {
-    console.log("entered sequelize error handler");
+    //console.log("entered sequelize error handler");
     res.json('SequelizeForeignKeyConstraintError');
   } else {
-    console.log(error.name)
-    next()
+    //console.log("entered else block of foreign key constraint handler")
+    next(error)
   }
 })
 
-app.use((error, res, req, next) => {
+app.use((error, req, res, next) => {
+  //console.log("entered constraint error handler");
   if (error.name === 'SequelizeUniqueConstraintError') {
+    //console.log('correctly entered unique constraint block')
     res.json('SequelizeUniqueConstraintError');
+  } else {
+    //console.log('i am in next block wrongly')
+    next(error)
   }
 })
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  //console.log("entered dfault error handler")
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

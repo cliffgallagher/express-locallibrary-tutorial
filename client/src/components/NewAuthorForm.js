@@ -45,10 +45,7 @@ const NewAuthorForm = (props) => {
                 },
                 body: JSON.stringify(newAuthorFormInfo)
             });
-            setNewAuthorFirstName("");
-            setNewAuthorFamilyName("");
-            setNewAuthorBirthDate("");
-            setNewAuthorDeathDate("");
+            props.hideNewAuthorForm();
         } catch(e) {
             console.log(e);
         }

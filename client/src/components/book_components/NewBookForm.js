@@ -60,7 +60,7 @@ const NewBookForm = (props) => {
 
         const data = await insertBook();
         if (data === "title already present in database") {
-            console.log("book not inserted");
+            props.isAddingDuplicate();
         } else {
             console.log("book inserted");
             props.getBookListNewBookToBookForm();

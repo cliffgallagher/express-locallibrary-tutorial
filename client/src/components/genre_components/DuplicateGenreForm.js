@@ -3,8 +3,9 @@ import '../Popup.css';
 
 const DuplicateGenreForm = (props) => {
     
-    function duplicateGenreWarningCloseHandler() {
-        props.hideNewGenreForm();
+    function duplicateGenreWarningCloseHandler(event) {
+        event.preventDefault();
+        props.setAddingDuplicateAuthor(false);
     }
     
     return (

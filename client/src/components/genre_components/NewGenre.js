@@ -17,15 +17,15 @@ const NewGenre = (props) => {
                     <button onClick={addNewGenreButtonClickHandler}>Add New Genre</button>
                 </div>
             )}
-            {addNewGenre && (
+            {addNewGenre && !addingDuplicateAuthor && (
                 <div>
                     <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateAuthor={setAddingDuplicateAuthor}/>
                 </div>
             )}
-            {addingDuplicateAuthor && (
+            {!addNewGenre && addingDuplicateAuthor && (
                 <div>
                     <button onClick={addNewGenreButtonClickHandler}>Add New Genre</button>
-                    <p>adding duplicate Author</p>
+                    <DuplicateGenreForm setAddingDuplicateAuthor={setAddingDuplicateAuthor}/>
                 </div>
             )}
         </div>

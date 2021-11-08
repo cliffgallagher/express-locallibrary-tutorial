@@ -32,7 +32,7 @@ const NewBookForm = (props) => {
     }, [])
     
 
-    function bookFormSubmitHandler(event) {
+    async function bookFormSubmitHandler(event) {
         event.preventDefault();
         const userInputData = {
             title: titleInput,
@@ -46,7 +46,7 @@ const NewBookForm = (props) => {
         
         const insertBook = async () => {
             //console.log("entered insertBook");
-            const response = await fetch('catalog/book/create', {
+            const response = await fetch('catalog/book/create/one', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,18 +55,21 @@ const NewBookForm = (props) => {
             });
             const data = await response.json();
             console.log("data in NewBookForm: " + data);
-            props.getBookListNewBookToBookForm();
-            //console.log("user input data: " + JSON.stringify(userInputData));
-           // console.log("response in NewBookForm: " + JSON.stringify(response));
             return data;
         }
 
-        insertBook();
-        setTitleInput("");
-        setISBNInput("");
-        setSummaryInput("");
-        setAuthorInput(0);
-        setGenreInput(0);
+        const data = await insertBook();
+        if (data === "title already present in database") {
+            console.log("book not inserted");
+        } else {
+            console.log("book inserted");
+            props.getBookListNewBookToBookForm();
+            setTitleInput("");
+            setISBNInput("");
+            setSummaryInput("");
+            setAuthorInput(0);
+            setGenreInput(0);
+        }
     }
 
     function titleInputChangeHandler(event) {

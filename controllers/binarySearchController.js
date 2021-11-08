@@ -21,13 +21,13 @@ exports.search_for_existing_title = async function(req, res, next) {
         ]
     })
     const titleSearchResult = BinarySearch(initialArray, 0, initialArray.length - 1, req.body.title, "title");
-    console.log("titleSearchResult: " + titleSearchResult);
+    //console.log("titleSearchResult: " + titleSearchResult);
 
     if (titleSearchResult === -1) {
-        console.log("did end up in if statement");
+        //console.log("did end up in if statement");
         next()
     } else {
-        console.log("title already in database");
+        //console.log("title already in database");
         res.json("title already present in database");
     }
 }

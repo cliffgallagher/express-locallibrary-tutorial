@@ -76,7 +76,7 @@ exports.book_create_get = function(req, res) {
 
 // Handle book create on POST.
 exports.book_create_post = async function(req, res) {
-    console.log("did end up in book_create_post");
+    //console.log("did end up in book_create_post");
     try {
         //res.send('NOT IMPLEMENTED: Book create POST');
         //console.log("req.body in controller: " + req.body);

@@ -43,7 +43,10 @@ exports.search_for_existing_author = async function(req, res, next) {
     //console.log(JSON.stringify(authorArray));
     const result = binarySearch.binarySearchAuthorObjects(authorArray, 0, authorArray.length -1, req.body.family_name, req.body.first_name);
     //console.log("search results: " + result);
-
-    res.end()
+    if (result === -1) {
+        next()
+    } else {
+        res.json("author already present in database")
+    }
 }
 

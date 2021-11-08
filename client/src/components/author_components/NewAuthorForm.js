@@ -38,7 +38,7 @@ const NewAuthorForm = (props) => {
         //console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
 
         try {
-            await fetch('catalog/author/create/one', {
+            const response = await fetch('catalog/author/create/one', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,7 +46,14 @@ const NewAuthorForm = (props) => {
                 body: JSON.stringify(newAuthorFormInfo)
             });
             props.hideNewAuthorForm();
-            props.getAuthorList();
+            const data = await response.json();
+            console.log("data: " + data);
+            if (data === "author already present in database") {
+                //console.log("yes, author is in database");
+            } else {
+                //console.log("author not already in list, was inserted");
+                props.getAuthorList();
+            }
         } catch(e) {
             console.log(e);
         }

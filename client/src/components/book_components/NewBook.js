@@ -29,7 +29,8 @@ const NewBook = (props) => {
             isbn: isbn,
             genreID: genreID
         }
-        setNewBookInfo(objectForDuplicateWarning);
+        props.newBookInfoNewBookToBookComponent(objectForDuplicateWarning);
+        console.log("objectForDuplicateWarning in NewBook: " + JSON.stringify(objectForDuplicateWarning));
     }
 
     return <div>

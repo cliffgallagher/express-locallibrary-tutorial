@@ -37,15 +37,19 @@ const BookComponent = (props) => {
 
     }
 
+    function newBookInfoNewBookToBookComponent(newBookInfo) {
+        console.log("newbookinfo in bookcomponent:" + JSON.stringify(newBookInfo));
+    }
+
     useEffect(() => {
         getBookList();
-    }, [])
+    }, []);
 
     return (
         <div>
             {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
                 <div>
-                    <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
+                    <NewBook getBookListMyComponentNewToNewBook={getBookList} newBookInfoNewBookToBookComponent={newBookInfoNewBookToBookComponent}/>
                     <BookList bookArray={bookArray}/>
                 </div>
             )}

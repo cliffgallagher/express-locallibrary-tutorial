@@ -2,7 +2,7 @@ import React from 'react';
 import '../Popup.css';
 
 const DuplicateBookWarning = (props) => {
-    console.log("newbookinfo: " + props.newBookInfoToNewBook);
+    console.log("rendered duplicatebookwarning");
     return (
         <div className='popup'>
             <div className='popup-inner'>

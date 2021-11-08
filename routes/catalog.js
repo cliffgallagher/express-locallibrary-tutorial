@@ -69,10 +69,10 @@ router.get('/books', book_controller.book_list);
 router.get('/author/create', author_controller.author_create_get);
 
 // POST request for creating Author.
-router.post('/author/create', function(req, res, next) {
+router.post('/author/create/one', function(req, res, next) {
     //console.log("request body in author/create: " + JSON.stringify(req.body))
     next()
-}, author_controller.author_create_post);
+}, binarySearchController.search_for_existing_author, author_controller.author_create_post);
 
 // GET request to delete Author.
 router.get('/author/:id/delete', author_controller.author_delete_get);

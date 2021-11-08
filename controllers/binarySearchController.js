@@ -32,3 +32,8 @@ exports.search_for_existing_title = async function(req, res, next) {
     }
 }
 
+exports.search_for_existing_author = async function(req, res, next) {
+    console.log("entered search_for_existing_author");
+    res.end()
+}
+

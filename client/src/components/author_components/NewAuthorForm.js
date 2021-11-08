@@ -50,6 +50,7 @@ const NewAuthorForm = (props) => {
             console.log("data: " + data);
             if (data === "author already present in database") {
                 //console.log("yes, author is in database");
+                props.showDuplicateAuthorWarning();
             } else {
                 //console.log("author not already in list, was inserted");
                 props.getAuthorList();

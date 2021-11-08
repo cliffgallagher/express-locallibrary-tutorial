@@ -1,4 +1,4 @@
-const BinarySearch = require('../binarySearch');
+const binarySearch = require('../binarySearch');
 var book_controller = require('./bookController');
 const Book = require('../models/Book');
 const Author = require('../models/Author');
@@ -20,7 +20,7 @@ exports.search_for_existing_title = async function(req, res, next) {
             ['title', 'ASC']
         ]
     })
-    const titleSearchResult = BinarySearch(initialArray, 0, initialArray.length - 1, req.body.title, "title");
+    const titleSearchResult = binarySearch.binarySearchBookObjects(initialArray, 0, initialArray.length - 1, req.body.title, "title");
     //console.log("titleSearchResult: " + titleSearchResult);
 
     if (titleSearchResult === -1) {
@@ -33,7 +33,14 @@ exports.search_for_existing_title = async function(req, res, next) {
 }
 
 exports.search_for_existing_author = async function(req, res, next) {
-    console.log("entered search_for_existing_author");
+    //console.log("entered search_for_existing_author");
+    const authorArray = await Author.findAll({
+        order: [
+            ['family_name', 'ASC']
+        ]
+    });
+    //console.log(JSON.stringify(authorArray));
+
     res.end()
 }
 

@@ -32,7 +32,7 @@ const AuthorComponent = () => {
     }
 
     function passNewAuthorInfo(newAuthorInfo) {
-        //console.log("new author info in AuthorComponent: " + JSON.stringify(newAuthorInfo));
+        //console.log("zzzzzz");
         setNewAuthorInfoForWarning(newAuthorInfo);
     }
 

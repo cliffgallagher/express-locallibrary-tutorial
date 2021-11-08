@@ -5,7 +5,6 @@ import DuplicateAuthorWarning from './DuplicateAuthorWarning';
 const NewAuthor = (props) => {
     const [isAddingNewAuthor, setIsAddingNewAuthor] = useState(false);
     const [addingDuplicateAuthor, setAddingDuplicateAuthor] = useState(false);
-    const [newAuthorInfoForWarning, setNewAuthorInfoForWarning] = useState();
 
     function newAuthorButtonClickHandler() {
         setIsAddingNewAuthor(true);
@@ -27,11 +26,6 @@ const NewAuthor = (props) => {
         //console.log("new author info in NewAuthor component: " + JSON.stringify(newAuthorInfo));
         props.passNewAuthorInfo(newAuthorInfo);
     }
-
-    function getNewAuthorInfoToDuplicateWarning() {
-        setNewAuthorInfoForWarning(props.newAuthorInfoForWarning);
-        console.log("newAuthorInfo as props in NewAuthor: " + props.newAuthorInfoForWarning);
-    }
     
     return (
         <div>
@@ -39,7 +33,7 @@ const NewAuthor = (props) => {
             {isAddingNewAuthor && <NewAuthorForm hideNewAuthorForm={hideNewAuthorForm} getAuthorList={props.getAuthorList} showDuplicateAuthorWarning={showDuplicateAuthorWarning} passNewAuthorInfo={passNewAuthorInfo}/>}
             {addingDuplicateAuthor && (
                 <div>
-                    {<DuplicateAuthorWarning hideDuplicateAuthorWarning={hideDuplicateAuthorWarning} showDuplicateAuthorWarning={showDuplicateAuthorWarning} passNewAuthorInfo={passNewAuthorInfo} newAuthorInfoForWarning={props.newAuthorInfoForWarning}/>}
+                    {<DuplicateAuthorWarning hideDuplicateAuthorWarning={hideDuplicateAuthorWarning} showDuplicateAuthorWarning={showDuplicateAuthorWarning} passNewAuthorInfo={passNewAuthorInfo} newAuthorInfoForWarning={props.newAuthorInfoForWarning} getAuthorList={props.getAuthorList}/>}
                 </div>
             )}
         </div>

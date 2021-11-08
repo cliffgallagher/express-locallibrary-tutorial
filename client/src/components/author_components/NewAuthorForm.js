@@ -38,7 +38,7 @@ const NewAuthorForm = (props) => {
         //console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
 
         try {
-            await fetch('catalog/author/create/two', {
+            await fetch('catalog/author/create/one', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'

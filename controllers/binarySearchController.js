@@ -36,10 +36,13 @@ exports.search_for_existing_author = async function(req, res, next) {
     //console.log("entered search_for_existing_author");
     const authorArray = await Author.findAll({
         order: [
-            ['family_name', 'ASC']
+            ['family_name', 'ASC'],
+            ['first_name', 'ASC']
         ]
     });
-    console.log(JSON.stringify(authorArray));
+    //console.log(JSON.stringify(authorArray));
+    const result = binarySearch.binarySearchAuthorObjects(authorArray, 0, authorArray.length -1, req.body.family_name, req.body.first_name);
+    //console.log("search results: " + result);
 
     res.end()
 }

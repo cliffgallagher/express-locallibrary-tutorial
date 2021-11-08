@@ -24,6 +24,7 @@ const NewGenreForm = (props) => {
         console.log("data in newGenreForm: " + JSON.stringify(data));
         if (data === 'SequelizeUniqueConstraintError') {
             console.log("you did it");
+            props.setAddingDuplicateAuthor(true);
         } else {
             props.setAddNewGenre(false);
             props.getGenreList();

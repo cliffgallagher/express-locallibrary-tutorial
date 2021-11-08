@@ -29,6 +29,11 @@ router.get('/book/create', book_controller.book_create_get);
 // POST request for creating Book.
 router.post('/book/create/one', binarySearchController.search_for_existing_title, book_controller.book_create_post);
 
+router.post('/book/create/two', function(req, res, next) {
+    //console.log("inside book/create/two: " + JSON.stringify(req.body)),
+    next()
+}, book_controller.book_create_post);
+
 /*** OLD POST REQUEST FOR CREATING BOOK
 router.post('/book/create', function(req, res, next) {
     console.log("request body in /book/create in catalog.js: " + req.body)

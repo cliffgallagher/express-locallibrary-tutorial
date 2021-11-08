@@ -20,17 +20,24 @@ const NewBook = (props) => {
         setAddingDuplicate(true);
     }
 
+    function isNotAddingDuplicate() {
+        setAddingDuplicate(false);
+    }
+
     function newBookInfoToNewBook(newBookInfo) {
-        const {title, authorID, summary, isbn, genreID} = newBookInfo;
+
+        const {title, author_id, summary, isbn, genre_id} = newBookInfo;
+        console.log("newBookInfo in NewBook: " + JSON.stringify(newBookInfo));
         const objectForDuplicateWarning = {
             title: title,
-            authorID: authorID,
+            author_id: author_id,
             summary: summary,
             isbn: isbn,
-            genreID: genreID
+            genre_id: genre_id
         }
+        console.log("objectForDuplicateWarning info in NewBook: " + JSON.stringify(objectForDuplicateWarning));
         props.newBookInfoNewBookToBookComponent(objectForDuplicateWarning);
-        console.log("objectForDuplicateWarning in NewBook: " + JSON.stringify(objectForDuplicateWarning));
+        //console.log("objectForDuplicateWarning in NewBook: " + JSON.stringify(objectForDuplicateWarning));
     }
 
     return <div>
@@ -39,7 +46,7 @@ const NewBook = (props) => {
         {isAddingNewBook && addingDuplicate && (
             <div>
                 <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} />
-                <DuplicateBookWarning newBookInfo={newBookInfo}/>
+                <DuplicateBookWarning newBookInfo={props.newBookInfo} isNotAddingDuplicate={isNotAddingDuplicate} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook}/>
             </div>
         )}
     </div>;

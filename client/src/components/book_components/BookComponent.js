@@ -14,6 +14,7 @@ const BookComponent = (props) => {
     const [bookIDForBookPopupForUpdate, setbookIDForBookPopupForUpdate] = useState();
     const [authorIDForBookPopupForUpdate, setAuthorIDForBookPopupForUpdate] = useState();
     const [genreIDForBookPopupForUpdate, setGenreIDForBookPopupForUpdate] = useState();
+    const [newBookInfo, setNewBookInfo] = useState();
 
     /*function bookListElementMouseEnterHandler() {
         setDisplayBookPopupForUpdate(true);
@@ -38,7 +39,16 @@ const BookComponent = (props) => {
     }
 
     function newBookInfoNewBookToBookComponent(newBookInfo) {
-        console.log("newbookinfo in bookcomponent:" + JSON.stringify(newBookInfo));
+        //console.log("newbookinfo in bookcomponent:" + JSON.stringify(newBookInfo));
+        const {title, author_id, summary, isbn, genre_id} = newBookInfo;
+        const objectForDuplicateWarning = {
+            title: title,
+            author_id: author_id,
+            summary: summary,
+            isbn: isbn,
+            genre_id: genre_id
+        }
+        setNewBookInfo(objectForDuplicateWarning);
     }
 
     useEffect(() => {
@@ -49,7 +59,7 @@ const BookComponent = (props) => {
         <div>
             {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
                 <div>
-                    <NewBook getBookListMyComponentNewToNewBook={getBookList} newBookInfoNewBookToBookComponent={newBookInfoNewBookToBookComponent}/>
+                    <NewBook getBookListMyComponentNewToNewBook={getBookList} newBookInfoNewBookToBookComponent={newBookInfoNewBookToBookComponent} newBookInfo={newBookInfo}/>
                     <BookList bookArray={bookArray}/>
                 </div>
             )}

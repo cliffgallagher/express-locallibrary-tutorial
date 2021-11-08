@@ -35,7 +35,14 @@ app.use((error, req, res, next) => {
     console.log("entered sequelize error handler");
     res.json('SequelizeForeignKeyConstraintError');
   } else {
+    console.log(error.name)
     next()
+  }
+})
+
+app.use((error, res, req, next) => {
+  if (error.name === 'SequelizeUniqueConstraintError') {
+    res.json('SequelizeUniqueConstraintError');
   }
 })
 

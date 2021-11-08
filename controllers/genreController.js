@@ -22,12 +22,16 @@ exports.genre_create_get = function(req, res) {
 };
 
 // Handle Genre create on POST.
-exports.genre_create_post = async function(req, res) {
-    const newGenre = await Genre.create({
-        name: req.body.genreName
-    })
-    
-    res.send(newGenre);
+exports.genre_create_post = async function(req, res, next) {
+    try {
+        const newGenre = await Genre.create({
+            name: req.body.genreName
+        })
+        
+        res.send(newGenre)
+    } catch(e) {
+        next(e)
+    }
 };
 
 // Display Genre delete form on GET.

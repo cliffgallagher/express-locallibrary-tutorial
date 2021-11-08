@@ -74,6 +74,11 @@ router.post('/author/create/one', function(req, res, next) {
     next()
 }, binarySearchController.search_for_existing_author, author_controller.author_create_post);
 
+router.post('/author/create/two', function(req, res, next) {
+    //console.log("request body in author/create: " + JSON.stringify(req.body))
+    next()
+}, author_controller.author_create_post);
+
 // GET request to delete Author.
 router.get('/author/:id/delete', author_controller.author_delete_get);
 

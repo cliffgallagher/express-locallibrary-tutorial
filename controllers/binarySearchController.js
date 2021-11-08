@@ -39,7 +39,7 @@ exports.search_for_existing_author = async function(req, res, next) {
             ['family_name', 'ASC']
         ]
     });
-    //console.log(JSON.stringify(authorArray));
+    console.log(JSON.stringify(authorArray));
 
     res.end()
 }

@@ -5,7 +5,8 @@ exports.author_list = async function(req, res) {
     try {
         const promise = await Author.findAll({
             order: [
-                ['family_name', 'ASC']
+                ['family_name', 'ASC'],
+                ['first_name', 'ASC']
             ]
         });
         res.send(promise);

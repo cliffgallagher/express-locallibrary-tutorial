@@ -42,6 +42,8 @@ const NewBookForm = (props) => {
             genre_id: genreInput
         }
 
+        props.newBookInfoToNewBook(userInputData);
+
         //console.log("userInput in new book form: " + JSON.stringify(userInputData));
         
         const insertBook = async () => {

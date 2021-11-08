@@ -5,6 +5,7 @@ import DuplicateBookWarning from './DuplicateBookWarning';
 const NewBook = (props) => {
     const [isAddingNewBook, setIsAddingNewBook] = useState(false);
     const [addingDuplicate, setAddingDuplicate] = useState(false);
+    const [newBookInfo, setNewBookInfo] = useState();
     
     function newBookButtonHandler(event) {
         setIsAddingNewBook(true);
@@ -19,13 +20,25 @@ const NewBook = (props) => {
         setAddingDuplicate(true);
     }
 
+    function newBookInfoToNewBook(newBookInfo) {
+        const {title, authorID, summary, isbn, genreID} = newBookInfo;
+        const objectForDuplicateWarning = {
+            title: title,
+            authorID: authorID,
+            summary: summary,
+            isbn: isbn,
+            genreID: genreID
+        }
+        setNewBookInfo(objectForDuplicateWarning);
+    }
+
     return <div>
         {!isAddingNewBook && <div><button onClick={newBookButtonHandler}>Add New Book</button></div>}
-        {isAddingNewBook && !addingDuplicate && <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} isAddingDuplicate={isAddingDuplicate}/>}
+        {isAddingNewBook && !addingDuplicate && <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} isAddingDuplicate={isAddingDuplicate} newBookInfoToNewBook={newBookInfoToNewBook}/>}
         {isAddingNewBook && addingDuplicate && (
             <div>
                 <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} />
-                <DuplicateBookWarning />
+                <DuplicateBookWarning newBookInfo={newBookInfo}/>
             </div>
         )}
     </div>;

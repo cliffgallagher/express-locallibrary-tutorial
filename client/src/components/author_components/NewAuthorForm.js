@@ -35,6 +35,8 @@ const NewAuthorForm = (props) => {
             dateOfDeath: newAuthorDeathDate
         }
 
+        props.passNewAuthorInfo(newAuthorFormInfo);
+
         //console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
 
         try {

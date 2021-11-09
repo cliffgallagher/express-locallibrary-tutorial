@@ -71,17 +71,18 @@ const BookPopupForUpdate = (props) => {
 
         const updateBook = async () => {
             //console.log("entered updateBook");
-            const response = await fetch(`catalog/book/${props.bookID}/update`, {
+            const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedBookInfo)
             });
-            //console.log("have received response from post in PopupForUpdate");
-            props.setDisplayBookPopupForUpdate(false);
+            const data = await response.json();
+            console.log("data in popupforupdate: " + data);
+            /*props.setDisplayBookPopupForUpdate(false);
             props.getBookList();
-            return response;
+            return response;*/
         }
 
         updateBook();

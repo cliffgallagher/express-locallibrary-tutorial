@@ -26,9 +26,8 @@ router.get('/enhanced', function(req, res, next) {
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
 router.get('/book/create', book_controller.book_create_get);
 
-// POST request for creating Book.
+// POST requests for creating Book.
 router.post('/book/create/one', binarySearchController.search_for_existing_title, book_controller.book_create_post);
-
 router.post('/book/create/two', function(req, res, next) {
     //console.log("inside book/create/two: " + JSON.stringify(req.body)),
     next()
@@ -55,7 +54,9 @@ router.post('/book/:book_id/delete', function(req, res, next) {
 router.get('/book/:book_id/update', book_controller.book_update_get);
 
 // POST request to update Book.
-router.post('/book/:book_id/update', book_controller.book_update_post);
+//router.post('/book/:book_id/update', book_controller.book_update_post);
+router.post('/book/:book_id/update/one', binarySearchController.search_for_existing_title, book_controller.book_update_post);
+router.post('/book/:book_id/update/two', book_controller.book_update_post);
 
 // GET request for one Book.
 router.get('/book/:id', book_controller.book_detail);

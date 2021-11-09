@@ -10,6 +10,7 @@ const BookPopupForUpdate = (props) => {
     const [updateFormAuthorInput, setUpdateFormAuthorInput] = useState();
     const [updateFormGenreInput, setUpdateFormGenreInput] = useState();
     const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
+    const [initialTitle, setInitialTitle] = useState();
 
     //console.log("rendered BookPOpupForUpdate");
 
@@ -43,7 +44,7 @@ const BookPopupForUpdate = (props) => {
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
             setUpdateFormSummaryInput(bodyOfResponse[0].summary);
-            
+            setInitialTitle(bodyOfResponse[0].title);
             
         } catch(e) {
             console.log(e);
@@ -69,8 +70,9 @@ const BookPopupForUpdate = (props) => {
             genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
+        console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
 
-        const updateBook = async () => {
+        /*const updateBook = async () => {
             //console.log("entered updateBook");
             const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
                 method: 'POST',
@@ -90,7 +92,7 @@ const BookPopupForUpdate = (props) => {
             }
         }
 
-        updateBook();
+        updateBook();*/
     }
     
     function updateFormTitleInputChangeHandler(event) {

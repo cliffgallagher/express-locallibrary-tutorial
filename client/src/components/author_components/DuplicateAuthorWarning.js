@@ -2,7 +2,7 @@ import React from "react";
 import '../Popup.css';
 
 const DuplicateAuthorWarning = (props) => {
-    //console.log("info in dup author warning: " + JSON.stringify(props.newAuthorInfoForWarning));
+    console.log("info in dup author warning: " + JSON.stringify(props.newAuthorInfoForWarning));
 
     async function duplicateAuthorWarningSubmitHandler(event) {
         event.preventDefault();

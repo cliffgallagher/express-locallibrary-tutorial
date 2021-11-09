@@ -11,7 +11,6 @@ const AuthorComponent = () => {
     const [displayAuthorPopupForUpdate, setDisplayAuthorPopupForUpdate] = useState(false);
     const [authorIDForPopupForUpdate, setAuthorIDForPopupForUpdate] = useState();
     const [displayAuthorPopupForDelete, setDisplayAuthorPopupForDelete] = useState(false);
-    const [newAuthorInfoForWarning, setNewAuthorInfoForWarning] = useState();
 
     async function getAuthorList() {
         const response = await fetch('catalog/authors');
@@ -31,16 +30,11 @@ const AuthorComponent = () => {
         setAuthorIDForPopupForUpdate(authorID);
     }
 
-    function passNewAuthorInfo(newAuthorInfo) {
-        //console.log("zzzzzz");
-        setNewAuthorInfoForWarning(newAuthorInfo);
-    }
-
     return (
         <div>
             {displayAuthors && !displayAuthorPopupForUpdate && (
                 <div>
-                    <NewAuthor getAuthorList={getAuthorList} passNewAuthorInfo={passNewAuthorInfo} newAuthorInfoForWarning={newAuthorInfoForWarning}/>
+                    <NewAuthor getAuthorList={getAuthorList}/>
                     <AuthorList authorArray={authorArray}/>
                 </div>
             )}

@@ -51,6 +51,41 @@ const BookPopupForUpdate = (props) => {
         }
     }
 
+    const updateBookWithTitleCheck = async (updatedBookInfo) => {
+        //console.log("entered updateBook");
+        const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedBookInfo)
+        });
+        const data = await response.json();
+        //console.log("data in popupforupdate: " + data);
+        if (data === "title already present in database") {
+            setDisplayDuplicateWarning(true);
+        } else {
+            props.setDisplayBookPopupForUpdate(false);
+            props.getBookList();
+            return response;
+        }
+    }
+
+    const updateBookNoTitleCheck = async (updatedBookInfo) => {
+        //console.log("entered updateBook");
+        const response = await fetch(`catalog/book/${props.bookID}/update/two`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedBookInfo)
+        });
+        setDisplayDuplicateWarning(false);
+        props.setDisplayBookPopupForUpdate(false);
+        props.getBookList();
+        return response;    
+    }
+
     useEffect(async () => {
         //console.log("book ID is: " + props.bookID);
         fetchBook();
@@ -70,29 +105,12 @@ const BookPopupForUpdate = (props) => {
             genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
-        console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
-
-        /*const updateBook = async () => {
-            //console.log("entered updateBook");
-            const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedBookInfo)
-            });
-            const data = await response.json();
-            //console.log("data in popupforupdate: " + data);
-            if (data === "title already present in database") {
-                setDisplayDuplicateWarning(true);
-            } else {
-                props.setDisplayBookPopupForUpdate(false);
-                props.getBookList();
-                return response;
-            }
+        //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
+        if (initialTitle === updatedBookInfo.title) {
+            updateBookNoTitleCheck(updatedBookInfo);
+        } else {
+            updateBookWithTitleCheck(updatedBookInfo);
         }
-
-        updateBook();*/
     }
     
     function updateFormTitleInputChangeHandler(event) {
@@ -128,23 +146,7 @@ const BookPopupForUpdate = (props) => {
             genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
-
-        const updateBook = async () => {
-            //console.log("entered updateBook");
-            const response = await fetch(`catalog/book/${props.bookID}/update/two`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedBookInfo)
-            });
-            setDisplayDuplicateWarning(false);
-            props.setDisplayBookPopupForUpdate(false);
-            props.getBookList();
-            return response;    
-        }
-
-        updateBook();
+        updateBookNoTitleCheck(updatedBookInfo);
     }
 
     function duplicateWarningCancelButtonHandler() {

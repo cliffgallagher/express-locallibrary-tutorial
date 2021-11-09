@@ -7,6 +7,8 @@ const AuthorPopupForUpdate = (props) => {
     const [authorUpdateFormBirthValue, setAuthorUpdateFormBirthValue] = useState();
     const [authorUpdateFormDeathValue, setAuthorUpdateFormDeathValue] = useState();
     const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
+    const [initialFirstName, setInitialFirstName] = useState();
+    const [initialLastName, setInitialLastName] = useState();
 
     async function getInitialValues() {
         try {
@@ -17,21 +19,15 @@ const AuthorPopupForUpdate = (props) => {
             setAuthorUpdateFormFamilyNameValue(data[0].family_name);
             setAuthorUpdateFormBirthValue((data[0].date_of_birth).slice(0, 10));
             data[0].date_of_death && setAuthorUpdateFormDeathValue((data[0].date_of_death).slice(0, 10));
+            setInitialFirstName(data[0].first_name);
+            setInitialLastName(data[0].family_name);
         } catch(e) {
             console.log(e);
         }
         
     }
 
-    async function authorUpdateFormSubmitHandler(event) {
-        event.preventDefault();
-        const updatedAuthorData = {
-            first_name: authorUpdateFormFirstNameValue,
-            family_name: authorUpdateFormFamilyNameValue,
-            birthDate: authorUpdateFormBirthValue,
-            deathDate: authorUpdateFormDeathValue
-        }
-        //console.log(JSON.stringify(updatedAuthorData));
+    const updateAuthorNameCheck = async (updatedAuthorData) => {
         try {
             const response = await fetch(`catalog/author/${props.authorID}/update/one`, {
                 method: 'POST',
@@ -51,9 +47,42 @@ const AuthorPopupForUpdate = (props) => {
         } catch(e) {
             console.log(e);
         }
-
     }
 
+    const updateAuthorNoNameCheck = async (updatedAuthorData) => {
+        try {
+            const response = await fetch(`catalog/author/${props.authorID}/update/two`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedAuthorData)
+            });
+            setDisplayDuplicateWarning(false);
+            props.setDisplayAuthorPopupForUpdate(false);
+            props.getAuthorList();
+
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    async function authorUpdateFormSubmitHandler(event) {
+        event.preventDefault();
+        const updatedAuthorData = {
+            first_name: authorUpdateFormFirstNameValue,
+            family_name: authorUpdateFormFamilyNameValue,
+            birthDate: authorUpdateFormBirthValue,
+            deathDate: authorUpdateFormDeathValue
+        }
+        if ((initialFirstName === updatedAuthorData.first_name) && (initialLastName === updatedAuthorData.family_name)) {
+            updateAuthorNoNameCheck(updatedAuthorData);
+        } else {
+            updateAuthorNameCheck(updatedAuthorData);
+        }
+        //console.log(JSON.stringify(updatedAuthorData));    }
+    }
+    
     useEffect(() => {
         getInitialValues();
     }, [])
@@ -87,21 +116,7 @@ const AuthorPopupForUpdate = (props) => {
             deathDate: authorUpdateFormDeathValue
         }
         //console.log(JSON.stringify(updatedAuthorData));
-        try {
-            const response = await fetch(`catalog/author/${props.authorID}/update/two`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedAuthorData)
-            });
-            setDisplayDuplicateWarning(false);
-            props.setDisplayAuthorPopupForUpdate(false);
-            props.getAuthorList();
-
-        } catch(e) {
-            console.log(e);
-        }
+        updateAuthorNoNameCheck(updatedAuthorData);
     }
 
     function authorDuplicateWarningCancelButtonHandler() {

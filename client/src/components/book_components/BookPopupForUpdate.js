@@ -4,9 +4,9 @@ import '../Popup.css';
 const BookPopupForUpdate = (props) => {
     const [updateFormAuthorOptions, setUpdateFormAuthorOptions] = useState([]);
     const [updateFormGenreOptions, setUpdateFormGenreOptions] = useState([])
-    const [updateFormTitleInput, setUpdateFormTitleInput] = useState("");
-    const [updateFormISBNInput, setUpdateFormISBNInput] = useState("");
-    const [updateFormSummaryInput, setUpdateFormSummaryInput] = useState("");
+    const [updateFormTitleInput, setUpdateFormTitleInput] = useState();
+    const [updateFormISBNInput, setUpdateFormISBNInput] = useState();
+    const [updateFormSummaryInput, setUpdateFormSummaryInput] = useState();
     const [updateFormAuthorInput, setUpdateFormAuthorInput] = useState();
     const [updateFormGenreInput, setUpdateFormGenreInput] = useState();
     const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
@@ -117,6 +117,34 @@ const BookPopupForUpdate = (props) => {
         props.setDisplayBookPopupForUpdate(false);
     }
 
+    function duplicateTitleUpdateWarningSubmitHandler(event) {
+        event.preventDefault();
+        const updatedBookInfo = {
+            title: updateFormTitleInput,
+            authorID: updateFormAuthorInput,
+            isbn: updateFormISBNInput,
+            genreID: updateFormGenreInput,
+            summary: updateFormSummaryInput
+        }
+
+        const updateBook = async () => {
+            //console.log("entered updateBook");
+            const response = await fetch(`catalog/book/${props.bookID}/update/two`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedBookInfo)
+            });
+            setDisplayDuplicateWarning(false);
+            props.setDisplayBookPopupForUpdate(false);
+            props.getBookList();
+            return response;    
+        }
+
+        updateBook();
+    }
+
     return <div className='popup'>
         <div className='popup-inner'>
             {!displayDuplicateWarning && <form onSubmit={popupForUpdateSubmitHandler}>
@@ -129,8 +157,10 @@ const BookPopupForUpdate = (props) => {
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
             </form>}
             {displayDuplicateWarning && (
-                <form>
-                    <p>duplicate warning form</p>
+                <form onSubmit={duplicateTitleUpdateWarningSubmitHandler}>
+                    <p>A book with the title {updateFormTitleInput} already exists in the database. Are you sure you want to update this book to have that title?</p>
+                    <button type='submit'>Update</button>
+                    <button>Cancel</button>
                 </form>
             )}
         </div>

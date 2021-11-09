@@ -25,25 +25,27 @@ const AuthorPopupForUpdate = (props) => {
     async function authorUpdateFormSubmitHandler(event) {
         event.preventDefault();
         const updatedAuthorData = {
-            firstName: authorUpdateFormFirstNameValue,
-            familyName: authorUpdateFormFamilyNameValue,
+            first_name: authorUpdateFormFirstNameValue,
+            family_name: authorUpdateFormFamilyNameValue,
             birthDate: authorUpdateFormBirthValue,
             deathDate: authorUpdateFormDeathValue
         }
         //console.log(JSON.stringify(updatedAuthorData));
         try {
-            await fetch(`catalog/author/${props.authorID}/update`, {
+            const response = await fetch(`catalog/author/${props.authorID}/update/one`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedAuthorData)
             });
+            const data = await response.json();
+            console.log("data in AuthorPopupForUpdate: " + data);
         } catch(e) {
             console.log(e);
         }
-        props.setDisplayAuthorPopupForUpdate(false);
-        props.getAuthorList();
+        /*props.setDisplayAuthorPopupForUpdate(false);
+        props.getAuthorList();*/
     }
 
     useEffect(() => {

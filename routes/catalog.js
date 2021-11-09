@@ -94,7 +94,8 @@ router.get('/author/:id/update', function(req, res, next) {
 }, author_controller.author_update_get);
 
 // POST request to update Author.
-router.post('/author/:id/update', author_controller.author_update_post);
+router.post('/author/:id/update/one', binarySearchController.search_for_existing_author, author_controller.author_update_post);
+router.post('/author/:id/update/two', author_controller.author_update_post);
 
 // GET request for one Author.
 router.get('/author/:id', author_controller.author_detail);

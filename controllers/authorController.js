@@ -91,8 +91,8 @@ exports.author_update_get = async function(req, res) {
 exports.author_update_post = async function(req, res) {
     try {
         const authorObject = await Author.update({
-            first_name: req.body.firstName,
-            family_name: req.body.familyName,
+            first_name: req.body.first_name,
+            family_name: req.body.family_nameame,
             date_of_birth: req.body.birthDate,
             date_of_death: req.body.deathDate
         }, {

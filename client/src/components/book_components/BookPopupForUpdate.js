@@ -9,6 +9,7 @@ const BookPopupForUpdate = (props) => {
     const [updateFormSummaryInput, setUpdateFormSummaryInput] = useState("");
     const [updateFormAuthorInput, setUpdateFormAuthorInput] = useState();
     const [updateFormGenreInput, setUpdateFormGenreInput] = useState();
+    const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
 
     //console.log("rendered BookPOpupForUpdate");
 
@@ -79,10 +80,14 @@ const BookPopupForUpdate = (props) => {
                 body: JSON.stringify(updatedBookInfo)
             });
             const data = await response.json();
-            console.log("data in popupforupdate: " + data);
-            /*props.setDisplayBookPopupForUpdate(false);
-            props.getBookList();
-            return response;*/
+            //console.log("data in popupforupdate: " + data);
+            if (data === "title already present in database") {
+                setDisplayDuplicateWarning(true);
+            } else {
+                props.setDisplayBookPopupForUpdate(false);
+                props.getBookList();
+                return response;
+            }
         }
 
         updateBook();
@@ -114,7 +119,7 @@ const BookPopupForUpdate = (props) => {
 
     return <div className='popup'>
         <div className='popup-inner'>
-            <form onSubmit={popupForUpdateSubmitHandler}>
+            {!displayDuplicateWarning && <form onSubmit={popupForUpdateSubmitHandler}>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
                 <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
@@ -122,7 +127,12 @@ const BookPopupForUpdate = (props) => {
                 <label>Summary<input type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>
                 <button type="submit">Update Book</button>
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
-            </form>
+            </form>}
+            {displayDuplicateWarning && (
+                <form>
+                    <p>duplicate warning form</p>
+                </form>
+            )}
         </div>
     </div>
 }

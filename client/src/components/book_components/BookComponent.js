@@ -59,7 +59,7 @@ const BookComponent = (props) => {
         <div>
             {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
                 <div>
-                    <NewBook getBookListMyComponentNewToNewBook={getBookList} newBookInfoNewBookToBookComponent={newBookInfoNewBookToBookComponent} newBookInfo={newBookInfo}/>
+                    <NewBook getBookListMyComponentNewToNewBook={getBookList} />
                     <BookList bookArray={bookArray}/>
                 </div>
             )}

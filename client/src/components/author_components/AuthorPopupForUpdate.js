@@ -6,6 +6,7 @@ const AuthorPopupForUpdate = (props) => {
     const [authorUpdateFormFamilyNameValue, setAuthorUpdateFormFamilyNameValue] = useState();
     const [authorUpdateFormBirthValue, setAuthorUpdateFormBirthValue] = useState();
     const [authorUpdateFormDeathValue, setAuthorUpdateFormDeathValue] = useState();
+    const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
 
     async function getInitialValues() {
         try {
@@ -40,12 +41,17 @@ const AuthorPopupForUpdate = (props) => {
                 body: JSON.stringify(updatedAuthorData)
             });
             const data = await response.json();
-            console.log("data in AuthorPopupForUpdate: " + data);
+            //console.log("data in AuthorPopupForUpdate: " + data);
+            if (data === "author already present in database") {
+                setDisplayDuplicateWarning(true);
+            } else {
+                props.setDisplayAuthorPopupForUpdate(false);
+                props.getAuthorList();
+            }
         } catch(e) {
             console.log(e);
         }
-        /*props.setDisplayAuthorPopupForUpdate(false);
-        props.getAuthorList();*/
+
     }
 
     useEffect(() => {
@@ -71,17 +77,54 @@ const AuthorPopupForUpdate = (props) => {
     function popupForUpdateCloseButtonHandler() {
         props.setDisplayAuthorPopupForUpdate(false);
     }
+
+    async function duplicateAuthorUpdateWarningSubmitHandler(event) {
+        event.preventDefault();
+        const updatedAuthorData = {
+            first_name: authorUpdateFormFirstNameValue,
+            family_name: authorUpdateFormFamilyNameValue,
+            birthDate: authorUpdateFormBirthValue,
+            deathDate: authorUpdateFormDeathValue
+        }
+        //console.log(JSON.stringify(updatedAuthorData));
+        try {
+            const response = await fetch(`catalog/author/${props.authorID}/update/two`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedAuthorData)
+            });
+            setDisplayDuplicateWarning(false);
+            props.setDisplayAuthorPopupForUpdate(false);
+            props.getAuthorList();
+
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    function authorDuplicateWarningCancelButtonHandler() {
+        setDisplayDuplicateWarning(false);
+    }
     
     return <div className='popup'>
         <div className='popup-inner'>
-            <form onSubmit={authorUpdateFormSubmitHandler}>
+            {!displayDuplicateWarning && <form onSubmit={authorUpdateFormSubmitHandler}>
                 <label>First Name<input type='text' name='authorUpdateFormFirstNameInput' value={authorUpdateFormFirstNameValue} onChange={authorUpdateFormFirstNameChangeHandler}/></label>
                 <label>Family Name<input type='text' name='authorUpdateFormFamilyNameInput' value={authorUpdateFormFamilyNameValue} onChange={authorUpdateFormFamilyNameChangeHandler}/></label>
                 <label>Date of Birth<input type='date' name='authorUpdateFormBirthInput' value={authorUpdateFormBirthValue} onChange={authorUpdateFormBirthDateChangeHandler}/></label>
                 <label>Date of Death<input type='date' name='authorUpdateFormDeathInput'value={authorUpdateFormDeathValue} onChange={authorUpdateFormDeathDateChangeHandler}/></label>
                 <button type="submit">Update Author</button>
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
-            </form>
+            </form>}
+            {displayDuplicateWarning && (
+                <form onSubmit={duplicateAuthorUpdateWarningSubmitHandler}>
+                    <p>An author named {`${authorUpdateFormFirstNameValue} ${authorUpdateFormFamilyNameValue}`} already exists in the database. Are you sure you want to update this author to have that name?</p>
+                    <button type='submit'>Update</button>
+                    <button onClick={authorDuplicateWarningCancelButtonHandler}>Cancel</button>
+                </form>
+            )}
         </div>
     </div>
 }

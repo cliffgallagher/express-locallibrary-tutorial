@@ -80,7 +80,7 @@ exports.genre_update_get = async function(req, res) {
 };
 
 // Handle Genre update on POST.
-exports.genre_update_post = async function(req, res) {
+exports.genre_update_post = async function(req, res, next) {
     try {
         const updatedGenre = await Genre.update({
           name: req.body.genreName  
@@ -91,6 +91,7 @@ exports.genre_update_post = async function(req, res) {
         })
         res.json(updatedGenre);
     } catch(e) {
-        console.log(e);
+        console.log(e.name);
+        next(e);
     }
 };

@@ -28,7 +28,8 @@ router.get('/book/create', book_controller.book_create_get);
 
 // POST requests for creating Book.
 router.post('/book/create/one', 
-body('title').isLength({min: 1}),
+body('title').isLength({min: 1}).withMessage("Title cannot be blank"),
+
 function(req, res, next) {
     //console.log("inside book/create/two: " + JSON.stringify(req.body)),
     const errors = validationResult(req);

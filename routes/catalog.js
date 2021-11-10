@@ -27,13 +27,8 @@ router.get('/enhanced', function(req, res, next) {
 router.get('/book/create', book_controller.book_create_get);
 
 // POST requests for creating Book.
-router.post('/book/create/one', binarySearchController.search_for_existing_title, book_controller.book_create_post);
-
-
-router.post('/book/create/two', 
-
+router.post('/book/create/one', 
 body('title').isLength({min: 1}),
-
 function(req, res, next) {
     //console.log("inside book/create/two: " + JSON.stringify(req.body)),
     const errors = validationResult(req);
@@ -41,7 +36,19 @@ function(req, res, next) {
       return res.status(400).json({ errors: errors.array() });
     }
     next()
-}, book_controller.book_create_post);
+}, binarySearchController.search_for_existing_title, book_controller.book_create_post);
+
+
+router.post('/book/create/two', 
+/*body('title').isLength({min: 1}),
+function(req, res, next) {
+    //console.log("inside book/create/two: " + JSON.stringify(req.body)),
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next()
+},*/ book_controller.book_create_post);
 
 /*** OLD POST REQUEST FOR CREATING BOOK
 router.post('/book/create', function(req, res, next) {

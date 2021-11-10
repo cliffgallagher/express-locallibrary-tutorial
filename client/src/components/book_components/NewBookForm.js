@@ -50,7 +50,7 @@ const NewBookForm = (props) => {
         
         const insertBook = async () => {
             //console.log("entered insertBook");
-            const response = await fetch('catalog/book/create/two', {
+            const response = await fetch('catalog/book/create/one', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

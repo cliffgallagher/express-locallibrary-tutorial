@@ -8,6 +8,7 @@ const NewBookForm = (props) => {
     const [summaryInput, setSummaryInput] = useState("");
     const [authorInput, setAuthorInput] = useState();
     const [genreInput, setGenreInput] = useState();
+    const [validationErrors, setValidationErrors] = useState();
 
     const getAuthorsFromDatabase = async () => {
         const authorsResponse = await fetch('/catalog/authors');
@@ -83,12 +84,15 @@ const NewBookForm = (props) => {
                 if (errorMessages.includes("title already in database")) {
                     props.isAddingDuplicate();
                 } else {
-                    console.log("errorMessages: " + JSON.stringify(errorMessages));
+                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                    setValidationErrors(() => {
+                        return errorMessages.map(element => <li>{element}</li>);
+                    });
                 }
                 //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
                 // figure out
-                console.log("book inserted");
+                //console.log("book inserted");
                 props.getBookListNewBookToBookForm();
                 setTitleInput("");
                 setISBNInput("");
@@ -121,6 +125,7 @@ const NewBookForm = (props) => {
     }
     
     return <form onSubmit={bookFormSubmitHandler}>
+            <ul>{validationErrors}</ul>
             <label>Title<input type='text' name='titleField' value={titleInput} onChange={titleInputChangeHandler} /></label>
             <label>ISBN<input type='text' name='isbnField' value={isbnInput} onChange={isbnInputChangeHandler}/></label>
             <label>Summary<input type='text' name='summaryField' value={summaryInput} onChange={summaryInputChangeHandler}/></label>

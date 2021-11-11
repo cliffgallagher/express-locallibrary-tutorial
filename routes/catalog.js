@@ -44,6 +44,7 @@ body('isbn').custom((value) => {
 }),
 body('summary').not().isEmpty().withMessage("Summary cannot be blank"),
 body('author_id').not().isEmpty().withMessage("Must pick an author."),
+body('genre_id').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
     //console.log("inside book/create/two: " + JSON.stringify(req.body)),

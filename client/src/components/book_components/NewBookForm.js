@@ -63,6 +63,7 @@ const NewBookForm = (props) => {
         }
 
         const data = await insertBook();
+        console.log("data has property 'errors': " + data.hasOwnProperty('errors'));
         if (data === "title already present in database") {
             props.isAddingDuplicate();
         } else {

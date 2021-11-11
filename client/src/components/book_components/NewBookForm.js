@@ -63,8 +63,8 @@ const NewBookForm = (props) => {
         }
 
         const data = await insertBook();
-        console.log("data has property 'errors': " + data.hasOwnProperty('errors'));
-        if (data === "title already present in database") {
+        //console.log("data has property 'errors': " + data.hasOwnProperty('errors'));
+        /*if (data === "title already present in database") {
             props.isAddingDuplicate();
         } else {
             console.log("book inserted");
@@ -74,6 +74,21 @@ const NewBookForm = (props) => {
             setSummaryInput("");
             setAuthorInput(0);
             setGenreInput(0);
+        }*/
+
+        if (typeof data === 'object') {
+            if (data.hasOwnProperty('errors')) {
+                const errors = data.errors.map(element => element.msg);
+                console.log(JSON.stringify(errors));
+            } else {
+                console.log("book inserted");
+                props.getBookListNewBookToBookForm();
+                setTitleInput("");
+                setISBNInput("");
+                setSummaryInput("");
+                setAuthorInput(0);
+                setGenreInput(0);
+            }
         }
     }
 

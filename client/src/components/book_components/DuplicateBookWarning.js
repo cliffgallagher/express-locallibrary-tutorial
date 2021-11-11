@@ -2,7 +2,7 @@ import React from 'react';
 import '../Popup.css';
 
 const DuplicateBookWarning = (props) => {
-    console.log("newBookInfo in DuplicateBookWarning: " + JSON.stringify(props.newBookInfo));
+    //console.log("newBookInfo in DuplicateBookWarning: " + JSON.stringify(props.newBookInfo));
     async function duplicateBookWarningSubmitHandler(event) {
         event.preventDefault();
         //console.log("submit handler: " + props.newBookInfo);

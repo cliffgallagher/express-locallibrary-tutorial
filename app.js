@@ -33,7 +33,14 @@ app.use(function(req, res, next) {
 app.use((error, req, res, next) => {
   if (error.name === 'SequelizeForeignKeyConstraintError') {
     //console.log("entered sequelize error handler");
-    res.json('SequelizeForeignKeyConstraintError');
+    res.json({
+      "errors": [
+        {
+          'msg': 'SequelizeForeignKeyConstraintError'
+        }
+      ]
+    });
+    //res.json('SequelizeForeignKeyConstraintError');
   } else {
     //console.log("entered else block of foreign key constraint handler")
     next(error)
@@ -44,7 +51,13 @@ app.use((error, req, res, next) => {
   //console.log("entered constraint error handler");
   if (error.name === 'SequelizeUniqueConstraintError') {
     //console.log('correctly entered unique constraint block')
-    res.json('SequelizeUniqueConstraintError');
+    res.json({
+      "errors": [
+        {
+          'msg': 'SequelizeUniqueConstraintError'
+        }
+      ]
+    });
   } else {
     //console.log('i am in next block wrongly')
     next(error)

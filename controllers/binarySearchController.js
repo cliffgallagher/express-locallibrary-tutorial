@@ -28,7 +28,14 @@ exports.search_for_existing_title = async function(req, res, next) {
         next()
     } else {
         //console.log("title already in database");
-        res.json("title already present in database");
+        //res.json("title already present in database");
+        res.json({
+            "errors": [
+              {
+                'msg': 'title already in database'
+              }
+            ]
+          });
     }
 }
 
@@ -46,7 +53,13 @@ exports.search_for_existing_author = async function(req, res, next) {
     if (result === -1) {
         next()
     } else {
-        res.json("author already present in database")
+        res.json({
+            "errors": [
+              {
+                'msg': 'author already in database'
+              }
+            ]
+          })
     }
 }
 

@@ -9,7 +9,8 @@ exports.author_list = async function(req, res) {
                 ['first_name', 'ASC']
             ]
         });
-        res.send(promise);
+        //console.log("author_list: " + JSON.stringify(promise));
+        res.json(promise);
     } catch(e) {
         console.log(e);
     }  

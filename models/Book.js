@@ -24,7 +24,7 @@ module.exports = db.define('Book', {
     },
     isbn: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     genre_id: {
         type: DataTypes.INTEGER,

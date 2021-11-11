@@ -29,7 +29,13 @@ router.get('/book/create', book_controller.book_create_get);
 // POST requests for creating Book.
 router.post('/book/create/one', 
 body('title').not().isEmpty().withMessage("Title cannot be blank"),
-body('isbn').isNumeric({no_symbols: true}).withMessage("ISBN can only contain numerals"),
+//body('isbn').isNumeric({no_symbols: true}).withMessage("ISBN can only contain numerals"),
+body('isbn').custom((value) => {
+    if (value.toLowerCase().search(/\D/) !== -1) {
+        throw new Error("ISBN can contain only numbers");
+    }
+    return true
+}),
 body('isbn').custom((value) => {
     if ((value.length !== 0) && (value.length !== 10) && (value.length !== 13)) {
         console.log("entered if block of custom validator");

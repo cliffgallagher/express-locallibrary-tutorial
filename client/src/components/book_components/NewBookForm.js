@@ -78,13 +78,16 @@ const NewBookForm = (props) => {
 
         if (typeof data === 'object') {
             if (data.hasOwnProperty('errors')) {
-                if (data.errors[0].msg === 'title already present in database') {
+                //console.log("data.errors: " + JSON.stringify(data.errors));
+                const errorMessages = data.errors.map(element => element.msg);
+                if (errorMessages.includes("title already in database")) {
                     props.isAddingDuplicate();
                 } else {
-                    const errors = data.errors.map(element => element.msg);
-                    console.log(JSON.stringify(errors));
+                    console.log("errorMessages: " + JSON.stringify(errorMessages));
                 }
+                //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
+                // figure out
                 console.log("book inserted");
                 props.getBookListNewBookToBookForm();
                 setTitleInput("");

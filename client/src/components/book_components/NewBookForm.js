@@ -6,7 +6,7 @@ const NewBookForm = (props) => {
     const [titleInput, setTitleInput] = useState("");
     const [isbnInput, setISBNInput] = useState("");
     const [summaryInput, setSummaryInput] = useState("");
-    const [authorInput, setAuthorInput] = useState("0");
+    const [authorInput, setAuthorInput] = useState();
     const [genreInput, setGenreInput] = useState();
 
     const getAuthorsFromDatabase = async () => {

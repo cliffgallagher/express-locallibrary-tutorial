@@ -2,9 +2,9 @@ import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import BookComponent from './components/book_components/BookComponent';
-import DisplaySelector from './components/DisplaySelector';
 import AuthorComponent from './components/author_components/AuthorComponent';
 import GenreComponent from './components/genre_components/GenreComponent';
+import NavbarHeader from './components/NavbarHeader';
 
 function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div>
-        <DisplaySelector displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction}/>
+        <NavbarHeader />
         {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && <BookComponent />}
         {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && <AuthorComponent />}
         {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && <GenreComponent />}

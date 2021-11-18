@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
 
-const Navbar = () => {
+const NavbarHeader = () => {
 
     function sayHello() {
         console.log("hi I'm fabars");
@@ -17,4 +17,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+export default NavbarHeader;

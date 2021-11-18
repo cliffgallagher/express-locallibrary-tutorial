@@ -6,4 +6,7 @@
 
 .fabars {
     color: white;
+    align-self: center;
+    box-sizing: border-box;
+    margin-left: .5rem;
 }

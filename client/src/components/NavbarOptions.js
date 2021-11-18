@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import styles from './NavbarOptions.module.css';
 
 const NavbarOptions = () => {
     
@@ -12,12 +13,12 @@ const NavbarOptions = () => {
     }
     
     return (
-        <div>
+        <div className={styles.navbar}>
             <AiOutlineClose />
             <ul>
-                <li onClick={helloBooks}>Books</li>
-                <li onClick={helloAuthors}>Authors</li>
-                <li>Genres</li>
+                <p onClick={helloBooks}>Books</p>
+                <p onClick={helloAuthors}>Authors</p>
+                <p>Genres</p>
             </ul>
         </div>
     )

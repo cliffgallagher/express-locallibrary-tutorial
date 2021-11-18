@@ -5,6 +5,7 @@ import BookComponent from './components/book_components/BookComponent';
 import AuthorComponent from './components/author_components/AuthorComponent';
 import GenreComponent from './components/genre_components/GenreComponent';
 import NavbarHeader from './components/NavbarHeader';
+import NavbarOptions from './components/NavbarOptions';
 
 function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
@@ -32,6 +33,7 @@ function App() {
   return (
     <div>
         <NavbarHeader />
+        <NavbarOptions />
         {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && <BookComponent />}
         {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && <AuthorComponent />}
         {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && <GenreComponent />}

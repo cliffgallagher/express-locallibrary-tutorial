@@ -1,5 +1,7 @@
 .navbarHeader {
     background-color: black;
+    min-height: 3rem;
+    display: flex;
 }
 
 .fabars {

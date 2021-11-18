@@ -14,7 +14,7 @@ const NavbarOptions = () => {
     
     return (
         <div className={styles.navbar}>
-            <AiOutlineClose />
+            <AiOutlineClose className={styles.closeXButton} size={'1.5rem'}/>
             <ul>
                 <p onClick={helloBooks}>Books</p>
                 <p onClick={helloAuthors}>Authors</p>

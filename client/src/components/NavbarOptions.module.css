@@ -5,3 +5,8 @@
 .navbar p {
     color: white;
 }
+
+.closeXButton {
+    color: white;
+    margin-left: .5rem;
+}

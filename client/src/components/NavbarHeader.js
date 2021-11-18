@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
+import styles from './NavbarHeader.module.css';
 
 const NavbarHeader = () => {
 
@@ -9,8 +10,8 @@ const NavbarHeader = () => {
     
     return (
         <>
-            <div className="navbar">
-                <FaBars onClick={sayHello}/>
+            <div className={styles.navbarHeader}>
+                <FaBars className={styles.fabars} onClick={sayHello}/>
             </div>
         </>
 

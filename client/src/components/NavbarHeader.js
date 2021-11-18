@@ -11,7 +11,7 @@ const NavbarHeader = () => {
     return (
         <>
             <div className={styles.navbarHeader}>
-                <FaBars className={styles.fabars} onClick={sayHello}/>
+                <FaBars className={styles.fabars} size={28} onClick={sayHello}/>
             </div>
         </>
 

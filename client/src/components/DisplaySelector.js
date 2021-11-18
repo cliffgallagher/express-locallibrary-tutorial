@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import NavbarOptions from './NavbarOptions';
 
 const DisplaySelector = (props) => {
 
@@ -18,6 +19,7 @@ const DisplaySelector = (props) => {
     return (
         <div>
             <Navbar />
+            <NavbarOptions />
             <button onClick={booksButtonClickHandler}>Books</button>
             <button onClick={authorsButtonClickHandler}>Authors</button>
             <button onClick={genresButtonClickHandler}>Genres</button>

@@ -30,14 +30,11 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div>
         <DisplaySelector displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction}/>
         {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && <BookComponent />}
         {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && <AuthorComponent />}
         {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && <GenreComponent />}
-      </header>
     </div>
   );
 }

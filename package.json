@@ -20,6 +20,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.0",
+    "react-icons": "^4.3.1",
     "rimraf": "^3.0.2",
     "sequelize": "^6.6.5"
   },

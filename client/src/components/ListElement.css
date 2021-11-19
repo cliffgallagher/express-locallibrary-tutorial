@@ -5,6 +5,8 @@
     box-sizing: border-box;
     padding: .25rem;
     margin: 1rem;
+    background-color: #FF4E50;
+    color: #E1F5C4;
 }
 
 .listElement:hover {

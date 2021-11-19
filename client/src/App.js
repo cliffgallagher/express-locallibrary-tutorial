@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.css';
 import BookComponent from './components/book_components/BookComponent';
 import AuthorComponent from './components/author_components/AuthorComponent';
 import GenreComponent from './components/genre_components/GenreComponent';
@@ -32,7 +32,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className={styles.appClass}>
         <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
         <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction}/>
         {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && <BookComponent />}

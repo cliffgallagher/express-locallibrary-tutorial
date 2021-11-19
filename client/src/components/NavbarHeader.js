@@ -5,7 +5,7 @@ import styles from './NavbarHeader.module.css';
 const NavbarHeader = (props) => {
 
     function openNav() {
-        console.log("entered openNav");
+        //console.log("entered openNav");
         props.setDisplayNavbar(true);
     }
     

@@ -34,7 +34,7 @@ function App() {
   return (
     <div>
         <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
-        <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar}/>
+        <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction}/>
         {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && <BookComponent />}
         {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && <AuthorComponent />}
         {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && <GenreComponent />}

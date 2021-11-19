@@ -5,12 +5,21 @@ import styles from './NavbarOptions.module.css';
 const NavbarOptions = (props) => {
     console.log("displayNavbar is true or false: " + props.displayNavbar);
     
-    function helloBooks() {
-        console.log("hello books");
+    function booksOptionClickHandler() {
+        //console.log("hello books");
+        props.displayBookComponentFunction();
+        props.setDisplayNavbar(false);
     }
 
-    function helloAuthors() {
-        console.log("hello authors");
+    function authorsOptionClickHandler() {
+        //console.log("hello authors");
+        props.displayAuthorComponentFunction();
+        props.setDisplayNavbar(false);
+    }
+
+    function genressOptionClickHandler() {
+        props.displayGenreComponentFunction();
+        props.setDisplayNavbar(false);
     }
 
     function xbuttonClickHandler() {
@@ -21,9 +30,9 @@ const NavbarOptions = (props) => {
         <div className={`${styles.navbar} ${props.displayNavbar && styles.displayNavbar}`}>
             <AiOutlineClose className={styles.closeXButton} size={'1.5rem'} onClick={xbuttonClickHandler}/>
             <ul>
-                <p onClick={helloBooks}>Books</p>
-                <p onClick={helloAuthors}>Authors</p>
-                <p>Genres</p>
+                <p onClick={booksOptionClickHandler}>Books</p>
+                <p onClick={authorsOptionClickHandler}>Authors</p>
+                <p onClick={genressOptionClickHandler}>Genres</p>
             </ul>
         </div>
     )

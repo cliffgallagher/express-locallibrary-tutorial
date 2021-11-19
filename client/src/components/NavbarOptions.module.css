@@ -20,6 +20,11 @@
     transition: 0.3s;
 }
 
+.navbar p:hover {
+    background-color: white;
+    color: black;
+}
+
 .closeXButton {
     color: white;
     margin-left: .5rem;

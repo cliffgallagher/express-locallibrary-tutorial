@@ -12,10 +12,14 @@ const NavbarOptions = (props) => {
     function helloAuthors() {
         console.log("hello authors");
     }
+
+    function xbuttonClickHandler() {
+        props.setDisplayNavbar(false);
+    }
     
     return (
         <div className={`${styles.navbar} ${props.displayNavbar && styles.displayNavbar}`}>
-            <AiOutlineClose className={styles.closeXButton} size={'1.5rem'}/>
+            <AiOutlineClose className={styles.closeXButton} size={'1.5rem'} onClick={xbuttonClickHandler}/>
             <ul>
                 <p onClick={helloBooks}>Books</p>
                 <p onClick={helloAuthors}>Authors</p>

@@ -1,11 +1,11 @@
 .navbarHeader {
-    background-color: black;
+    background-color: #FF4E50;
     min-height: 3rem;
     display: flex;
 }
 
 .fabars {
-    color: white;
+    color: #E1F5C4;
     align-self: center;
     box-sizing: border-box;
     margin-left: .5rem;

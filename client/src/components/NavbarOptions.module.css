@@ -1,5 +1,5 @@
 .navbar {
-    background-color: black;
+    background-color: #FF4E50;
     height: 100%;
     width: 0;
     position: fixed;
@@ -19,19 +19,19 @@
 }
 
 .navbar p {
-    color: white;
+    color: #E1F5C4;
     transition: 0.3s;
     cursor: default;
 
 }
 
 .navbar p:hover {
-    background-color: white;
-    color: black;
+    background-color: #E1F5C4;
+    color: #FF4E50;
 }
 
 .closeXButton {
-    color: white;
+    color: #E1F5C4;
     margin-left: .5rem;
     transition: 0.3s;
 }

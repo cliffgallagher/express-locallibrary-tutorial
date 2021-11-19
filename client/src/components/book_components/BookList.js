@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './BookList.module.css';
 
 const BookList = (props) => {
     //const [myArray, setMyArray] = useState([]);
@@ -26,7 +27,7 @@ const BookList = (props) => {
 
     return (
         <div>
-            <ul>{props.bookArray}</ul>
+            <ul className={styles.ulGrid}>{props.bookArray}</ul>
         </div>
     )
 }

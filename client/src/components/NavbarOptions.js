@@ -2,7 +2,8 @@ import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import styles from './NavbarOptions.module.css';
 
-const NavbarOptions = () => {
+const NavbarOptions = (props) => {
+    console.log("displayNavbar is true or false: " + props.displayNavbar);
     
     function helloBooks() {
         console.log("hello books");
@@ -13,7 +14,7 @@ const NavbarOptions = () => {
     }
     
     return (
-        <div className={styles.navbar}>
+        <div className={`${styles.navbar} ${props.displayNavbar && styles.displayNavbar}`}>
             <AiOutlineClose className={styles.closeXButton} size={'1.5rem'}/>
             <ul>
                 <p onClick={helloBooks}>Books</p>

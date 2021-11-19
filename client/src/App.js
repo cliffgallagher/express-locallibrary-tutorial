@@ -11,6 +11,7 @@ function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
   const [displayAuthorComponent, setDisplayAuthorComponent] = useState(false);
   const [displayGenreComponent, setDisplayGenreComponent] = useState(false);
+  const [displayNavbar, setDisplayNavbar] = useState(false);
 
   function displayBookComponentFunction() {
     setDisplayBookComponent(true);
@@ -32,8 +33,8 @@ function App() {
 
   return (
     <div>
-        <NavbarHeader />
-        <NavbarOptions />
+        <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
+        <NavbarOptions displayNavbar={displayNavbar}/>
         {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && <BookComponent />}
         {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && <AuthorComponent />}
         {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && <GenreComponent />}

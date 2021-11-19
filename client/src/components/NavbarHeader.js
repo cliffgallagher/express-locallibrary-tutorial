@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import styles from './NavbarHeader.module.css';
 
-const NavbarHeader = () => {
+const NavbarHeader = (props) => {
 
-    function sayHello() {
-        console.log("hi I'm fabars");
+    function openNav() {
+        console.log("entered openNav");
+        props.setDisplayNavbar(true);
     }
     
     return (
         <>
             <div className={styles.navbarHeader}>
-                <FaBars className={styles.fabars} size={`1.5rem`} onClick={sayHello}/>
+                <FaBars className={styles.fabars} size={`1.5rem`} onClick={openNav}/>
             </div>
         </>
 

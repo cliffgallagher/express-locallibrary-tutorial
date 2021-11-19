@@ -18,12 +18,13 @@
 .navbar p {
     color: white;
     transition: 0.3s;
+    cursor: default;
+    width: auto;
 }
 
 .navbar p:hover {
     background-color: white;
     color: black;
-    cursor: default;
 }
 
 .closeXButton {

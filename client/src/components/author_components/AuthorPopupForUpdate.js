@@ -59,8 +59,8 @@ const AuthorPopupForUpdate = (props) => {
                     }
                     //console.log("errorMessages: " + JSON.stringify(errorMessages));
                 } else {
-                    props.setDisplayBookPopupForUpdate(false);
-                    props.getBookList();
+                    props.setDisplayAuthorPopupForUpdate(false);
+                    props.getAuthorList();
                     return response;
                 }
             }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GenreInfo from './GenreInfo';
-import '../ListElement.css';
+import styles from '../ListElement.module.css';
 
 const GenreListItem = (props) => {
     const [showUpdateAndDeleteButtons, setShowUpdateAndDeleteButtons] = useState(false);
@@ -24,7 +24,7 @@ const GenreListItem = (props) => {
     }
     
     return (
-        <div className='listElement' onMouseEnter={mouseEnterGenreListItemHandler} onMouseLeave={mouseLeaveGenreListItemHandler}>
+        <div className={styles.listElement} onMouseEnter={mouseEnterGenreListItemHandler} onMouseLeave={mouseLeaveGenreListItemHandler}>
             {!showUpdateAndDeleteButtons && <GenreInfo genreName={props.genreName}/>}
             {showUpdateAndDeleteButtons && (
                 <div>

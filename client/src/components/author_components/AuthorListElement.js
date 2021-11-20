@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AuthorInfo from './AuthorInfo';
-import '../ListElement.css'
+import styles from '../ListElement.module.css'
 
 const AuthorListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
@@ -27,7 +27,7 @@ const AuthorListElement = (props) => {
     }
     
     return (
-        <div className='listElement' onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}>
+        <div className={styles.listElement} onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}>
             {!displayUpdateAndDeleteButtons && <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>}
             {displayUpdateAndDeleteButtons && (
                 <div>

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import styles from './AuthorList.module.css';
 
 const AuthorList = (props) => {
     
     return (
         <div>
-            <ul>{props.authorArray}</ul>
+            <ul className={styles.ulGrid}>{props.authorArray}</ul>
         </div>
     )
 }

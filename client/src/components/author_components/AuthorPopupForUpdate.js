@@ -9,6 +9,7 @@ const AuthorPopupForUpdate = (props) => {
     const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
     const [initialFirstName, setInitialFirstName] = useState();
     const [initialLastName, setInitialLastName] = useState();
+    const [validationErrors, setValidationErrors] = useState();
 
     async function getInitialValues() {
         try {
@@ -38,11 +39,30 @@ const AuthorPopupForUpdate = (props) => {
             });
             const data = await response.json();
             //console.log("data in AuthorPopupForUpdate: " + data);
-            if (data === "author already present in database") {
+            /*if (data === "author already present in database") {
                 setDisplayDuplicateWarning(true);
             } else {
                 props.setDisplayAuthorPopupForUpdate(false);
                 props.getAuthorList();
+            }*/
+            if (typeof data === 'object') {
+                if (data.hasOwnProperty('errors')) {
+                    //console.log("data.errors: " + JSON.stringify(data.errors));
+                    const errorMessages = data.errors.map(element => element.msg);
+                    if (errorMessages.includes("author already in database")) {
+                        setDisplayDuplicateWarning(true);
+                    } else {
+                        //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                        setValidationErrors(() => {
+                            return errorMessages.map(element => <li>{element}</li>);
+                        });
+                    }
+                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                } else {
+                    props.setDisplayBookPopupForUpdate(false);
+                    props.getBookList();
+                    return response;
+                }
             }
         } catch(e) {
             console.log(e);

@@ -11,6 +11,7 @@ const BookPopupForUpdate = (props) => {
     const [updateFormGenreInput, setUpdateFormGenreInput] = useState();
     const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
     const [initialTitle, setInitialTitle] = useState();
+    const [validationErrors, setValidationErrors] = useState();
 
     //console.log("rendered BookPOpupForUpdate");
 
@@ -61,13 +62,32 @@ const BookPopupForUpdate = (props) => {
             body: JSON.stringify(updatedBookInfo)
         });
         const data = await response.json();
-        //console.log("data in popupforupdate: " + data);
-        if (data === "title already present in database") {
+        /*
+        if (errorMessages.includes("title already in database")) {
             setDisplayDuplicateWarning(true);
         } else {
             props.setDisplayBookPopupForUpdate(false);
             props.getBookList();
             return response;
+        }*/
+        if (typeof data === 'object') {
+            if (data.hasOwnProperty('errors')) {
+                //console.log("data.errors: " + JSON.stringify(data.errors));
+                const errorMessages = data.errors.map(element => element.msg);
+                if (errorMessages.includes("title already in database")) {
+                    setDisplayDuplicateWarning(true);
+                } else {
+                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                    setValidationErrors(() => {
+                        return errorMessages.map(element => <li>{element}</li>);
+                    });
+                }
+                //console.log("errorMessages: " + JSON.stringify(errorMessages));
+            } else {
+                props.setDisplayBookPopupForUpdate(false);
+                props.getBookList();
+                return response;
+            }
         }
     }
 

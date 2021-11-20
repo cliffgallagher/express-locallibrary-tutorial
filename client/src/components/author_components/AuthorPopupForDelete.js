@@ -5,7 +5,7 @@ const AuthorPopupForDelete = (props) => {
     const [authorBirthDateOnDeleteForm, setAuthorBirthDateOnDeleteForm] = useState();
     const [authorDeathDateOnDeleteForm, setAuthorDeathDateOnDeleteForm] = useState();
     const [receivedForeignKeyConstraintError, setReceivedForeignKeyConstraintError] = useState(false);
-
+    const [validationErrors, setValidationErrors] = useState();
     
     async function getInitialValues() {
         //console.log('authorID in getInitialValues: ' + props.authorID);
@@ -32,14 +32,33 @@ const AuthorPopupForDelete = (props) => {
                 }
             });
             const data = await response.json();
+            console.log("data in popupfordelete: " + JSON.stringify(data));
             //console.log('typeof data: ' + typeof data);
-            if (data === 'SequelizeForeignKeyConstraintError') {
+            /*if (data === 'SequelizeForeignKeyConstraintError') {
                 //console.log('entered if block');
                 setReceivedForeignKeyConstraintError(true);
             } else {
                 props.displayAuthorPopupForDelete(false);
                 props.getAuthorList();
+            }*/
+
+            if (data.hasOwnProperty('errors')) {
+                //console.log("data.errors: " + JSON.stringify(data.errors));
+                const errorMessages = data.errors.map(element => element.msg);
+                if (errorMessages.includes("SequelizeForeignKeyConstraintError")) {
+                    setReceivedForeignKeyConstraintError(true);
+                } else {
+                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                    setValidationErrors(() => {
+                        return errorMessages.map(element => <li>{element}</li>);
+                    });
+                }
+                //console.log("errorMessages: " + JSON.stringify(errorMessages));
+            } else {
+                props.setDisplayAuthorPopupForDelete(false);
+                props.getAuthorList();
             }
+
         } catch(e) {
             console.log("error in popupForDelete: " + e);
         }
@@ -54,8 +73,9 @@ const AuthorPopupForDelete = (props) => {
         props.displayAuthorPopupForDelete(false);
     }
 
-    function foreignKeyWarningCloseButtonHandler() {
-        props.displayAuthorPopupForDelete(false);
+    function foreignKeyWarningCloseButtonHandler(event) {
+        event.preventDefault();
+        props.setDisplayAuthorPopupForDelete(false);
         setReceivedForeignKeyConstraintError(false);
     }
     

@@ -49,7 +49,7 @@ const AuthorComponent = () => {
                 <div>
                     <NewAuthor getAuthorList={getAuthorList}/>
                     <AuthorList authorArray={authorArray}/>
-                    <AuthorPopupForDelete displayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} authorID={authorIDForPopupForUpdate} getAuthorList={getAuthorList}/>
+                    <AuthorPopupForDelete setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} authorID={authorIDForPopupForUpdate} getAuthorList={getAuthorList}/>
                 </div>
             )}
         </div>

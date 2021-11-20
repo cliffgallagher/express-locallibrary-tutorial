@@ -4,7 +4,7 @@ import DuplicateGenreForm from "./DuplicateGenreForm";
 
 const NewGenre = (props) => {
     const [addNewGenre, setAddNewGenre] = useState(false);
-    const [addingDuplicateAuthor, setAddingDuplicateAuthor] = useState(false);
+    const [addingDuplicateGenre, setAddingDuplicateGenre] = useState(false);
 
     function addNewGenreButtonClickHandler() {
         setAddNewGenre(true);
@@ -12,20 +12,20 @@ const NewGenre = (props) => {
     
     return (
         <div>
-            {!addNewGenre && !addingDuplicateAuthor && (
+            {!addNewGenre && !addingDuplicateGenre && (
                 <div>
                     <button onClick={addNewGenreButtonClickHandler}>Add New Genre</button>
                 </div>
             )}
-            {addNewGenre && !addingDuplicateAuthor && (
+            {addNewGenre && !addingDuplicateGenre && (
                 <div>
-                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateAuthor={setAddingDuplicateAuthor}/>
+                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateGenre={setAddingDuplicateGenre}/>
                 </div>
             )}
-            {!addNewGenre && addingDuplicateAuthor && (
+            {!addNewGenre && addingDuplicateGenre && (
                 <div>
                     <button onClick={addNewGenreButtonClickHandler}>Add New Genre</button>
-                    <DuplicateGenreForm setAddingDuplicateAuthor={setAddingDuplicateAuthor}/>
+                    <DuplicateGenreForm setAddingDuplicateGenre={setAddingDuplicateGenre}/>
                 </div>
             )}
         </div>

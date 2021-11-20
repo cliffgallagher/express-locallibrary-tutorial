@@ -4,6 +4,7 @@ import '../Popup.css';
 const GenrePopupForDelete = (props) => {
     const [genreToDelete, setGenreToDelete] = useState();
     const [receivedForeignKeyConstraintError, setReceivedForeignKeyConstraintError] = useState(false);
+    const [validationErrors, setValidationErrors] = useState();
 
     async function getGenreDeleteFormValues() {
         try {
@@ -26,8 +27,24 @@ const GenrePopupForDelete = (props) => {
         });
         const data = await response.json();
         console.log(JSON.stringify(data));
-        if (data === "SequelizeForeignKeyConstraintError") {
+        /*if (data === "SequelizeForeignKeyConstraintError") {
             setReceivedForeignKeyConstraintError(true);
+        } else {
+            props.setDisplayGenrePopupForDelete(false);
+            props.getGenreList();
+        }*/
+        if (data.hasOwnProperty('errors')) {
+            //console.log("data.errors: " + JSON.stringify(data.errors));
+            const errorMessages = data.errors.map(element => element.msg);
+            if (errorMessages.includes("SequelizeForeignKeyConstraintError")) {
+                setReceivedForeignKeyConstraintError(true);
+            } else {
+                //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                setValidationErrors(() => {
+                    return errorMessages.map(element => <li>{element}</li>);
+                });
+            }
+            //console.log("errorMessages: " + JSON.stringify(errorMessages));
         } else {
             props.setDisplayGenrePopupForDelete(false);
             props.getGenreList();

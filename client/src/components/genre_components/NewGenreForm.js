@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from '../NewElementForm.module.css';
 
 const NewGenreForm = (props) => {
     const [newGenreFormNameValue, setNewGenreFormValue] = useState();
@@ -61,7 +62,7 @@ const NewGenreForm = (props) => {
 
     return (
         <div>
-            <form onSubmit={newGenreFormSubmitHandler}>
+            <form id={styles.newElementForm} onSubmit={newGenreFormSubmitHandler}>
                 <label>New Genre Name<input type='text' name='newGenreFormNameField' value={newGenreFormNameValue} onChange={newGenreFormNameChangeHandler}/></label>
                 <button type='submit'>Submit Genre</button>
                 <button onClick={newGenreFormCancelButtonHandler}>Cancel</button>

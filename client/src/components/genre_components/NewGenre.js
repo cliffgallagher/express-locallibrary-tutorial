@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NewGenreForm from "./NewGenreForm";
 import DuplicateGenreForm from "./DuplicateGenreForm";
+import styles from "../NewElement.module.css";
 
 const NewGenre = (props) => {
     const [addNewGenre, setAddNewGenre] = useState(false);
@@ -13,8 +14,8 @@ const NewGenre = (props) => {
     return (
         <div>
             {!addNewGenre && !addingDuplicateGenre && (
-                <div>
-                    <button onClick={addNewGenreButtonClickHandler}>Add New Genre</button>
+                <div id={styles.addElementButtonContainer}>
+                    <button id={styles.addElementButton} onClick={addNewGenreButtonClickHandler}>Add New Genre</button>
                 </div>
             )}
             {addNewGenre && !addingDuplicateGenre && (

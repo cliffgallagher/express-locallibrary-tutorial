@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NewBookForm from './NewBookForm';
 import DuplicateBookWarning from './DuplicateBookWarning';
+import styles from './NewBook.module.css';
 
 const NewBook = (props) => {
     const [isAddingNewBook, setIsAddingNewBook] = useState(false);
@@ -42,7 +43,7 @@ const NewBook = (props) => {
     }
 
     return <div>
-        {!isAddingNewBook && <div><button onClick={newBookButtonHandler}>Add New Book</button></div>}
+        {!isAddingNewBook && <div id={styles.addBookButtonContainer}><button id={styles.addBookButton} onClick={newBookButtonHandler}>Add New Book</button></div>}
         {isAddingNewBook && !addingDuplicate && (
             <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} isAddingDuplicate={isAddingDuplicate} newBookInfoToNewBook={newBookInfoToNewBook}/>
         )}

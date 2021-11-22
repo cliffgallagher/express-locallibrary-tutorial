@@ -1,0 +1,18 @@
+#addBookButtonContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: end;
+}
+
+#addBookButton {
+    grid-column: 4;
+    margin: 2rem 1rem 0 1rem;
+    max-width: 35%;
+    min-height: 44px;
+    background-color: #FF4E50;
+    color: #E1F5C4;
+    border: none;
+    border-radius: 5px;
+    border-color: #FF4E50;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}

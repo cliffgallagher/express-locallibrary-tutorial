@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from "./NewBookForm.module.css";
 
 const NewBookForm = (props) => {
     const [authorOptions, setAuthorOptions] = useState([<option key='0' value='0'>Select Author</option>]);
@@ -124,15 +125,15 @@ const NewBookForm = (props) => {
         setGenreInput(event.target.value);
     }
     
-    return <form onSubmit={bookFormSubmitHandler}>
+    return <form id={styles.newBookForm} onSubmit={bookFormSubmitHandler}>
             <ul>{validationErrors}</ul>
             <label>Title<input type='text' name='titleField' value={titleInput} onChange={titleInputChangeHandler} /></label>
             <label>ISBN<input type='text' name='isbnField' value={isbnInput} onChange={isbnInputChangeHandler}/></label>
             <label>Summary<input type='text' name='summaryField' value={summaryInput} onChange={summaryInputChangeHandler}/></label>
             <label>Author<select name='authors' value ={authorInput} onChange={authorInputChangeHandler}>{authorOptions}</select></label>
             <label>Genre<select name='genres' value={genreInput} onChange={genreInputChangeHandler}>{genreOptions}</select></label>
-            <button onClick={props.onCancel}>Cancel</button>
             <button type='submit'>Submit</button>
+            <button onClick={props.onCancel}>Cancel</button>
         </form>
 }
 

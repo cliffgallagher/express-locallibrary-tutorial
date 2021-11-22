@@ -17,7 +17,7 @@ const AuthorComponent = () => {
         const data = await response.json();
         //console.log('author data: ' + JSON.stringify(data));
         setAuthorArray(() => {
-            return data.map(element => <AuthorListElement key={element.author_id} authorID={element.author_id} firstName={element.first_name} familyName={element.family_name} dateOfBirth={element.date_of_birth} dateOfDeath={element.date_of_death} setDisplayAuthorPopupForUpdate={setDisplayAuthorPopupForUpdate} authorInfoToAuthorComponent={authorInfoToAuthorComponent} setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete}/>);
+            return data.map(element => <AuthorListElement key={element.author_id} authorID={element.author_id} firstName={element.first_name} familyName={element.family_name} dateOfBirth={element.date_of_birth} dateOfDeath={element.date_of_death} setDisplayAuthorPopupForUpdate={setDisplayAuthorPopupForUpdate} authorInfoToAuthorComponent={authorInfoToAuthorComponent} setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} setDisplayAuthors={setDisplayAuthors}/>);
         });
         
     }
@@ -35,7 +35,7 @@ const AuthorComponent = () => {
             {displayAuthors && !displayAuthorPopupForUpdate && (
                 <div>
                     <NewAuthor getAuthorList={getAuthorList}/>
-                    <AuthorList authorArray={authorArray}/>
+                    <AuthorList authorArray={authorArray} />
                 </div>
             )}
             {displayAuthorPopupForUpdate && (
@@ -45,11 +45,11 @@ const AuthorComponent = () => {
                     <AuthorPopupForUpdate setDisplayAuthorPopupForUpdate={setDisplayAuthorPopupForUpdate} authorID={authorIDForPopupForUpdate} getAuthorList={getAuthorList}/>
                 </div>
             )}
-            {displayAuthorPopupForDelete && (
+            {displayAuthorPopupForDelete && !displayAuthors && (
                 <div>
                     <NewAuthor getAuthorList={getAuthorList}/>
                     <AuthorList authorArray={authorArray}/>
-                    <AuthorPopupForDelete setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} authorID={authorIDForPopupForUpdate} getAuthorList={getAuthorList}/>
+                    <AuthorPopupForDelete setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} authorID={authorIDForPopupForUpdate} getAuthorList={getAuthorList} setDisplayAuthors={setDisplayAuthors}/>
                 </div>
             )}
         </div>

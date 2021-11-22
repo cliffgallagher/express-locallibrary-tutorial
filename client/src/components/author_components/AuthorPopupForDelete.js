@@ -70,7 +70,8 @@ const AuthorPopupForDelete = (props) => {
     }, []);
     
     function popupForDeleteCloseButtonHandler() {
-        props.setDisplayAuthorPopupForDelete(false);
+        props.setDisplayAuthorPopupForDelete(false)
+        props.setDisplayAuthors(true);
     }
 
     function foreignKeyWarningCloseButtonHandler(event) {

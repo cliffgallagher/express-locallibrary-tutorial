@@ -21,6 +21,7 @@ const AuthorListElement = (props) => {
     }
 
     function deleteAuthorButtonClickHandler() {
+        props.setDisplayAuthors(false);
         props.setDisplayAuthorPopupForDelete(true);
         //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
         props.authorInfoToAuthorComponent(props.authorID);

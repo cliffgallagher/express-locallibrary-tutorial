@@ -4,6 +4,7 @@
     margin: 2rem 1rem 0 1rem;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 #newBookForm label {
@@ -27,4 +28,9 @@
     border-radius: 5px;
     border-color: #FF4E50;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#newBookForm ul {
+    list-style-type: none;
+    width: 100%;
 }

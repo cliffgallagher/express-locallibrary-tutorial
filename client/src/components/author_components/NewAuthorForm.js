@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from "../NewElementForm.module.css";
 
 const NewAuthorForm = (props) => {
     const [newAuthorFirstName, setNewAuthorFirstName] = useState();
@@ -82,7 +83,7 @@ const NewAuthorForm = (props) => {
     
     return (
         <div>
-            <form onSubmit={newAuthorFormSubmitHandler}>
+            <form id={styles.newElementForm} onSubmit={newAuthorFormSubmitHandler}>
                 <label>First Name<input type='text' name='newAuthorFormFirstNameInput' onChange={newAuthorFormFirstNameChangeHandler} value={newAuthorFirstName}/></label>
                 <label>Family Name<input type='text' name='newAuthorFormFamilyNameInput' onChange={newAuthorFormFamilyNameChangeHandler} value={newAuthorFamilyName}/></label>
                 <label>Date of Birth<input type='date' name='newAuthorFormBirthInput' onChange={newAuthorFormBirthChangeHandler} value={newAuthorBirthDate}/></label>

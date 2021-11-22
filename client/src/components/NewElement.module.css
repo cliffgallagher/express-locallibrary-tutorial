@@ -1,10 +1,10 @@
-#addBookButtonContainer {
+#addElementButtonContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     justify-items: end;
 }
 
-#addBookButton {
+#addElementButton {
     grid-column: 4;
     margin: 2rem 1rem 0 1rem;
     max-width: 35%;

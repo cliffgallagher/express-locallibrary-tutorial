@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NewAuthorForm from './NewAuthorForm';
 import DuplicateAuthorWarning from './DuplicateAuthorWarning';
+import styles from '../NewElement.module.css';
 
 const NewAuthor = (props) => {
     const [isAddingNewAuthor, setIsAddingNewAuthor] = useState(false);
@@ -32,7 +33,7 @@ const NewAuthor = (props) => {
     
     return (
         <div>
-            {!isAddingNewAuthor && !addingDuplicateAuthor && <button onClick={newAuthorButtonClickHandler}>Add New Author</button>}
+            {!isAddingNewAuthor && !addingDuplicateAuthor && <div id={styles.addElementButtonContainer}><button id={styles.addElementButton} onClick={newAuthorButtonClickHandler}>Add New Author</button></div>}
             {isAddingNewAuthor && <NewAuthorForm hideNewAuthorForm={hideNewAuthorForm} getAuthorList={props.getAuthorList} showDuplicateAuthorWarning={showDuplicateAuthorWarning} passNewAuthorInfo={passNewAuthorInfo}/>}
             {addingDuplicateAuthor && (
                 <div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BookList.module.css';
+import styles from '../List.module.css';
 
 const BookList = (props) => {
     //const [myArray, setMyArray] = useState([]);

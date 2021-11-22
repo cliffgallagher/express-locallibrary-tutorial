@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from './AuthorList.module.css';
+import styles from '../List.module.css';
 
 const AuthorList = (props) => {
     

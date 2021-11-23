@@ -89,7 +89,34 @@ router.get('/book/:book_id/update', book_controller.book_update_get);
 
 // POST request to update Book.
 //router.post('/book/:book_id/update', book_controller.book_update_post);
-router.post('/book/:book_id/update/one', binarySearchController.search_for_existing_title, book_controller.book_update_post);
+router.post('/book/:book_id/update/one',
+
+body('title').not().isEmpty().withMessage("Title cannot be blank"),
+body('isbn').custom((value) => {
+    if (value.toLowerCase().search(/\D/) !== -1) {
+        throw new Error("ISBN can contain only numbers");
+    }
+    return true
+}),
+body('isbn').custom((value) => {
+    if ((value.length !== 0) && (value.length !== 10) && (value.length !== 13)) {
+        //console.log("entered if block of custom validator");
+        throw new Error("ISBN must be 0, 10 or 13 numbers long");
+    }
+    return true;
+}),
+body('summary').not().isEmpty().withMessage("Summary cannot be blank"),
+body('author_id').not().isEmpty().withMessage("Must pick an author."),
+body('genre_id').not().isEmpty().withMessage("Must pick a genre."),
+
+function(req, res, next) {
+    console.log("inside book/update/one: " + JSON.stringify(req.body));
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next()
+}, binarySearchController.search_for_existing_title, book_controller.book_update_post);
 router.post('/book/:book_id/update/two', book_controller.book_update_post);
 
 // GET request for one Book.

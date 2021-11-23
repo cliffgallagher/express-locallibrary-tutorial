@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import '../Popup.css';
+//import '../Popup.css';
+import styles from '../ElementPopupForUpdate.module.css';
 
 const BookPopupForUpdate = (props) => {
     const [updateFormAuthorOptions, setUpdateFormAuthorOptions] = useState([]);
@@ -53,7 +54,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     const updateBookWithTitleCheck = async (updatedBookInfo) => {
-        //console.log("entered updateBook");
+        console.log("entered updateBook");
         const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
             method: 'POST',
             headers: {
@@ -120,9 +121,9 @@ const BookPopupForUpdate = (props) => {
         event.preventDefault();
         const updatedBookInfo = {
             title: updateFormTitleInput,
-            authorID: updateFormAuthorInput,
+            author_id: updateFormAuthorInput,
             isbn: updateFormISBNInput,
-            genreID: updateFormGenreInput,
+            genre_id: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
         //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
@@ -173,9 +174,10 @@ const BookPopupForUpdate = (props) => {
         setDisplayDuplicateWarning(false);
     }
 
-    return <div className='popup'>
-        <div className='popup-inner'>
-            {!displayDuplicateWarning && <form onSubmit={popupForUpdateSubmitHandler}>
+    return <div className={styles.popup}>
+        <div >
+            {!displayDuplicateWarning && <form className={styles.popupInner} onSubmit={popupForUpdateSubmitHandler}>
+                <ul>{validationErrors}</ul>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
                 <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>

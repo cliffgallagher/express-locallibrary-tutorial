@@ -101,10 +101,25 @@ const BookPopupForUpdate = (props) => {
             },
             body: JSON.stringify(updatedBookInfo)
         });
-        setDisplayDuplicateWarning(false);
+        /*setDisplayDuplicateWarning(false);
         props.setDisplayBookPopupForUpdate(false);
         props.getBookList();
-        return response;    
+        return response; */
+        const data = await response.json();
+        if (typeof data === 'object') {
+            if (data.hasOwnProperty('errors')) {
+                //console.log("data.errors: " + JSON.stringify(data.errors));
+                const errorMessages = data.errors.map(element => element.msg);
+                setValidationErrors(() => {
+                        return errorMessages.map(element => <li>{element}</li>);
+                });
+                
+                //console.log("errorMessages: " + JSON.stringify(errorMessages));
+            } else {
+                props.setDisplayBookPopupForUpdate(false);
+                props.getBookList();
+            }
+        }   
     }
 
     useEffect(async () => {

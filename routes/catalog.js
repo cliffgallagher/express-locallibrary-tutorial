@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 // GET books plus genre and author names
 router.get('/enhanced', function(req, res, next) {
-    console.log("entered enhanced route");
+    //console.log("entered enhanced route");
     next()
 }, book_controller.enhanced);
 

@@ -178,17 +178,17 @@ exports.book_update_post = async function(req, res) {
         //console.log("book_id in POST bookController: " + req.params.book_id);
         const bookToUpdate = await Book.update({ 
             title: req.body.title,
-            author_id: req.body.authorID,
+            author_id: req.body.author_id,
             isbn: req.body.isbn,
-            genre_id: req.body.genreID,
+            genre_id: req.body.genre_id,
             summary: req.body.summary 
             }, {
             where: {
                 book_id: req.params.book_id
             }
         });
-        //res.json(bookToUpdate);
-        res.send(bookToUpdate);
+        console.log("booktToUpdate in book_update_post: " + JSON.stringify(bookToUpdate));
+        res.json(bookToUpdate);
     } catch(e) {
         console.log(e);
     }

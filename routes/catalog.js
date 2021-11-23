@@ -43,6 +43,10 @@ body('isbn').custom((value) => {
     return true;
 }),
 body('summary').not().isEmpty().withMessage("Summary cannot be blank"),
+body('summary').isLength({
+    min: 1,
+    max: 250
+}).withMessage("Summary must be between 1 and 250 characters."),
 body('author_id').not().isEmpty().withMessage("Must pick an author."),
 body('genre_id').not().isEmpty().withMessage("Must pick a genre."),
 
@@ -106,6 +110,10 @@ body('isbn').custom((value) => {
     return true;
 }),
 body('summary').not().isEmpty().withMessage("Summary cannot be blank"),
+body('summary').isLength({
+    min: 1,
+    max: 250
+}).withMessage("Summary must be between 1 and 250 characters."),
 body('author_id').not().isEmpty().withMessage("Must pick an author."),
 body('genre_id').not().isEmpty().withMessage("Must pick a genre."),
 

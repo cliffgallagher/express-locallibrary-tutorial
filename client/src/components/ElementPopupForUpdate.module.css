@@ -17,27 +17,32 @@
     max-width: 640px;
     background-color: #FFF;
     color: black;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-auto-flow: column;
 }
 
 .popupInner ul {
     list-style-type: none;
     padding-left: 0px;
     width: 100%;
+    grid-column: 1;
 }
 
 .popupInner label {
-    margin: 0 .5rem 0 0;
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: 30% 1fr;
 }
 
-.popupInner label input {
-    margin: 0 0 0 .2rem;
+.popupInner input {
+    grid-column: 2;
 }
 
-.popupInner label select {
-    margin: 0 0 0 .2rem;
+.popupInner select {
+    grid-column: 2;
 }
+
+.popupInner button {
+    grid-column: 1;
+}
+

@@ -42,10 +42,11 @@ const BookPopupForUpdate = (props) => {
             //console.log("bookID in BookPopupForUpdate: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/update`);
             const bodyOfResponse = await response.json();
-            //console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
+            console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
-            setUpdateFormSummaryInput(bodyOfResponse[0].summary);
+            //setUpdateFormSummaryInput(bodyOfResponse[0].summary);
+            setUpdateFormSummaryInput("Here is some static text");
             setInitialTitle(bodyOfResponse[0].title);
             
         } catch(e) {
@@ -141,10 +142,11 @@ const BookPopupForUpdate = (props) => {
             genre_id: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
-        //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
+        console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
         if (initialTitle === updatedBookInfo.title) {
             updateBookNoTitleCheck(updatedBookInfo);
         } else {
+            console.log("entered else block");
             updateBookWithTitleCheck(updatedBookInfo);
         }
     }
@@ -197,12 +199,12 @@ const BookPopupForUpdate = (props) => {
                 <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput} onChange={updateFormGenreInputChangeHandler}>{updateFormGenreOptions}</select></label>
-                <label>Summary<input id={styles.summary_input} type='text' name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}/></label>
+                <label>Summary<textarea id={styles.summary_input} name='updateFormSummaryField' onChange={updateFormSummaryInputChangeHandler}>{updateFormSummaryInput}</textarea></label>
                 <button type="submit">Update Book</button>
-                <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
+                <button className='close-button' onClick={popupForUpdateCloseButtonHandler} >Close</button>
             </form>}
             {displayDuplicateWarning && (
-                <form onSubmit={duplicateTitleUpdateWarningSubmitHandler}>
+                <form className={styles.popupInner} onSubmit={duplicateTitleUpdateWarningSubmitHandler}>
                     <p>A book with the title {updateFormTitleInput} already exists in the database. Are you sure you want to update this book to have that title?</p>
                     <button type='submit'>Update</button>
                     <button onClick={duplicateWarningCancelButtonHandler}>Cancel</button>

@@ -56,6 +56,7 @@ const AuthorPopupForDelete = (props) => {
                 //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
                 props.setDisplayAuthorPopupForDelete(false);
+                props.setDisplayAuthors(true);
                 props.getAuthorList();
             }
 

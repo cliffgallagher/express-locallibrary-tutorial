@@ -129,7 +129,7 @@ const NewBookForm = (props) => {
             <ul>{validationErrors}</ul>
             <label>Title<input type='text' name='titleField' value={titleInput} onChange={titleInputChangeHandler} /></label>
             <label>ISBN<input type='text' name='isbnField' value={isbnInput} onChange={isbnInputChangeHandler}/></label>
-            <label>Summary<input type='text' name='summaryField' value={summaryInput} onChange={summaryInputChangeHandler}/></label>
+            <label id={styles.newBookSummaryLabel}>Summary<textarea id={styles.newBookSummaryInput} name='summaryField' value={summaryInput} onChange={summaryInputChangeHandler}/></label>
             <label>Author<select name='authors' value ={authorInput} onChange={authorInputChangeHandler}>{authorOptions}</select></label>
             <label>Genre<select name='genres' value={genreInput} onChange={genreInputChangeHandler}>{genreOptions}</select></label>
             <button type='submit'>Submit</button>

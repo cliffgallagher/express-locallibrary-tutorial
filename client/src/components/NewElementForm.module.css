@@ -34,3 +34,12 @@
     list-style-type: none;
     width: 100%;
 }
+
+#newBookSummaryLabel {
+    display: flex;
+    align-items: center;
+}
+
+#newBookSummaryLabel textarea {
+    margin: 0 0 0 .2rem;
+}

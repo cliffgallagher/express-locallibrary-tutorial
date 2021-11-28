@@ -202,14 +202,14 @@ const BookPopupForUpdate = (props) => {
                 <label>Summary<textarea id={styles.summary_input} name='updateFormSummaryField' value={updateFormSummaryInput} rows="5" cols="25" onChange={updateFormSummaryInputChangeHandler}></textarea></label>
                 <div id={styles.button_div}>
                     <button type="submit">Update Book</button>
-                    <button className='close-button' onClick={popupForUpdateCloseButtonHandler} >Close</button>
+                    <button className='close-button' onClick={popupForUpdateCloseButtonHandler} id={styles.right_most_button}>Close</button>
                 </div>
             </form>}
             {displayDuplicateWarning && (
                 <form className={styles.popupInner} onSubmit={duplicateTitleUpdateWarningSubmitHandler}>
                     <p>A book with the title {updateFormTitleInput} already exists in the database. Are you sure you want to update this book to have that title?</p>
                     <button type='submit'>Update</button>
-                    <button onClick={duplicateWarningCancelButtonHandler}>Cancel</button>
+                    <button id={styles.right_most_button} onClick={duplicateWarningCancelButtonHandler}>Cancel</button>
                 </form>
             )}
         </div>

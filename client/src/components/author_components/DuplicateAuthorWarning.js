@@ -1,5 +1,5 @@
 import React from "react";
-import '../Popup.css';
+import styles from '../Popup.module.css';
 
 const DuplicateAuthorWarning = (props) => {
     console.log("info in dup author warning: " + JSON.stringify(props.newAuthorInfoForWarning));
@@ -22,13 +22,16 @@ const DuplicateAuthorWarning = (props) => {
     }
     
     return (
-        <div className='popup'>
-            <div className='popup-inner'>
+        <div className={styles.popup}>
+            <div className={styles.popup_inner}>
                 <form onSubmit={duplicateAuthorWarningSubmitHandler}>
                     <p>An author named {`${props.newAuthorInfoForWarning.first_name} ${props.newAuthorInfoForWarning.family_name}`} is already in the database.</p>
                     <p>Do you still wish to create this author?</p>
-                    <button type="submit">Yes</button>
-                    <button className='close-button' onClick={hideDuplicateAuthorWarning}>No</button>
+                    <div id={styles.button_div}>
+                        <button type="submit">Yes</button>
+                        <button className='close-button' onClick={hideDuplicateAuthorWarning}>No</button>
+                    </div>
+
                 </form>
             </div>
         </div>

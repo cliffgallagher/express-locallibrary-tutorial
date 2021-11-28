@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Popup.css';
+import styles from '../Popup.module.css';
 
 const DuplicateBookWarning = (props) => {
     //console.log("newBookInfo in DuplicateBookWarning: " + JSON.stringify(props.newBookInfo));
@@ -23,12 +23,14 @@ const DuplicateBookWarning = (props) => {
 
 
     return (
-        <div className='popup'>
-            <div className='popup-inner'>
+        <div className={styles.popup}>
+            <div className={styles.popup_inner}>
                 <form onSubmit={duplicateBookWarningSubmitHandler}>
                     <p>A book with title {props.newBookInfo.title} already exists in the database. Insert anyway?</p>
+                    <div id={styles.button_div}>
+                        <button className='close-button' onClick={duplicateBookWarningCloseHandler}>No</button>
+                    </div>
                     <button type="submit">Yes</button>
-                    <button className='close-button' onClick={duplicateBookWarningCloseHandler}>No</button>
                 </form>
             </div>
         </div>

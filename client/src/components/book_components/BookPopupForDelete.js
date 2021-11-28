@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../Popup.css';
+import styles from '../Popup.module.css';
 
 const BookPopupForDelete = (props) => {
     const [titleToDelete, setTitleToDelete] = useState("");
@@ -49,14 +49,16 @@ const BookPopupForDelete = (props) => {
         return response;
     }
 
-    return <div className='popup'>
-        <div className='popup-inner'>
+    return <div className={styles.popup}>
+        <div className={styles.popup_inner}>
             <form onSubmit={deleteBookHandler}>
                 <h1>Are you sure you want to delete this book?</h1>
                 <h3>Title: {titleToDelete}</h3>
                 <h3>Author: {authorToDelete}</h3>
                 <h3>ISBN: {isbnToDelete}</h3>
-                <button type="submit">Delete</button><button onClick={popupForDeleteCloseButtonHandler}>Close</button>
+                <div id={styles.button_div}>
+                    <button type="submit">Delete</button><button id={styles.right_most_button} onClick={popupForDeleteCloseButtonHandler}>Close</button>
+                </div>   
             </form>
         </div>
     </div>

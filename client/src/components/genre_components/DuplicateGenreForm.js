@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Popup.css';
+import styles from '../Popup.module.css';
 
 const DuplicateGenreForm = (props) => {
     
@@ -9,11 +9,13 @@ const DuplicateGenreForm = (props) => {
     }
     
     return (
-        <div className='popup'>
-            <div className='popup-inner'>
+        <div className={styles.popup}>
+            <div className={styles.popup_inner}>
                 <form>
                     <p>Genre-name is already in the database</p>
-                    <button onClick={duplicateGenreWarningCloseHandler}>Close</button>
+                    <div id={styles.button_div}>
+                        <button onClick={duplicateGenreWarningCloseHandler}>Close</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-.popup-inner {
+.popup_inner {
     position: relative;
     padding: 32px;
     width: 100%;
@@ -18,8 +18,20 @@
     background-color: #fbfbfb;
 }
 
-.popup-inner .close-btn {
-    position: absolute;
-    top: 16px;
-    right: 16px;
+.popup_inner #button_div {
+    grid-column: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.popup_inner #button_div button {
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    color: #E0EFF1;
+    min-height: 44px;
+}
+
+#right_most_button {
+    margin-left: .5rem;
 }

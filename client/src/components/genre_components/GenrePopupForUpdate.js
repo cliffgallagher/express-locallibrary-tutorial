@@ -83,7 +83,7 @@ const GenrePopupForUpdate = (props) => {
         {!updatedGenreNameAlreadyExists && <form onSubmit={genreUpdateFormSubmitHandler}>
             <label>Genre Name<input type='text' name='genreUpdateFormNameField' value={genreUpdateFormNameValue} onChange={genreUpdateFormNameChangeHandler}/></label>
             <div id={styles.button_div}>
-                <button type='submit'>Update</button><button onClick={genreUpdateFormCancelButtonClickHandler}>Cancel</button>
+                <button type='submit'>Update</button><button onClick={genreUpdateFormCancelButtonClickHandler} id={styles.right_most_button}>Cancel</button>
             </div>
 
         </form>}

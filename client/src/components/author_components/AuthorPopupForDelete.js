@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from '../Popup.module.css';
 
 const AuthorPopupForDelete = (props) => {
     const [authorNameOnDeleteForm, setAuthorNameOnDeleteForm] = useState();
@@ -79,23 +80,28 @@ const AuthorPopupForDelete = (props) => {
         event.preventDefault();
         props.setDisplayAuthorPopupForDelete(false);
         setReceivedForeignKeyConstraintError(false);
+        props.setDisplayAuthors(true);
     }
     
-    return <div className='popup'>
-    <div className='popup-inner'>
+    return <div className={styles.popup}>
+    <div className={styles.popup_inner}>
         {!receivedForeignKeyConstraintError && <form onSubmit={deleteAuthorFormSubmitHandler}>
             <h1>Are you sure you want to delete this author?</h1>
             <h3>Name: {authorNameOnDeleteForm}</h3>
             <h3>Date of Birth: {authorBirthDateOnDeleteForm}</h3>
             <h3>Died: {authorDeathDateOnDeleteForm}</h3>
-            <button type="submit">Delete Author</button>
-            <button className='close-button' onClick={popupForDeleteCloseButtonHandler}>Close</button>
+            <div id={styles.button_div}>
+                <button type="submit">Delete Author</button>
+                <button className='close-button' id={styles.right_most_button} onClick={popupForDeleteCloseButtonHandler}>Close</button>
+            </div>
         </form>}
         {receivedForeignKeyConstraintError && (
             <form>
                 <h3>You're attempting to delete an author who wrote a book currently stored in the database.</h3>
                 <h3>Please delete the book or update it with a different author before deleting this author.</h3>
-                <button onClick={foreignKeyWarningCloseButtonHandler}>Close</button>
+                <div id={styles.button_div}>
+                    <button onClick={foreignKeyWarningCloseButtonHandler}>Close</button>
+                </div>
             </form>
         )}
     </div>

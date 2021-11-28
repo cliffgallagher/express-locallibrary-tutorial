@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../Popup.css';
+import styles from '../Popup.module.css';
 
 const GenrePopupForDelete = (props) => {
     const [genreToDelete, setGenreToDelete] = useState();
@@ -65,20 +65,24 @@ const GenrePopupForDelete = (props) => {
     }
 
     return (
-        <div className='popup'>
-            <div className='popup-inner'>
+        <div className={styles.popup}>
+            <div className={styles.popup_inner}>
                 {!receivedForeignKeyConstraintError && (
                     <form onSubmit={genreDeleteFormSubmitHandler}>
                         <p>Are you sure you wish to delete this genre?</p>
                         <h1>{genreToDelete}</h1>
-                        <button type='submit'>Delete</button><button onClick={genreDeleteFormCancelHandler}>Cancel</button>
+                        <div id={styles.button_div}>
+                            <button type='submit'>Delete</button><button onClick={genreDeleteFormCancelHandler} id={styles.right_most_button}>Cancel</button>
+                        </div>
                 </form>
                 )}
                 {receivedForeignKeyConstraintError && (
                     <form>
                         <h3>You're attempting to delete the genre of a book currently stored in the database.</h3>
                         <h3>Please delete the book or update it with a different genre before deleting this genre.</h3>
-                        <button onClick={foreignKeyWarningCloseButtonHandler}>Close</button>
+                        <div id={styles.button_div}>
+                            <button onClick={foreignKeyWarningCloseButtonHandler}>Close</button>
+                        </div>
                     </form>
                 )}
                 

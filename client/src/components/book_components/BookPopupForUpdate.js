@@ -200,8 +200,10 @@ const BookPopupForUpdate = (props) => {
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput} onChange={updateFormGenreInputChangeHandler}>{updateFormGenreOptions}</select></label>
                 <label>Summary<textarea id={styles.summary_input} name='updateFormSummaryField' value={updateFormSummaryInput} rows="5" cols="25" onChange={updateFormSummaryInputChangeHandler}></textarea></label>
-                <button type="submit">Update Book</button>
-                <button className='close-button' onClick={popupForUpdateCloseButtonHandler} >Close</button>
+                <div id={styles.button_div}>
+                    <button type="submit">Update Book</button>
+                    <button className='close-button' onClick={popupForUpdateCloseButtonHandler} >Close</button>
+                </div>
             </form>}
             {displayDuplicateWarning && (
                 <form className={styles.popupInner} onSubmit={duplicateTitleUpdateWarningSubmitHandler}>

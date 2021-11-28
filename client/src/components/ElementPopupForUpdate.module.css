@@ -16,9 +16,10 @@
     width: 100%;
     max-width: 640px;
     background-color: #fbfbfb;
-    color: black;
+    color: #2b2b2b;
     display: grid;
     grid-auto-flow: column;
+    border-radius: 5px;
 }
 
 .popupInner ul {
@@ -36,14 +37,25 @@
 
 .popupInner input {
     grid-column: 2;
+
 }
 
 .popupInner select {
     grid-column: 2;
+
 }
 
-.popupInner button {
+.popupInner #button_div {
     grid-column: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.popupInner #button_div button {
+    border-radius: 5px;
+    border: none;
+    background-color: #2b2b2b;
+    color: #fbfbfb;
 }
 
 .popupInner textarea {

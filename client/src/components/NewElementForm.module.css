@@ -40,6 +40,7 @@
     align-items: center;
 }
 
-#newBookSummaryLabel textarea {
+#newBookSummaryInput {
     margin: 0 0 0 .2rem;
+
 }

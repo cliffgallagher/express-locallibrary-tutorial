@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../Popup.css';
+import styles from '../ElementPopupForUpdate.module.css';
 
 const GenrePopupForUpdate = (props) => {
     const [genreUpdateFormNameValue, setGenreUpdateFormNameValue] = useState();
@@ -78,11 +78,14 @@ const GenrePopupForUpdate = (props) => {
         getInitialGenreValues();
     }, []);
     
-    return <div className='popup'>
-    <div className='popup-inner'>
+    return <div className={styles.popup}>
+    <div className={styles.popupInner}>
         {!updatedGenreNameAlreadyExists && <form onSubmit={genreUpdateFormSubmitHandler}>
             <label>Genre Name<input type='text' name='genreUpdateFormNameField' value={genreUpdateFormNameValue} onChange={genreUpdateFormNameChangeHandler}/></label>
-            <button type='submit'>Update</button><button onClick={genreUpdateFormCancelButtonClickHandler}>Cancel</button>
+            <div id={styles.button_div}>
+                <button type='submit'>Update</button><button onClick={genreUpdateFormCancelButtonClickHandler}>Cancel</button>
+            </div>
+
         </form>}
         {updatedGenreNameAlreadyExists && (
             <form>

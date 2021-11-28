@@ -46,3 +46,8 @@
     grid-column: 1;
 }
 
+.popupInner textarea {
+    font-family: Arial;
+    resize: none;
+}
+

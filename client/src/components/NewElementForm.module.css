@@ -42,5 +42,6 @@
 
 #newBookSummaryInput {
     margin: 0 0 0 .2rem;
-
+    font-family: Arial;
+    resize: none;
 }

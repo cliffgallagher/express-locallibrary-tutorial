@@ -1,6 +1,6 @@
 #newElementForm {
-    background-color: #fbfbfb;
-    color: #2b2b2b;
+    background-color: #7DB4B5;
+    color: #000000;
     margin: 2rem 1rem 0 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -23,11 +23,11 @@
 #newElementForm button {
     margin: 0 .5rem 0 0;
     min-height: 44px;
-    background-color: #2b2b2b;
-    color: #fbfbfb;
+    background-color: #000000;
+    color: #E0EFF1;
     border: none;
     border-radius: 5px;
-    border-color: #2b2b2b;
+    border-color: #E0EFF1;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 

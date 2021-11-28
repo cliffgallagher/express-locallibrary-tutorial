@@ -1,11 +1,11 @@
 .navbarHeader {
-    background-color: #2b2b2b;
+    background-color: #000000;
     min-height: 3rem;
     display: flex;
 }
 
 .fabars {
-    color: #fbfbfb;
+    color: #E0EFF1;
     align-self: center;
     box-sizing: border-box;
     margin-left: .5rem;

@@ -54,8 +54,8 @@
 .popupInner #button_div button {
     border-radius: 5px;
     border: none;
-    background-color: #2b2b2b;
-    color: #fbfbfb;
+    background-color: #000000;
+    color: #E0EFF1;
 }
 
 .popupInner textarea {

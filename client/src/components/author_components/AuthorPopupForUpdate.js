@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../Popup.css';
+import styles from '../ElementPopupForUpdate.module.css';
 
 const AuthorPopupForUpdate = (props) => {
     const [authorUpdateFormFirstNameValue, setAuthorUpdateFormFirstNameValue] = useState();
@@ -143,15 +143,17 @@ const AuthorPopupForUpdate = (props) => {
         setDisplayDuplicateWarning(false);
     }
     
-    return <div className='popup'>
-        <div className='popup-inner'>
+    return <div className={styles.popup}>
+        <div className={styles.popupInner}>
             {!displayDuplicateWarning && <form onSubmit={authorUpdateFormSubmitHandler}>
                 <label>First Name<input type='text' name='authorUpdateFormFirstNameInput' value={authorUpdateFormFirstNameValue} onChange={authorUpdateFormFirstNameChangeHandler}/></label>
                 <label>Family Name<input type='text' name='authorUpdateFormFamilyNameInput' value={authorUpdateFormFamilyNameValue} onChange={authorUpdateFormFamilyNameChangeHandler}/></label>
                 <label>Date of Birth<input type='date' name='authorUpdateFormBirthInput' value={authorUpdateFormBirthValue} onChange={authorUpdateFormBirthDateChangeHandler}/></label>
                 <label>Date of Death<input type='date' name='authorUpdateFormDeathInput'value={authorUpdateFormDeathValue} onChange={authorUpdateFormDeathDateChangeHandler}/></label>
-                <button type="submit">Update Author</button>
-                <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
+                <div id={styles.button_div}>
+                    <button type="submit">Update Author</button>
+                    <button className='close-button' onClick={popupForUpdateCloseButtonHandler}>Close</button>
+                </div>
             </form>}
             {displayDuplicateWarning && (
                 <form onSubmit={duplicateAuthorUpdateWarningSubmitHandler}>

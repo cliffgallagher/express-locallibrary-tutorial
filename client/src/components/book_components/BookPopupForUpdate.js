@@ -45,8 +45,8 @@ const BookPopupForUpdate = (props) => {
             console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
-            //setUpdateFormSummaryInput(bodyOfResponse[0].summary);
-            setUpdateFormSummaryInput("Here is some static text");
+            setUpdateFormSummaryInput(bodyOfResponse[0].summary);
+            //setUpdateFormSummaryInput("Here is some static text");
             setInitialTitle(bodyOfResponse[0].title);
             
         } catch(e) {
@@ -199,7 +199,7 @@ const BookPopupForUpdate = (props) => {
                 <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput} onChange={updateFormGenreInputChangeHandler}>{updateFormGenreOptions}</select></label>
-                <label>Summary<textarea id={styles.summary_input} name='updateFormSummaryField' onChange={updateFormSummaryInputChangeHandler}>{updateFormSummaryInput}</textarea></label>
+                <label>Summary<textarea id={styles.summary_input} name='updateFormSummaryField' value={updateFormSummaryInput} onChange={updateFormSummaryInputChangeHandler}></textarea></label>
                 <button type="submit">Update Book</button>
                 <button className='close-button' onClick={popupForUpdateCloseButtonHandler} >Close</button>
             </form>}

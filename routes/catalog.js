@@ -335,8 +335,13 @@ router.get('/authors', author_controller.author_list);
 router.get('/genre/create', genre_controller.genre_create_get);
 
 //POST request for creating Genre.
-router.post('/genre/create', function(req, res, next) {
-    console.log('req body in genre/create: ' + JSON.stringify(req.body))
+router.post('/genre/create', 
+body('genreName').not().isEmpty().withMessage("Genre name cannot be empty"),
+function(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     next()
 }, genre_controller.genre_create_post);
 

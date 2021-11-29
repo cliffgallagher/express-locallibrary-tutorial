@@ -29,7 +29,7 @@ const DuplicateAuthorWarning = (props) => {
                     <p>Do you still wish to create this author?</p>
                     <div id={styles.button_div}>
                         <button type="submit">Yes</button>
-                        <button className='close-button' onClick={hideDuplicateAuthorWarning}>No</button>
+                        <button className='close-button' id={styles.right_most_button} onClick={hideDuplicateAuthorWarning}>No</button>
                     </div>
 
                 </form>

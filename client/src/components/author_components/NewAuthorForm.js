@@ -39,7 +39,7 @@ const NewAuthorForm = (props) => {
 
         props.passNewAuthorInfo(newAuthorFormInfo);
 
-        //console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
+        console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
 
         try {
             const response = await fetch('catalog/author/create/one', {

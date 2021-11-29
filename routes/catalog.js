@@ -170,6 +170,31 @@ router.get('/author/create', author_controller.author_create_get);
 router.post('/author/create/one', 
 body('first_name').not().isEmpty().withMessage('First name cannot be empty'),
 body('family_name').not().isEmpty().withMessage('Family name cannot be empty'),
+body('dateOfBirth').custom((value) => {
+    //console.log("value: " + value);
+    if (!value) {
+        throw new Error ('Date of birth cannot be empty');
+    }
+    return true;
+}),
+body('dateOfBirth').custom((value, {req}) => {
+    //console.log('req.body: ' + req.body.dateOfBirth);
+    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
+    if (req.body.dateOfBirth > new Date().toISOString().slice(0, 10)) {
+        throw new Error('Date of birth cannot be a future date')
+    }
+    return true;
+}),
+body('dateOfDeath').custom((value, {req}) => {
+    //console.log('req.body: ' + req.body.dateOfBirth);
+    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
+    if (value) {
+        if (req.body.dateOfDeath > new Date().toISOString().slice(0, 10)) {
+            throw new Error('Date of death cannot be a future date')
+        }
+    }
+    return true;
+}),
 function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

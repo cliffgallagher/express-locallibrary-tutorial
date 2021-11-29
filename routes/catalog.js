@@ -355,7 +355,15 @@ router.post('/genre/:id/delete', genre_controller.genre_delete_post);
 router.get('/genre/:id/update', genre_controller.genre_update_get);
 
 // POST request to update Genre.
-router.post('/genre/:id/update', genre_controller.genre_update_post);
+router.post('/genre/:id/update', 
+body('genreName').not().isEmpty().withMessage("Genre name cannot be empty"),
+function(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next()
+}, genre_controller.genre_update_post);
 
 // GET request for one Genre.
 router.get('/genre/:id', genre_controller.genre_detail);

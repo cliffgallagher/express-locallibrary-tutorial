@@ -230,8 +230,98 @@ router.get('/author/:id/update', function(req, res, next) {
 }, author_controller.author_update_get);
 
 // POST request to update Author.
-router.post('/author/:id/update/one', binarySearchController.search_for_existing_author, author_controller.author_update_post);
-router.post('/author/:id/update/two', author_controller.author_update_post);
+router.post('/author/:id/update/one', binarySearchController.search_for_existing_author, 
+body('first_name').not().isEmpty().withMessage('First name cannot be empty'),
+body('family_name').not().isEmpty().withMessage('Family name cannot be empty'),
+body('birthDate').custom((value, {req}) => {
+    console.log("value: " + value);
+    console.log("req: " + JSON.stringify(req.body));
+    if (!value) {
+        throw new Error ('Date of birth cannot be empty');
+    }
+    return true;
+}),
+body('birthDate').custom((value, {req}) => {
+    //console.log('req.body: ' + req.body.dateOfBirth);
+    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
+    if (req.body.birthDate > new Date().toISOString().slice(0, 10)) {
+        throw new Error('Date of birth cannot be a future date')
+    }
+    return true;
+}),
+body('deathDate').custom((value, {req}) => {
+    //console.log('req.body: ' + req.body.dateOfBirth);
+    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
+    if (value) {
+        if (req.body.deathDate > new Date().toISOString().slice(0, 10)) {
+            throw new Error('Date of death cannot be a future date')
+        }
+    }
+    return true;
+}),
+body('deathDate').custom((value, {req}) => {
+    if (value) {
+        if (req.body.deathDate < req.body.birthDate) {
+            throw new Error('Date of birth cannot be after date of death');
+        }
+    }
+    return true;
+}),
+function(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next()
+}, author_controller.author_update_post);
+
+
+
+router.post('/author/:id/update/two',
+body('birthDate').custom((value, {req}) => {
+    console.log(value.length);
+    console.log("value in update/two: " + value);
+    console.log("req: " + JSON.stringify(req.body));
+    if (value === "" || !value ) {
+        console.log("entered if statement");
+        throw new Error ('Date of birth cannot be empty');
+    }
+    return true;
+}),
+body('birthDate').custom((value, {req}) => {
+    //console.log('req.body: ' + req.body.dateOfBirth);
+    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
+    if (req.body.birthDate > new Date().toISOString().slice(0, 10)) {
+        throw new Error('Date of birth cannot be a future date')
+    }
+    return true;
+}),
+body('deathDate').custom((value, {req}) => {
+    //console.log('req.body: ' + req.body.dateOfBirth);
+    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
+    if (value) {
+        if (req.body.deathDate > new Date().toISOString().slice(0, 10)) {
+            throw new Error('Date of death cannot be a future date')
+        }
+    }
+    return true;
+}),
+body('deathDate').custom((value, {req}) => {
+    if (value) {
+        if (req.body.deathDate < req.body.birthDate) {
+            throw new Error('Date of birth cannot be after date of death');
+        }
+    }
+    return true;
+}),
+function(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next()
+}, author_controller.author_update_post);
+
 
 // GET request for one Author.
 router.get('/author/:id', author_controller.author_detail);

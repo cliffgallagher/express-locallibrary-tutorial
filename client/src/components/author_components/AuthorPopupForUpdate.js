@@ -70,6 +70,7 @@ const AuthorPopupForUpdate = (props) => {
     }
 
     const updateAuthorNoNameCheck = async (updatedAuthorData) => {
+        //console.log("entered updateAuthorNoNameCheck");
         try {
             const response = await fetch(`catalog/author/${props.authorID}/update/two`, {
                 method: 'POST',
@@ -78,10 +79,24 @@ const AuthorPopupForUpdate = (props) => {
                 },
                 body: JSON.stringify(updatedAuthorData)
             });
-            setDisplayDuplicateWarning(false);
-            props.setDisplayAuthorPopupForUpdate(false);
-            props.getAuthorList();
 
+            const data = await response.json();
+            if (typeof data === 'object') {
+                if (data.hasOwnProperty('errors')) {
+                    //console.log("data.errors: " + JSON.stringify(data.errors));
+                    const errorMessages = data.errors.map(element => element.msg);
+                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                    setValidationErrors(() => {
+                        return errorMessages.map(element => <li>{element}</li>);
+                    });
+                    
+                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                } else {
+                    setDisplayDuplicateWarning(false);
+                    props.setDisplayAuthorPopupForUpdate(false);
+                    props.getAuthorList();
+                }
+            }
         } catch(e) {
             console.log(e);
         }
@@ -89,18 +104,21 @@ const AuthorPopupForUpdate = (props) => {
 
     async function authorUpdateFormSubmitHandler(event) {
         event.preventDefault();
-        const updatedAuthorData = {
+        let updatedAuthorData = {
             first_name: authorUpdateFormFirstNameValue,
             family_name: authorUpdateFormFamilyNameValue,
             birthDate: authorUpdateFormBirthValue,
-            deathDate: authorUpdateFormDeathValue
+            //deathDate: authorUpdateFormDeathValue
+        }
+        if (authorUpdateFormDeathValue) {
+            updatedAuthorData = {...updatedAuthorData, deathDate: authorUpdateFormDeathValue}
         }
         if ((initialFirstName === updatedAuthorData.first_name) && (initialLastName === updatedAuthorData.family_name)) {
             updateAuthorNoNameCheck(updatedAuthorData);
         } else {
             updateAuthorNameCheck(updatedAuthorData);
         }
-        //console.log(JSON.stringify(updatedAuthorData));    }
+        console.log(JSON.stringify(updatedAuthorData));
     }
     
     useEffect(() => {
@@ -146,6 +164,7 @@ const AuthorPopupForUpdate = (props) => {
     return <div className={styles.popup}>
         <div className={styles.popupInner}>
             {!displayDuplicateWarning && <form onSubmit={authorUpdateFormSubmitHandler}>
+                <ul>{validationErrors}</ul>
                 <label>First Name<input type='text' name='authorUpdateFormFirstNameInput' value={authorUpdateFormFirstNameValue} onChange={authorUpdateFormFirstNameChangeHandler}/></label>
                 <label>Family Name<input type='text' name='authorUpdateFormFamilyNameInput' value={authorUpdateFormFamilyNameValue} onChange={authorUpdateFormFamilyNameChangeHandler}/></label>
                 <label>Date of Birth<input type='date' name='authorUpdateFormBirthInput' value={authorUpdateFormBirthValue} onChange={authorUpdateFormBirthDateChangeHandler}/></label>

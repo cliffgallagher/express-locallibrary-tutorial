@@ -42,7 +42,6 @@ body('isbn').custom((value) => {
     }
     return true;
 }),
-body('summary').not().isEmpty().withMessage("Summary cannot be blank"),
 body('summary').isLength({
     min: 1,
     max: 250
@@ -168,8 +167,14 @@ router.get('/books', book_controller.book_list);
 router.get('/author/create', author_controller.author_create_get);
 
 // POST request for creating Author.
-router.post('/author/create/one', function(req, res, next) {
-    //console.log("request body in author/create: " + JSON.stringify(req.body))
+router.post('/author/create/one', 
+body('first_name').not().isEmpty().withMessage('First name cannot be empty'),
+body('family_name').not().isEmpty().withMessage('Family name cannot be empty'),
+function(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     next()
 }, binarySearchController.search_for_existing_author, author_controller.author_create_post);
 

@@ -49,7 +49,7 @@ const NewAuthorForm = (props) => {
                 },
                 body: JSON.stringify(newAuthorFormInfo)
             });
-            props.hideNewAuthorForm();
+            //props.hideNewAuthorForm();
             const data = await response.json();
             //console.log("data: " + data);
             /*if (data === "author already present in database") {
@@ -84,6 +84,7 @@ const NewAuthorForm = (props) => {
     return (
         <div>
             <form id={styles.newElementForm} onSubmit={newAuthorFormSubmitHandler}>
+                <ul>{validationErrors}</ul>
                 <label>First Name<input type='text' name='newAuthorFormFirstNameInput' onChange={newAuthorFormFirstNameChangeHandler} value={newAuthorFirstName}/></label>
                 <label>Family Name<input type='text' name='newAuthorFormFamilyNameInput' onChange={newAuthorFormFamilyNameChangeHandler} value={newAuthorFamilyName}/></label>
                 <label>Date of Birth<input type='date' name='newAuthorFormBirthInput' onChange={newAuthorFormBirthChangeHandler} value={newAuthorBirthDate}/></label>

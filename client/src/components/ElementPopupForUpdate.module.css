@@ -46,6 +46,10 @@
 
 }
 
+.popupInner p {
+    grid-column: 1;
+}
+
 .popupInner #button_div {
     grid-column: 1;
     display: flex;

@@ -208,8 +208,10 @@ const BookPopupForUpdate = (props) => {
             {displayDuplicateWarning && (
                 <form className={styles.popupInner} onSubmit={duplicateTitleUpdateWarningSubmitHandler}>
                     <p>A book with the title {updateFormTitleInput} already exists in the database. Are you sure you want to update this book to have that title?</p>
-                    <button type='submit'>Update</button>
-                    <button id={styles.right_most_button} onClick={duplicateWarningCancelButtonHandler}>Cancel</button>
+                    <div id={styles.button_div}>
+                        <button type='submit'>Update</button>
+                        <button id={styles.right_most_button} onClick={duplicateWarningCancelButtonHandler}>Cancel</button>
+                    </div>
                 </form>
             )}
         </div>

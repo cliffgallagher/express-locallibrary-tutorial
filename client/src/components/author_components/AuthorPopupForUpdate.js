@@ -158,8 +158,10 @@ const AuthorPopupForUpdate = (props) => {
             {displayDuplicateWarning && (
                 <form onSubmit={duplicateAuthorUpdateWarningSubmitHandler}>
                     <p>An author named {`${authorUpdateFormFirstNameValue} ${authorUpdateFormFamilyNameValue}`} already exists in the database. Are you sure you want to update this author to have that name?</p>
-                    <button type='submit'>Update</button>
-                    <button id={styles.right_most_button} onClick={authorDuplicateWarningCancelButtonHandler}>Cancel</button>
+                    <div id={styles.button_div}>
+                        <button type='submit'>Update</button>
+                        <button id={styles.right_most_button} onClick={authorDuplicateWarningCancelButtonHandler}>Cancel</button>
+                    </div>
                 </form>
             )}
         </div>

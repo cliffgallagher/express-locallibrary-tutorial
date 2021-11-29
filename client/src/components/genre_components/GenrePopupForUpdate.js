@@ -90,7 +90,9 @@ const GenrePopupForUpdate = (props) => {
         {updatedGenreNameAlreadyExists && (
             <form>
                 <p>Genre name {genreUpdateFormNameValue} already exists in the database.</p>
-                <button onClick={duplicateGenreNameWarningCloseButtonHandler}>Close</button>
+                <div id={styles.button_div}>
+                    <button onClick={duplicateGenreNameWarningCloseButtonHandler}>Close</button>
+                </div>
             </form>
         )}
     </div>

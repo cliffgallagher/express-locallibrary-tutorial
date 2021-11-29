@@ -30,16 +30,21 @@ const NewAuthorForm = (props) => {
 
     async function newAuthorFormSubmitHandler(event) {
         event.preventDefault();
-        const newAuthorFormInfo = {
+        //console.log('newAuthorDeathDate: ' + newAuthorDeathDate);
+        let newAuthorFormInfo = {
             first_name: newAuthorFirstName,
             family_name: newAuthorFamilyName,
-            dateOfBirth: newAuthorBirthDate,
-            dateOfDeath: newAuthorDeathDate
+            dateOfBirth: newAuthorBirthDate
         }
+
+        if (newAuthorDeathDate) {
+            newAuthorFormInfo = {...newAuthorFormInfo, dateOfDeath: newAuthorDeathDate};
+        }
+        //console.log('newAuthorFormInfo: ' + JSON.stringify(newAuthorFormInfo));
 
         props.passNewAuthorInfo(newAuthorFormInfo);
 
-        console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
+        //console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
 
         try {
             const response = await fetch('catalog/author/create/one', {
@@ -73,6 +78,7 @@ const NewAuthorForm = (props) => {
                         //console.log("errorMessages: " + JSON.stringify(errorMessages));
                     } else {
                         props.getAuthorList();
+                        props.hideNewAuthorForm();
                         return response;
                     }
                 }

@@ -95,11 +95,12 @@ const NewBookForm = (props) => {
                 // figure out
                 //console.log("book inserted");
                 props.getBookListNewBookToBookForm();
-                setTitleInput("");
+                props.onCancel();
+                /*setTitleInput("");
                 setISBNInput("");
                 setSummaryInput("");
                 setAuthorInput(0);
-                setGenreInput(0);
+                setGenreInput(0);*/
             }
         }
     }

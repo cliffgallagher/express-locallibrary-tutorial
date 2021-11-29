@@ -13,7 +13,7 @@ const NewBook = (props) => {
     }
 
     function newBookCancelHandler() {
-        console.log("clicked cancel button");
+        //console.log("clicked cancel button");
         setIsAddingNewBook(false);
     }
 

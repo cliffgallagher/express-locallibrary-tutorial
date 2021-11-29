@@ -30,6 +30,7 @@ const NewAuthorForm = (props) => {
 
     async function newAuthorFormSubmitHandler(event) {
         event.preventDefault();
+        setValidationErrors([]);
         //console.log('newAuthorDeathDate: ' + newAuthorDeathDate);
         let newAuthorFormInfo = {
             first_name: newAuthorFirstName,
@@ -56,6 +57,7 @@ const NewAuthorForm = (props) => {
             });
             //props.hideNewAuthorForm();
             const data = await response.json();
+            console.log("data: " + JSON.stringify(data));
             //console.log("data: " + data);
             /*if (data === "author already present in database") {
                 //console.log("yes, author is in database");

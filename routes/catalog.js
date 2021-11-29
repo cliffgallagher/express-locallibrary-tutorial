@@ -195,6 +195,14 @@ body('dateOfDeath').custom((value, {req}) => {
     }
     return true;
 }),
+body('dateOfDeath').custom((value, {req}) => {
+    if (value) {
+        if (req.body.dateOfDeath < req.body.dateOfBirth) {
+            throw new Error('Date of birth cannot be after date of death');
+        }
+    }
+    return true;
+}),
 function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

@@ -5,6 +5,7 @@ import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
 import DisplaySelector from '../DisplaySelector';
+import ChosenElement from '../ChosenElement';
 
 const BookComponent = (props) => {
     const [displayBooks, setDisplayBooks] = useState(true);
@@ -15,6 +16,7 @@ const BookComponent = (props) => {
     const [authorIDForBookPopupForUpdate, setAuthorIDForBookPopupForUpdate] = useState();
     const [genreIDForBookPopupForUpdate, setGenreIDForBookPopupForUpdate] = useState();
     const [newBookInfo, setNewBookInfo] = useState();
+    const [displayElement, setDisplayElement] = useState(false);
 
     /*function bookListElementMouseEnterHandler() {
         setDisplayBookPopupForUpdate(true);
@@ -25,7 +27,7 @@ const BookComponent = (props) => {
         const body = await response.json();
         //console.log("body before setBookArray: " + JSON.stringify(body));
         setBookArray(() => {
-            return body.map(element => <BookListElement key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genreName={element.name} genreID={element.genre_id} summary={element.summary} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} bookPropsFromBookListElementToBookComponent={bookPropsFromBookListElementToBookComponent} setDisplayBookPopupForDelete={setDisplayBookPopupForDelete}/>);
+            return body.map(element => <BookListElement key={element.book_id} bookID={element.book_id} title={element.title} authorID={element.author_id} author={`${element.first_name} ${element.family_name}`} isbn={element.isbn} genreName={element.name} genreID={element.genre_id} summary={element.summary} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} bookPropsFromBookListElementToBookComponent={bookPropsFromBookListElementToBookComponent} setDisplayBookPopupForDelete={setDisplayBookPopupForDelete} setDisplayElement={setDisplayElement}/>);
         });
         console.log(bookArray);
     }
@@ -57,10 +59,17 @@ const BookComponent = (props) => {
 
     return (
         <div>
-            {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
+            {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && !displayElement && (
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList} />
                     <BookList bookArray={bookArray}/>
+                </div>
+            )}
+            {displayElement && (
+                <div>
+                    <NewBook getBookListMyComponentNewToNewBook={getBookList} />
+                    <BookList bookArray={bookArray}/>
+                    <ChosenElement />    
                 </div>
             )}
             {displayBookPopupForUpdate && (

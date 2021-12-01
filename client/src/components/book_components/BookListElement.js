@@ -25,8 +25,12 @@ const BookListElement = (props) => {
         props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
     }
 
+    function clickElementHandler() {
+        props.setDisplayElement(true);
+    }
+
     return (
-        <div className={styles.listElement} onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}>
+        <div className={styles.listElement} onClick={clickElementHandler} /*onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}*/>
             {!displayUpdateAndDeleteButtons && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>

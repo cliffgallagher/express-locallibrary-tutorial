@@ -67,8 +67,6 @@ const BookComponent = (props) => {
             )}
             {displayElement && (
                 <div>
-                    <NewBook getBookListMyComponentNewToNewBook={getBookList} />
-                    <BookList bookArray={bookArray}/>
                     <ChosenElement />    
                 </div>
             )}

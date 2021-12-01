@@ -26,3 +26,21 @@
 .chosen_element_popup_inner p {
       padding-left: .75rem;
   }
+
+#button_div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+  #button_div button {
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    color: #E0EFF1;
+    min-height: 44px;
+    margin-left: .5rem;
+}
+
+#right_most_button {
+    margin-left: .5rem;
+}

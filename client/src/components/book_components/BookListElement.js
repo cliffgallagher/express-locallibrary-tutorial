@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styles from '../ListElement.module.css';
 import BookInfo from './BookInfo';
+import ChosenElement from '../ChosenElement';
 
 const BookListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
     const [hideElement, setHideElement] = useState(false);
+    const [displayElement, setDisplayElement] = useState(false);
 
     //console.log("bookID in BookListElement: " + props.bookID);
 
@@ -28,20 +30,20 @@ const BookListElement = (props) => {
 
     function clickElementHandler() {
         setHideElement(true);
-        //props.setDisplayElement(true);
+        setDisplayElement(true);
     }
 
     return (
         <div className={`${styles.listElement} ${hideElement ? styles.hideElement : ''}`} onClick={clickElementHandler} /*onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}*/>
-            {!displayUpdateAndDeleteButtons && (
+            {!displayElement && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
                 </div>    
             )}
-            {displayUpdateAndDeleteButtons && (
+            {displayElement && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
-                <button onClick={updateBookButtonClickHandler}>Update Book</button><button onClick={deleteBookButtonClickHandler}>Delete Book</button>
+                    <ChosenElement />
                 </div>    
             )}
         </div>

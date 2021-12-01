@@ -80,15 +80,17 @@ exports.book_create_post = async function(req, res) {
     try {
         //res.send('NOT IMPLEMENTED: Book create POST');
         //console.log("req.body in controller: " + req.body);
-        const newBook = await Book.create({
+        /*const newBook = await Book.create({
         title: req.body.title,
         author_id: req.body.author_id,
         isbn: req.body.isbn,
         genre_id: req.body.genre_id,
         summary: req.body.summary
-    });
+    });*/
+    const [results, metadata] = await sequelize.query(`BEGIN SET @title = "${req.body.title}"; SET @author = ${req.body.author_id}; SET @isbn = "${req.body.isbn}"; SET @genre = ${req.body.genre_id}; SET @summary = "${req.body.summary}"; INSERT INTO \`books\` VALUES (DEFAULT, @title, @author, @isbn, @genre, DEFAULT, DEFAULT, @summary); END;`);
+    console.log("results: " + JSON.stringify(results));
 
-    res.json(newBook);
+    //res.json(newBook);
     //console.log(JSON.stringify(newBook));
     } catch (e) {
         console.log(e);

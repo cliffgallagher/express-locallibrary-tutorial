@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../ListElement.module.css';
 import BookInfo from './BookInfo';
-import ChosenElement from '../ChosenElement';
+import ChosenBook from './ChosenBook';
 
 const BookListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
@@ -43,7 +43,7 @@ const BookListElement = (props) => {
             {displayElement && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
-                    <ChosenElement />
+                    <ChosenBook title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
                 </div>    
             )}
         </div>

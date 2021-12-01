@@ -5,7 +5,6 @@ import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
 import DisplaySelector from '../DisplaySelector';
-import ChosenElement from '../ChosenElement';
 
 const BookComponent = (props) => {
     const [displayBooks, setDisplayBooks] = useState(true);

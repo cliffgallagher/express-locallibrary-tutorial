@@ -3,7 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import styles from './NavbarOptions.module.css';
 
 const NavbarOptions = (props) => {
-    console.log("displayNavbar is true or false: " + props.displayNavbar);
+    //console.log("displayNavbar is true or false: " + props.displayNavbar);
     
     function booksOptionClickHandler() {
         //console.log("hello books");

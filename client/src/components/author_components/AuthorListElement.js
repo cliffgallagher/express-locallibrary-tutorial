@@ -5,7 +5,7 @@ import ChosenAuthor from './ChosenAuthor.js';
 
 const AuthorListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
-    const [hideElement, setHideElement] = useState(false);
+    const [hideChosenElement, setHideChosenElement] = useState(false);
     const [displayChosenElement, setDisplayChosenElement] = useState(false);
 
     //console.log('date of birth in AuthorListElement: ' + props.dateOfBirth);
@@ -31,11 +31,14 @@ const AuthorListElement = (props) => {
     }
 
     function clickElementHandler() {
-        setDisplayChosenElement(true);
+        if(!displayChosenElement) {
+            setDisplayChosenElement(true);
+            setHideChosenElement(true);
+        }
     }
     
     return (
-        <div className={`${styles.listElement} ${hideElement ? styles.hideElement: ''}`} onClick={clickElementHandler}/*{styles.listElement} onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}*/>
+        <div className={`${styles.listElement} ${hideChosenElement ? styles.hideElement: ''}`} onClick={clickElementHandler}/*{styles.listElement} onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}*/>
             {!displayChosenElement && (
                 <div>
                     <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>
@@ -44,7 +47,7 @@ const AuthorListElement = (props) => {
             {displayChosenElement && (
                 <div>
                     <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>
-                    <ChosenAuthor />
+                    <ChosenAuthor setDisplayChosenElement={setDisplayChosenElement} setHideChosenElement={setHideChosenElement}/>
                 </div>
             )}
         </div>

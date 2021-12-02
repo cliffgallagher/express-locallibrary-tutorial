@@ -25,6 +25,7 @@ const BookListElement = (props) => {
     function updateBookButtonClickHandler() {
         props.setDisplayBookPopupForUpdate(true);
         props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
+        setHideElement(true);
     }
 
     function deleteBookButtonClickHandler() {
@@ -36,7 +37,7 @@ const BookListElement = (props) => {
         if (!displayElement) {
             setHideElement(true);
             setDisplayElement(true);
-            console.log("i clicked the element");
+            //console.log("i clicked the element");
         }
     }
 
@@ -50,7 +51,7 @@ const BookListElement = (props) => {
             {displayElement && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
-                    <ChosenBook title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary} setDisplayElement={setDisplayElement} setHideElement={setHideElement} getBookList={props.getBookList}/>
+                    <ChosenBook title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary} setDisplayElement={setDisplayElement} setHideElement={setHideElement} getBookList={props.getBookList} updateBookButtonClickHandler={updateBookButtonClickHandler}/>
                 </div>    
             )}
         </div>

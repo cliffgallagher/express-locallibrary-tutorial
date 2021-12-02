@@ -57,7 +57,7 @@ const BookComponent = (props) => {
 
     return (
         <div>
-            {displayBooks && !displayBookPopupForUpdate && !displayBookPopupForDelete && (
+            {displayBooks && !displayBookPopupForDelete && (
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList} />
                     <BookList bookArray={bookArray}/>
@@ -67,7 +67,6 @@ const BookComponent = (props) => {
                 <div>
                     <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
                     <BookList bookArray={bookArray}/>
-                    <BookPopupForUpdate bookID={bookIDForBookPopupForUpdate} authorID={authorIDForBookPopupForUpdate} genreID={genreIDForBookPopupForUpdate} setDisplayBookPopupForUpdate={setDisplayBookPopupForUpdate} getBookList={getBookList}/>
                 </div>
             )}
             {displayBookPopupForDelete && (

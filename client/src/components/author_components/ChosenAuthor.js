@@ -34,7 +34,7 @@ const ChosenAuthor = (props) => {
                 </div>
             )}
             {displayElementPopupForUpdate && (
-                <AuthorPopupForUpdate setDisplayAuthorPopupForUpdate={setDisplayElementPopupForUpdate} authorID={props.authorIDForPopupForUpdate} getAuthorList={props.getAuthorList}/>
+                <AuthorPopupForUpdate setDisplayAuthorPopupForUpdate={setDisplayElementPopupForUpdate} authorID={props.authorIDForPopupForUpdate} getAuthorList={props.getAuthorList} setDisplayChosenElement={props.setDisplayChosenElement} setHideChosenElement={props.setHideChosenElement}/>
             )}
 
         </div>

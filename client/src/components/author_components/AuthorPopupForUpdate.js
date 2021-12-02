@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AiFillPropertySafety } from "react-icons/ai";
 import styles from '../ElementPopupForUpdate.module.css';
 
 const AuthorPopupForUpdate = (props) => {
@@ -60,6 +61,8 @@ const AuthorPopupForUpdate = (props) => {
                     //console.log("errorMessages: " + JSON.stringify(errorMessages));
                 } else {
                     props.setDisplayAuthorPopupForUpdate(false);
+                    props.setDisplayChosenElement(false);
+                    props.setHideChosenElement(false);
                     props.getAuthorList();
                     return response;
                 }
@@ -94,6 +97,8 @@ const AuthorPopupForUpdate = (props) => {
                 } else {
                     setDisplayDuplicateWarning(false);
                     props.setDisplayAuthorPopupForUpdate(false);
+                    props.setDisplayChosenElement(false);
+                    props.setHideChosenElement(false);
                     props.getAuthorList();
                 }
             }

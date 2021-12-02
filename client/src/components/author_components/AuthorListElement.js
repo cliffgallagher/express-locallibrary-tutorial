@@ -47,7 +47,7 @@ const AuthorListElement = (props) => {
             {displayChosenElement && (
                 <div>
                     <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>
-                    <ChosenAuthor firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath} setDisplayChosenElement={setDisplayChosenElement} setHideChosenElement={setHideChosenElement}/>
+                    <ChosenAuthor firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath} setDisplayChosenElement={setDisplayChosenElement} setHideChosenElement={setHideChosenElement} getAuthorList={props.getAuthorList} authorIDForPopupForUpdate={props.authorID}/>
                 </div>
             )}
         </div>

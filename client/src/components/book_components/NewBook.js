@@ -50,7 +50,7 @@ const NewBook = (props) => {
         {isAddingNewBook && addingDuplicate && (
             <div>
                 <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} />
-                <DuplicateBookWarning newBookInfo={newBookInfo} isNotAddingDuplicate={isNotAddingDuplicate} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook}/>
+                <DuplicateBookWarning newBookInfo={newBookInfo} isNotAddingDuplicate={isNotAddingDuplicate} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} setIsAddingNewBook={setIsAddingNewBook}/>
             </div>
         )}
     </div>;

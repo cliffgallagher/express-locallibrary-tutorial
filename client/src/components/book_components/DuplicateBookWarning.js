@@ -15,10 +15,12 @@ const DuplicateBookWarning = (props) => {
         });
         props.isNotAddingDuplicate();
         props.getBookListNewBookToBookForm();
+        props.setIsAddingNewBook(false);
     }
 
     function duplicateBookWarningCloseHandler() {
         props.isNotAddingDuplicate();
+        props.setIsAddingNewBook(false);
     }
 
 
@@ -28,9 +30,9 @@ const DuplicateBookWarning = (props) => {
                 <form onSubmit={duplicateBookWarningSubmitHandler}>
                     <p>A book with title {props.newBookInfo.title} already exists in the database. Insert anyway?</p>
                     <div id={styles.button_div}>
-                        <button className='close-button' onClick={duplicateBookWarningCloseHandler}>No</button>
+                        <button type="submit">Yes</button>
+                        <button id={styles.right_most_button} onClick={duplicateBookWarningCloseHandler}>No</button>
                     </div>
-                    <button type="submit">Yes</button>
                 </form>
             </div>
         </div>

@@ -17,7 +17,7 @@ const GenrePopupForUpdate = (props) => {
     }
     
     function genreUpdateFormCancelButtonClickHandler() {
-        props.setDisplayGenrePopupForUpdate(false);
+        props.setDisplayElementPopupForUpdate(false);
     }
 
     function genreUpdateFormNameChangeHandler(event) {

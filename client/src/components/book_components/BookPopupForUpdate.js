@@ -86,8 +86,11 @@ const BookPopupForUpdate = (props) => {
                 }
                 //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
-                props.setDisplayBookPopupForUpdate(false);
                 props.getBookList();
+                props.setDisplayElementPopupForUpdate(false);
+                props.setDisplayElement(false);
+                props.setHideElement(false);
+
                 return response;
             }
         }
@@ -117,8 +120,11 @@ const BookPopupForUpdate = (props) => {
                 
                 //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
-                props.setDisplayBookPopupForUpdate(false);
                 props.getBookList();
+                props.setDisplayElementPopupForUpdate(false);
+                props.setDisplayElement(false);
+                props.setHideElement(false);
+
             }
         }   
     }
@@ -142,11 +148,11 @@ const BookPopupForUpdate = (props) => {
             genre_id: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
-        console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
+        //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
         if (initialTitle === updatedBookInfo.title) {
             updateBookNoTitleCheck(updatedBookInfo);
         } else {
-            console.log("entered else block");
+            //console.log("entered else block");
             updateBookWithTitleCheck(updatedBookInfo);
         }
     }
@@ -172,7 +178,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     function popupForUpdateCloseButtonHandler(event) {
-        props.setDisplayBookPopupForUpdate(false);
+        props.setDisplayElementPopupForUpdate(false);
     }
 
     function duplicateTitleUpdateWarningSubmitHandler(event) {

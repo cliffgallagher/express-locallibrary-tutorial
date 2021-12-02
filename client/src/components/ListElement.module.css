@@ -7,7 +7,7 @@
     margin: 1rem;
     background-color: #E0EFF1;
     color: #000000;
-    
+    cursor: default;
 }
 
 .listElement:hover {

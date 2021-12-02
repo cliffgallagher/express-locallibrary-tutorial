@@ -37,7 +37,7 @@ const ChosenBook = (props) => {
             )}
             {displayElementPopupForUpdate && (
                 <div>
-                    <BookPopupForUpdate bookID={props.bookID} authorID={props.authorID} genreID={props.genreID}/>
+                    <BookPopupForUpdate bookID={props.bookID} authorID={props.authorID} genreID={props.genreID} setDisplayElementPopupForUpdate={setDisplayElementPopupForUpdate} getBookList={props.getBookList} setDisplayElement={props.setDisplayElement} setHideElement={props.setHideElement}/>
                 </div>
             )}
         </div>

@@ -16,7 +16,7 @@ const GenreComponent = () => {
         const data = await response.json();
         //console.log('genreList in genre component: ' + JSON.stringify(data));
         setGenreArray(() => {
-            return data.map(element => <GenreListItem key={element.genre_id} genreID={element.genre_id} genreName={element.name} setDisplayGenrePopupForUpdate={setDisplayGenrePopupForUpdate} receiveGenreID={receiveGenreID} setDisplayGenrePopupForDelete={setDisplayGenrePopupForDelete}/>)
+            return data.map(element => <GenreListItem key={element.genre_id} genreID={element.genre_id} genreName={element.name} setDisplayGenrePopupForUpdate={setDisplayGenrePopupForUpdate} receiveGenreID={receiveGenreID} setDisplayGenrePopupForDelete={setDisplayGenrePopupForDelete} getGenreList={getGenreList}/>)
         });
     }
 

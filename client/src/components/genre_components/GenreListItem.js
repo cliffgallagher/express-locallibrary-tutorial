@@ -39,7 +39,7 @@ const GenreListItem = (props) => {
             {displayChosenElement && (
                 <div>
                     <GenreInfo genreName={props.genreName}/>
-                    <ChosenGenre genreName={props.genreName} setDisplayChosenElement={setDisplayChosenElement} setHideChosenElement={setHideChosenElement}/>
+                    <ChosenGenre genreName={props.genreName} setDisplayChosenElement={setDisplayChosenElement} setHideChosenElement={setHideChosenElement} genreID={props.genreID} getGenreList={props.getGenreList}/>
                 </div>
 
             )}

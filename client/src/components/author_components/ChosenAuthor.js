@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../ChosenElement.module.css';
+import AuthorInfo from './AuthorInfo.js';
 
 const ChosenAuthor = (props) => {
     
@@ -16,7 +17,7 @@ const ChosenAuthor = (props) => {
             
             <div className={styles.chosen_element_popup}>
                 <div className={styles.chosen_element_popup_inner}>
-                    <p>Chosen Author</p>
+                    <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>
                     <div id={styles.button_div}>
                         <button >Update</button>
                         <button >Delete</button>

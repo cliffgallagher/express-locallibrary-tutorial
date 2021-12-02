@@ -112,8 +112,8 @@ body('summary').isLength({
     min: 1,
     max: 250
 }).withMessage("Summary must be between 1 and 250 characters."),
-body('author_id').not().isEmpty().withMessage("Must pick an author."),
-body('genre_id').not().isEmpty().withMessage("Must pick a genre."),
+body('authorID').not().isEmpty().withMessage("Must pick an author."),
+body('genreID').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
     console.log("inside book/update/one: " + JSON.stringify(req.body));
@@ -124,10 +124,7 @@ function(req, res, next) {
     next()
 }, binarySearchController.search_for_existing_title, book_controller.book_update_post);
 
-router.post('/book/:book_id/update/two', function(req, res, next) {
-    //console.log("req.body in book/update/two: " + JSON.stringify(req.body));
-    next()
-},
+router.post('/book/:book_id/update/two',
 body('title').not().isEmpty().withMessage("Title cannot be blank"),
 body('isbn').custom((value) => {
     if (value.toLowerCase().search(/\D/) !== -1) {
@@ -150,9 +147,9 @@ body('authorID').not().isEmpty().withMessage("Must pick an author."),
 body('genreID').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
-    //console.log("inside book/update/two: " + JSON.stringify(req.body));
+    console.log("inside book/update/two: " + JSON.stringify(req.body));
     const errors = validationResult(req);
-    console.log("errors: " + JSON.stringify(errors));
+    //console.log("errors: " + JSON.stringify(errors));
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }

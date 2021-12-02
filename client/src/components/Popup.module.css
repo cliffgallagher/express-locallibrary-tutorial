@@ -35,3 +35,7 @@
 #right_most_button {
     margin-left: .5rem;
 }
+
+#popup_for_delete {
+    color: black;
+}

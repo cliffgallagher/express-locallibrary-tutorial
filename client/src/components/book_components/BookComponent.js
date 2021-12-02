@@ -55,29 +55,10 @@ const BookComponent = (props) => {
         getBookList();
     }, []);
 
-    return (
-        <div>
-            {displayBooks && !displayBookPopupForDelete && (
-                <div>
-                    <NewBook getBookListMyComponentNewToNewBook={getBookList} />
-                    <BookList bookArray={bookArray}/>
-                </div>
-            )}
-            {displayBookPopupForUpdate && (
-                <div>
-                    <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
-                    <BookList bookArray={bookArray}/>
-                </div>
-            )}
-            {displayBookPopupForDelete && (
-                <div>
-                    <NewBook getBookListMyComponentNewToNewBook={getBookList}/>
-                    <BookList bookArray={bookArray}/>
-                    <BookPopupForDelete getBookList={getBookList} bookID={bookIDForBookPopupForUpdate} authorID={authorIDForBookPopupForUpdate} genreID={genreIDForBookPopupForUpdate} setDisplayBookPopupForDelete={setDisplayBookPopupForDelete}/>
-                </div>
-            )}
-        </div>
-    )
+    return (<div>
+            <NewBook getBookListMyComponentNewToNewBook={getBookList} />
+            <BookList bookArray={bookArray}/>
+        </div>)
 }
 
 export default BookComponent;

@@ -25,7 +25,7 @@ const BookPopupForDelete = (props) => {
     }, []);
 
     function popupForDeleteCloseButtonHandler() {
-        props.setDisplayBookPopupForDelete(false);
+        props.setDisplayElementPopupForDelete(false);
     }
 
     async function deleteBookHandler(event) {
@@ -41,7 +41,8 @@ const BookPopupForDelete = (props) => {
             },
             body: JSON.stringify(bookIDAsObject)
         });
-        props.setDisplayBookPopupForDelete(false);
+        props.setDisplayElementPopupForDelete(false);
+        props.setDisplayElement(false);
         props.getBookList();
         //console.log("have received response from post in PopupForDelete");
         
@@ -51,7 +52,7 @@ const BookPopupForDelete = (props) => {
 
     return <div className={styles.popup}>
         <div className={styles.popup_inner}>
-            <form onSubmit={deleteBookHandler}>
+            <form onSubmit={deleteBookHandler} id={styles.popup_for_delete}>
                 <h1>Are you sure you want to delete this book?</h1>
                 <h3>Title: {titleToDelete}</h3>
                 <h3>Author: {authorToDelete}</h3>

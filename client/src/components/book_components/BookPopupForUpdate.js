@@ -143,9 +143,9 @@ const BookPopupForUpdate = (props) => {
         event.preventDefault();
         const updatedBookInfo = {
             title: updateFormTitleInput,
-            author_id: updateFormAuthorInput,
+            authorID: updateFormAuthorInput,
             isbn: updateFormISBNInput,
-            genre_id: updateFormGenreInput,
+            genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
         //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);

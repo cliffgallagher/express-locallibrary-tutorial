@@ -17,7 +17,7 @@ const ChosenBook = (props) => {
         setTimeout(() => {
             props.setDisplayElement(false);
             props.setHideElement(false);
-            console.log("i clicked the darn button");
+            //console.log("i clicked the darn button");
         }, 50);
     }
     
@@ -37,7 +37,7 @@ const ChosenBook = (props) => {
             )}
             {displayElementPopupForUpdate && (
                 <div>
-                    <BookPopupForUpdate />
+                    <BookPopupForUpdate bookID={props.bookID} authorID={props.authorID} genreID={props.genreID}/>
                 </div>
             )}
         </div>

@@ -39,7 +39,7 @@ const BookPopupForUpdate = (props) => {
     
     async function fetchBook() {
         try {
-            //console.log("bookID in BookPopupForUpdate: " + props.bookID);
+            console.log("bookID in BookPopupForUpdate: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/update`);
             const bodyOfResponse = await response.json();
             console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
@@ -124,7 +124,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     useEffect(async () => {
-        //console.log("book ID is: " + props.bookID);
+        console.log("inside useEffect");
         fetchBook();
         await getAuthorsFromDatabase();
         setUpdateFormAuthorInput(props.authorID);

@@ -32,26 +32,8 @@ const AuthorComponent = () => {
 
     return (
         <div>
-            {displayAuthors && !displayAuthorPopupForUpdate && (
-                <div>
-                    <NewAuthor getAuthorList={getAuthorList}/>
-                    <AuthorList authorArray={authorArray} />
-                </div>
-            )}
-            {displayAuthorPopupForUpdate && (
-                <div>
-                    <NewAuthor getAuthorList={getAuthorList}/>
-                    <AuthorList authorArray={authorArray}/>
-                    <AuthorPopupForUpdate setDisplayAuthorPopupForUpdate={setDisplayAuthorPopupForUpdate} authorID={authorIDForPopupForUpdate} getAuthorList={getAuthorList}/>
-                </div>
-            )}
-            {displayAuthorPopupForDelete && !displayAuthors && (
-                <div>
-                    <NewAuthor getAuthorList={getAuthorList}/>
-                    <AuthorList authorArray={authorArray}/>
-                    <AuthorPopupForDelete setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} authorID={authorIDForPopupForUpdate} getAuthorList={getAuthorList} setDisplayAuthors={setDisplayAuthors}/>
-                </div>
-            )}
+            <NewAuthor getAuthorList={getAuthorList}/>
+            <AuthorList authorArray={authorArray} />
         </div>
     )
 }

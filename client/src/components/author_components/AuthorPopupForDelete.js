@@ -56,8 +56,8 @@ const AuthorPopupForDelete = (props) => {
                 }
                 //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
-                props.setDisplayAuthorPopupForDelete(false);
-                props.setDisplayAuthors(true);
+                props.setDisplayElementPopupForDelete(false);
+                props.setDisplayChosenElement(false);
                 props.getAuthorList();
             }
 
@@ -72,20 +72,20 @@ const AuthorPopupForDelete = (props) => {
     }, []);
     
     function popupForDeleteCloseButtonHandler() {
-        props.setDisplayAuthorPopupForDelete(false)
-        props.setDisplayAuthors(true);
+        props.setDisplayElementPopupForDelete(false)
+        //props.setDisplayAuthors(true);
     }
 
     function foreignKeyWarningCloseButtonHandler(event) {
         event.preventDefault();
-        props.setDisplayAuthorPopupForDelete(false);
+        props.setDisplayElementPopupForDelete(false);
         setReceivedForeignKeyConstraintError(false);
-        props.setDisplayAuthors(true);
+        //props.setDisplayAuthors(true);
     }
     
     return <div className={styles.popup}>
-    <div className={styles.popup_inner}>
-        {!receivedForeignKeyConstraintError && <form onSubmit={deleteAuthorFormSubmitHandler}>
+    <div className={styles.popup_inner} id={styles.popup_for_delete}>
+        {!receivedForeignKeyConstraintError && <form onSubmit={deleteAuthorFormSubmitHandler} >
             <h1>Are you sure you want to delete this author?</h1>
             <h3>Name: {authorNameOnDeleteForm}</h3>
             <h3>Date of Birth: {authorBirthDateOnDeleteForm}</h3>

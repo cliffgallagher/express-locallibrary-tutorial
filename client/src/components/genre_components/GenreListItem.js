@@ -28,6 +28,7 @@ const GenreListItem = (props) => {
 
     function clickElementHandler() {
         setDisplayChosenElement(true);
+        setHideChosenElement(true);
     }
     
     return (
@@ -38,7 +39,7 @@ const GenreListItem = (props) => {
             {displayChosenElement && (
                 <div>
                     <GenreInfo genreName={props.genreName}/>
-                    <ChosenGenre />
+                    <ChosenGenre genreName={props.genreName} setDisplayChosenElement={setDisplayChosenElement} setHideChosenElement={setHideChosenElement}/>
                 </div>
 
             )}

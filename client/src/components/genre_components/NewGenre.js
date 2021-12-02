@@ -25,7 +25,7 @@ const NewGenre = (props) => {
             )}
             {!addNewGenre && addingDuplicateGenre && (
                 <div>
-                    <button onClick={addNewGenreButtonClickHandler}>Add New Genre</button>
+                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateGenre={setAddingDuplicateGenre}/>
                     <DuplicateGenreForm setAddingDuplicateGenre={setAddingDuplicateGenre}/>
                 </div>
             )}

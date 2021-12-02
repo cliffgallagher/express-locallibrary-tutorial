@@ -2,10 +2,17 @@ import React from "react";
 import styles from '../ChosenElement.module.css';
 import BookInfo from "./BookInfo";
 
-const ChosenElement = (props) => {
+const ChosenBook = (props) => {
     
-    function chosenElementCancelHandler() {
-        props.getBookList();
+    async function chosenElementCancelHandler() {
+
+        //props.setDisplayElement(false);
+        //props.setHideElement(false);
+        setTimeout(() => {
+            props.setDisplayElement(false);
+            props.setHideElement(false);
+            console.log("i clicked the darn button");
+        }, 50);
     }
     
     return (
@@ -22,4 +29,4 @@ const ChosenElement = (props) => {
     )
 }
 
-export default ChosenElement;
+export default ChosenBook;

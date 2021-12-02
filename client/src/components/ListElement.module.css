@@ -22,4 +22,5 @@
       background-color: #7DB4B5;
       color: #7DB4B5;
       box-shadow: none;
+      transition: .1s;
   }

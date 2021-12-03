@@ -46,7 +46,9 @@ const GenrePopupForDelete = (props) => {
             }
             //console.log("errorMessages: " + JSON.stringify(errorMessages));
         } else {
-            props.setDisplayGenrePopupForDelete(false);
+            props.setDisplayElementPopupForDelete(false);
+            props.setDisplayChosenElement(false);
+            props.setHideChosenElement(false);
             props.getGenreList();
         }
     }
@@ -56,21 +58,21 @@ const GenrePopupForDelete = (props) => {
     }, []);
     
     function genreDeleteFormCancelHandler() {
-        props.setDisplayGenrePopupForDelete(false);
+        props.setDisplayElementPopupForDelete(false);
     }
 
     function foreignKeyWarningCloseButtonHandler() {
         setReceivedForeignKeyConstraintError(false);
-        props.setDisplayGenrePopupForDelete(false);
+        props.setDisplayElementPopupForDelete(false);
     }
 
     return (
         <div className={styles.popup}>
-            <div className={styles.popup_inner}>
+            <div className={styles.popup_inner} id={styles.popup_for_delete}>
                 {!receivedForeignKeyConstraintError && (
                     <form onSubmit={genreDeleteFormSubmitHandler}>
-                        <p>Are you sure you wish to delete this genre?</p>
-                        <h1>{genreToDelete}</h1>
+                        <h1>Are you sure you wish to delete this genre?</h1>
+                        <h3>{genreToDelete}</h3>
                         <div id={styles.button_div}>
                             <button type='submit'>Delete</button><button onClick={genreDeleteFormCancelHandler} id={styles.right_most_button}>Cancel</button>
                         </div>

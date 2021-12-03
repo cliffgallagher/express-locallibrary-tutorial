@@ -61,7 +61,9 @@ const GenrePopupForUpdate = (props) => {
                 } else {
                     // figure out
                     //console.log("book inserted");
-                    props.setDisplayGenrePopupForUpdate(false);
+                    props.setDisplayElementPopupForUpdate(false);
+                    props.setDisplayChosenElement(false);
+                    props.setHideChosenElement(false);
                     props.getGenreList();
                 }
             }

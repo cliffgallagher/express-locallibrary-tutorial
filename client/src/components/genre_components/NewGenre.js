@@ -6,10 +6,15 @@ import styles from "../NewElement.module.css";
 const NewGenre = (props) => {
     const [addNewGenre, setAddNewGenre] = useState(false);
     const [addingDuplicateGenre, setAddingDuplicateGenre] = useState(false);
+    const [duplicateGenreName, setDuplicateGenreName] = useState();
 
     function addNewGenreButtonClickHandler() {
         setAddNewGenre(true);
     }
+
+    const receiveGenreName = (name) => {
+        setDuplicateGenreName(name);
+    };
     
     return (
         <div>
@@ -20,13 +25,13 @@ const NewGenre = (props) => {
             )}
             {addNewGenre && !addingDuplicateGenre && (
                 <div>
-                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateGenre={setAddingDuplicateGenre}/>
+                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateGenre={setAddingDuplicateGenre} sendGenreNameUp={receiveGenreName}/>
                 </div>
             )}
             {!addNewGenre && addingDuplicateGenre && (
                 <div>
-                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateGenre={setAddingDuplicateGenre}/>
-                    <DuplicateGenreForm setAddingDuplicateGenre={setAddingDuplicateGenre}/>
+                    <NewGenreForm setAddNewGenre={setAddNewGenre} getGenreList={props.getGenreList} setAddingDuplicateGenre={setAddingDuplicateGenre} />
+                    <DuplicateGenreForm setAddingDuplicateGenre={setAddingDuplicateGenre} duplicateGenreName={duplicateGenreName}/>
                 </div>
             )}
         </div>

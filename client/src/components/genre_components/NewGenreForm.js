@@ -9,12 +9,12 @@ const NewGenreForm = (props) => {
         setNewGenreFormValue(event.target.value);
     }
 
-    async function newGenreFormSubmitHandler(event) {
+    const newGenreFormSubmitHandler = async (event) => {
         event.preventDefault();
         const genreName = {
             genreName: newGenreFormNameValue
         }
-
+        props.sendGenreNameUp(genreName.genreName);
         const response = await fetch('catalog/genre/create', {
             method: 'POST',
             headers: {
@@ -33,6 +33,7 @@ const NewGenreForm = (props) => {
             props.getGenreList();
         }*/
         if (typeof data === 'object') {
+            console.log("data: " + JSON.stringify(data));
             if (data.hasOwnProperty('errors')) {
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);

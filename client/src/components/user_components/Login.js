@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './Login.module.css';
 
-const Login = () => {
+const Login = (props) => {
+    
+    function createNewUserClickHandler() {
+        //console.log("create new user");
+        props.setIsNewUser(true);
+    }
+    
     return (
         <div className={styles.popup}>
             <div className={styles.popup_inner}>
@@ -13,7 +19,7 @@ const Login = () => {
                         <button>Login</button>
                     </div>
                 </form>
-                <a>Create New User</a>
+                <a onClick={createNewUserClickHandler}>Create New User</a>
             </div>
         </div>
     )

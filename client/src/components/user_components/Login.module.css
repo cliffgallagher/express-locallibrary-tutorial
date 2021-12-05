@@ -55,6 +55,10 @@
     cursor: default;
 }
 
+.popup_inner a:hover {
+    color: #7DB4B5;
+}
+
 
 
 

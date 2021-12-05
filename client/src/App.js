@@ -6,14 +6,15 @@ import AuthorComponent from './components/author_components/AuthorComponent';
 import GenreComponent from './components/genre_components/GenreComponent';
 import NavbarHeader from './components/NavbarHeader';
 import NavbarOptions from './components/NavbarOptions';
-import Login from './components/Login.js';
+import Login from './components/user_components/Login.js';
+import NewUserSignup from './components/user_components/NewUserSignup.js';
 
 function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
   const [displayAuthorComponent, setDisplayAuthorComponent] = useState(false);
   const [displayGenreComponent, setDisplayGenreComponent] = useState(false);
   const [displayNavbar, setDisplayNavbar] = useState(false);
-  const [isNewUser, setIsNewUser] = useState(true);
+  const [isNewUser, setIsNewUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function displayBookComponentFunction() {
@@ -36,10 +37,13 @@ function App() {
 
   return (
     <div className={styles.appClass}>
-        {!isLoggedIn && isNewUser && (
+        {!isLoggedIn && !isNewUser && (
           <div>
-            <Login />
+            <Login setIsNewUser={setIsNewUser}/>
           </div>
+        )}
+        {!isLoggedIn && isNewUser && (
+          <NewUserSignup />
         )}
         {isLoggedIn && (
           <div>

@@ -12,8 +12,9 @@
 .popup_inner {
     position: relative;
     background-color: white;
+    box-sizing: border-box;
     border-radius: 5px;
-    
+    padding: 32px;
 }
 
 .popup_inner form {
@@ -24,6 +25,7 @@
 
 .popup_inner form label {
     grid-column: 1;
+    margin-bottom: .5rem;
 }
 
 #button_div {
@@ -31,6 +33,15 @@
     display: flex;
     justify-content: flex-end;
     grid-column-end: -1;
+}
+
+#button_div button {
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    color: #E0EFF1;
+    min-height: 44px;
+    margin-top: .5rem;
 }
 
 

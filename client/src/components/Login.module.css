@@ -1,0 +1,39 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup_inner {
+    position: relative;
+    background-color: white;
+    border-radius: 5px;
+    
+}
+
+.popup_inner form {
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    flex-direction: column;
+}
+
+.popup_inner form label {
+    grid-column: 1;
+}
+
+#button_div {
+    grid-row: 3;
+    display: flex;
+    justify-content: flex-end;
+    grid-column-end: -1;
+}
+
+
+
+
+

@@ -43,7 +43,7 @@ function App() {
           </div>
         )}
         {!isLoggedIn && isNewUser && (
-          <NewUserSignup />
+          <NewUserSignup setIsNewUser={setIsNewUser}/>
         )}
         {isLoggedIn && (
           <div>

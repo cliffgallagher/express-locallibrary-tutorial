@@ -13,6 +13,7 @@ const Login = () => {
                         <button>Login</button>
                     </div>
                 </form>
+                <a>Create New User</a>
             </div>
         </div>
     )

@@ -35,6 +35,10 @@ function App() {
     setDisplayGenreComponent(true);
   }
 
+  useEffect(() => {
+    setIsLoggedIn(true);
+  }, []);
+
   return (
     <div className={styles.appClass}>
         {!isLoggedIn && !isNewUser && (

@@ -4,6 +4,7 @@ import styles from './App.module.css';
 import BookComponent from './components/book_components/BookComponent';
 import AuthorComponent from './components/author_components/AuthorComponent';
 import GenreComponent from './components/genre_components/GenreComponent';
+import UserInfoComponent from './components/user_components/UserInfoComponent';
 import NavbarHeader from './components/NavbarHeader';
 import NavbarOptions from './components/NavbarOptions';
 import Login from './components/user_components/Login.js';
@@ -16,23 +17,34 @@ function App() {
   const [displayNavbar, setDisplayNavbar] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [displayUserInfoComponent, setDisplayUserInfoComponent] = useState(false);
 
   function displayBookComponentFunction() {
     setDisplayBookComponent(true);
     setDisplayAuthorComponent(false);
     setDisplayGenreComponent(false);
+    setDisplayUserInfoComponent(false);
   }
 
   function displayAuthorComponentFunction() {
     setDisplayBookComponent(false);
     setDisplayAuthorComponent(true);
     setDisplayGenreComponent(false);
+    setDisplayUserInfoComponent(false);
   }
 
   function displayGenreComponentFunction() {
     setDisplayBookComponent(false);
     setDisplayAuthorComponent(false);
     setDisplayGenreComponent(true);
+    setDisplayUserInfoComponent(false);
+  }
+
+  function displayUserInfoComponentFunction() {
+    setDisplayBookComponent(false);
+    setDisplayAuthorComponent(false);
+    setDisplayGenreComponent(false);
+    setDisplayUserInfoComponent(true);
   }
 
   useEffect(() => {
@@ -52,10 +64,11 @@ function App() {
         {isLoggedIn && (
           <div>
             <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
-            <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction}/>
-            {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && <BookComponent />}
-            {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && <AuthorComponent />}
-            {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && <GenreComponent />}
+            <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction} displayUserInfoComponentFunction={displayUserInfoComponentFunction}/>
+            {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent />}
+            {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent &&<AuthorComponent />}
+            {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && !displayUserInfoComponent &&<GenreComponent />}
+            {!displayBookComponent && !displayAuthorComponent && !displayGenreComponent && displayUserInfoComponent &&<UserInfoComponent/>}
           </div>
         )}
     </div>

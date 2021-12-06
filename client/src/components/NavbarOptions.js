@@ -17,12 +17,17 @@ const NavbarOptions = (props) => {
         props.setDisplayNavbar(false);
     }
 
-    function genressOptionClickHandler() {
+    function genresOptionClickHandler() {
         props.displayGenreComponentFunction();
         props.setDisplayNavbar(false);
     }
 
     function xbuttonClickHandler() {
+        props.setDisplayNavbar(false);
+    }
+
+    function userInfoOptionClickHandler() {
+        props.displayUserInfoComponentFunction();
         props.setDisplayNavbar(false);
     }
     
@@ -32,10 +37,10 @@ const NavbarOptions = (props) => {
             <ul>
                 <p onClick={booksOptionClickHandler}>Books</p>
                 <p onClick={authorsOptionClickHandler}>Authors</p>
-                <p onClick={genressOptionClickHandler}>Genres</p>
+                <p onClick={genresOptionClickHandler}>Genres</p>
             </ul>
             <div id={styles.bottom_div}>
-                <p>User Info</p>
+                <p onClick={userInfoOptionClickHandler}>User Info</p>
                 <p>Logout</p>
             </div>
         </div>

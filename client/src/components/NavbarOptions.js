@@ -34,6 +34,10 @@ const NavbarOptions = (props) => {
                 <p onClick={authorsOptionClickHandler}>Authors</p>
                 <p onClick={genressOptionClickHandler}>Genres</p>
             </ul>
+            <div id={styles.bottom_div}>
+                <p>User Info</p>
+                <p>Logout</p>
+            </div>
         </div>
     )
 }

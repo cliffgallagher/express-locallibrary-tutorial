@@ -35,3 +35,10 @@
     margin-left: .5rem;
     transition: 0.3s;
 }
+
+#bottom_div {
+    margin-top: auto;
+    margin-bottom: 2rem;
+    min-width: 65px;
+    align-self: center;
+}

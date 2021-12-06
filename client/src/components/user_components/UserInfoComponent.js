@@ -1,9 +1,10 @@
 import React from 'react';
+import UserInfoForm from './UserInfoForm';
 
 const UserInfoComponent = () => {
     return (
         <div>
-            <p>I am the UserInfo Component</p>
+            <UserInfoForm />
         </div>
     )
 }

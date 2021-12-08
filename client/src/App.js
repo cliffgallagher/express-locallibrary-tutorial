@@ -47,9 +47,9 @@ function App() {
     setDisplayUserInfoComponent(true);
   }
 
-  useEffect(() => {
+/*  useEffect(() => {
     setIsLoggedIn(true);
-  }, []);
+  }, []);*/
 
   return (
     <div className={styles.appClass}>

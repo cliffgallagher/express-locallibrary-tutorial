@@ -32,7 +32,7 @@ const NewUserSignup = (props) => {
         setNewUserConfirmedPassword(event.target.value);
     }
 
-    function newUserSignupSubmitHandler(event) {
+    async function newUserSignupSubmitHandler(event) {
         event.preventDefault();
         const newUserInfo = {
             newUserFirstName: newUserFirstName,
@@ -41,7 +41,17 @@ const NewUserSignup = (props) => {
             newUserPassword: newUserPassword,
             newUserConfirmedPassword: newUserConfirmedPassword
         }
-        console.log(newUserInfo);
+
+        const response = await fetch('users/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUserInfo)
+        })
+
+        
+        //console.log(newUserInfo);
         setNewUserFirstName('');
         setNewUserLastName('');
         setNewUserEmail('');

@@ -5,6 +5,7 @@ const NewUserSignup = (props) => {
     const [newUserFirstName, setNewUserFirstName] = useState();
     const [newUserLastName, setNewUserLastName] = useState();
     const [newUserEmail, setNewUserEmail] = useState();
+    const [newUserUsername, setNewUserUsername] = useState();
     const [newUserPassword, setNewUserPassword] = useState();
     const [newUserConfirmedPassword, setNewUserConfirmedPassword] = useState();
     
@@ -32,12 +33,17 @@ const NewUserSignup = (props) => {
         setNewUserConfirmedPassword(event.target.value);
     }
 
+    function newUserUsernameChangeHandler(event) {
+        setNewUserUsername(event.target.value);
+    }
+
     async function newUserSignupSubmitHandler(event) {
         event.preventDefault();
         const newUserInfo = {
             newUserFirstName: newUserFirstName,
             newUserLastName: newUserLastName,
             newUserEmail: newUserEmail,
+            newUserUsername: newUserUsername,
             newUserPassword: newUserPassword,
             newUserConfirmedPassword: newUserConfirmedPassword
         }
@@ -55,6 +61,7 @@ const NewUserSignup = (props) => {
         setNewUserFirstName('');
         setNewUserLastName('');
         setNewUserEmail('');
+        setNewUserUsername('');
         setNewUserPassword('');
         setNewUserConfirmedPassword('');
     }
@@ -67,6 +74,7 @@ const NewUserSignup = (props) => {
                     <label>First Name<input type='text' name='newuserFirstName' onChange={newUserFirstNameChangeHandler} value={newUserFirstName}/></label>
                     <label>Last Name<input type='text' name='newUserLastName' onChange={newUserLastNameChangeHandler} value={newUserLastName}/></label>
                     <label>Email<input type='text' name='newUserEmail' onChange={newUserEmailChangeHandler} value={newUserEmail}/></label>
+                    <label>Username<input type='text' name='newuserUsername' onChange={newUserUsernameChangeHandler} value={newUserUsername}/></label>
                     <label>Password<input type='text' name='newUserPassword' onChange={newUserPasswordChangeHandler} value={newUserPassword}/></label>
                     <label>Confirm Password<input type='text' name='newUserConfirmedPassword' onChange={newUserConfirmedPasswordChangeHandler} value={newUserConfirmedPassword}/></label>
                     <div id={styles.button_div}>

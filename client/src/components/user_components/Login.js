@@ -23,6 +23,8 @@ const Login = (props) => {
             },
             body: JSON.stringify(loginInfo)
         })
+        setLoginUsername('');
+        setLoginPassword('');
     }
 
     function loginUsernameChangeHandler(event) {

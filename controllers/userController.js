@@ -11,6 +11,7 @@ exports.user_create_post = async function(req, res) {
             first_name: req.body.newUserFirstName,
             last_name: req.body.newUserLastName,
             email: req.body.newUserEmail,
+            username: req.body.newUserUsername,
             password: hashedPassword
         })
         res.json(newUser);
@@ -19,4 +20,12 @@ exports.user_create_post = async function(req, res) {
         console.log(e)
     }
 
-} 
+}
+
+exports.user_login_post = async function(req, res) {
+    try {
+        console.log(JSON.stringify(req.body))
+    } catch {
+        console.log(e)
+    }
+}

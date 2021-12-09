@@ -56,7 +56,8 @@ const NewUserSignup = (props) => {
             body: JSON.stringify(newUserInfo)
         })
 
-        
+        const data = await response.json();
+        console.log('data in NewUserSignup: ' + JSON.stringify(data));
         //console.log(newUserInfo);
         setNewUserFirstName('');
         setNewUserLastName('');

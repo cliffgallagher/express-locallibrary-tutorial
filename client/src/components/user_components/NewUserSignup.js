@@ -68,6 +68,9 @@ const NewUserSignup = (props) => {
                 });
             } else {
                 setSuccessfulSignup(true);
+                setTimeout(() => {
+                    props.setIsNewUser(false);
+                }, 3000);
                 /*setNewUserFirstName('');
                 setNewUserLastName('');
                 setNewUserEmail('');

@@ -62,9 +62,13 @@
 .popup_inner ul {
     list-style-type: none;
     padding-left: 0px;
-    width: 100%;
+    max-width: 26rem;
     grid-column: 1;
     color: #680148;
+}
+
+.popup_inner ul li {
+    margin-bottom: .5rem;
 }
 
 

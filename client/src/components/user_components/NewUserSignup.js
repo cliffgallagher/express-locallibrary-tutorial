@@ -10,6 +10,7 @@ const NewUserSignup = (props) => {
     const [newUserConfirmedPassword, setNewUserConfirmedPassword] = useState();
     const [validationErrors, setValidationErrors] = useState();
     const [successfulSignup, setSuccessfulSignup] = useState(false);
+    const [passwordState, setPasswordState] = useState('password');
     
     function backToLoginClickHandler() {
         props.setIsNewUser(false);
@@ -86,6 +87,14 @@ const NewUserSignup = (props) => {
             }
         }
     }
+
+    function passwordCheckboxChangeHandler() {
+        if (passwordState === 'password') {
+            setPasswordState('text')
+        } else {
+            setPasswordState('password');
+        }
+    }
     
     return (
         <div className={styles.popup}>
@@ -98,10 +107,10 @@ const NewUserSignup = (props) => {
                     <label>Last Name<input type='text' name='newUserLastName' onChange={newUserLastNameChangeHandler} value={newUserLastName}/></label>
                     <label>Email<input type='text' name='newUserEmail' onChange={newUserEmailChangeHandler} value={newUserEmail}/></label>
                     <label>Username<input type='text' name='newuserUsername' onChange={newUserUsernameChangeHandler} value={newUserUsername}/></label>
-                    <label>Password<input type='text' name='newUserPassword' onChange={newUserPasswordChangeHandler} value={newUserPassword}/></label>
-                    <label>Confirm Password<input type='text' name='newUserConfirmedPassword' onChange={newUserConfirmedPasswordChangeHandler} value={newUserConfirmedPassword}/></label>
+                    <label>Password<input type={passwordState} name='newUserPassword' onChange={newUserPasswordChangeHandler} value={newUserPassword}/></label>
+                    <label>Confirm Password<input type={passwordState} name='newUserConfirmedPassword' onChange={newUserConfirmedPasswordChangeHandler} value={newUserConfirmedPassword}/></label>
                     <div id={styles.show_password_checkbox}>
-                        <input type="checkbox" id="showPasswordID" name="showPasswordName"/>
+                        <input type="checkbox" id="showPasswordID" name="showPasswordName" onChange={passwordCheckboxChangeHandler}/>
                         <label for="showPasswordID">Show Password</label>
                     </div>
                     <div id={styles.button_div}>

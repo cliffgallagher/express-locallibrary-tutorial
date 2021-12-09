@@ -11,6 +11,7 @@ const NewUserSignup = (props) => {
     const [validationErrors, setValidationErrors] = useState();
     const [successfulSignup, setSuccessfulSignup] = useState(false);
     const [passwordState, setPasswordState] = useState('password');
+    const [areValidationErrors, setAreValidationErrors] = useState(false);
     
     function backToLoginClickHandler() {
         props.setIsNewUser(false);
@@ -63,6 +64,7 @@ const NewUserSignup = (props) => {
         console.log('data in NewUserSignup: ' + JSON.stringify(data));
         if (typeof data === 'object') {
             if (data.hasOwnProperty('errors')) {
+                setAreValidationErrors(true);
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 let errorMessages = data.errors.map(element => element.msg);
                 if (errorMessages.indexOf('SequelizeUniqueConstraintError') >= 0) {
@@ -100,7 +102,7 @@ const NewUserSignup = (props) => {
         <div className={styles.popup}>
             {!successfulSignup &&
             <div className={styles.popup_inner}>
-                <ul>{validationErrors}</ul>
+                {areValidationErrors && <ul>{validationErrors}</ul>}
                 <p>Please enter your information below:</p>
                 <form className={styles.form} onSubmit={newUserSignupSubmitHandler}>
                     <label>First Name<input type='text' name='newuserFirstName' onChange={newUserFirstNameChangeHandler} value={newUserFirstName}/></label>

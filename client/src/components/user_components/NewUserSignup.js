@@ -8,6 +8,7 @@ const NewUserSignup = (props) => {
     const [newUserUsername, setNewUserUsername] = useState();
     const [newUserPassword, setNewUserPassword] = useState();
     const [newUserConfirmedPassword, setNewUserConfirmedPassword] = useState();
+    const [validationErrors, setValidationErrors] = useState();
     
     function backToLoginClickHandler() {
         props.setIsNewUser(false);
@@ -57,19 +58,28 @@ const NewUserSignup = (props) => {
         })
 
         const data = await response.json();
-        console.log('data in NewUserSignup: ' + JSON.stringify(data));
-        //console.log(newUserInfo);
-        setNewUserFirstName('');
-        setNewUserLastName('');
-        setNewUserEmail('');
-        setNewUserUsername('');
-        setNewUserPassword('');
-        setNewUserConfirmedPassword('');
+        if (typeof data === 'object') {
+            if (data.hasOwnProperty('errors')) {
+                //console.log("data.errors: " + JSON.stringify(data.errors));
+                const errorMessages = data.errors.map(element => element.msg);
+                setValidationErrors(() => {
+                    return errorMessages.map(element => <li>{element}</li>);
+                });
+            } else {
+                setNewUserFirstName('');
+                setNewUserLastName('');
+                setNewUserEmail('');
+                setNewUserUsername('');
+                setNewUserPassword('');
+                setNewUserConfirmedPassword('');
+            }
+        }
     }
     
     return (
         <div className={styles.popup}>
             <div className={styles.popup_inner}>
+                <ul>{validationErrors}</ul>
                 <p>Please enter your information below:</p>
                 <form className={styles.form} onSubmit={newUserSignupSubmitHandler}>
                     <label>First Name<input type='text' name='newuserFirstName' onChange={newUserFirstNameChangeHandler} value={newUserFirstName}/></label>

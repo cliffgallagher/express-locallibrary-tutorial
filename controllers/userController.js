@@ -2,8 +2,8 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const { nextTick } = require('async')
 
-exports.user_create_post = async function(req, res) {
-    console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
+exports.user_create_post = async function(req, res, next) {
+    //console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
 
     try {
         const salt = await bcrypt.genSalt()
@@ -18,8 +18,8 @@ exports.user_create_post = async function(req, res) {
         res.json(newUser);
 
     } catch(e) {
-        console.log(e)
-        next(e)
+        console.log('error in user_create_post: ' + e)
+        next(e);
     }
 
 }

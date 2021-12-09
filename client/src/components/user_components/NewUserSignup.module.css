@@ -34,10 +34,10 @@
 }
 
 #button_div {
-    grid-row: 3;
+
     display: flex;
     justify-content: flex-end;
-    grid-column-end: -1;
+
 }
 
 #button_div button {
@@ -63,9 +63,10 @@
 .popup_inner ul {
     list-style-type: none;
     padding-left: 0px;
-    max-width: 26rem;
-    grid-column: 1;
+    max-width: 25rem;
+
     color: #680148;
+   
 }
 
 .popup_inner ul li {

@@ -100,6 +100,10 @@ const NewUserSignup = (props) => {
                     <label>Username<input type='text' name='newuserUsername' onChange={newUserUsernameChangeHandler} value={newUserUsername}/></label>
                     <label>Password<input type='text' name='newUserPassword' onChange={newUserPasswordChangeHandler} value={newUserPassword}/></label>
                     <label>Confirm Password<input type='text' name='newUserConfirmedPassword' onChange={newUserConfirmedPasswordChangeHandler} value={newUserConfirmedPassword}/></label>
+                    <div id={styles.show_password_checkbox}>
+                        <input type="checkbox" id="showPasswordID" name="showPasswordName"/>
+                        <label for="showPasswordID">Show Password</label>
+                    </div>
                     <div id={styles.button_div}>
                         <button type='submit'>Create User</button>
                     </div>

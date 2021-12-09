@@ -73,7 +73,20 @@
     margin-bottom: .5rem;
 }
 
+#show_password_checkbox {
+    align-self: flex-start;
+    display: flex;
+    font-size: .75rem;
+    align-items: center;
+}
 
+#show_password_checkbox input {
+    margin-left: 0rem;
+}
+
+#show_password_checkbox label {
+    margin-bottom: 0rem;
+}
 
 
 

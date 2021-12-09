@@ -9,6 +9,7 @@ const NewUserSignup = (props) => {
     const [newUserPassword, setNewUserPassword] = useState();
     const [newUserConfirmedPassword, setNewUserConfirmedPassword] = useState();
     const [validationErrors, setValidationErrors] = useState();
+    const [successfulSignup, setSuccessfulSignup] = useState(false);
     
     function backToLoginClickHandler() {
         props.setIsNewUser(false);
@@ -66,18 +67,20 @@ const NewUserSignup = (props) => {
                     return errorMessages.map(element => <li>{element}</li>);
                 });
             } else {
-                setNewUserFirstName('');
+                setSuccessfulSignup(true);
+                /*setNewUserFirstName('');
                 setNewUserLastName('');
                 setNewUserEmail('');
                 setNewUserUsername('');
                 setNewUserPassword('');
-                setNewUserConfirmedPassword('');
+                setNewUserConfirmedPassword('');*/
             }
         }
     }
     
     return (
         <div className={styles.popup}>
+            {!successfulSignup &&
             <div className={styles.popup_inner}>
                 <ul>{validationErrors}</ul>
                 <p>Please enter your information below:</p>
@@ -93,7 +96,12 @@ const NewUserSignup = (props) => {
                     </div>
                 </form>
                 <a onClick={backToLoginClickHandler}>Back to Login</a>
-            </div>
+            </div>}
+            {successfulSignup && 
+               <div className={styles.popup_inner}>
+                   <p>New user created. Redirecting to login page...</p>
+               </div>  
+            }
         </div>
     )
 }

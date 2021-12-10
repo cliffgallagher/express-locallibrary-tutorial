@@ -59,6 +59,15 @@
     color: #680148;
 }
 
+.popup_inner ul {
+    list-style-type: none;
+    padding-left: 0px;
+    max-width: 25rem;
+    margin: 0rem;
+    color: #680148;
+    align-self: flex-start;
+}
+
 
 
 

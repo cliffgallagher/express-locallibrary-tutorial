@@ -61,7 +61,7 @@ const NewUserSignup = (props) => {
         })
 
         const data = await response.json();
-        console.log('data in NewUserSignup: ' + JSON.stringify(data));
+        //console.log('data in NewUserSignup: ' + JSON.stringify(data));
         if (typeof data === 'object') {
             if (data.hasOwnProperty('errors')) {
                 setAreValidationErrors(true);

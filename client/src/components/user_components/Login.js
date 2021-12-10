@@ -4,6 +4,8 @@ import styles from './Login.module.css';
 const Login = (props) => {
     const [loginUsername, setLoginUsername] = useState();
     const [loginPassword, setLoginPassword] = useState();
+    const [validationErrors, setValidationErrors] = useState();
+    const [areValidationErrors, setAreValidationErrors] = useState(false);
 
     function createNewUserClickHandler() {
         //console.log("create new user");
@@ -24,6 +26,18 @@ const Login = (props) => {
             body: JSON.stringify(loginInfo)
         })
         const data = await response.json();
+        if (typeof data === 'object') {
+            if (data.hasOwnProperty('errors')) {
+                setAreValidationErrors(true);
+                //console.log("data.errors: " + JSON.stringify(data.errors));
+                let errorMessages = data.errors.map(element => element.msg);
+                setValidationErrors(() => {
+                    return errorMessages.map(element => <li>{element}</li>);
+                });
+            } else {
+                // login is successful
+            }
+        }
         console.log('data: ' + JSON.stringify(data));
         setLoginUsername('');
         setLoginPassword('');
@@ -40,6 +54,7 @@ const Login = (props) => {
     return (
         <div className={styles.popup}>
             <div className={styles.popup_inner}>
+                {areValidationErrors && <ul>{validationErrors}</ul>}
                 <p>Please log in below</p>
                 <form className={styles.form} onSubmit={loginFormSubmitHandler}>
                     <label>Username<input type='text' name='newuserUsername' value={loginUsername} onChange={loginUsernameChangeHandler}/></label>

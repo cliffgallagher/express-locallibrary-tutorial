@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
-const { nextTick } = require('async')
+const jwt = require('jsonwebtoken')
 
 exports.user_create_post = async function(req, res, next) {
     //console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
@@ -24,17 +24,24 @@ exports.user_create_post = async function(req, res, next) {
 
 }
 
-exports.user_login_post = async function(req, res) {
+exports.user_login_post = async function(req, res, next) {
     try {
         //console.log('req.body in user_login_post: ' + JSON.stringify(req.body))
         const user = await User.findAll({
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
             where: {
                 username: req.body.loginUsername
             }
         })
-        //console.log('what returns from User.findAll: ' + JSON.stringify(user))
+        console.log('what returns from User.findAll: ' + JSON.stringify(user))
         if (await bcrypt.compare(req.body.loginPassword, user[0].password)) {
-            console.log('success')
+            //console.log('success')
+            //console.log('stringify user: ' + JSON.stringify(user[0]))
+            const stringifiedUser = JSON.stringify(user[0])
+            const accessToken = jwt.sign(stringifiedUser, process.env.ACCESS_TOKEN_SECRET)
+            res.json({...user[0].dataValues, accessToken: accessToken})
         }
     } catch(e) {
         console.log(e)

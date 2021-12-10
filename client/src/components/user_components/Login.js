@@ -23,6 +23,8 @@ const Login = (props) => {
             },
             body: JSON.stringify(loginInfo)
         })
+        const data = await response.json();
+        console.log('data: ' + JSON.stringify(data));
         setLoginUsername('');
         setLoginPassword('');
     }
@@ -41,7 +43,7 @@ const Login = (props) => {
                 <p>Please log in below</p>
                 <form className={styles.form} onSubmit={loginFormSubmitHandler}>
                     <label>Username<input type='text' name='newuserUsername' value={loginUsername} onChange={loginUsernameChangeHandler}/></label>
-                    <label>Password<input type='text' name='newUserPassword' value={loginPassword} onChange={loginPasswordChangeHandler}/></label>
+                    <label>Password<input type='password' name='newUserPassword' value={loginPassword} onChange={loginPasswordChangeHandler}/></label>
                     <div id={styles.button_div}>
                         <button type='submit'>Login</button>
                     </div>

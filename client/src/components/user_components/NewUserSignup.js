@@ -70,7 +70,6 @@ const NewUserSignup = (props) => {
                 if (errorMessages.indexOf('SequelizeUniqueConstraintError') >= 0) {
                     errorMessages.pop();
                     errorMessages.push('That username already exists in the database. Please pick a different username.')
-
                 }
                 setValidationErrors(() => {
                     return errorMessages.map(element => <li>{element}</li>);

@@ -36,6 +36,8 @@ const Login = (props) => {
                 });
             } else {
                 // login is successful
+                props.sendLoggedInUserToApp(data);
+                props.setIsLoggedIn(true);
             }
         }
         console.log('data: ' + JSON.stringify(data));

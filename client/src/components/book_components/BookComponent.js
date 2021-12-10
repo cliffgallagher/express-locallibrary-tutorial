@@ -21,7 +21,13 @@ const BookComponent = (props) => {
     }*/
 
     async function getBookList() {
-        const response = await fetch('catalog/enhanced');
+        //console.log('props.token in BookComponent' + props.token);
+        //const fakeToken = props.token.concat('x');
+        const response = await fetch('catalog/enhanced', {
+            headers: {
+                'Authorization': `Bearer ${props.token}`
+            }
+        });
         const body = await response.json();
         //console.log("body before setBookArray: " + JSON.stringify(body));
         setBookArray(() => {

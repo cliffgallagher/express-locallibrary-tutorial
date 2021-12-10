@@ -18,6 +18,7 @@ function App() {
   const [isNewUser, setIsNewUser] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayUserInfoComponent, setDisplayUserInfoComponent] = useState(false);
+  const [token, setToken] = useState();
 
   function displayBookComponentFunction() {
     setDisplayBookComponent(true);
@@ -47,6 +48,11 @@ function App() {
     setDisplayUserInfoComponent(true);
   }
 
+  function receiveLoggedInUserFromLogin(data) {
+    const token = data.accessToken;
+    setToken(token);
+  }
+
 /*  useEffect(() => {
     setIsLoggedIn(true);
   }, []);*/
@@ -55,7 +61,7 @@ function App() {
     <div className={styles.appClass}>
         {!isLoggedIn && !isNewUser && (
           <div>
-            <Login setIsNewUser={setIsNewUser}/>
+            <Login setIsNewUser={setIsNewUser} setIsLoggedIn={setIsLoggedIn} sendLoggedInUserToApp={receiveLoggedInUserFromLogin}/>
           </div>
         )}
         {!isLoggedIn && isNewUser && (
@@ -65,7 +71,7 @@ function App() {
           <div>
             <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
             <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction} displayUserInfoComponentFunction={displayUserInfoComponentFunction}/>
-            {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent />}
+            {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent token={token}/>}
             {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent &&<AuthorComponent />}
             {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && !displayUserInfoComponent &&<GenreComponent />}
             {!displayBookComponent && !displayAuthorComponent && !displayGenreComponent && displayUserInfoComponent &&<UserInfoComponent/>}

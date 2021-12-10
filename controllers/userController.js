@@ -37,15 +37,11 @@ exports.user_login_post = async function(req, res, next) {
         })
         //console.log('user: ' + JSON.stringify(user));
         if (user[0] && (await bcrypt.compare(req.body.loginPassword, user[0].password))) {
-
-                //console.log('success')
-                //console.log('stringify user: ' + JSON.stringify(user[0]))
                 const stringifiedUser = JSON.stringify(user[0])
                 const accessToken = jwt.sign(stringifiedUser, process.env.ACCESS_TOKEN_SECRET)
-                res.json({...user[0].dataValues, accessToken: accessToken})
-            
+                res.json({...user[0].dataValues, accessToken: accessToken})          
         } else {
-            //no matching user found
+            //no matching user/pwd pair found
             res.status(403).json({
                 errors: [{
                     msg: 'Incorrect username/password'

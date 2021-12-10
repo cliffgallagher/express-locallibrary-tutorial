@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { AiFillPropertySafety } from "react-icons/ai";
+import React, { useState, useEffect, useContext } from "react";
 import styles from '../ElementPopupForUpdate.module.css';
+import { AuthContext } from "../../context/auth-context";
 
 const AuthorPopupForUpdate = (props) => {
     const [authorUpdateFormFirstNameValue, setAuthorUpdateFormFirstNameValue] = useState();
@@ -11,10 +11,15 @@ const AuthorPopupForUpdate = (props) => {
     const [initialFirstName, setInitialFirstName] = useState();
     const [initialLastName, setInitialLastName] = useState();
     const [validationErrors, setValidationErrors] = useState();
+    const auth = useContext(AuthContext);
 
     async function getInitialValues() {
         try {
-            const response = await fetch(`catalog/author/${props.authorID}/update`);
+            const response = await fetch(`catalog/author/${props.authorID}/update`, {
+                headers: {
+                    'Authorization': `Bearer ${auth}`
+                }
+            });
             const data = await response.json();
             //console.log(data);
             setAuthorUpdateFormFirstNameValue(data[0].first_name);
@@ -34,7 +39,8 @@ const AuthorPopupForUpdate = (props) => {
             const response = await fetch(`catalog/author/${props.authorID}/update/one`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`
                 },
                 body: JSON.stringify(updatedAuthorData)
             });
@@ -78,7 +84,8 @@ const AuthorPopupForUpdate = (props) => {
             const response = await fetch(`catalog/author/${props.authorID}/update/two`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`
                 },
                 body: JSON.stringify(updatedAuthorData)
             });

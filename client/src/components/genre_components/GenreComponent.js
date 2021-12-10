@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import NewGenre from './NewGenre';
 import GenreList from './GenreList';
 import GenreListItem from './GenreListItem';
 import GenrePopupForUpdate from './GenrePopupForUpdate';
 import GenrePopupForDelete from './GenrePopupForDelete';
+import { AuthContext } from '../../context/auth-context';
 
 const GenreComponent = () => {
     const [genreArray, setGenreArray] = useState();
     const [displayGenrePopupForUpdate, setDisplayGenrePopupForUpdate] = useState(false);
     const [genreIDInPopups, setGenreIDInPopups] = useState();
     const [displayGenrePopupForDelete, setDisplayGenrePopupForDelete] = useState(false);
+    const auth = useContext(AuthContext);
 
     async function getGenreList() {
-        const response = await fetch('catalog/genres');
+        const response = await fetch('catalog/genres', {
+            headers: {
+                'Authorization': `Bearer ${auth}`
+            }
+        });
         const data = await response.json();
         //console.log('genreList in genre component: ' + JSON.stringify(data));
         setGenreArray(() => {

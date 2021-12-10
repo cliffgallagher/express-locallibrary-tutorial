@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from "../NewElementForm.module.css";
+import { AuthContext } from '../../context/auth-context';
 
 const NewAuthorForm = (props) => {
     const [newAuthorFirstName, setNewAuthorFirstName] = useState();
@@ -7,6 +8,7 @@ const NewAuthorForm = (props) => {
     const [newAuthorBirthDate, setNewAuthorBirthDate] = useState();
     const [newAuthorDeathDate, setNewAuthorDeathDate] = useState();
     const [validationErrors, setValidationErrors] = useState();
+    const auth = useContext(AuthContext);
 
     function newAuthorFormFirstNameChangeHandler(event) {
         setNewAuthorFirstName(event.target.value);
@@ -51,13 +53,14 @@ const NewAuthorForm = (props) => {
             const response = await fetch('catalog/author/create/one', {
                 method: 'post',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`
                 },
                 body: JSON.stringify(newAuthorFormInfo)
             });
             //props.hideNewAuthorForm();
             const data = await response.json();
-            console.log("data: " + JSON.stringify(data));
+            //console.log("data: " + JSON.stringify(data));
             //console.log("data: " + data);
             /*if (data === "author already present in database") {
                 //console.log("yes, author is in database");

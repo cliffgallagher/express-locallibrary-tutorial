@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from '../Popup.module.css';
+import { AuthContext } from '../../context/auth-context';
 
 const AuthorPopupForDelete = (props) => {
     const [authorNameOnDeleteForm, setAuthorNameOnDeleteForm] = useState();
@@ -7,11 +8,16 @@ const AuthorPopupForDelete = (props) => {
     const [authorDeathDateOnDeleteForm, setAuthorDeathDateOnDeleteForm] = useState();
     const [receivedForeignKeyConstraintError, setReceivedForeignKeyConstraintError] = useState(false);
     const [validationErrors, setValidationErrors] = useState();
+    const auth = useContext(AuthContext);
     
     async function getInitialValues() {
         //console.log('authorID in getInitialValues: ' + props.authorID);
         try {
-            const response = await fetch(`catalog/author/${props.authorID}/delete`);
+            const response = await fetch(`catalog/author/${props.authorID}/delete`, {
+                headers: {
+                    'Authorization': `Bearer ${auth}`
+                }
+            });
             const data = await response.json();
             //console.log(JSON.stringify(data));
             setAuthorNameOnDeleteForm(`${data[0].first_name} ${data[0].family_name}`);
@@ -29,7 +35,8 @@ const AuthorPopupForDelete = (props) => {
             const response = await fetch(`catalog/author/${props.authorID}/delete`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`
                 }
             });
             const data = await response.json();
@@ -62,7 +69,7 @@ const AuthorPopupForDelete = (props) => {
             }
 
         } catch(e) {
-            console.log("error in popupForDelete: " + e);
+            //console.log("error in popupForDelete: " + e);
         }
         
     }

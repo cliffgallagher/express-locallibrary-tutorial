@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import NewAuthor from './NewAuthor';
 import AuthorList from './AuthorList';
 import AuthorListElement from './AuthorListElement';
 import AuthorPopupForUpdate from './AuthorPopupForUpdate';
 import AuthorPopupForDelete from './AuthorPopupForDelete';
+import { AuthContext } from '../../context/auth-context';
 
 const AuthorComponent = () => {
     const [displayAuthors, setDisplayAuthors] = useState(true);
@@ -11,9 +12,14 @@ const AuthorComponent = () => {
     const [displayAuthorPopupForUpdate, setDisplayAuthorPopupForUpdate] = useState(false);
     const [authorIDForPopupForUpdate, setAuthorIDForPopupForUpdate] = useState();
     const [displayAuthorPopupForDelete, setDisplayAuthorPopupForDelete] = useState(false);
+    const auth = useContext(AuthContext);
 
     async function getAuthorList() {
-        const response = await fetch('catalog/authors');
+        const response = await fetch('catalog/authors', {
+            headers: {
+                'Authorization': `Bearer ${auth}`
+            }
+        });
         const data = await response.json();
         //console.log('author data: ' + JSON.stringify(data));
         setAuthorArray(() => {

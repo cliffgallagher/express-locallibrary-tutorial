@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from '../ElementPopupForUpdate.module.css';
+import { AuthContext } from "../../context/auth-context";
 
 const GenrePopupForUpdate = (props) => {
     const [genreUpdateFormNameValue, setGenreUpdateFormNameValue] = useState();
     const [updatedGenreNameAlreadyExists, setUpdatedGenreNameAlreadyExists] = useState(false);
     const [validationErrors, setValidationErrors] = useState();
+    const auth = useContext(AuthContext);
 
     async function getInitialGenreValues() {
         try {
-            const response = await fetch(`catalog/genre/${props.genreID}/update`);
+            const response = await fetch(`catalog/genre/${props.genreID}/update`, {
+                headers: {
+                    'Authorization': `Bearer ${auth}`
+                }
+            });
             const data = await response.json();
             setGenreUpdateFormNameValue(data[0].name);
         } catch(e) {
@@ -33,7 +39,8 @@ const GenrePopupForUpdate = (props) => {
             const response = await fetch(`catalog/genre/${props.genreID}/update`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`
                 },
                 body: JSON.stringify(genreName)
             });

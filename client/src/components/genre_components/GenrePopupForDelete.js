@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from '../Popup.module.css';
+import { AuthContext } from "../../context/auth-context";
 
 const GenrePopupForDelete = (props) => {
     const [genreToDelete, setGenreToDelete] = useState();
     const [receivedForeignKeyConstraintError, setReceivedForeignKeyConstraintError] = useState(false);
     const [validationErrors, setValidationErrors] = useState();
+    const auth = useContext(AuthContext);
 
     async function getGenreDeleteFormValues() {
         try {
-            const response = await fetch(`catalog/genre/${props.genreID}/delete`);
+            const response = await fetch(`catalog/genre/${props.genreID}/delete`, {
+                headers: {
+                    'Authorization': `Bearer ${auth}`
+                }
+            });
             const data = await response.json();
             //console.log(JSON.stringify(data));
             setGenreToDelete(data[0].name);
@@ -22,7 +28,8 @@ const GenrePopupForDelete = (props) => {
         const response = await fetch(`catalog/genre/${props.genreID}/delete`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
             }
         });
         const data = await response.json();

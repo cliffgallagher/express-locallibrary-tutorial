@@ -68,7 +68,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     const updateBookWithTitleCheck = async (updatedBookInfo) => {
-        console.log("entered updateBook");
+        //console.log("entered updateBook");
         const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
             method: 'POST',
             headers: {
@@ -163,7 +163,7 @@ const BookPopupForUpdate = (props) => {
             genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
-        console.log('updatedBookInfo: ' + JSON.stringify(updatedBookInfo));
+        //console.log('updatedBookInfo: ' + JSON.stringify(updatedBookInfo));
         //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
         if (initialTitle === updatedBookInfo.title) {
             updateBookNoTitleCheck(updatedBookInfo);

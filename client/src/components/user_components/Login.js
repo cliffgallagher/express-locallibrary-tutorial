@@ -41,8 +41,8 @@ const Login = (props) => {
             }
         }
         console.log('data: ' + JSON.stringify(data));
-        setLoginUsername('');
-        setLoginPassword('');
+        /*setLoginUsername('');
+        setLoginPassword('');*/
     }
 
     function loginUsernameChangeHandler(event) {

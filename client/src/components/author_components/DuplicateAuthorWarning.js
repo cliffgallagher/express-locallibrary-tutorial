@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from '../Popup.module.css';
+import { AuthContext } from "../../context/auth-context";
 
 const DuplicateAuthorWarning = (props) => {
-    console.log("info in dup author warning: " + JSON.stringify(props.newAuthorInfoForWarning));
+    const auth = useContext(AuthContext);
+    //console.log("info in dup author warning: " + JSON.stringify(props.newAuthorInfoForWarning));
 
     async function duplicateAuthorWarningSubmitHandler(event) {
         event.preventDefault();
         await fetch(`catalog/author/create/two`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
             },
             body: JSON.stringify(props.newAuthorInfoForWarning)
         });
         props.hideDuplicateAuthorWarning();
+        props.hideNewAuthorForm();
         props.getAuthorList();
     }
     

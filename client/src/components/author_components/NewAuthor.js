@@ -37,7 +37,7 @@ const NewAuthor = (props) => {
             {isAddingNewAuthor && <NewAuthorForm hideNewAuthorForm={hideNewAuthorForm} getAuthorList={props.getAuthorList} showDuplicateAuthorWarning={showDuplicateAuthorWarning} passNewAuthorInfo={passNewAuthorInfo}/>}
             {addingDuplicateAuthor && (
                 <div>
-                    {<DuplicateAuthorWarning hideDuplicateAuthorWarning={hideDuplicateAuthorWarning} showDuplicateAuthorWarning={showDuplicateAuthorWarning} newAuthorInfoForWarning={newAuthorInfoState} getAuthorList={props.getAuthorList}/>}
+                    {<DuplicateAuthorWarning hideDuplicateAuthorWarning={hideDuplicateAuthorWarning} showDuplicateAuthorWarning={showDuplicateAuthorWarning} newAuthorInfoForWarning={newAuthorInfoState} getAuthorList={props.getAuthorList} hideNewAuthorForm={hideNewAuthorForm}/>}
                 </div>
             )}
         </div>

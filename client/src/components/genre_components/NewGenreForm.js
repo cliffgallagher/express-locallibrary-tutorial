@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from '../NewElementForm.module.css';
+import { AuthContext } from "../../context/auth-context";
 
 const NewGenreForm = (props) => {
     const [newGenreFormNameValue, setNewGenreFormValue] = useState();
     const [validationErrors, setValidationErrors] = useState();
+    const auth = useContext(AuthContext);
 
     function newGenreFormNameChangeHandler(event) {
         setNewGenreFormValue(event.target.value);
@@ -18,7 +20,8 @@ const NewGenreForm = (props) => {
         const response = await fetch('catalog/genre/create', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
             },
             body: JSON.stringify(genreName)
         });

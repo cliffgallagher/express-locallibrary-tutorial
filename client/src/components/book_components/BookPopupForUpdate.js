@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 //import '../Popup.css';
 import styles from '../ElementPopupForUpdate.module.css';
+import {AuthContext} from '../../context/auth-context';
 
 const BookPopupForUpdate = (props) => {
     const [updateFormAuthorOptions, setUpdateFormAuthorOptions] = useState([]);
@@ -13,12 +14,16 @@ const BookPopupForUpdate = (props) => {
     const [displayDuplicateWarning, setDisplayDuplicateWarning] = useState(false);
     const [initialTitle, setInitialTitle] = useState();
     const [validationErrors, setValidationErrors] = useState();
-
+    const auth = useContext(AuthContext);
     //console.log("rendered BookPOpupForUpdate");
 
     const getAuthorsFromDatabase = async () => {
         try {
-            const authorsResponse = await fetch('/catalog/authors');
+            const authorsResponse = await fetch('/catalog/authors', {
+                headers: {
+                    'Authorization': `Bearer ${auth}`
+                }
+            });
             const authorObjectArray = await authorsResponse.json();
             //console.log('authorList in popup for update: ' + JSON.stringify(authorObjectArray));
             setUpdateFormAuthorOptions(() => {
@@ -30,7 +35,11 @@ const BookPopupForUpdate = (props) => {
     }
 
     const getGenresFromDatabase = async () => {
-        const genresResponse = await fetch('/catalog/genres');
+        const genresResponse = await fetch('/catalog/genres', {
+            headers: {
+                'Authorization': `Bearer ${auth}`
+            }
+        });
         const genreObjectArray = await genresResponse.json();
         setUpdateFormGenreOptions(() => {
             return [genreObjectArray.map(element => <option key={element.genre_id} value={element.genre_id}>{element.name}</option>)];
@@ -39,10 +48,14 @@ const BookPopupForUpdate = (props) => {
     
     async function fetchBook() {
         try {
-            console.log("bookID in BookPopupForUpdate: " + props.bookID);
-            const response = await fetch(`catalog/book/${props.bookID}/update`);
+            //console.log("bookID in BookPopupForUpdate: " + props.bookID);
+            const response = await fetch(`catalog/book/${props.bookID}/update`, {
+                headers: {
+                    'Authorization': `Bearer ${auth}`
+                }
+            });
             const bodyOfResponse = await response.json();
-            console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
+            //console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
             setUpdateFormSummaryInput(bodyOfResponse[0].summary);
@@ -59,7 +72,8 @@ const BookPopupForUpdate = (props) => {
         const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
             },
             body: JSON.stringify(updatedBookInfo)
         });
@@ -101,7 +115,8 @@ const BookPopupForUpdate = (props) => {
         const response = await fetch(`catalog/book/${props.bookID}/update/two`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
             },
             body: JSON.stringify(updatedBookInfo)
         });
@@ -130,7 +145,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     useEffect(async () => {
-        console.log("inside useEffect");
+        //console.log("inside useEffect");
         fetchBook();
         await getAuthorsFromDatabase();
         setUpdateFormAuthorInput(props.authorID);
@@ -148,6 +163,7 @@ const BookPopupForUpdate = (props) => {
             genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
+        console.log('updatedBookInfo: ' + JSON.stringify(updatedBookInfo));
         //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
         if (initialTitle === updatedBookInfo.title) {
             updateBookNoTitleCheck(updatedBookInfo);

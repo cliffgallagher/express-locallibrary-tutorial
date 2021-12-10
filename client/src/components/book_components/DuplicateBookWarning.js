@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from '../Popup.module.css';
+import {AuthContext} from '../../context/auth-context';
 
 const DuplicateBookWarning = (props) => {
+    const auth = useContext(AuthContext);
+
     //console.log("newBookInfo in DuplicateBookWarning: " + JSON.stringify(props.newBookInfo));
     async function duplicateBookWarningSubmitHandler(event) {
         event.preventDefault();
@@ -9,7 +12,8 @@ const DuplicateBookWarning = (props) => {
         await fetch('catalog/book/create/two', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
             },
             body: JSON.stringify(props.newBookInfo)
         });

@@ -9,6 +9,7 @@ import NavbarHeader from './components/NavbarHeader';
 import NavbarOptions from './components/NavbarOptions';
 import Login from './components/user_components/Login.js';
 import NewUserSignup from './components/user_components/NewUserSignup.js';
+import {AuthContext} from './context/auth-context';
 
 function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
@@ -69,12 +70,14 @@ function App() {
         )}
         {isLoggedIn && (
           <div>
-            <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
-            <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction} displayUserInfoComponentFunction={displayUserInfoComponentFunction}/>
-            {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent token={token}/>}
-            {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent &&<AuthorComponent />}
-            {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && !displayUserInfoComponent &&<GenreComponent />}
-            {!displayBookComponent && !displayAuthorComponent && !displayGenreComponent && displayUserInfoComponent &&<UserInfoComponent/>}
+            <AuthContext.Provider value={token}>
+              <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
+              <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction} displayUserInfoComponentFunction={displayUserInfoComponentFunction}/>
+              {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent/>}
+              {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent &&<AuthorComponent />}
+              {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && !displayUserInfoComponent &&<GenreComponent />}
+              {!displayBookComponent && !displayAuthorComponent && !displayGenreComponent && displayUserInfoComponent &&<UserInfoComponent/>}
+            </AuthContext.Provider>
           </div>
         )}
     </div>

@@ -178,9 +178,9 @@ exports.book_update_post = async function(req, res) {
         //console.log("book_id in POST bookController: " + req.params.book_id);
         const bookToUpdate = await Book.update({ 
             title: req.body.title,
-            author_id: req.body.author_id,
+            author_id: req.body.authorID,
             isbn: req.body.isbn,
-            genre_id: req.body.genre_id,
+            genre_id: req.body.genreID,
             summary: req.body.summary 
             }, {
             where: {

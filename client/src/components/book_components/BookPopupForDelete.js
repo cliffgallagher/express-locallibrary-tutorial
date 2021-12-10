@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from '../Popup.module.css';
+import {AuthContext} from '../../context/auth-context';
 
 const BookPopupForDelete = (props) => {
     const [titleToDelete, setTitleToDelete] = useState("");
     const [isbnToDelete, setISBNToDelete] = useState("");
     const [authorToDelete, setAuthorToDelete] = useState("");
+    const auth = useContext(AuthContext);
 
     async function fetchDeleteBookInfo() {
         try {
             //console.log("bookID in delete popup: " + props.bookID);
-            const response = await fetch(`catalog/book/${props.bookID}/delete`);
+            const response = await fetch(`catalog/book/${props.bookID}/delete`, {
+                headers: {
+                    'Authorization': `Bearer ${auth}`
+                }
+            });
             const bodyOfResponse = await response.json();
             //console.log("delete info in popup for delete: " + JSON.stringify(bodyOfResponse))
             setTitleToDelete(bodyOfResponse[0].title);
@@ -37,7 +43,8 @@ const BookPopupForDelete = (props) => {
         const response = await fetch(`catalog/book/${props.bookID}/delete`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
             },
             body: JSON.stringify(bookIDAsObject)
         });

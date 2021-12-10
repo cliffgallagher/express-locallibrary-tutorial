@@ -4,14 +4,14 @@ import BookInfo from './BookInfo';
 import ChosenBook from './ChosenBook';
 
 const BookListElement = (props) => {
-    console.log(`book list element ${props.title} rendered.`);
+    //console.log(`book list element ${props.title} rendered.`);
 
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
     const [hideElement, setHideElement] = useState(false);
     const [displayElement, setDisplayElement] = useState(false);
 
-    console.log('displayElement: ' + displayElement);
-    console.log('hideElement: ' + hideElement);
+    //console.log('displayElement: ' + displayElement);
+    //console.log('hideElement: ' + hideElement);
     //console.log("bookID in BookListElement: " + props.bookID);
 
     function showUpdateAndDeleteButtons() {

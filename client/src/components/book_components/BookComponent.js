@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import BookList from './BookList';
 import NewBook from './NewBook';
 import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
 import DisplaySelector from '../DisplaySelector';
+import {AuthContext} from '../../context/auth-context';
 
 const BookComponent = (props) => {
     const [displayBooks, setDisplayBooks] = useState(true);
@@ -15,6 +16,7 @@ const BookComponent = (props) => {
     const [authorIDForBookPopupForUpdate, setAuthorIDForBookPopupForUpdate] = useState();
     const [genreIDForBookPopupForUpdate, setGenreIDForBookPopupForUpdate] = useState();
     const [newBookInfo, setNewBookInfo] = useState();
+    const auth = useContext(AuthContext);
 
     /*function bookListElementMouseEnterHandler() {
         setDisplayBookPopupForUpdate(true);
@@ -25,7 +27,7 @@ const BookComponent = (props) => {
         //const fakeToken = props.token.concat('x');
         const response = await fetch('catalog/enhanced', {
             headers: {
-                'Authorization': `Bearer ${props.token}`
+                'Authorization': `Bearer ${auth}`
             }
         });
         const body = await response.json();

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from "../NewElementForm.module.css";
+import {AuthContext} from '../../context/auth-context';
 
 const NewBookForm = (props) => {
     const [authorOptions, setAuthorOptions] = useState([<option key='0' value='0'>Select Author</option>]);
@@ -10,9 +11,14 @@ const NewBookForm = (props) => {
     const [authorInput, setAuthorInput] = useState();
     const [genreInput, setGenreInput] = useState();
     const [validationErrors, setValidationErrors] = useState();
+    const auth = useContext(AuthContext);
 
     const getAuthorsFromDatabase = async () => {
-        const authorsResponse = await fetch('/catalog/authors');
+        const authorsResponse = await fetch('/catalog/authors', {
+            headers: {
+                'Authorization': `Bearer ${auth}`
+            }
+        });
         const authorObjectArray = await authorsResponse.json();
         //console.log(JSON.stringify(authorObjectArray));
         setAuthorOptions((prevState) => {
@@ -21,7 +27,11 @@ const NewBookForm = (props) => {
     }
 
     const getGenresFromDatabase = async () => {
-        const genresResponse = await fetch('/catalog/genres');
+        const genresResponse = await fetch('/catalog/genres', {
+            headers: {
+                'Authorization': `Bearer ${auth}`
+            }
+        });
         const genreObjectArray = await genresResponse.json();
         setGenreOptions((prevState) => {
             return [...prevState, genreObjectArray.map(element => <option key={element.genre_id} value={element.genre_id}>{element.name}</option>)];
@@ -55,7 +65,8 @@ const NewBookForm = (props) => {
             const response = await fetch('catalog/book/create/one', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${auth}`
                 },
                 body: JSON.stringify(userInputData)
             });

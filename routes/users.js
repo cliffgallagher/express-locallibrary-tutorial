@@ -37,6 +37,15 @@ function(req, res, next) {
   next()
 }, userController.user_create_post)
 
-router.post('/login', userController.user_login_post)
+router.post('/login', 
+body('loginUsername').not().isEmpty().withMessage('Please enter a username'),
+body('loginPassword').not().isEmpty().withMessage('Please enter a password'),
+function(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next()
+}, userController.user_login_post)
 
 module.exports = router;

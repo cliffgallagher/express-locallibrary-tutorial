@@ -35,10 +35,14 @@ exports.user_login_post = async function(req, res, next) {
                 username: req.body.loginUsername
             }
         })
+        //console.log('user[0]: ' + JSON.stringify(user[0]))
         //console.log('user: ' + JSON.stringify(user));
         if (user[0] && (await bcrypt.compare(req.body.loginPassword, user[0].password))) {
                 const stringifiedUser = JSON.stringify(user[0])
-                const accessToken = jwt.sign(stringifiedUser, process.env.ACCESS_TOKEN_SECRET)
+                const accessToken = jwt.sign({
+                    exp: Math.floor(Date.now() / 1000) + (60 * 30),
+                    data: stringifiedUser 
+                }, process.env.ACCESS_TOKEN_SECRET)
                 res.json({...user[0].dataValues, accessToken: accessToken})          
         } else {
             //no matching user/pwd pair found

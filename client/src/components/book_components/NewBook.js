@@ -44,12 +44,11 @@ const NewBook = (props) => {
 
     return <div>
         {!isAddingNewBook && <div id={styles.addElementButtonContainer}><button id={styles.addElementButton} onClick={newBookButtonHandler}>Add New Book</button></div>}
-        {isAddingNewBook && !addingDuplicate && (
+        {isAddingNewBook && (
             <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} isAddingDuplicate={isAddingDuplicate} newBookInfoToNewBook={newBookInfoToNewBook}/>
         )}
-        {isAddingNewBook && addingDuplicate && (
+        {addingDuplicate && (
             <div>
-                <NewBookForm onCancel={newBookCancelHandler} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} />
                 <DuplicateBookWarning newBookInfo={newBookInfo} isNotAddingDuplicate={isNotAddingDuplicate} getBookListNewBookToBookForm={props.getBookListMyComponentNewToNewBook} setIsAddingNewBook={setIsAddingNewBook}/>
             </div>
         )}

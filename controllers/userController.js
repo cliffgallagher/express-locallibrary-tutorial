@@ -39,7 +39,7 @@ exports.user_login_post = async function(req, res, next) {
         //console.log('user: ' + JSON.stringify(user));
         if (user[0] && (await bcrypt.compare(req.body.loginPassword, user[0].password))) {
                 const stringifiedUser = JSON.stringify(user[0])
-                const logoutTime = Math.floor(Date.now() / 1000) + (60 * 20)
+                const logoutTime = Math.floor(Date.now() / 1000) + (60 * .1)
                 const accessToken = jwt.sign({
                     exp: logoutTime,
                     data: stringifiedUser 

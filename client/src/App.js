@@ -20,6 +20,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayUserInfoComponent, setDisplayUserInfoComponent] = useState(false);
   const [token, setToken] = useState();
+  const [timeUntilLogout, setTimeUntilLogout] = useState();
 
   function displayBookComponentFunction() {
     setDisplayBookComponent(true);
@@ -57,7 +58,9 @@ function App() {
     let timeInMilliseconds = Date.now();
     const timeInSeconds = Math.floor(timeInMilliseconds/1000);
     const secondsUntilLogout = data.logoutTime - timeInSeconds;
-    console.log('secondsUntilLogout: ' + secondsUntilLogout);
+    const millisecondsUntilLogout = secondsUntilLogout * 1000;
+    console.log('millisecondsUntilLogout: ' + millisecondsUntilLogout);
+    setTimeUntilLogout(millisecondsUntilLogout - 1);
   }
 
 /*  useEffect(() => {
@@ -87,6 +90,12 @@ function App() {
   useEffect(() => {
     checkForTokenInCookies();
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoggedIn(false)
+    }, timeUntilLogout)
+  }, [timeUntilLogout])
 
   return (
     <div className={styles.appClass}>

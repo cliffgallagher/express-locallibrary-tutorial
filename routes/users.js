@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/cool/', function(req, res, next) {
-  res.send('You\'re so cool!');
+  res.json('You\'re so cool!');
 });
 
 router.post('/create',
@@ -47,5 +47,10 @@ function(req, res, next) {
   }
   next()
 }, userController.user_login_post)
+
+router.post('/checkcookies', (req, res, next) => {
+  console.log('entered cookie_login route')
+  next()
+}, userController.user_login_cookies)
 
 module.exports = router;

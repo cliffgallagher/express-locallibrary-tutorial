@@ -58,6 +58,30 @@ function App() {
     setIsLoggedIn(true);
   }, []);*/
 
+  async function checkForTokenInCookies() {
+    /*if (token in cookie matches token in context) {
+      setIsLoggedIn(true);
+    }*/
+    console.log('checkForTokenInCookies ran');
+    const response = await fetch('users/checkcookies', {
+      method: 'POST'
+    });
+    const data = await response.json();
+    console.log('fetch in App: ' + JSON.stringify(data));
+    if (data.hasOwnProperty('success')) {
+      setToken(data.token);
+      setIsLoggedIn(true);
+    };
+    /*const data = await response.json();
+    if (data.hasOwnProperty('success')) {
+      setIsLoggedIn(true);
+    }*/
+  }
+
+  useEffect(() => {
+    checkForTokenInCookies();
+  }, [])
+
   return (
     <div className={styles.appClass}>
         {!isLoggedIn && !isNewUser && (

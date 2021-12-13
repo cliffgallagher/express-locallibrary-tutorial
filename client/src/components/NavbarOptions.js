@@ -30,6 +30,13 @@ const NavbarOptions = (props) => {
         props.displayUserInfoComponentFunction();
         props.setDisplayNavbar(false);
     }
+
+    async function logoutOptionClickHandler() {
+        const response = await fetch('users/logout', {
+            method: 'POST'
+        });
+        props.setIsLoggedIn(false);
+    }
     
     return (
         <div className={`${styles.navbar} ${props.displayNavbar && styles.displayNavbar}`}>
@@ -40,8 +47,7 @@ const NavbarOptions = (props) => {
                 <p onClick={genresOptionClickHandler}>Genres</p>
             </ul>
             <div id={styles.bottom_div}>
-                <p onClick={userInfoOptionClickHandler}>User Info</p>
-                <p>Logout</p>
+                <p onClick={logoutOptionClickHandler}>Logout</p>
             </div>
         </div>
     )

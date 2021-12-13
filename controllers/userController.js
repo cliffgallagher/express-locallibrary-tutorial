@@ -73,3 +73,8 @@ exports.user_login_cookies = async function(req, res, next) {
         console.log(e)
     }
 }
+
+exports.user_logout_post = async function(req, res, next) {
+    res.cookie('token', null)
+    res.json('logged out')
+}

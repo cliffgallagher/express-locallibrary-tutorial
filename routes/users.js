@@ -53,4 +53,6 @@ router.post('/checkcookies', (req, res, next) => {
   next()
 }, userController.user_login_cookies)
 
+router.post('/logout', userController.user_logout_post)
+
 module.exports = router;

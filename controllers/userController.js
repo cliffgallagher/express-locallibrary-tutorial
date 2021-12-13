@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { token } = require('morgan')
 
 exports.user_create_post = async function(req, res, next) {
     //console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
@@ -43,6 +44,7 @@ exports.user_login_post = async function(req, res, next) {
                     exp: Math.floor(Date.now() / 1000) + (60 * 30),
                     data: stringifiedUser 
                 }, process.env.ACCESS_TOKEN_SECRET)
+                res.cookie('token', accessToken, {httpOnly: true, sameSite: "Lax"})
                 res.json({...user[0].dataValues, accessToken: accessToken})          
         } else {
             //no matching user/pwd pair found

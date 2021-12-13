@@ -36,6 +36,7 @@ const NavbarOptions = (props) => {
             method: 'POST'
         });
         props.setIsLoggedIn(false);
+        props.setDisplayNavbar(false);
     }
     
     return (

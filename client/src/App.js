@@ -52,6 +52,12 @@ function App() {
   function receiveLoggedInUserFromLogin(data) {
     const token = data.accessToken;
     setToken(token);
+    //console.log('logoutTime: ' + data.logoutTime);
+    //console.log('seconds until logout: ' + Number(data.logoutTime) - (Date.now()));
+    let timeInMilliseconds = Date.now();
+    const timeInSeconds = Math.floor(timeInMilliseconds/1000);
+    const secondsUntilLogout = data.logoutTime - timeInSeconds;
+    console.log('secondsUntilLogout: ' + secondsUntilLogout);
   }
 
 /*  useEffect(() => {

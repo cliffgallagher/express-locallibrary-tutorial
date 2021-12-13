@@ -40,7 +40,7 @@ const Login = (props) => {
                 props.setIsLoggedIn(true);
             }
         }
-        console.log('data: ' + JSON.stringify(data));
+        console.log('data: in loginFormSubmitHandler' + JSON.stringify(data));
         /*setLoginUsername('');
         setLoginPassword('');*/
     }

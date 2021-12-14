@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaSearch } from 'react-icons/fa';
 import styles from './NavbarHeader.module.css';
 
 const NavbarHeader = (props) => {
@@ -13,6 +13,7 @@ const NavbarHeader = (props) => {
         <>
             <div className={styles.navbarHeader}>
                 <FaBars className={styles.fabars} size={`1.5rem`} onClick={openNav}/>
+                <FaSearch className={styles.fasearch} size={'1.5rem'}/>
             </div>
         </>
 

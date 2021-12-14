@@ -17,6 +17,11 @@ const BookPopupForDelete = (props) => {
                 }
             });
             const bodyOfResponse = await response.json();
+            if (typeof bodyOfResponse === 'object') {
+                if (bodyOfResponse.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
+            }
             //console.log("delete info in popup for delete: " + JSON.stringify(bodyOfResponse))
             setTitleToDelete(bodyOfResponse[0].title);
             setISBNToDelete(bodyOfResponse[0].isbn);

@@ -20,6 +20,11 @@ const NewBookForm = (props) => {
             }
         });
         const authorObjectArray = await authorsResponse.json();
+        if (typeof authorObjectArray === 'object') {
+            if (authorObjectArray.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
+        }
         //console.log(JSON.stringify(authorObjectArray));
         setAuthorOptions((prevState) => {
             return [...prevState, authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
@@ -33,6 +38,11 @@ const NewBookForm = (props) => {
             }
         });
         const genreObjectArray = await genresResponse.json();
+        if (typeof genreObjectArray === 'object') {
+            if (genreObjectArray.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
+        }
         setGenreOptions((prevState) => {
             return [...prevState, genreObjectArray.map(element => <option key={element.genre_id} value={element.genre_id}>{element.name}</option>)];
         })   
@@ -90,6 +100,9 @@ const NewBookForm = (props) => {
         }*/
 
         if (typeof data === 'object') {
+            if (data.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
             if (data.hasOwnProperty('errors')) {
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);

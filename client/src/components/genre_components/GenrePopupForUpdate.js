@@ -16,6 +16,11 @@ const GenrePopupForUpdate = (props) => {
                 }
             });
             const data = await response.json();
+            if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
+            }
             setGenreUpdateFormNameValue(data[0].name);
         } catch(e) {
             console.log(e);
@@ -53,6 +58,9 @@ const GenrePopupForUpdate = (props) => {
                 props.getGenreList();
             }*/
             if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
                 if (data.hasOwnProperty('errors')) {
                     //console.log("data.errors: " + JSON.stringify(data.errors));
                     const errorMessages = data.errors.map(element => element.msg);

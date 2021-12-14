@@ -8,7 +8,7 @@ const DuplicateAuthorWarning = (props) => {
 
     async function duplicateAuthorWarningSubmitHandler(event) {
         event.preventDefault();
-        await fetch(`catalog/author/create/two`, {
+        const response = await fetch(`catalog/author/create/two`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,6 +16,12 @@ const DuplicateAuthorWarning = (props) => {
             },
             body: JSON.stringify(props.newAuthorInfoForWarning)
         });
+        const data = response.json();
+        if (typeof data === 'object') {
+            if (data.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
+        }
         props.hideDuplicateAuthorWarning();
         props.hideNewAuthorForm();
         props.getAuthorList();

@@ -36,6 +36,9 @@ const NewGenreForm = (props) => {
             props.getGenreList();
         }*/
         if (typeof data === 'object') {
+            if (data.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
             console.log("data: " + JSON.stringify(data));
             if (data.hasOwnProperty('errors')) {
                 //console.log("data.errors: " + JSON.stringify(data.errors));

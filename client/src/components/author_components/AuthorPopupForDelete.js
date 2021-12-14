@@ -19,6 +19,11 @@ const AuthorPopupForDelete = (props) => {
                 }
             });
             const data = await response.json();
+            if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
+            }
             //console.log(JSON.stringify(data));
             setAuthorNameOnDeleteForm(`${data[0].first_name} ${data[0].family_name}`);
             setAuthorBirthDateOnDeleteForm(`${data[0].date_of_birth.slice(5, 7)}-${data[0].date_of_birth.slice(8, 10)}-${data[0].date_of_birth.slice(0, 4)}`);
@@ -49,7 +54,9 @@ const AuthorPopupForDelete = (props) => {
                 props.displayAuthorPopupForDelete(false);
                 props.getAuthorList();
             }*/
-
+            if (data.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
             if (data.hasOwnProperty('errors')) {
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);

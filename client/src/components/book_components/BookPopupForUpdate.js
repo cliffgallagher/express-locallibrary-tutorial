@@ -25,6 +25,11 @@ const BookPopupForUpdate = (props) => {
                 }
             });
             const authorObjectArray = await authorsResponse.json();
+            if (typeof authorObjectArray === 'object') {
+                if (authorObjectArray.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
+            }
             //console.log('authorList in popup for update: ' + JSON.stringify(authorObjectArray));
             setUpdateFormAuthorOptions(() => {
                 return [authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
@@ -41,6 +46,11 @@ const BookPopupForUpdate = (props) => {
             }
         });
         const genreObjectArray = await genresResponse.json();
+        if (typeof genreObjectArray === 'object') {
+            if (genreObjectArray.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
+        }
         setUpdateFormGenreOptions(() => {
             return [genreObjectArray.map(element => <option key={element.genre_id} value={element.genre_id}>{element.name}</option>)];
         })   
@@ -55,6 +65,11 @@ const BookPopupForUpdate = (props) => {
                 }
             });
             const bodyOfResponse = await response.json();
+            if (typeof bodyOfResponse === 'object') {
+                if (bodyOfResponse.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
+            }
             //console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
@@ -87,6 +102,9 @@ const BookPopupForUpdate = (props) => {
             return response;
         }*/
         if (typeof data === 'object') {
+            if (data.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
             if (data.hasOwnProperty('errors')) {
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);
@@ -126,6 +144,9 @@ const BookPopupForUpdate = (props) => {
         return response; */
         const data = await response.json();
         if (typeof data === 'object') {
+            if (data.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
             if (data.hasOwnProperty('errors')) {
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);

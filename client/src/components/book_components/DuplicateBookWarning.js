@@ -9,7 +9,7 @@ const DuplicateBookWarning = (props) => {
     async function duplicateBookWarningSubmitHandler(event) {
         event.preventDefault();
         //console.log("submit handler: " + props.newBookInfo);
-        await fetch('catalog/book/create/two', {
+        const response = await fetch('catalog/book/create/two', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,6 +17,12 @@ const DuplicateBookWarning = (props) => {
             },
             body: JSON.stringify(props.newBookInfo)
         });
+        const data = response.json();
+        if (typeof data === 'object') {
+            if (data.name === 'TokenExpiredError') {
+                auth.setIsLoggedIn(false);
+            }
+        }
         props.isNotAddingDuplicate();
         props.getBookListNewBookToBookForm();
         props.setIsAddingNewBook(false);

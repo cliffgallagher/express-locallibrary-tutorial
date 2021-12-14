@@ -69,6 +69,9 @@ const NewAuthorForm = (props) => {
                 //console.log("author not already in list, was inserted");
                 props.getAuthorList();*/
                 if (typeof data === 'object') {
+                    if (data.name === 'TokenExpiredError') {
+                        auth.setIsLoggedIn(false);
+                    }
                     if (data.hasOwnProperty('errors')) {
                         //console.log("data.errors: " + JSON.stringify(data.errors));
                         const errorMessages = data.errors.map(element => element.msg);

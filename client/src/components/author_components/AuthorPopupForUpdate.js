@@ -21,6 +21,11 @@ const AuthorPopupForUpdate = (props) => {
                 }
             });
             const data = await response.json();
+            if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
+            }
             //console.log(data);
             setAuthorUpdateFormFirstNameValue(data[0].first_name);
             setAuthorUpdateFormFamilyNameValue(data[0].family_name);
@@ -53,6 +58,9 @@ const AuthorPopupForUpdate = (props) => {
                 props.getAuthorList();
             }*/
             if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
                 if (data.hasOwnProperty('errors')) {
                     //console.log("data.errors: " + JSON.stringify(data.errors));
                     const errorMessages = data.errors.map(element => element.msg);
@@ -92,6 +100,9 @@ const AuthorPopupForUpdate = (props) => {
 
             const data = await response.json();
             if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
                 if (data.hasOwnProperty('errors')) {
                     //console.log("data.errors: " + JSON.stringify(data.errors));
                     const errorMessages = data.errors.map(element => element.msg);

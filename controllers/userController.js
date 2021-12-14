@@ -40,7 +40,7 @@ exports.user_login_post = async function(req, res, next) {
         if (user[0] && (await bcrypt.compare(req.body.loginPassword, user[0].password))) {
                 const stringifiedUser = JSON.stringify(user[0])
                 const accessToken = jwt.sign({
-                    exp: Math.floor(Date.now() / 1000) + (60 * .1),
+                    exp: Math.floor(Date.now() / 1000) + (60 * .4),
                     data: stringifiedUser 
                 }, process.env.ACCESS_TOKEN_SECRET)
                 res.cookie('token', accessToken, {httpOnly: true, sameSite: "Lax"})

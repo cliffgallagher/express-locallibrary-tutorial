@@ -11,7 +11,11 @@ const NavbarHeader = (props) => {
     }
 
     function faSearchClickHandler() {
-        setShowSearchBar(true);
+        if (!showSearchBar) {
+            setShowSearchBar(true);
+        } else {
+            setShowSearchBar(false);
+        }
     }
     
     return (

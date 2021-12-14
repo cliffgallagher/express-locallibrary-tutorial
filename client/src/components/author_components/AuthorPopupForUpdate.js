@@ -17,7 +17,7 @@ const AuthorPopupForUpdate = (props) => {
         try {
             const response = await fetch(`catalog/author/${props.authorID}/update`, {
                 headers: {
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const data = await response.json();
@@ -40,7 +40,7 @@ const AuthorPopupForUpdate = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 },
                 body: JSON.stringify(updatedAuthorData)
             });
@@ -85,7 +85,7 @@ const AuthorPopupForUpdate = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 },
                 body: JSON.stringify(updatedAuthorData)
             });

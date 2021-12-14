@@ -12,7 +12,7 @@ const GenrePopupForDelete = (props) => {
         try {
             const response = await fetch(`catalog/genre/${props.genreID}/delete`, {
                 headers: {
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const data = await response.json();
@@ -29,7 +29,7 @@ const GenrePopupForDelete = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             }
         });
         const data = await response.json();

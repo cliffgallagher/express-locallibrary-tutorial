@@ -40,7 +40,7 @@ exports.user_login_post = async function(req, res, next) {
         if (user[0] && (await bcrypt.compare(req.body.loginPassword, user[0].password))) {
                 const stringifiedUser = JSON.stringify(user[0])
                 const accessToken = jwt.sign({
-                    exp: Math.floor(Date.now() / 1000) + (60 * 20),
+                    exp: Math.floor(Date.now() / 1000) + (60 * .1),
                     data: stringifiedUser 
                 }, process.env.ACCESS_TOKEN_SECRET)
                 res.cookie('token', accessToken, {httpOnly: true, sameSite: "Lax"})
@@ -63,7 +63,7 @@ exports.user_login_cookies = async function(req, res, next) {
     try {
         console.log('req.cookies in user_login_post: ' + JSON.stringify(req.cookies))
         if (req.cookies.token) {
-            console.log('tokennn: ' + req.cookies.token)
+            //console.log('tokennn: ' + req.cookies.token)
             jwt.verify(req.cookies.token, process.env.ACCESS_TOKEN_SECRET)
             return res.status(200).json({success: 'success', token: req.cookies.token})
         } else {

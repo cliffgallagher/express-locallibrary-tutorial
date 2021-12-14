@@ -21,7 +21,7 @@ const BookPopupForUpdate = (props) => {
         try {
             const authorsResponse = await fetch('/catalog/authors', {
                 headers: {
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const authorObjectArray = await authorsResponse.json();
@@ -37,7 +37,7 @@ const BookPopupForUpdate = (props) => {
     const getGenresFromDatabase = async () => {
         const genresResponse = await fetch('/catalog/genres', {
             headers: {
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             }
         });
         const genreObjectArray = await genresResponse.json();
@@ -51,7 +51,7 @@ const BookPopupForUpdate = (props) => {
             //console.log("bookID in BookPopupForUpdate: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/update`, {
                 headers: {
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const bodyOfResponse = await response.json();
@@ -73,7 +73,7 @@ const BookPopupForUpdate = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             },
             body: JSON.stringify(updatedBookInfo)
         });

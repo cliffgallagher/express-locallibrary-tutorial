@@ -94,7 +94,10 @@ function App() {
         )}
         {isLoggedIn && (
           <div>
-            <AuthContext.Provider value={token}>
+            <AuthContext.Provider value={{
+                token: token,
+                setIsLoggedIn: setIsLoggedIn
+                }}>
               <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
               <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction} displayUserInfoComponentFunction={displayUserInfoComponentFunction} setIsLoggedIn={setIsLoggedIn}/>
               {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent/>}

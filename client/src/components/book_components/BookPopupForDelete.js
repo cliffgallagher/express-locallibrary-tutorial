@@ -13,7 +13,7 @@ const BookPopupForDelete = (props) => {
             //console.log("bookID in delete popup: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/delete`, {
                 headers: {
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const bodyOfResponse = await response.json();
@@ -44,7 +44,7 @@ const BookPopupForDelete = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             },
             body: JSON.stringify(bookIDAsObject)
         });

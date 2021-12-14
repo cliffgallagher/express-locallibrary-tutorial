@@ -21,7 +21,7 @@ const NewGenreForm = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             },
             body: JSON.stringify(genreName)
         });

@@ -66,16 +66,28 @@ app.use((error, req, res, next) => {
   }
 })
 
+app.use((error, req, res, next) => {
+  //console.log("entered constraint error handler");
+  if (error.name === 'TokenExpiredError') {
+    //console.log('correctly entered unique constraint block')
+    res.json(error);
+  } else {
+    //console.log('i am in next block wrongly')
+    next(error)
+  }
+})
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  //console.log("entered dfault error handler")
+  console.log("entered dfault error handler")
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
+  res.end()
 });
 
 /*const port = process.env.PORT || 3001;

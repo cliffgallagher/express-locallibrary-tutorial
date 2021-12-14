@@ -12,7 +12,7 @@ const GenrePopupForUpdate = (props) => {
         try {
             const response = await fetch(`catalog/genre/${props.genreID}/update`, {
                 headers: {
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const data = await response.json();
@@ -40,7 +40,7 @@ const GenrePopupForUpdate = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 },
                 body: JSON.stringify(genreName)
             });

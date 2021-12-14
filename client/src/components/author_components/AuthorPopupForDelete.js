@@ -15,7 +15,7 @@ const AuthorPopupForDelete = (props) => {
         try {
             const response = await fetch(`catalog/author/${props.authorID}/delete`, {
                 headers: {
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const data = await response.json();
@@ -36,7 +36,7 @@ const AuthorPopupForDelete = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 }
             });
             const data = await response.json();

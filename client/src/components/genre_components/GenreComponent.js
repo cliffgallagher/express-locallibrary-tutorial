@@ -16,7 +16,7 @@ const GenreComponent = () => {
     async function getGenreList() {
         const response = await fetch('catalog/genres', {
             headers: {
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             }
         });
         const data = await response.json();

@@ -27,7 +27,7 @@ const BookComponent = (props) => {
         //const fakeToken = props.token.concat('x');
         const response = await fetch('catalog/enhanced', {
             headers: {
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             }
         });
         const body = await response.json();

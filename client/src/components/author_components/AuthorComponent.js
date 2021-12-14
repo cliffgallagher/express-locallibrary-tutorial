@@ -15,17 +15,26 @@ const AuthorComponent = () => {
     const auth = useContext(AuthContext);
 
     async function getAuthorList() {
-        const response = await fetch('catalog/authors', {
-            headers: {
-                'Authorization': `Bearer ${auth}`
+        try {
+            const response = await fetch('catalog/authors', {
+                headers: {
+                    'Authorization': `Bearer ${auth.token}`
+                }
+            });
+            const data = await response.json();
+            console.log('author data: ' + JSON.stringify(data));
+            if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
+                }
             }
-        });
-        const data = await response.json();
-        //console.log('author data: ' + JSON.stringify(data));
-        setAuthorArray(() => {
-            return data.map(element => <AuthorListElement key={element.author_id} authorID={element.author_id} firstName={element.first_name} familyName={element.family_name} dateOfBirth={element.date_of_birth} dateOfDeath={element.date_of_death} setDisplayAuthorPopupForUpdate={setDisplayAuthorPopupForUpdate} authorInfoToAuthorComponent={authorInfoToAuthorComponent} setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} setDisplayAuthors={setDisplayAuthors} getAuthorList={getAuthorList}/>);
-        });
-        
+            //console.log(typeof data);
+            setAuthorArray(() => {
+                return data.map(element => <AuthorListElement key={element.author_id} authorID={element.author_id} firstName={element.first_name} familyName={element.family_name} dateOfBirth={element.date_of_birth} dateOfDeath={element.date_of_death} setDisplayAuthorPopupForUpdate={setDisplayAuthorPopupForUpdate} authorInfoToAuthorComponent={authorInfoToAuthorComponent} setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} setDisplayAuthors={setDisplayAuthors} getAuthorList={getAuthorList}/>);
+            });
+        } catch(e) {
+            console.log('error: ' + e);
+        }        
     }
 
     useEffect(() => {

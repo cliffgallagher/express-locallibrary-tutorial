@@ -16,7 +16,7 @@ const NewBookForm = (props) => {
     const getAuthorsFromDatabase = async () => {
         const authorsResponse = await fetch('/catalog/authors', {
             headers: {
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             }
         });
         const authorObjectArray = await authorsResponse.json();
@@ -29,7 +29,7 @@ const NewBookForm = (props) => {
     const getGenresFromDatabase = async () => {
         const genresResponse = await fetch('/catalog/genres', {
             headers: {
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             }
         });
         const genreObjectArray = await genresResponse.json();
@@ -66,7 +66,7 @@ const NewBookForm = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${auth}`
+                    'Authorization': `Bearer ${auth.token}`
                 },
                 body: JSON.stringify(userInputData)
             });

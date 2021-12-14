@@ -20,6 +20,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayUserInfoComponent, setDisplayUserInfoComponent] = useState(false);
   const [token, setToken] = useState();
+  const [searchText, setSearchText] = useState();
+
+  console.log('searchText: ' + searchText);
 
   function displayBookComponentFunction() {
     setDisplayBookComponent(true);
@@ -96,9 +99,10 @@ function App() {
           <div>
             <AuthContext.Provider value={{
                 token: token,
-                setIsLoggedIn: setIsLoggedIn
+                setIsLoggedIn: setIsLoggedIn,
+                searchText: searchText
                 }}>
-              <NavbarHeader setDisplayNavbar={setDisplayNavbar}/>
+              <NavbarHeader setDisplayNavbar={setDisplayNavbar} setSearchText={setSearchText}/>
               <NavbarOptions displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} displayBookComponentFunction={displayBookComponentFunction} displayAuthorComponentFunction={displayAuthorComponentFunction} displayGenreComponentFunction={displayGenreComponentFunction} displayUserInfoComponentFunction={displayUserInfoComponentFunction} setIsLoggedIn={setIsLoggedIn}/>
               {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent/>}
               {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent &&<AuthorComponent />}

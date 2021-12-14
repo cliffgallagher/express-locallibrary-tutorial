@@ -17,6 +17,10 @@ const NavbarHeader = (props) => {
             setShowSearchBar(false);
         }
     }
+
+    function searchTextInputChangeHandler(event) {
+        props.setSearchText(event.target.value);
+    }
     
     return (
         <>
@@ -24,7 +28,7 @@ const NavbarHeader = (props) => {
                 <FaBars className={styles.fabars} size={`1.5rem`} onClick={openNav}/>
                 <div className={styles.searchDiv}>
                     <form>
-                        <input className={`${styles.searchDiv_form_input} ${showSearchBar && styles.show_search_bar}`} type='text' name='searchTextInput'/>
+                        <input className={`${styles.searchDiv_form_input} ${showSearchBar && styles.show_search_bar}`} type='text' name='searchTextInput' onChange={searchTextInputChangeHandler}/>
                     </form>
                     <FaSearch id={styles.fasearchIcon} size={'1.5rem'} onClick={faSearchClickHandler}/>
                 </div>

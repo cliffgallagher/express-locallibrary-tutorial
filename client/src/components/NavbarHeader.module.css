@@ -12,7 +12,25 @@
     margin-left: .5rem;
 }
 
-.fasearch {
-    color: #E0EFF1;
+.searchDiv {
+    display: flex;
+    box-sizing: border-box;
     margin-right: 1rem;
+}
+
+.searchDiv_form_input {
+    width: 0rem;
+    padding: 0;
+    border: 0;
+}
+
+.searchDiv_form_input.show_search_bar {
+    width: auto;
+    padding: 2px;
+    border: 0;
+}
+
+#fasearchIcon {
+    color: #E0EFF1;
+    margin-left: .25rem;
 }

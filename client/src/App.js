@@ -22,7 +22,7 @@ function App() {
   const [token, setToken] = useState();
   const [searchText, setSearchText] = useState();
 
-  console.log('searchText: ' + searchText);
+  //console.log('searchText: ' + searchText);
 
   function displayBookComponentFunction() {
     setDisplayBookComponent(true);

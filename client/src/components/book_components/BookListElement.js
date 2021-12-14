@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from '../ListElement.module.css';
 import BookInfo from './BookInfo';
 import ChosenBook from './ChosenBook';
+import { AuthContext } from '../../context/auth-context';
 
 const BookListElement = (props) => {
     //console.log(`book list element ${props.title} rendered.`);
+    const auth = useContext(AuthContext);
+    //console.log('rendereing BookListElement');
+    
 
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
     const [hideElement, setHideElement] = useState(false);
@@ -40,6 +44,22 @@ const BookListElement = (props) => {
             //console.log("i clicked the element");
         }
     }
+
+    function searchForSearchText() {
+        if (auth.searchText) {
+            if (auth.searchText.length > 0 ) {
+                if (!(props.title.includes(auth.searchText)) && !(props.author.includes(auth.searchText)) && !(props.isbn.includes(auth.searchText)) && !(props.genreName.includes(auth.searchText)) && !(props.summary.includes(auth.searchText))) {
+                    //console.log('no such text found');
+                    setHideElement(true);
+                }
+            }
+        }
+    }
+
+
+    searchForSearchText();
+
+
 
     return (
         <div className={`${styles.listElement} ${hideElement ? styles.hideElement : ''}`} onClick={clickElementHandler}>

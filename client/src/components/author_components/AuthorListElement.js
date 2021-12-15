@@ -43,7 +43,11 @@ const AuthorListElement = (props) => {
         if (auth.searchText) {
             if (auth.searchText.length > 0 ) {
                 const searchTextToLowerCase = auth.searchText.toLowerCase();
-                if (!(props.firstName.toLowerCase().includes(searchTextToLowerCase)) && !(props.familyName.toLowerCase().includes(searchTextToLowerCase))) {
+                const searchableBirthDate = props.dateOfBirth.slice(5,10) + '-' + props.dateOfBirth.slice(0,4);
+                /*console.log('searchable dob: ' + searchableBirthDate);
+                console.log('dateOfBirth: ' + props.dateOfBirth);
+                console.log('searchTextToLowerCase: ' + searchTextToLowerCase);*/
+                if (!(props.firstName.toLowerCase().includes(searchTextToLowerCase)) && !(props.familyName.toLowerCase().includes(searchTextToLowerCase)) && !(searchableBirthDate.includes(searchTextToLowerCase))) {
                     //console.log('no such text found');
                     setHideChosenElement(true);
                     setGridOrder(true);

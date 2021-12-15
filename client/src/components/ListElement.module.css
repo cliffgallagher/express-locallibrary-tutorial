@@ -24,3 +24,7 @@
       box-shadow: none;
       transition: .1s;
   }
+
+  .listElement.hideElement.gridOrder {
+      order: 1;
+  }

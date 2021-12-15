@@ -13,6 +13,7 @@ const BookListElement = (props) => {
     const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
     const [hideElement, setHideElement] = useState(false);
     const [displayElement, setDisplayElement] = useState(false);
+    const [gridOrder, setGridOrder] = useState(false);
 
     //console.log('displayElement: ' + displayElement);
     //console.log('hideElement: ' + hideElement);
@@ -51,14 +52,18 @@ const BookListElement = (props) => {
                 if (!(props.title.includes(auth.searchText)) && !(props.author.includes(auth.searchText)) && !(props.isbn.includes(auth.searchText)) && !(props.genreName.includes(auth.searchText)) && !(props.summary.includes(auth.searchText))) {
                     //console.log('no such text found');
                     setHideElement(true);
+                    setGridOrder(true);
                 } else {
                     setHideElement(false);
+                    setGridOrder(false);
                 }
             } else {
                 setHideElement(false);
+                setGridOrder(false);
             }
         } else {
             setHideElement(false);
+            setGridOrder(false);
         }
     }
 
@@ -70,7 +75,7 @@ const BookListElement = (props) => {
 
 
     return (
-        <div className={`${styles.listElement} ${hideElement ? styles.hideElement : ''}`} onClick={clickElementHandler}>
+        <div className={`${styles.listElement} ${hideElement ? styles.hideElement : ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler}>
             {!displayElement && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>

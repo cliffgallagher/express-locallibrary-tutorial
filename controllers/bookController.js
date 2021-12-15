@@ -89,9 +89,15 @@ exports.book_create_post = async function(req, res) {
     } catch (e) {
         console.log(e);
     }*/
-    const [results, metadata] = await sequelize.query("INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)", {
+
+    // this works but doesn't use prepared statements
+    /*const [results, metadata] = await sequelize.query("INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)", {
         replacements: ['Test Title', 34, '', 47, 'This is my summary']
-    })
+    })*/
+
+    //This worked to prepare a statement
+    /*const [results, metadata] = await sequelize.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")*/
+
     console.log('results in book_create_post: ' + JSON.stringify(results))
 };
 

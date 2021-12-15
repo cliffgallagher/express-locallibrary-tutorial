@@ -104,10 +104,8 @@ exports.book_create_post = async function(req, res) {
     const [results6, metadata6] = await sequelize.query("SET @d = '47'")
     const [results7, metadata7] = await sequelize.query("SET @e = 'This is my other summary'")
 
-    const [results2, metadata2] = await sequelize.query("EXECUTE stmt1 USING @a, @b, @c, @d, @e", {
-        replacements: ['Test Title', '34', '', '47', 'This is a test summary']
-    })
-    console.log('results in book_create_post: ' + JSON.stringify(results))
+    const [results2, metadata2] = await sequelize.query("EXECUTE stmt1 USING @a, @b, @c, @d, @e")
+    console.log('results in book_create_post: ' + JSON.stringify(results2))
 };
 
 // Display book delete form on GET.

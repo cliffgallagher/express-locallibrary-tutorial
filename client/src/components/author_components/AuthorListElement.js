@@ -44,13 +44,24 @@ const AuthorListElement = (props) => {
             if (auth.searchText.length > 0 ) {
                 const searchTextToLowerCase = auth.searchText.toLowerCase();
                 const searchableBirthDate = props.dateOfBirth.slice(5,10) + '-' + props.dateOfBirth.slice(0,4);
-                /*console.log('searchable dob: ' + searchableBirthDate);
+                /*console.log('name: ' + props.firstName + ', dateOfDeath: ' + props.dateOfDeath);
+                console.log('searchable dob: ' + searchableBirthDate);
                 console.log('dateOfBirth: ' + props.dateOfBirth);
                 console.log('searchTextToLowerCase: ' + searchTextToLowerCase);*/
                 if (!(props.firstName.toLowerCase().includes(searchTextToLowerCase)) && !(props.familyName.toLowerCase().includes(searchTextToLowerCase)) && !(searchableBirthDate.includes(searchTextToLowerCase))) {
-                    //console.log('no such text found');
-                    setHideChosenElement(true);
-                    setGridOrder(true);
+                    if (props.dateOfDeath) {
+                        const searchableDeathDate = props.dateOfDeath.slice(5,10) + '-' + props.dateOfDeath.slice(0,4);
+                        if (!(searchableDeathDate.includes(searchTextToLowerCase))) {
+                            setHideChosenElement(true);
+                            setGridOrder(true);
+                        } else {
+                            setHideChosenElement(false);
+                            setGridOrder(false); 
+                        }
+                    } else {
+                        setHideChosenElement(true);
+                        setGridOrder(true);
+                    }
                 } else {
                     setHideChosenElement(false);
                     setGridOrder(false);

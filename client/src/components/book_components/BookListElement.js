@@ -57,6 +57,8 @@ const BookListElement = (props) => {
             } else {
                 setHideElement(false);
             }
+        } else {
+            setHideElement(false);
         }
     }
 

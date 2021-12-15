@@ -38,7 +38,7 @@ const DuplicateBookWarning = (props) => {
         <div className={styles.popup}>
             <div className={styles.popup_inner}>
                 <form onSubmit={duplicateBookWarningSubmitHandler}>
-                    <p>A book with title {props.newBookInfo.title} already exists in the database. Insert anyway?</p>
+                    <p>A book with title '{props.newBookInfo.title}' already exists in the database. Insert anyway?</p>
                     <div id={styles.button_div}>
                         <button type="submit">Yes</button>
                         <button id={styles.right_most_button} onClick={duplicateBookWarningCloseHandler}>No</button>

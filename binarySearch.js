@@ -10,12 +10,12 @@ function binarySearchBookObjects(arr, l, r, x, k){
     console.log("k is: " + k);*/
     if (r >= l) {
         let mid = l + Math.floor((r - l) / 2);
-        /*console.log("mid: " + mid);
+        console.log("mid: " + mid);
         console.log("arr[mid] is: " + arr[mid]);
-        console.log("arr[mid][k] is: " + arr[mid][`${k}`]);*/
+        console.log("arr[mid][k] is: " + arr[mid][`${k}`]);
         // If the element is present at the middle
         // itself
-        if (arr[mid][k] === x)
+        if (arr[mid][k].toLowerCase() === x.toLowerCase())
             return mid;
  
         // If element is smaller than mid, then
@@ -51,12 +51,12 @@ function binarySearchAuthorObjects(arr, l, r, lastNameSearchingFor, firstNameSea
         // If the element is present at the middle
         // itself
         //&& ((arr[mid]["first_name"] === firstNameSearchingFor))
-        if (arr[mid].family_name === lastNameSearchingFor) {
+        if (arr[mid].family_name.toLowerCase() === lastNameSearchingFor.toLowerCase()) {
             //console.log("entered equals block");
-            if (arr[mid]["first_name"] === firstNameSearchingFor) {
+            if (arr[mid]["first_name"].toLowerCase() === firstNameSearchingFor.toLowerCase()) {
                 return mid;
             } else {
-                if (arr[mid]["first_name"] > firstNameSearchingFor) {
+                if (arr[mid]["first_name"].toLowerCase() > firstNameSearchingFor.toLowerCase()) {
                     return binarySearchAuthorObjects(arr, l, mid - 1, lastNameSearchingFor, firstNameSearchingFor);
                 } else {
                     return binarySearchAuthorObjects(arr, mid + 1, r, lastNameSearchingFor, firstNameSearchingFor);
@@ -66,7 +66,7 @@ function binarySearchAuthorObjects(arr, l, r, lastNameSearchingFor, firstNameSea
 
         // If element is smaller than mid, then
         // it can only be present in left subarray
-        if (arr[mid]["family_name"] > lastNameSearchingFor) {
+        if (arr[mid]["family_name"].toLowerCase() > lastNameSearchingFor.toLowerCase()) {
             //console.log("entered greater than block");
             return binarySearchAuthorObjects(arr, l, mid - 1, lastNameSearchingFor, firstNameSearchingFor);
         }

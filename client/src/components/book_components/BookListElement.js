@@ -51,13 +51,19 @@ const BookListElement = (props) => {
                 if (!(props.title.includes(auth.searchText)) && !(props.author.includes(auth.searchText)) && !(props.isbn.includes(auth.searchText)) && !(props.genreName.includes(auth.searchText)) && !(props.summary.includes(auth.searchText))) {
                     //console.log('no such text found');
                     setHideElement(true);
+                } else {
+                    setHideElement(false);
                 }
+            } else {
+                setHideElement(false);
             }
         }
     }
 
+    useEffect(() => {
+        searchForSearchText();
+    }, [auth.searchText]);
 
-    searchForSearchText();
 
 
 

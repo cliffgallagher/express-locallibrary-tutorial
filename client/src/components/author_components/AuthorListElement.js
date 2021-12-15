@@ -44,11 +44,16 @@ const AuthorListElement = (props) => {
             if (auth.searchText.length > 0 ) {
                 const searchTextToLowerCase = auth.searchText.toLowerCase();
                 const searchableBirthDate = props.dateOfBirth.slice(5,10) + '-' + props.dateOfBirth.slice(0,4);
-                /*console.log('name: ' + props.firstName + ', dateOfDeath: ' + props.dateOfDeath);
+                const authorFullName = props.firstName + ' ' + props.familyName;
+                const authorLastNameCommaFirst = props.familyName + ', ' + props.firstName;
+                const authorLastNameFirst = props.familyName + ' ' + props.firstName;
+                /*console.log('authorLastNameCommaFirst: ' + authorLastNameCommaFirst);
+                console.log('authorFullName: ' + authorFullName);
+                console.log('name: ' + props.firstName + ', dateOfDeath: ' + props.dateOfDeath);
                 console.log('searchable dob: ' + searchableBirthDate);
                 console.log('dateOfBirth: ' + props.dateOfBirth);
                 console.log('searchTextToLowerCase: ' + searchTextToLowerCase);*/
-                if (!(props.firstName.toLowerCase().includes(searchTextToLowerCase)) && !(props.familyName.toLowerCase().includes(searchTextToLowerCase)) && !(searchableBirthDate.includes(searchTextToLowerCase))) {
+                if (!(props.firstName.toLowerCase().includes(searchTextToLowerCase)) && !(props.familyName.toLowerCase().includes(searchTextToLowerCase)) && !(searchableBirthDate.includes(searchTextToLowerCase)) && !(authorFullName.toLowerCase().includes(searchTextToLowerCase)) && !(authorLastNameCommaFirst.toLowerCase().includes(searchTextToLowerCase)) && !(authorLastNameFirst.toLowerCase().includes(searchTextToLowerCase))) {
                     if (props.dateOfDeath) {
                         const searchableDeathDate = props.dateOfDeath.slice(5,10) + '-' + props.dateOfDeath.slice(0,4);
                         if (!(searchableDeathDate.includes(searchTextToLowerCase))) {

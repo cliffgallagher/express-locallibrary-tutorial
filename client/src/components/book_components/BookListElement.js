@@ -49,7 +49,8 @@ const BookListElement = (props) => {
     function searchForSearchText() {
         if (auth.searchText) {
             if (auth.searchText.length > 0 ) {
-                if (!(props.title.includes(auth.searchText)) && !(props.author.includes(auth.searchText)) && !(props.isbn.includes(auth.searchText)) && !(props.genreName.includes(auth.searchText)) && !(props.summary.includes(auth.searchText))) {
+                const searchTextToLowerCase = auth.searchText.toLowerCase();
+                if (!(props.title.toLowerCase().includes(searchTextToLowerCase)) && !(props.author.toLowerCase().includes(searchTextToLowerCase)) && !(props.isbn.toLowerCase().includes(searchTextToLowerCase)) && !(props.genreName.toLowerCase().includes(searchTextToLowerCase)) && !(props.summary.toLowerCase().includes(searchTextToLowerCase))) {
                     //console.log('no such text found');
                     setHideElement(true);
                     setGridOrder(true);

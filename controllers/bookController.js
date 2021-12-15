@@ -96,8 +96,17 @@ exports.book_create_post = async function(req, res) {
     })*/
 
     //This worked to prepare a statement
-    /*const [results, metadata] = await sequelize.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")*/
+    const [results, metadata] = await sequelize.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
 
+    const [results3, metadata3] = await sequelize.query("SET @a = 'Other Test Title'")
+    const [results4, metadata4] = await sequelize.query("SET @b = '34'")
+    const [results5, metadata5] = await sequelize.query("SET @c = ''")
+    const [results6, metadata6] = await sequelize.query("SET @d = '47'")
+    const [results7, metadata7] = await sequelize.query("SET @e = 'This is my other summary'")
+
+    const [results2, metadata2] = await sequelize.query("EXECUTE stmt1 USING @a, @b, @c, @d, @e", {
+        replacements: ['Test Title', '34', '', '47', 'This is a test summary']
+    })
     console.log('results in book_create_post: ' + JSON.stringify(results))
 };
 

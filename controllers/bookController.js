@@ -76,10 +76,7 @@ exports.book_create_get = function(req, res) {
 
 // Handle book create on POST.
 exports.book_create_post = async function(req, res) {
-    //console.log("did end up in book_create_post");
-    try {
-        //res.send('NOT IMPLEMENTED: Book create POST');
-        //console.log("req.body in controller: " + req.body);
+    /*try {
         const newBook = await Book.create({
         title: req.body.title,
         author_id: req.body.author_id,
@@ -87,13 +84,15 @@ exports.book_create_post = async function(req, res) {
         genre_id: req.body.genre_id,
         summary: req.body.summary
     });
-
     res.json(newBook);
-    //console.log(JSON.stringify(newBook));
+
     } catch (e) {
         console.log(e);
-    }
-    
+    }*/
+    const [results, metadata] = await sequelize.query("INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)", {
+        replacements: ['Test Title', 34, '', 47, 'This is my summary']
+    })
+    console.log('results in book_create_post: ' + JSON.stringify(results))
 };
 
 // Display book delete form on GET.

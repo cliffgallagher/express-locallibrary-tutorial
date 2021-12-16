@@ -2,7 +2,7 @@ var Book = require('../models/Book');
 const { body, validationResult } = require('express-validator');
 const Author = require('../models/Author');
 const Genre = require('../models/Genre');
-const { Sequelize } = require('sequelize');
+const db = require("../config/database");
 
 Book.belongsTo(Author, {foreignKey: 'author_id', targetKey: 'author_id'});
 Author.hasMany(Book);
@@ -77,14 +77,14 @@ exports.book_create_get = function(req, res) {
 // Handle book create on POST.
 exports.book_create_post = async function(req, res) {
     try {
-        const [results, metadata] = await sequelize.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
-        const [results2, metadata2] = await sequelize.query(`SET @a = '${req.body.title}'`)
-        const [results3, metadata3] = await sequelize.query(`SET @b = '${req.body.author_id}'`)
-        const [results4, metadata4] = await sequelize.query(`SET @c = '${req.body.isbn}'`)
-        const [results5, metadata5] = await sequelize.query(`SET @d = '${req.body.genre_id}'`)
-        const [results6, metadata6] = await sequelize.query(`SET @e = '${req.body.summary}'`)
-        const [results7, metadata7] = await sequelize.query(`EXECUTE stmt1 USING @a, @b, @c, @d, @e`)
-        const [results8, metadata8] = await sequelize.query("DEALLOCATE PREPARE stmt1")
+        const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.title}'`)
+        const [results3, metadata3] = await db.query(`SET @b = '${req.body.author_id}'`)
+        const [results4, metadata4] = await db.query(`SET @c = '${req.body.isbn}'`)
+        const [results5, metadata5] = await db.query(`SET @d = '${req.body.genre_id}'`)
+        const [results6, metadata6] = await db.query(`SET @e = '${req.body.summary}'`)
+        const [results7, metadata7] = await db.query(`EXECUTE stmt1 USING @a, @b, @c, @d, @e`)
+        const [results8, metadata8] = await db.query("DEALLOCATE PREPARE stmt1")
         console.log('results7: ' + JSON.stringify(results7))
         res.json(results7)
     } catch(e) {

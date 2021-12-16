@@ -129,12 +129,12 @@ const BookPopupForUpdate = (props) => {
     }
 
     const updateBookNoTitleCheck = async (updatedBookInfo) => {
-        //console.log("entered updateBookNoTitleCheck");
+        console.log("entered updateBookNoTitleCheck");
         const response = await fetch(`catalog/book/${props.bookID}/update/two`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth.token}`
             },
             body: JSON.stringify(updatedBookInfo)
         });

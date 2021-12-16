@@ -182,6 +182,7 @@ const AuthorPopupForUpdate = (props) => {
 
     function authorDuplicateWarningCancelButtonHandler() {
         setDisplayDuplicateWarning(false);
+        props.setDisplayAuthorPopupForUpdate(false);
     }
     
     return <div className={styles.popup}>

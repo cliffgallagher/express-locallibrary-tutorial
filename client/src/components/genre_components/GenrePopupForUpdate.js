@@ -89,6 +89,7 @@ const GenrePopupForUpdate = (props) => {
 
     function duplicateGenreNameWarningCloseButtonHandler() {
         setUpdatedGenreNameAlreadyExists(false);
+        props.setDisplayElementPopupForUpdate(false);
     }
 
     useEffect(() => {

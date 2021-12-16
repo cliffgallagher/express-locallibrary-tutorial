@@ -1,4 +1,5 @@
 var Genre = require('../models/Genre');
+const db = require("../config/database");
 
 // Display list of all Genre.
 exports.genre_list = async function(req, res) {
@@ -24,11 +25,17 @@ exports.genre_create_get = function(req, res) {
 // Handle Genre create on POST.
 exports.genre_create_post = async function(req, res, next) {
     try {
-        const newGenre = await Genre.create({
+        /*const newGenre = await Genre.create({
             name: req.body.genreName
         })
         
-        res.send(newGenre)
+        res.send(newGenre)*/
+        console.log('req.body in genre_create_post: ' + JSON.stringify(req.body))
+        const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO genres (name, createdAt, updatedAt) VALUES (?, NOW(), NOW())'")
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.genreName}'`)
+        const [results3, metadata3] = await db.query("EXECUTE stmt1 USING @a")
+        const [results4, metadata4] = await db.query("DEALLOCATE PREPARE stmt1")
+        res.json(results3)
     } catch(e) {
         next(e)
     }

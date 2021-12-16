@@ -186,7 +186,7 @@ exports.book_update_post = async function(req, res) {
     try {
         console.log("update request in POST handler: " + JSON.stringify(req.body));
         //console.log("book_id in POST bookController: " + req.params.book_id);
-        const bookToUpdate = await Book.update({ 
+        /*const bookToUpdate = await Book.update({ 
             title: req.body.title,
             author_id: req.body.authorID,
             isbn: req.body.isbn,
@@ -197,8 +197,18 @@ exports.book_update_post = async function(req, res) {
                 book_id: req.params.book_id
             }
         });
-        console.log("booktToUpdate in book_update_post: " + JSON.stringify(bookToUpdate));
-        res.json(bookToUpdate);
+        console.log("booktToUpdate in book_update_post: " + JSON.stringify(bookToUpdate));*/
+        const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE books SET title=?, author_id=?, isbn=?, genre_id=?, summary=?, updatedAt=? WHERE book_id=?'")
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.title}'`)
+        const [results3, metadata3] = await db.query(`SET @b = '${req.body.authorID}'`)
+        const [results4, metadata4] = await db.query(`SET @c = '${req.body.isbn}'`)
+        const [results5, metadata5] = await db.query(`SET @d = '${req.body.genreID}'`)
+        const [results6, metadata6] = await db.query(`SET @e = '${req.body.summary}'`)
+        const [results7, metadata7] = await db.query(`SET @f = NOW()`)
+        const [results8, metadata8] = await db.query(`SET @g = '${req.params.book_id}'`)
+        const [results9, metadata9] = await db.query("EXECUTE stmt1 USING @a, @b, @c, @d, @e, @f, @g")
+        const [results10, metadata10] = await db.query("DEALLOCATE PREPARE stmt1")
+        res.json(results9);
     } catch(e) {
         console.log(e);
     }

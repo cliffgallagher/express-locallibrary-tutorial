@@ -59,7 +59,7 @@ exports.user_login_post = async function(req, res, next) {
         const [results2, metadata2] = await db.query(`SET @a = '${req.body.loginUsername}'`)
         const [results3, metadata3] = await db.query("EXECUTE stmt1 USING @a")
         const [results4, metadata4] = await db.query("DEALLOCATE PREPARE stmt1")
-        console.log('results in user_login_post: ' + JSON.stringify(results3))
+        //console.log('results in user_login_post: ' + JSON.stringify(results3))
         //console.log('user[0]: ' + JSON.stringify(user[0]))
         //console.log('user: ' + JSON.stringify(user));
         if ((results3[0].username === req.body.loginUsername) && (await bcrypt.compare(req.body.loginPassword, results3[0].password))) {
@@ -86,7 +86,7 @@ exports.user_login_post = async function(req, res, next) {
 
 exports.user_login_cookies = async function(req, res, next) {
     try {
-        console.log('req.cookies in user_login_post: ' + JSON.stringify(req.cookies))
+        //console.log('req.cookies in user_login_post: ' + JSON.stringify(req.cookies))
         if (req.cookies.token) {
             //console.log('tokennn: ' + req.cookies.token)
             jwt.verify(req.cookies.token, process.env.ACCESS_TOKEN_SECRET)

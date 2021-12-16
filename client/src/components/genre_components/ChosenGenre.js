@@ -39,7 +39,7 @@ const ChosenGenre = (props) => {
                 )}
                 {displayElementPopupForUpdate && (
                     <div>
-                        <GenrePopupForUpdate setDisplayElementPopupForUpdate={setDisplayElementPopupForUpdate} genreID={props.genreID} getGenreList={props.getGenreList} setHideChosenElement={props.setHideChosenElement} setDisplayChosenElement={props.setDisplayChosenElement}/>
+                        <GenrePopupForUpdate setDisplayElementPopupForUpdate={setDisplayElementPopupForUpdate} genreID={props.genreID} getGenreList={props.getGenreList} setHideChosenElement={props.setHideChosenElement} setDisplayChosenElement={props.setDisplayChosenElement} />
                     </div>
                 )}
                 {displayElementPopupForDelete && (

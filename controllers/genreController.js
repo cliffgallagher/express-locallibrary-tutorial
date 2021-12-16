@@ -37,6 +37,7 @@ exports.genre_create_post = async function(req, res, next) {
         const [results4, metadata4] = await db.query("DEALLOCATE PREPARE stmt1")
         res.json(results3)
     } catch(e) {
+        console.log(e)
         next(e)
     }
 };
@@ -89,14 +90,20 @@ exports.genre_update_get = async function(req, res) {
 // Handle Genre update on POST.
 exports.genre_update_post = async function(req, res, next) {
     try {
-        const updatedGenre = await Genre.update({
+        /*const updatedGenre = await Genre.update({
           name: req.body.genreName  
         }, {
             where: {
                 genre_id: req.params.id
             }
         })
-        res.json(updatedGenre);
+        res.json(updatedGenre);*/
+        const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE genres SET name=?, updatedAt=NOW() WHERE genre_id=?'")
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.genreName}'`)
+        const [results3, metadata3] = await db.query(`SET @b = '${req.params.id}'`)
+        const [results4, metadata4] = await db.query("EXECUTE stmt1 USING @a, @b")
+        const [results5, metadata5] = await db.query("DEALLOCATE PREPARE stmt1")
+        res.json(results4)
     } catch(e) {
         console.log(e.name);
         next(e);

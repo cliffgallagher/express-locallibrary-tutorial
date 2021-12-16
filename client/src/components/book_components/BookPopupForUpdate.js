@@ -232,6 +232,7 @@ const BookPopupForUpdate = (props) => {
 
     function duplicateWarningCancelButtonHandler() {
         setDisplayDuplicateWarning(false);
+        props.setDisplayElementPopupForUpdate(false);
     }
 
     return <div className={styles.popup}>

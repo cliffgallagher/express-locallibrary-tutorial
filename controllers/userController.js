@@ -46,14 +46,20 @@ exports.user_create_post = async function(req, res, next) {
 
 exports.user_login_post = async function(req, res, next) {
     try {
-        const user = await User.findAll({
+        console.log('req.body in user_login_post: ' + JSON.stringify(req.body))
+        /*const user = await User.findAll({
             attributes: {
                 exclude: ['createdAt', 'updatedAt']
             },
             where: {
                 username: req.body.loginUsername
             }
-        })
+        })*/
+        const [results, metadata] = await db.query("PREPARE stmt1 FROM 'SELECT username, password FROM users WHERE (username = ?)'")
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.loginUsername}'`)
+        const [results3, metadata3] = await db.query("EXECUTE stmt1 USING @a")
+        const [results4, metadata4] = await db.query("DEALLOCATE PREPARE stmt1")
+        console.log('results in user_login_post: ' + JSON.stringify(results3))
         //console.log('user[0]: ' + JSON.stringify(user[0]))
         //console.log('user: ' + JSON.stringify(user));
         if (user[0] && (await bcrypt.compare(req.body.loginPassword, user[0].password))) {

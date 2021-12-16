@@ -2,7 +2,7 @@ var Book = require('../models/Book');
 const { body, validationResult } = require('express-validator');
 const Author = require('../models/Author');
 const Genre = require('../models/Genre');
-const { sequelize } = require('../models/Author');
+const { Sequelize } = require('sequelize');
 
 Book.belongsTo(Author, {foreignKey: 'author_id', targetKey: 'author_id'});
 Author.hasMany(Book);
@@ -76,27 +76,6 @@ exports.book_create_get = function(req, res) {
 
 // Handle book create on POST.
 exports.book_create_post = async function(req, res) {
-    /*try {
-        const newBook = await Book.create({
-        title: req.body.title,
-        author_id: req.body.author_id,
-        isbn: req.body.isbn,
-        genre_id: req.body.genre_id,
-        summary: req.body.summary
-    });
-    res.json(newBook);
-
-    } catch (e) {
-        console.log(e);
-    }*/
-
-    // this works but doesn't use prepared statements
-    /*const [results, metadata] = await sequelize.query("INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)", {
-        replacements: ['Test Title', 34, '', 47, 'This is my summary']
-    })*/
-
-    //This worked to prepare a statement
-    console.log('req.body in book_create_post: ' + JSON.stringify(req.body))
     try {
         const [results, metadata] = await sequelize.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
         const [results2, metadata2] = await sequelize.query(`SET @a = '${req.body.title}'`)
@@ -111,6 +90,19 @@ exports.book_create_post = async function(req, res) {
     } catch(e) {
         console.log(e)
     }
+    /*try {
+        const newBook = await Book.create({
+        title: req.body.title,
+        author_id: req.body.author_id,
+        isbn: req.body.isbn,
+        genre_id: req.body.genre_id,
+        summary: req.body.summary
+    });
+    res.json(newBook);
+
+    } catch (e) {
+        console.log(e);
+    }*/
 
 };
 

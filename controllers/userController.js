@@ -2,11 +2,12 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { token } = require('morgan')
+const db = require("../config/database");
 
 exports.user_create_post = async function(req, res, next) {
     //console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
 
-    try {
+    /*try {
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(req.body.newUserPassword, salt)
         const newUser = await User.create({
@@ -17,6 +18,24 @@ exports.user_create_post = async function(req, res, next) {
             password: hashedPassword
         })
         res.json(newUser);
+
+    } catch(e) {
+        console.log('error in user_create_post: ' + e)
+        next(e);
+    }*/
+    try {
+        console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(req.body.newUserPassword, salt)
+        const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO users (first_name, last_name, email, password, createdAt, updatedAt, username) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.newUserFirstName}'`)
+        const [results3, metadata3] = await db.query(`SET @b = '${req.body.newUserLastName}'`)
+        const [results4, metadata4] = await db.query(`SET @c = '${req.body.newUserEmail}'`)
+        const [results5, metadata5] = await db.query(`SET @d = '${hashedPassword}'`)
+        const [results6, metadata6] = await db.query(`SET @e = '${req.body.newUserUsername}'`)
+        const [results8, metadata8] = await db.query(`EXECUTE stmt1 USING @a, @b, @c, @d, @e`)
+        const [results9, metadata9] = await db.query("DEALLOCATE PREPARE stmt1")
+        res.json(results8)
 
     } catch(e) {
         console.log('error in user_create_post: ' + e)

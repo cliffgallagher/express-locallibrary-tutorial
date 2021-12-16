@@ -208,6 +208,7 @@ body('dateOfDeath').custom((value, {req}) => {
     return true;
 }),
 function(req, res, next) {
+    console.log('made it past validation in author/create/one')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

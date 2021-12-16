@@ -51,7 +51,7 @@ const NewAuthorForm = (props) => {
 
         try {
             const response = await fetch('catalog/author/create/one', {
-                method: 'post',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${auth.token}`

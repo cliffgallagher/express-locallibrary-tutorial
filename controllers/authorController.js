@@ -118,7 +118,7 @@ exports.author_update_get = async function(req, res) {
 // Handle Author update on POST.
 exports.author_update_post = async function(req, res) {
     try {
-        const authorObject = await Author.update({
+        /*const authorObject = await Author.update({
             first_name: req.body.first_name,
             family_name: req.body.family_name,
             date_of_birth: req.body.birthDate,
@@ -128,7 +128,31 @@ exports.author_update_post = async function(req, res) {
                 author_id: req.params.id
             }
         })
-        res.json(authorObject);
+        res.json(authorObject);*/
+        console.log('req.body in author_update_post: ' + JSON.stringify(req.body))
+        if (req.body.deathDate) {
+            console.log('entered if block of author_update_post')
+            const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE authors SET first_name=?, family_name=?, date_of_birth=?, date_of_death=?, updatedAt=NOW() WHERE author_id=?'")
+            const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
+            const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)
+            const [results4, metadata4] = await db.query(`SET @c = '${req.body.birthDate}'`)
+            const [results5, metadata5] = await db.query(`SET @d = '${req.body.deathDate}'`)
+            const [results6, metadata6] = await db.query(`SET @e = '${req.params.id}'`)
+            const [results7, metadata7] = await db.query("EXECUTE stmt1 USING @a, @b, @c, @d, @e")
+            const [results8, metadata8] = await db.query("DEALLOCATE PREPARE stmt1")
+            res.json(results7)
+        } else {
+            console.log('entered else block of author_update_post')
+            const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE authors SET first_name=?, family_name=?, date_of_birth=?, date_of_death=?, updatedAt=NOW() WHERE author_id=?'")
+            const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
+            const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)
+            const [results4, metadata4] = await db.query(`SET @c = '${req.body.birthDate}'`)
+            const [results5, metadata5] = await db.query(`SET @d = null`)
+            const [results6, metadata6] = await db.query(`SET @e = '${req.params.id}'`)
+            const [results7, metadata7] = await db.query("EXECUTE stmt1 USING @a, @b, @c, @d, @e")
+            const [results8, metadata8] = await db.query("DEALLOCATE PREPARE stmt1")
+            res.json(results6)
+        }
     } catch(e) {
         console.log(e);
     }

@@ -16,7 +16,7 @@ router.use(checkAuth)
 // GET catalog home page.
 //router.get('/', book_controller.index);
 router.get('/', function(req, res, next) {
-    console.log("entered index route");
+    //console.log("entered index route");
     next()
 }, book_controller.index);
 
@@ -119,7 +119,7 @@ body('authorID').not().isEmpty().withMessage("Must pick an author."),
 body('genreID').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
-    console.log("inside book/update/one: " + JSON.stringify(req.body));
+    //console.log("inside book/update/one: " + JSON.stringify(req.body));
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -150,7 +150,7 @@ body('authorID').not().isEmpty().withMessage("Must pick an author."),
 body('genreID').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
-    console.log("inside book/update/two: " + JSON.stringify(req.body));
+    //console.log("inside book/update/two: " + JSON.stringify(req.body));
     const errors = validationResult(req);
     //console.log("errors: " + JSON.stringify(errors));
     if (!errors.isEmpty()) {
@@ -208,7 +208,7 @@ body('dateOfDeath').custom((value, {req}) => {
     return true;
 }),
 function(req, res, next) {
-    console.log('made it past validation in author/create/one')
+    //console.log('made it past validation in author/create/one')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -230,7 +230,7 @@ router.post('/author/:id/delete', author_controller.author_delete_post);
 // GET request to update Author.
 
 router.get('/author/:id/update', function(req, res, next) {
-    console.log('authorID in author_update_get: ' + req.params.id)
+    //console.log('authorID in author_update_get: ' + req.params.id)
     next()
 }, author_controller.author_update_get);
 
@@ -239,8 +239,8 @@ router.post('/author/:id/update/one', binarySearchController.search_for_existing
 body('first_name').not().isEmpty().withMessage('First name cannot be empty'),
 body('family_name').not().isEmpty().withMessage('Family name cannot be empty'),
 body('birthDate').custom((value, {req}) => {
-    console.log("value: " + value);
-    console.log("req: " + JSON.stringify(req.body));
+    //console.log("value: " + value);
+    //console.log("req: " + JSON.stringify(req.body));
     if (!value) {
         throw new Error ('Date of birth cannot be empty');
     }
@@ -284,11 +284,11 @@ function(req, res, next) {
 
 router.post('/author/:id/update/two',
 body('birthDate').custom((value, {req}) => {
-    console.log(value.length);
-    console.log("value in update/two: " + value);
-    console.log("req: " + JSON.stringify(req.body));
+    //console.log(value.length);
+    //console.log("value in update/two: " + value);
+    //console.log("req: " + JSON.stringify(req.body));
     if (value === "" || !value ) {
-        console.log("entered if statement");
+        //console.log("entered if statement");
         throw new Error ('Date of birth cannot be empty');
     }
     return true;

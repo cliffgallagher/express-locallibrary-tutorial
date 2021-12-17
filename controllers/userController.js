@@ -24,7 +24,7 @@ exports.user_create_post = async function(req, res, next) {
         next(e);
     }*/
     try {
-        console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
+        //console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(req.body.newUserPassword, salt)
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO users (first_name, last_name, email, password, createdAt, updatedAt, username) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
@@ -38,7 +38,7 @@ exports.user_create_post = async function(req, res, next) {
         res.json(results8)
 
     } catch(e) {
-        console.log('error in user_create_post: ' + JSON.stringify(e))
+        //console.log('error in user_create_post: ' + JSON.stringify(e))
         next(e);
     }
 
@@ -46,7 +46,7 @@ exports.user_create_post = async function(req, res, next) {
 
 exports.user_login_post = async function(req, res, next) {
     try {
-        console.log('req.body in user_login_post: ' + JSON.stringify(req.body))
+        //console.log('req.body in user_login_post: ' + JSON.stringify(req.body))
         /*const user = await User.findAll({
             attributes: {
                 exclude: ['createdAt', 'updatedAt']
@@ -79,7 +79,7 @@ exports.user_login_post = async function(req, res, next) {
             })
         }
     } catch(e) {
-        console.log('error in catch block: ' + e)
+        //console.log('error in catch block: ' + e)
         next(e)
     }
 }
@@ -95,7 +95,8 @@ exports.user_login_cookies = async function(req, res, next) {
             res.status(401).json({failed: 'failed'})
         }
     } catch(e) {
-        console.log(e)
+        //console.log(e)
+        next(e)
     }
 }
 

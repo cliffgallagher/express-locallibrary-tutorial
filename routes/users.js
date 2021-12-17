@@ -49,7 +49,7 @@ function(req, res, next) {
 }, userController.user_login_post)
 
 router.post('/checkcookies', (req, res, next) => {
-  console.log('entered cookie_login route')
+  //console.log('entered cookie_login route')
   next()
 }, userController.user_login_cookies)
 

@@ -65,12 +65,12 @@ function App() {
     /*if (token in cookie matches token in context) {
       setIsLoggedIn(true);
     }*/
-    console.log('checkForTokenInCookies ran');
+    //console.log('checkForTokenInCookies ran');
     const response = await fetch('users/checkcookies', {
       method: 'POST'
     });
     const data = await response.json();
-    console.log('fetch in App: ' + JSON.stringify(data));
+    //console.log('fetch in App: ' + JSON.stringify(data));
     if (data.hasOwnProperty('success')) {
       setToken(data.token);
       setIsLoggedIn(true);

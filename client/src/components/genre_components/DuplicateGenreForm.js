@@ -6,6 +6,7 @@ const DuplicateGenreForm = (props) => {
     function duplicateGenreWarningCloseHandler(event) {
         event.preventDefault();
         props.setAddingDuplicateGenre(false);
+        
     }
     
     return (

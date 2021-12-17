@@ -9,17 +9,18 @@ Author.hasMany(Book);
 Book.belongsTo(Genre, {foreignKey: 'genre_id', targetKey: 'genre_id'});
 Genre.hasMany(Book);
 
-exports.index = async function(req, res) {
+exports.index = async function(req, res, next) {
     try {
         const promise = await Book.findAll();
         res.send(promise);
     } catch(e) {
-        console.log(e);
+        //console.log(e);
+        next(e)
     }
 };
 
 // display all books with genre and author names
-exports.enhanced = async function(req, res) {
+exports.enhanced = async function(req, res, next) {
     //console.log("you are in the enhanced controller method");
     //console.log("Is book a Book? " + (Book === sequelize.models.Book)); // returned "Yes"
 
@@ -42,7 +43,8 @@ exports.enhanced = async function(req, res) {
         //console.log(JSON.stringify(response));
         res.json(response);  
     } catch(e) {
-        console.log(e);
+        //console.log(e);
+        next(e)
     }
     
 };
@@ -85,10 +87,10 @@ exports.book_create_post = async function(req, res, next) {
         const [results6, metadata6] = await db.query(`SET @e = '${req.body.summary}'`)
         const [results7, metadata7] = await db.query(`EXECUTE stmt1 USING @a, @b, @c, @d, @e`)
         const [results8, metadata8] = await db.query("DEALLOCATE PREPARE stmt1")
-        console.log('results7: ' + JSON.stringify(results7))
+        //console.log('results7: ' + JSON.stringify(results7))
         res.json(results7)
     } catch(e) {
-        console.log(e)
+        //console.log(e)
         next(e)
     }
     /*try {
@@ -108,7 +110,7 @@ exports.book_create_post = async function(req, res, next) {
 };
 
 // Display book delete form on GET.
-exports.book_delete_get = async function(req, res) {
+exports.book_delete_get = async function(req, res, next) {
     
     try {
     //res.send('NOT IMPLEMENTED: Book update GET');
@@ -127,17 +129,18 @@ exports.book_delete_get = async function(req, res) {
                 book_id: req.params.book_id
                 }
         });
-        console.log("book to delete in book controller: " + JSON.stringify(bookToDelete));
+        //console.log("book to delete in book controller: " + JSON.stringify(bookToDelete));
         //res.json(bookToUpdate);
         res.json(bookToDelete);  
     } catch(e) {
-        console.log(e);
+        //console.log(e);
+        next(e)
     }
     
 };
 
 // Handle book delete on POST.
-exports.book_delete_post = async function(req, res) {
+exports.book_delete_post = async function(req, res, next) {
     try {
         //console.log("book_id in book_delete_post: " + req.params.book_id);
         const deletedBook = await Book.destroy({
@@ -147,13 +150,14 @@ exports.book_delete_post = async function(req, res) {
         });
         res.send("book deleted");
     } catch(e) {
-        console.log(e);
+        //console.log(e);
+        next(e)
     }
     
 };
 
 // Display book update form on GET.
-exports.book_update_get = async function(req, res) {
+exports.book_update_get = async function(req, res, next) {
     try {
         //res.send('NOT IMPLEMENTED: Book update GET');
         //console.log("book_id in bookController: " + req.params.book_id);
@@ -175,7 +179,8 @@ exports.book_update_get = async function(req, res) {
         //res.json(bookToUpdate);
         res.send(bookToUpdate);
     } catch(e) {
-        console.log(e);
+        //console.log(e);
+        next(e)
     }
     
 
@@ -185,7 +190,7 @@ exports.book_update_get = async function(req, res) {
 exports.book_update_post = async function(req, res, next) {
 
     try {
-        console.log("update request in POST handler: " + JSON.stringify(req.body));
+        //console.log("update request in POST handler: " + JSON.stringify(req.body));
         //console.log("book_id in POST bookController: " + req.params.book_id);
         /*const bookToUpdate = await Book.update({ 
             title: req.body.title,
@@ -198,7 +203,7 @@ exports.book_update_post = async function(req, res, next) {
                 book_id: req.params.book_id
             }
         });
-        console.log("booktToUpdate in book_update_post: " + JSON.stringify(bookToUpdate));*/
+        //console.log("booktToUpdate in book_update_post: " + JSON.stringify(bookToUpdate));*/
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE books SET title=?, author_id=?, isbn=?, genre_id=?, summary=?, updatedAt=? WHERE book_id=?'")
         const [results2, metadata2] = await db.query(`SET @a = '${req.body.title}'`)
         const [results3, metadata3] = await db.query(`SET @b = '${req.body.authorID}'`)
@@ -211,7 +216,7 @@ exports.book_update_post = async function(req, res, next) {
         const [results10, metadata10] = await db.query("DEALLOCATE PREPARE stmt1")
         res.json(results9);
     } catch(e) {
-        console.log(e);
+        //console.log(e);
         next(e)
     }
     //res.send('NOT IMPLEMENTED: Book update POST');

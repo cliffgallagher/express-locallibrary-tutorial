@@ -13,12 +13,9 @@ const ChosenBook = (props) => {
     }
 
     async function chosenElementCancelHandler() {
-        //props.setDisplayElement(false);
-        //props.setHideElement(false);
         setTimeout(() => {
             props.setDisplayElement(false);
             props.setHideElement(false);
-            //console.log("i clicked the darn button");
         }, 50);
     }
 

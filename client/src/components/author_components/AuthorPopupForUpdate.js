@@ -26,7 +26,7 @@ const AuthorPopupForUpdate = (props) => {
                     auth.setIsLoggedIn(false);
                 }
             }
-            //console.log(data);
+
             setAuthorUpdateFormFirstNameValue(data[0].first_name);
             setAuthorUpdateFormFamilyNameValue(data[0].family_name);
             setAuthorUpdateFormBirthValue((data[0].date_of_birth).slice(0, 10));
@@ -50,29 +50,20 @@ const AuthorPopupForUpdate = (props) => {
                 body: JSON.stringify(updatedAuthorData)
             });
             const data = await response.json();
-            //console.log("data in AuthorPopupForUpdate: " + data);
-            /*if (data === "author already present in database") {
-                setDisplayDuplicateWarning(true);
-            } else {
-                props.setDisplayAuthorPopupForUpdate(false);
-                props.getAuthorList();
-            }*/
+
             if (typeof data === 'object') {
                 if (data.name === 'TokenExpiredError') {
                     auth.setIsLoggedIn(false);
                 }
                 if (data.hasOwnProperty('errors')) {
-                    //console.log("data.errors: " + JSON.stringify(data.errors));
                     const errorMessages = data.errors.map(element => element.msg);
                     if (errorMessages.includes("author already in database")) {
                         setDisplayDuplicateWarning(true);
                     } else {
-                        //console.log("errorMessages: " + JSON.stringify(errorMessages));
                         setValidationErrors(() => {
                             return errorMessages.map(element => <li>{element}</li>);
                         });
                     }
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                 } else {
                     props.setDisplayAuthorPopupForUpdate(false);
                     props.setDisplayChosenElement(false);
@@ -87,7 +78,6 @@ const AuthorPopupForUpdate = (props) => {
     }
 
     const updateAuthorNoNameCheck = async (updatedAuthorData) => {
-        //console.log("entered updateAuthorNoNameCheck");
         try {
             const response = await fetch(`catalog/author/${props.authorID}/update/two`, {
                 method: 'POST',
@@ -104,14 +94,11 @@ const AuthorPopupForUpdate = (props) => {
                     auth.setIsLoggedIn(false);
                 }
                 if (data.hasOwnProperty('errors')) {
-                    //console.log("data.errors: " + JSON.stringify(data.errors));
                     const errorMessages = data.errors.map(element => element.msg);
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                     setValidationErrors(() => {
                         return errorMessages.map(element => <li>{element}</li>);
                     });
                     
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                 } else {
                     setDisplayDuplicateWarning(false);
                     props.setDisplayAuthorPopupForUpdate(false);
@@ -131,7 +118,6 @@ const AuthorPopupForUpdate = (props) => {
             first_name: authorUpdateFormFirstNameValue,
             family_name: authorUpdateFormFamilyNameValue,
             birthDate: authorUpdateFormBirthValue,
-            //deathDate: authorUpdateFormDeathValue
         }
         if (authorUpdateFormDeathValue) {
             updatedAuthorData = {...updatedAuthorData, deathDate: authorUpdateFormDeathValue}
@@ -141,7 +127,6 @@ const AuthorPopupForUpdate = (props) => {
         } else {
             updateAuthorNameCheck(updatedAuthorData);
         }
-        //console.log(JSON.stringify(updatedAuthorData));
     }
     
     useEffect(() => {
@@ -176,7 +161,6 @@ const AuthorPopupForUpdate = (props) => {
             birthDate: authorUpdateFormBirthValue,
             deathDate: authorUpdateFormDeathValue
         }
-        //console.log(JSON.stringify(updatedAuthorData));
         updateAuthorNoNameCheck(updatedAuthorData);
     }
 

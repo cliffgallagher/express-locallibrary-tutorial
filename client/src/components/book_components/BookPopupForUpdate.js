@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-//import '../Popup.css';
 import styles from '../ElementPopupForUpdate.module.css';
 import {AuthContext} from '../../context/auth-context';
 
@@ -15,7 +14,6 @@ const BookPopupForUpdate = (props) => {
     const [initialTitle, setInitialTitle] = useState();
     const [validationErrors, setValidationErrors] = useState();
     const auth = useContext(AuthContext);
-    //console.log("rendered BookPOpupForUpdate");
 
     const getAuthorsFromDatabase = async () => {
         try {
@@ -30,7 +28,7 @@ const BookPopupForUpdate = (props) => {
                     auth.setIsLoggedIn(false);
                 }
             }
-            //console.log('authorList in popup for update: ' + JSON.stringify(authorObjectArray));
+
             setUpdateFormAuthorOptions(() => {
                 return [authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
             }); 
@@ -58,7 +56,6 @@ const BookPopupForUpdate = (props) => {
     
     async function fetchBook() {
         try {
-            //console.log("bookID in BookPopupForUpdate: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/update`, {
                 headers: {
                     'Authorization': `Bearer ${auth.token}`
@@ -70,11 +67,10 @@ const BookPopupForUpdate = (props) => {
                     auth.setIsLoggedIn(false);
                 }
             }
-            //console.log("bodyOfResponse Update form: " + JSON.stringify(bodyOfResponse));
+
             setUpdateFormTitleInput(bodyOfResponse[0].title);
             setUpdateFormISBNInput(bodyOfResponse[0].isbn);
             setUpdateFormSummaryInput(bodyOfResponse[0].summary);
-            //setUpdateFormSummaryInput("Here is some static text");
             setInitialTitle(bodyOfResponse[0].title);
             
         } catch(e) {
@@ -83,7 +79,6 @@ const BookPopupForUpdate = (props) => {
     }
 
     const updateBookWithTitleCheck = async (updatedBookInfo) => {
-        //console.log("entered updateBook");
         const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
             method: 'POST',
             headers: {
@@ -93,30 +88,20 @@ const BookPopupForUpdate = (props) => {
             body: JSON.stringify(updatedBookInfo)
         });
         const data = await response.json();
-        /*
-        if (errorMessages.includes("title already in database")) {
-            setDisplayDuplicateWarning(true);
-        } else {
-            props.setDisplayBookPopupForUpdate(false);
-            props.getBookList();
-            return response;
-        }*/
+
         if (typeof data === 'object') {
             if (data.name === 'TokenExpiredError') {
                 auth.setIsLoggedIn(false);
             }
             if (data.hasOwnProperty('errors')) {
-                //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);
                 if (errorMessages.includes("title already in database")) {
                     setDisplayDuplicateWarning(true);
                 } else {
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                     setValidationErrors(() => {
                         return errorMessages.map(element => <li>{element}</li>);
                     });
                 }
-                //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
                 props.getBookList();
                 props.setDisplayElementPopupForUpdate(false);
@@ -129,7 +114,6 @@ const BookPopupForUpdate = (props) => {
     }
 
     const updateBookNoTitleCheck = async (updatedBookInfo) => {
-        //console.log("entered updateBookNoTitleCheck");
         const response = await fetch(`catalog/book/${props.bookID}/update/two`, {
             method: 'POST',
             headers: {
@@ -138,23 +122,18 @@ const BookPopupForUpdate = (props) => {
             },
             body: JSON.stringify(updatedBookInfo)
         });
-        /*setDisplayDuplicateWarning(false);
-        props.setDisplayBookPopupForUpdate(false);
-        props.getBookList();
-        return response; */
+
         const data = await response.json();
         if (typeof data === 'object') {
             if (data.name === 'TokenExpiredError') {
                 auth.setIsLoggedIn(false);
             }
             if (data.hasOwnProperty('errors')) {
-                //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);
                 setValidationErrors(() => {
                         return errorMessages.map(element => <li>{element}</li>);
                 });
                 
-                //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
                 props.getBookList();
                 props.setDisplayElementPopupForUpdate(false);
@@ -166,7 +145,6 @@ const BookPopupForUpdate = (props) => {
     }
 
     useEffect(async () => {
-        //console.log("inside useEffect");
         fetchBook();
         await getAuthorsFromDatabase();
         setUpdateFormAuthorInput(props.authorID);
@@ -184,12 +162,10 @@ const BookPopupForUpdate = (props) => {
             genreID: updateFormGenreInput,
             summary: updateFormSummaryInput
         }
-        //console.log('updatedBookInfo: ' + JSON.stringify(updatedBookInfo));
-        //console.log("initialTitle: " + initialTitle + ", updated title: " + updatedBookInfo.title);
+
         if (initialTitle === updatedBookInfo.title) {
             updateBookNoTitleCheck(updatedBookInfo);
         } else {
-            //console.log("entered else block");
             updateBookWithTitleCheck(updatedBookInfo);
         }
     }

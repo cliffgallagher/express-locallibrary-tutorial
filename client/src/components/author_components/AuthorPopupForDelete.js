@@ -11,7 +11,7 @@ const AuthorPopupForDelete = (props) => {
     const auth = useContext(AuthContext);
     
     async function getInitialValues() {
-        //console.log('authorID in getInitialValues: ' + props.authorID);
+
         try {
             const response = await fetch(`catalog/author/${props.authorID}/delete`, {
                 headers: {
@@ -24,7 +24,7 @@ const AuthorPopupForDelete = (props) => {
                     auth.setIsLoggedIn(false);
                 }
             }
-            //console.log(JSON.stringify(data));
+
             setAuthorNameOnDeleteForm(`${data[0].first_name} ${data[0].family_name}`);
             setAuthorBirthDateOnDeleteForm(`${data[0].date_of_birth.slice(5, 7)}-${data[0].date_of_birth.slice(8, 10)}-${data[0].date_of_birth.slice(0, 4)}`);
             data[0].date_of_death && setAuthorDeathDateOnDeleteForm(`${data[0].date_of_death.slice(5, 7)}-${data[0].date_of_death.slice(8, 10)}-${data[0].date_of_death.slice(0, 4)}`);
@@ -45,30 +45,21 @@ const AuthorPopupForDelete = (props) => {
                 }
             });
             const data = await response.json();
-            //console.log("data in popupfordelete: " + JSON.stringify(data));
-            //console.log('typeof data: ' + typeof data);
-            /*if (data === 'SequelizeForeignKeyConstraintError') {
-                //console.log('entered if block');
-                setReceivedForeignKeyConstraintError(true);
-            } else {
-                props.displayAuthorPopupForDelete(false);
-                props.getAuthorList();
-            }*/
+
             if (data.name === 'TokenExpiredError') {
                 auth.setIsLoggedIn(false);
             }
             if (data.hasOwnProperty('errors')) {
-                //console.log("data.errors: " + JSON.stringify(data.errors));
+
                 const errorMessages = data.errors.map(element => element.msg);
                 if (errorMessages.includes("SequelizeForeignKeyConstraintError")) {
                     setReceivedForeignKeyConstraintError(true);
                 } else {
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                     setValidationErrors(() => {
                         return errorMessages.map(element => <li>{element}</li>);
                     });
                 }
-                //console.log("errorMessages: " + JSON.stringify(errorMessages));
+
             } else {
                 props.setDisplayElementPopupForDelete(false);
                 props.setDisplayChosenElement(false);
@@ -87,14 +78,12 @@ const AuthorPopupForDelete = (props) => {
     
     function popupForDeleteCloseButtonHandler() {
         props.setDisplayElementPopupForDelete(false)
-        //props.setDisplayAuthors(true);
     }
 
     function foreignKeyWarningCloseButtonHandler(event) {
         event.preventDefault();
         props.setDisplayElementPopupForDelete(false);
         setReceivedForeignKeyConstraintError(false);
-        //props.setDisplayAuthors(true);
     }
     
     return <div className={styles.popup}>

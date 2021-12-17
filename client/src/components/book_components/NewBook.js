@@ -13,7 +13,6 @@ const NewBook = (props) => {
     }
 
     function newBookCancelHandler() {
-        //console.log("clicked cancel button");
         setIsAddingNewBook(false);
     }
 
@@ -28,7 +27,6 @@ const NewBook = (props) => {
     function newBookInfoToNewBook(newBookInfo) {
 
         const {title, author_id, summary, isbn, genre_id} = newBookInfo;
-        //console.log("newBookInfo in NewBook: " + JSON.stringify(newBookInfo));
         const objectForDuplicateWarning = {
             title: title,
             author_id: author_id,
@@ -37,9 +35,6 @@ const NewBook = (props) => {
             genre_id: genre_id
         }
         setNewBookInfo(objectForDuplicateWarning);
-        //console.log("objectForDuplicateWarning info in NewBook: " + JSON.stringify(objectForDuplicateWarning));
-        //props.newBookInfoNewBookToBookComponent(objectForDuplicateWarning);
-        //console.log("objectForDuplicateWarning in NewBook: " + JSON.stringify(objectForDuplicateWarning));
     }
 
     return <div>

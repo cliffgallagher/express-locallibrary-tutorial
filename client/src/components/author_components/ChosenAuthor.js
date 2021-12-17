@@ -12,7 +12,6 @@ const ChosenAuthor = (props) => {
         setTimeout(() => {
             props.setDisplayChosenElement(false);
             props.setHideChosenElement(false);
-            //console.log("i clicked the darn button");
         }, 50);
     }
 

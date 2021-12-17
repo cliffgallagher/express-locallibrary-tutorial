@@ -4,7 +4,6 @@ import { AuthContext } from "../../context/auth-context";
 
 const DuplicateAuthorWarning = (props) => {
     const auth = useContext(AuthContext);
-    //console.log("info in dup author warning: " + JSON.stringify(props.newAuthorInfoForWarning));
 
     async function duplicateAuthorWarningSubmitHandler(event) {
         event.preventDefault();

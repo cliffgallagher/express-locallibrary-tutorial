@@ -10,7 +10,6 @@ exports.author_list = async function(req, res, next) {
                 ['first_name', 'ASC']
             ]
         });
-        //console.log("author_list: " + JSON.stringify(promise));
         res.json(promise);
     } catch(e) {
         //console.log(e);
@@ -18,34 +17,11 @@ exports.author_list = async function(req, res, next) {
     }  
 }
 
-// Display detail page for a specific Author
-exports.author_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author detail: ' + req.params.id);
-}
-
-// Display  Author create form on GET
-exports.author_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author create GET');
-}
-
 // Handle Author create on POST
 exports.author_create_post = async function(req, res, next) {
-    //res.send('NOT IMPLEMENTED: Author create POST');
-    /*try {
-        const newAuthor = await Author.create({
-            first_name: req.body.first_name,
-            family_name: req.body.family_name,
-            date_of_birth: req.body.dateOfBirth,
-            date_of_death: req.body.dateOfDeath
-        })
-        res.json(newAuthor);
-    } catch(e) {
-        console.log(e);
-    }*/
-    //console.log('req.body in author_create_post: ' + JSON.stringify(req.body))
+
     try {
         if (req.body.dateOfDeath) {
-            //console.log('entered if block of author_create_post')
             const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO authors (first_name, family_name, date_of_birth, date_of_death, createdAt, updatedAt) VALUES (?, ?, ?, ?, NOW(), NOW())'")
             const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
             const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)
@@ -55,7 +31,6 @@ exports.author_create_post = async function(req, res, next) {
             const [results7, metadata7] = await db.query("DEALLOCATE PREPARE stmt1")
             res.json(results6)
         } else {
-            //console.log('entered else block of author_create_post')
             const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO authors (first_name, family_name, date_of_birth, createdAt, updatedAt) VALUES (?, ?, ?, NOW(), NOW())'")
             const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
             const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)
@@ -78,7 +53,6 @@ exports.author_delete_get = async function(req, res, next) {
                 author_id: req.params.id
             }
         });
-        //console.log('author object in authorController: ' +JSON.stringify(authorObject));
         res.json(authorObject);
     } catch(e) {
         //console.log(e);
@@ -110,7 +84,6 @@ exports.author_update_get = async function(req, res, next) {
             }
         });
         res.json(authorData);
-        //res.send('NOT IMPLEMENTED: Author update GET');
     } catch(e) {
         //console.log(e);
         next(e)
@@ -121,20 +94,7 @@ exports.author_update_get = async function(req, res, next) {
 // Handle Author update on POST.
 exports.author_update_post = async function(req, res, next) {
     try {
-        /*const authorObject = await Author.update({
-            first_name: req.body.first_name,
-            family_name: req.body.family_name,
-            date_of_birth: req.body.birthDate,
-            date_of_death: req.body.deathDate
-        }, {
-            where: {
-                author_id: req.params.id
-            }
-        })
-        res.json(authorObject);*/
-        //console.log('req.body in author_update_post: ' + JSON.stringify(req.body))
         if (req.body.deathDate) {
-            //console.log('entered if block of author_update_post')
             const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE authors SET first_name=?, family_name=?, date_of_birth=?, date_of_death=?, updatedAt=NOW() WHERE author_id=?'")
             const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
             const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)
@@ -145,7 +105,6 @@ exports.author_update_post = async function(req, res, next) {
             const [results8, metadata8] = await db.query("DEALLOCATE PREPARE stmt1")
             res.json(results7)
         } else {
-            //console.log('entered else block of author_update_post')
             const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE authors SET first_name=?, family_name=?, date_of_birth=?, date_of_death=?, updatedAt=NOW() WHERE author_id=?'")
             const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
             const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)

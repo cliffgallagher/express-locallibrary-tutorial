@@ -5,24 +5,7 @@ const { token } = require('morgan')
 const db = require("../config/database");
 
 exports.user_create_post = async function(req, res, next) {
-    //console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
 
-    /*try {
-        const salt = await bcrypt.genSalt()
-        const hashedPassword = await bcrypt.hash(req.body.newUserPassword, salt)
-        const newUser = await User.create({
-            first_name: req.body.newUserFirstName,
-            last_name: req.body.newUserLastName,
-            email: req.body.newUserEmail,
-            username: req.body.newUserUsername,
-            password: hashedPassword
-        })
-        res.json(newUser);
-
-    } catch(e) {
-        console.log('error in user_create_post: ' + e)
-        next(e);
-    }*/
     try {
         //console.log('req.body in user_create_post: ' + JSON.stringify(req.body))
         const salt = await bcrypt.genSalt()
@@ -46,22 +29,10 @@ exports.user_create_post = async function(req, res, next) {
 
 exports.user_login_post = async function(req, res, next) {
     try {
-        //console.log('req.body in user_login_post: ' + JSON.stringify(req.body))
-        /*const user = await User.findAll({
-            attributes: {
-                exclude: ['createdAt', 'updatedAt']
-            },
-            where: {
-                username: req.body.loginUsername
-            }
-        })*/
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'SELECT username, password FROM users WHERE (username = ?)'")
         const [results2, metadata2] = await db.query(`SET @a = '${req.body.loginUsername}'`)
         const [results3, metadata3] = await db.query("EXECUTE stmt1 USING @a")
         const [results4, metadata4] = await db.query("DEALLOCATE PREPARE stmt1")
-        //console.log('results in user_login_post: ' + JSON.stringify(results3))
-        //console.log('user[0]: ' + JSON.stringify(user[0]))
-        //console.log('user: ' + JSON.stringify(user));
         if ((results3[0].username === req.body.loginUsername) && (await bcrypt.compare(req.body.loginPassword, results3[0].password))) {
                 const stringifiedUser = JSON.stringify(results3[0].username)
                 const accessToken = jwt.sign({
@@ -86,9 +57,7 @@ exports.user_login_post = async function(req, res, next) {
 
 exports.user_login_cookies = async function(req, res, next) {
     try {
-        //console.log('req.cookies in user_login_post: ' + JSON.stringify(req.cookies))
         if (req.cookies.token) {
-            //console.log('tokennn: ' + req.cookies.token)
             jwt.verify(req.cookies.token, process.env.ACCESS_TOKEN_SECRET)
             return res.status(200).json({success: 'success', token: req.cookies.token})
         } else {

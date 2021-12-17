@@ -6,7 +6,6 @@ const NavbarHeader = (props) => {
     const [showSearchBar, setShowSearchBar] = useState(false);
 
     function openNav() {
-        //console.log("entered openNav");
         props.setDisplayNavbar(true);
     }
 

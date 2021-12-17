@@ -3,16 +3,13 @@ import { AiOutlineClose } from 'react-icons/ai';
 import styles from './NavbarOptions.module.css';
 
 const NavbarOptions = (props) => {
-    //console.log("displayNavbar is true or false: " + props.displayNavbar);
     
     function booksOptionClickHandler() {
-        //console.log("hello books");
         props.displayBookComponentFunction();
         props.setDisplayNavbar(false);
     }
 
     function authorsOptionClickHandler() {
-        //console.log("hello authors");
         props.displayAuthorComponentFunction();
         props.setDisplayNavbar(false);
     }
@@ -23,11 +20,6 @@ const NavbarOptions = (props) => {
     }
 
     function xbuttonClickHandler() {
-        props.setDisplayNavbar(false);
-    }
-
-    function userInfoOptionClickHandler() {
-        props.displayUserInfoComponentFunction();
         props.setDisplayNavbar(false);
     }
 

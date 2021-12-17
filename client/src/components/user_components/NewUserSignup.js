@@ -61,16 +61,12 @@ const NewUserSignup = (props) => {
         })
 
         const data = await response.json();
-        //console.log('data in NewUserSignup: ' + JSON.stringify(data));
         if (typeof data === 'object') {
             if (data.hasOwnProperty('errors')) {
-                //console.log('data in NewUserSignup: ' + JSON.stringify(data))
                 setAreValidationErrors(true);
-                //console.log("data.errors: " + JSON.stringify(data.errors));
                 let errorMessages = data.errors.map(element => element.msg);
                 if (errorMessages.indexOf('SequelizeUniqueConstraintError') >= 0) {
                     errorMessages.pop();
-                    //console.log(JSON.stringify(data.errors[0].type))
                     if (data.errors[0].type === 'users.username') {
                         errorMessages.push('That username already exists in the database. Please pick a different username.')
                     }
@@ -86,12 +82,6 @@ const NewUserSignup = (props) => {
                 setTimeout(() => {
                     props.setIsNewUser(false);
                 }, 3000);
-                /*setNewUserFirstName('');
-                setNewUserLastName('');
-                setNewUserEmail('');
-                setNewUserUsername('');
-                setNewUserPassword('');
-                setNewUserConfirmedPassword('');*/
             }
         }
     }

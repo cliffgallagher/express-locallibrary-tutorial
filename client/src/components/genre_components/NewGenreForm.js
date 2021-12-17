@@ -26,36 +26,24 @@ const NewGenreForm = (props) => {
             body: JSON.stringify(genreName)
         });
         const data = await response.json();
-        /*console.log("data in newGenreForm: " + JSON.stringify(data));
-        if (data === 'SequelizeUniqueConstraintError') {
-            console.log("you did it");
-            props.setAddNewGenre(false);
-            props.setAddingDuplicateAuthor(true);
-        } else {
-            props.setAddNewGenre(false);
-            props.getGenreList();
-        }*/
+
         if (typeof data === 'object') {
             if (data.name === 'TokenExpiredError') {
                 auth.setIsLoggedIn(false);
             }
-            //console.log("data: " + JSON.stringify(data));
+
             if (data.hasOwnProperty('errors')) {
-                //console.log("data.errors: " + JSON.stringify(data.errors));
+
                 const errorMessages = data.errors.map(element => element.msg);
                 if (errorMessages.includes("SequelizeUniqueConstraintError")) {
                     props.setAddNewGenre(false);
                     props.setAddingDuplicateGenre(true);
                 } else {
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                     setValidationErrors(() => {
                         return errorMessages.map(element => <li>{element}</li>);
                     });
                 }
-                //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
-                // figure out
-                //console.log("book inserted");
                 props.setAddNewGenre(false);
                 props.getGenreList();
             }

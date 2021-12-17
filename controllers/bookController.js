@@ -75,7 +75,7 @@ exports.book_create_get = function(req, res) {
 };
 
 // Handle book create on POST.
-exports.book_create_post = async function(req, res) {
+exports.book_create_post = async function(req, res, next) {
     try {
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
         const [results2, metadata2] = await db.query(`SET @a = '${req.body.title}'`)
@@ -89,6 +89,7 @@ exports.book_create_post = async function(req, res) {
         res.json(results7)
     } catch(e) {
         console.log(e)
+        next(e)
     }
     /*try {
         const newBook = await Book.create({
@@ -181,7 +182,7 @@ exports.book_update_get = async function(req, res) {
 };
 
 // Handle book update on POST.
-exports.book_update_post = async function(req, res) {
+exports.book_update_post = async function(req, res, next) {
 
     try {
         console.log("update request in POST handler: " + JSON.stringify(req.body));
@@ -211,6 +212,7 @@ exports.book_update_post = async function(req, res) {
         res.json(results9);
     } catch(e) {
         console.log(e);
+        next(e)
     }
     //res.send('NOT IMPLEMENTED: Book update POST');
     

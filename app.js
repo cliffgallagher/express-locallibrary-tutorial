@@ -86,8 +86,21 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  //console.log('error in default handler: ' + JSON.stringify(err.name).toLowerCase())
+  if (err.name.toLowerCase().includes('error')) {
+    //console.log('entered if block')
+    res.json({
+      "errors": [
+        {
+          'msg': 'Invalid input'
+        }
+      ]
+    });
+  } else {
+    res.end()
+  }
   //res.render('error');
-  res.end()
+
 });
 
 /*const port = process.env.PORT || 3001;

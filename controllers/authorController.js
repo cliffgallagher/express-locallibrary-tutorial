@@ -116,7 +116,7 @@ exports.author_update_get = async function(req, res) {
 }
 
 // Handle Author update on POST.
-exports.author_update_post = async function(req, res) {
+exports.author_update_post = async function(req, res, next) {
     try {
         /*const authorObject = await Author.update({
             first_name: req.body.first_name,
@@ -155,6 +155,7 @@ exports.author_update_post = async function(req, res) {
         }
     } catch(e) {
         console.log(e);
+        next(e)
     }
 
 }

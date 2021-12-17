@@ -35,7 +35,7 @@ const BookPopupForUpdate = (props) => {
                 return [authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
             }); 
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }     
     }
 
@@ -78,7 +78,7 @@ const BookPopupForUpdate = (props) => {
             setInitialTitle(bodyOfResponse[0].title);
             
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
 

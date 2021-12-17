@@ -91,7 +91,7 @@ const NewAuthorForm = (props) => {
                     }
                 }
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
     

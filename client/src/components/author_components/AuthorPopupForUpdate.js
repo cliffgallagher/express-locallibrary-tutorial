@@ -34,7 +34,7 @@ const AuthorPopupForUpdate = (props) => {
             setInitialFirstName(data[0].first_name);
             setInitialLastName(data[0].family_name);
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
         
     }
@@ -82,7 +82,7 @@ const AuthorPopupForUpdate = (props) => {
                 }
             }
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
 
@@ -121,7 +121,7 @@ const AuthorPopupForUpdate = (props) => {
                 }
             }
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
 
@@ -141,7 +141,7 @@ const AuthorPopupForUpdate = (props) => {
         } else {
             updateAuthorNameCheck(updatedAuthorData);
         }
-        console.log(JSON.stringify(updatedAuthorData));
+        //console.log(JSON.stringify(updatedAuthorData));
     }
     
     useEffect(() => {

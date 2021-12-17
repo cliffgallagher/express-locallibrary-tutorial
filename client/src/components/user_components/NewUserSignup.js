@@ -64,7 +64,7 @@ const NewUserSignup = (props) => {
         //console.log('data in NewUserSignup: ' + JSON.stringify(data));
         if (typeof data === 'object') {
             if (data.hasOwnProperty('errors')) {
-                console.log('data in NewUserSignup: ' + JSON.stringify(data))
+                //console.log('data in NewUserSignup: ' + JSON.stringify(data))
                 setAreValidationErrors(true);
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 let errorMessages = data.errors.map(element => element.msg);

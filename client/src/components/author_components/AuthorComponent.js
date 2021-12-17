@@ -22,7 +22,7 @@ const AuthorComponent = () => {
                 }
             });
             const data = await response.json();
-            console.log('author data: ' + JSON.stringify(data));
+            //console.log('author data: ' + JSON.stringify(data));
             if (typeof data === 'object') {
                 if (data.name === 'TokenExpiredError') {
                     auth.setIsLoggedIn(false);
@@ -33,7 +33,7 @@ const AuthorComponent = () => {
                 return data.map(element => <AuthorListElement key={element.author_id} authorID={element.author_id} firstName={element.first_name} familyName={element.family_name} dateOfBirth={element.date_of_birth} dateOfDeath={element.date_of_death} setDisplayAuthorPopupForUpdate={setDisplayAuthorPopupForUpdate} authorInfoToAuthorComponent={authorInfoToAuthorComponent} setDisplayAuthorPopupForDelete={setDisplayAuthorPopupForDelete} setDisplayAuthors={setDisplayAuthors} getAuthorList={getAuthorList}/>);
             });
         } catch(e) {
-            console.log('error: ' + e);
+            //console.log('error: ' + e);
         }        
     }
 

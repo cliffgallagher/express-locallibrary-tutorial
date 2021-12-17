@@ -37,7 +37,7 @@ const NewBook = (props) => {
             genre_id: genre_id
         }
         setNewBookInfo(objectForDuplicateWarning);
-        console.log("objectForDuplicateWarning info in NewBook: " + JSON.stringify(objectForDuplicateWarning));
+        //console.log("objectForDuplicateWarning info in NewBook: " + JSON.stringify(objectForDuplicateWarning));
         //props.newBookInfoNewBookToBookComponent(objectForDuplicateWarning);
         //console.log("objectForDuplicateWarning in NewBook: " + JSON.stringify(objectForDuplicateWarning));
     }

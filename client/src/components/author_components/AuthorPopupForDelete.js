@@ -29,7 +29,7 @@ const AuthorPopupForDelete = (props) => {
             setAuthorBirthDateOnDeleteForm(`${data[0].date_of_birth.slice(5, 7)}-${data[0].date_of_birth.slice(8, 10)}-${data[0].date_of_birth.slice(0, 4)}`);
             data[0].date_of_death && setAuthorDeathDateOnDeleteForm(`${data[0].date_of_death.slice(5, 7)}-${data[0].date_of_death.slice(8, 10)}-${data[0].date_of_death.slice(0, 4)}`);
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
         
     }
@@ -45,7 +45,7 @@ const AuthorPopupForDelete = (props) => {
                 }
             });
             const data = await response.json();
-            console.log("data in popupfordelete: " + JSON.stringify(data));
+            //console.log("data in popupfordelete: " + JSON.stringify(data));
             //console.log('typeof data: ' + typeof data);
             /*if (data === 'SequelizeForeignKeyConstraintError') {
                 //console.log('entered if block');

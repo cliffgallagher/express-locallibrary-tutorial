@@ -39,7 +39,7 @@ const NewGenreForm = (props) => {
             if (data.name === 'TokenExpiredError') {
                 auth.setIsLoggedIn(false);
             }
-            console.log("data: " + JSON.stringify(data));
+            //console.log("data: " + JSON.stringify(data));
             if (data.hasOwnProperty('errors')) {
                 //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);

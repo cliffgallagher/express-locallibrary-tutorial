@@ -24,7 +24,7 @@ const GenrePopupForDelete = (props) => {
             //console.log(JSON.stringify(data));
             setGenreToDelete(data[0].name);
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
 
@@ -38,7 +38,7 @@ const GenrePopupForDelete = (props) => {
             }
         });
         const data = await response.json();
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         /*if (data === "SequelizeForeignKeyConstraintError") {
             setReceivedForeignKeyConstraintError(true);
         } else {

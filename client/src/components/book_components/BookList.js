@@ -4,7 +4,7 @@ import styles from '../List.module.css';
 const BookList = (props) => {
     //const [myArray, setMyArray] = useState([]);
 
-    console.log("rendered BookList component");
+    //console.log("rendered BookList component");
 
 
     /*const getBookList = async () => {

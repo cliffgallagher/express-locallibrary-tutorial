@@ -23,7 +23,7 @@ const GenrePopupForUpdate = (props) => {
             }
             setGenreUpdateFormNameValue(data[0].name);
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
     
@@ -83,7 +83,7 @@ const GenrePopupForUpdate = (props) => {
                 }
             }
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
 

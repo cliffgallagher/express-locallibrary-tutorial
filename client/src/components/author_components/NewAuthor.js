@@ -26,7 +26,7 @@ const NewAuthor = (props) => {
 
     function passNewAuthorInfo(newAuthorInfo) {
         setNewAuthorInfoState(newAuthorInfo);
-        console.log("newAuthorInfo in NewAuthor: " + JSON.stringify(newAuthorInfo));
+        //console.log("newAuthorInfo in NewAuthor: " + JSON.stringify(newAuthorInfo));
         //console.log("new author info in NewAuthor component: " + JSON.stringify(newAuthorInfo));
         //props.passNewAuthorInfo(newAuthorInfo);
     }

@@ -27,7 +27,7 @@ const BookPopupForDelete = (props) => {
             setISBNToDelete(bodyOfResponse[0].isbn);
             setAuthorToDelete(`${bodyOfResponse[0].first_name} ${bodyOfResponse[0].family_name}`);
         } catch(e) {
-            console.log(e);
+            //console.log(e);
         }
     }
 

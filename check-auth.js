@@ -10,8 +10,6 @@ module.exports = (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
         next()
     } catch(e) {
-        //res.status(401).json(e)
-        //console.log('error name: ' + e.name)
         next(e)
     }
 }

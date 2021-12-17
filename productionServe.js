@@ -24,7 +24,6 @@ app.use(function(req, res, next) {
 // handle SequelizeForeignKeyConstraint errors
 app.use((error, req, res, next) => {
   if (error.name === 'SequelizeForeignKeyConstraintError') {
-    //console.log("entered sequelize error handler");
     res.json('SequelizeForeignKeyConstraintError');
   } else {
     next()

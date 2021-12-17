@@ -56,7 +56,8 @@ app.use((error, req, res, next) => {
     res.json({
       "errors": [
         {
-          'msg': 'SequelizeUniqueConstraintError'
+          'msg': 'SequelizeUniqueConstraintError',
+          'type': error.errors[0].path
         }
       ]
     });

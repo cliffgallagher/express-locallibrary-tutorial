@@ -38,7 +38,7 @@ exports.user_create_post = async function(req, res, next) {
         res.json(results8)
 
     } catch(e) {
-        console.log('error in user_create_post: ' + e)
+        console.log('error in user_create_post: ' + JSON.stringify(e))
         next(e);
     }
 

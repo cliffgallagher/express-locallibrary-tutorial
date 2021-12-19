@@ -4,7 +4,6 @@ import NewBook from './NewBook';
 import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
-import DisplaySelector from '../DisplaySelector';
 import {AuthContext} from '../../context/auth-context';
 
 const BookComponent = (props) => {

@@ -35,6 +35,7 @@ const NavbarOptions = (props) => {
         const response = await fetch('users/logout', {
             method: 'POST'
         });
+        props.setDisplayNavbar(false);
         props.setIsLoggedIn(false);
     }
     

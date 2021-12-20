@@ -39,7 +39,6 @@ body('isbn').custom((value) => {
 }),
 body('isbn').custom((value) => {
     if ((value.length !== 0) && (value.length !== 10) && (value.length !== 13)) {
-        //console.log("entered if block of custom validator");
         throw new Error("ISBN must be 0, 10 or 13 numbers long");
     }
     return true;
@@ -52,7 +51,6 @@ body('author_id').not().isEmpty().withMessage("Must pick an author."),
 body('genre_id').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
-    //console.log("inside book/create/two: " + JSON.stringify(req.body)),
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -61,33 +59,13 @@ function(req, res, next) {
 }, binarySearchController.search_for_existing_title, book_controller.book_create_post);
 
 
-router.post('/book/create/two', 
-/*body('title').isLength({min: 1}),
-function(req, res, next) {
-    //console.log("inside book/create/two: " + JSON.stringify(req.body)),
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    next()
-},*/ book_controller.book_create_post);
-
-/*** OLD POST REQUEST FOR CREATING BOOK
-router.post('/book/create', function(req, res, next) {
-    console.log("request body in /book/create in catalog.js: " + req.body)
-    next()
-}, book_controller.book_create_post);
-***/
-
+router.post('/book/create/two', book_controller.book_create_post);
 
 // GET request to delete Book.
 router.get('/book/:book_id/delete', book_controller.book_delete_get);
 
 // POST request to delete Book.
-router.post('/book/:book_id/delete', function(req, res, next) {
-    //console.log("request body in POST /book/delete in catalog.js: " + req.body)
-    next()
-}, book_controller.book_delete_post);
+router.post('/book/:book_id/delete', book_controller.book_delete_post);
 
 // GET request to update Book.
 router.get('/book/:book_id/update', book_controller.book_update_get);

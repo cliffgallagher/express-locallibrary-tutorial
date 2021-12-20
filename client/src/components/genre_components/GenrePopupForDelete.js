@@ -21,7 +21,6 @@ const GenrePopupForDelete = (props) => {
                     auth.setIsLoggedIn(false);
                 }
             }
-            //console.log(JSON.stringify(data));
             setGenreToDelete(data[0].name);
         } catch(e) {
             //console.log(e);
@@ -38,28 +37,19 @@ const GenrePopupForDelete = (props) => {
             }
         });
         const data = await response.json();
-        //console.log(JSON.stringify(data));
-        /*if (data === "SequelizeForeignKeyConstraintError") {
-            setReceivedForeignKeyConstraintError(true);
-        } else {
-            props.setDisplayGenrePopupForDelete(false);
-            props.getGenreList();
-        }*/
+
         if (data.name === 'TokenExpiredError') {
             auth.setIsLoggedIn(false);
         }
         if (data.hasOwnProperty('errors')) {
-            //console.log("data.errors: " + JSON.stringify(data.errors));
             const errorMessages = data.errors.map(element => element.msg);
             if (errorMessages.includes("SequelizeForeignKeyConstraintError")) {
                 setReceivedForeignKeyConstraintError(true);
             } else {
-                //console.log("errorMessages: " + JSON.stringify(errorMessages));
                 setValidationErrors(() => {
                     return errorMessages.map(element => <li>{element}</li>);
                 });
             }
-            //console.log("errorMessages: " + JSON.stringify(errorMessages));
         } else {
             props.setDisplayElementPopupForDelete(false);
             props.setDisplayChosenElement(false);

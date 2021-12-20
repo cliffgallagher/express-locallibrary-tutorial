@@ -25,7 +25,6 @@ const NewBookForm = (props) => {
                 auth.setIsLoggedIn(false);
             }
         }
-        //console.log(JSON.stringify(authorObjectArray));
         setAuthorOptions((prevState) => {
             return [...prevState, authorObjectArray.map(element => <option key={element.author_id} value={element.author_id}>{element.family_name + ", " + element.first_name}</option>)];
         })     
@@ -64,14 +63,9 @@ const NewBookForm = (props) => {
             genre_id: genreInput
         }
 
-        //console.log("input data in New Book Form: " + JSON.stringify(userInputData));
-
         props.newBookInfoToNewBook(userInputData);
-
-        //console.log("userInput in new book form: " + JSON.stringify(userInputData));
         
         const insertBook = async () => {
-            //console.log("entered insertBook");
             const response = await fetch('catalog/book/create/one', {
                 method: 'POST',
                 headers: {
@@ -81,50 +75,27 @@ const NewBookForm = (props) => {
                 body: JSON.stringify(userInputData)
             });
             const data = await response.json();
-            //console.log("data in NewBookForm: " + JSON.stringify(data));
             return data;
         }
 
         const data = await insertBook();
-        //console.log("data has property 'errors': " + data.hasOwnProperty('errors'));
-        /*if (data === "title already present in database") {
-            props.isAddingDuplicate();
-        } else {
-            console.log("book inserted");
-            props.getBookListNewBookToBookForm();
-            setTitleInput("");
-            setISBNInput("");
-            setSummaryInput("");
-            setAuthorInput(0);
-            setGenreInput(0);
-        }*/
 
         if (typeof data === 'object') {
             if (data.name === 'TokenExpiredError') {
                 auth.setIsLoggedIn(false);
             }
             if (data.hasOwnProperty('errors')) {
-                //console.log("data.errors: " + JSON.stringify(data.errors));
                 const errorMessages = data.errors.map(element => element.msg);
                 if (errorMessages.includes("title already in database")) {
                     props.isAddingDuplicate();
                 } else {
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                     setValidationErrors(() => {
                         return errorMessages.map(element => <li>{element}</li>);
                     });
                 }
-                //console.log("errorMessages: " + JSON.stringify(errorMessages));
             } else {
-                // figure out
-                //console.log("book inserted");
                 props.getBookListNewBookToBookForm();
                 props.onCancel();
-                /*setTitleInput("");
-                setISBNInput("");
-                setSummaryInput("");
-                setAuthorInput(0);
-                setGenreInput(0);*/
             }
         }
     }

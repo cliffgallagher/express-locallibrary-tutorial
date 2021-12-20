@@ -5,29 +5,10 @@ import ChosenGenre from './ChosenGenre.js';
 import { AuthContext } from "../../context/auth-context";
 
 const GenreListItem = (props) => {
-    const [showUpdateAndDeleteButtons, setShowUpdateAndDeleteButtons] = useState(false);
     const [displayChosenElement, setDisplayChosenElement] = useState(false);
     const [hideChosenElement, setHideChosenElement] = useState(false);
     const [gridOrder, setGridOrder] = useState();
     const auth = useContext(AuthContext);
-
-    function mouseEnterGenreListItemHandler() {
-        setShowUpdateAndDeleteButtons(true);
-    }
-
-    function mouseLeaveGenreListItemHandler() {
-        setShowUpdateAndDeleteButtons(false);
-    }
-
-    function updateGenreButtonClickHandler() {
-        props.setDisplayGenrePopupForUpdate(true);
-        props.receiveGenreID(props.genreID);
-    }
-
-    function deleteGenreButtonHandler() {
-        props.setDisplayGenrePopupForDelete(true);
-        props.receiveGenreID(props.genreID);
-    }
 
     function clickElementHandler() {
         setDisplayChosenElement(true);
@@ -39,7 +20,6 @@ const GenreListItem = (props) => {
             if (auth.searchText.length > 0 ) {
                 const searchTextToLowerCase = auth.searchText.toLowerCase();
                 if (!(props.genreName.toLowerCase().includes(searchTextToLowerCase))) {
-                    //console.log('no such text found');
                     setHideChosenElement(true);
                     setGridOrder(true);
                 } else {

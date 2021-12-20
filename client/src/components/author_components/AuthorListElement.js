@@ -10,27 +10,6 @@ const AuthorListElement = (props) => {
     const [displayChosenElement, setDisplayChosenElement] = useState(false);
     const [gridOrder, setGridOrder] = useState(false);
     const auth = useContext(AuthContext);
-    //console.log('date of birth in AuthorListElement: ' + props.dateOfBirth);
-    function showUpdateAndDeleteButtons() {
-        setDisplayUpdateAndDeleteButtons(true);
-    }
-
-    function hideUpdateAndDeleteButtons() {
-        setDisplayUpdateAndDeleteButtons(false);
-    }
-
-    function updateAuthorButtonClickHandler() {
-        props.setDisplayAuthorPopupForUpdate(true);
-        //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
-        props.authorInfoToAuthorComponent(props.authorID);
-    }
-
-    function deleteAuthorButtonClickHandler() {
-        props.setDisplayAuthors(false);
-        props.setDisplayAuthorPopupForDelete(true);
-        //props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
-        props.authorInfoToAuthorComponent(props.authorID);
-    }
 
     function clickElementHandler() {
         if(!displayChosenElement) {
@@ -47,12 +26,7 @@ const AuthorListElement = (props) => {
                 const authorFullName = props.firstName + ' ' + props.familyName;
                 const authorLastNameCommaFirst = props.familyName + ', ' + props.firstName;
                 const authorLastNameFirst = props.familyName + ' ' + props.firstName;
-                /*console.log('authorLastNameCommaFirst: ' + authorLastNameCommaFirst);
-                console.log('authorFullName: ' + authorFullName);
-                console.log('name: ' + props.firstName + ', dateOfDeath: ' + props.dateOfDeath);
-                console.log('searchable dob: ' + searchableBirthDate);
-                console.log('dateOfBirth: ' + props.dateOfBirth);
-                console.log('searchTextToLowerCase: ' + searchTextToLowerCase);*/
+
                 if (!(props.firstName.toLowerCase().includes(searchTextToLowerCase)) && !(props.familyName.toLowerCase().includes(searchTextToLowerCase)) && !(searchableBirthDate.includes(searchTextToLowerCase)) && !(authorFullName.toLowerCase().includes(searchTextToLowerCase)) && !(authorLastNameCommaFirst.toLowerCase().includes(searchTextToLowerCase)) && !(authorLastNameFirst.toLowerCase().includes(searchTextToLowerCase))) {
                     if (props.dateOfDeath) {
                         const searchableDeathDate = props.dateOfDeath.slice(5,10) + '-' + props.dateOfDeath.slice(0,4);
@@ -86,7 +60,7 @@ const AuthorListElement = (props) => {
     }, [auth.searchText]);
     
     return (
-        <div className={`${styles.listElement} ${hideChosenElement ? styles.hideElement: ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler}/*{styles.listElement} onMouseEnter={showUpdateAndDeleteButtons} onMouseLeave={hideUpdateAndDeleteButtons}*/>
+        <div className={`${styles.listElement} ${hideChosenElement ? styles.hideElement: ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler}>
             {!displayChosenElement && (
                 <div>
                     <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>

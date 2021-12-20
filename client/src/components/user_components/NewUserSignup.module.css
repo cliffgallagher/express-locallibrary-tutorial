@@ -78,6 +78,7 @@
     display: flex;
     font-size: .75rem;
     align-items: center;
+    accent-color: black;
 }
 
 #show_password_checkbox input {

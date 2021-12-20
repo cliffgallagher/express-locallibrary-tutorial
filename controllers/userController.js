@@ -47,7 +47,12 @@ exports.user_login_post = async function(req, res, next) {
         }
     } catch(e) {
         //console.log('error in catch block: ' + e)
-        next(e)
+        //next(e)
+        res.status(403).json({
+            errors: [{
+                msg: 'Incorrect username/password'
+            }]
+        })
     }
 }
 

@@ -28,6 +28,7 @@ const DuplicateAuthorWarning = (props) => {
     
     function hideDuplicateAuthorWarning() {
         props.hideDuplicateAuthorWarning();
+        props.hideNewAuthorForm();
     }
     
     return (

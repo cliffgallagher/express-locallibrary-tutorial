@@ -34,7 +34,6 @@ app.use(function(req, res, next) {
 // handle SequelizeForeignKeyConstraint errors
 app.use((error, req, res, next) => {
   if (error.name === 'SequelizeForeignKeyConstraintError') {
-    //console.log("entered sequelize error handler");
     res.json({
       "errors": [
         {
@@ -42,17 +41,13 @@ app.use((error, req, res, next) => {
         }
       ]
     });
-    //res.json('SequelizeForeignKeyConstraintError');
   } else {
-    //console.log("entered else block of foreign key constraint handler")
     next(error)
   }
 })
 
 app.use((error, req, res, next) => {
-  //console.log("entered constraint error handler");
   if (error.name === 'SequelizeUniqueConstraintError') {
-    //console.log('correctly entered unique constraint block')
     res.json({
       "errors": [
         {
@@ -62,34 +57,26 @@ app.use((error, req, res, next) => {
       ]
     });
   } else {
-    //console.log('i am in next block wrongly')
     next(error)
   }
 })
 
 app.use((error, req, res, next) => {
-  //console.log("entered constraint error handler");
   if (error.name === 'TokenExpiredError') {
-    //console.log('correctly entered unique constraint block')
     res.json(error);
   } else {
-    //console.log('i am in next block wrongly')
     next(error)
   }
 })
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  //console.log("entered dfault error handler")
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  //console.log('error in default handler: ' + JSON.stringify(err.name).toLowerCase())
   if (err.name.toLowerCase().includes('error')) {
-    //console.log('entered if block')
     res.json({
       "errors": [
         {
@@ -100,14 +87,6 @@ app.use(function(err, req, res, next) {
   } else {
     res.end()
   }
-  //res.render('error');
-
 });
-
-/*const port = process.env.PORT || 3001;
-app.listen(port, function(err){
-  if (err) console.log("Error in server setup")
-  console.log(`Server listening on port ${port}`);
-})*/
 
 module.exports = app;

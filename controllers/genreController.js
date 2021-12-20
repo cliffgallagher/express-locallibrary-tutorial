@@ -3,7 +3,6 @@ const db = require("../config/database");
 
 // Display list of all Genre.
 exports.genre_list = async function(req, res, next) {
-    //console.log('entered correct controller');
     const promise = await Genre.findAll({
         order: [
             ['name', 'ASC']
@@ -25,12 +24,6 @@ exports.genre_create_get = function(req, res) {
 // Handle Genre create on POST.
 exports.genre_create_post = async function(req, res, next) {
     try {
-        /*const newGenre = await Genre.create({
-            name: req.body.genreName
-        })
-        
-        res.send(newGenre)*/
-        //console.log('req.body in genre_create_post: ' + JSON.stringify(req.body))
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO genres (name, createdAt, updatedAt) VALUES (?, NOW(), NOW())'")
         const [results2, metadata2] = await db.query(`SET @a = '${req.body.genreName}'`)
         const [results3, metadata3] = await db.query("EXECUTE stmt1 USING @a")
@@ -59,7 +52,6 @@ exports.genre_delete_get = async function(req, res, next) {
 
 // Handle Genre delete on POST.
 exports.genre_delete_post = async function(req, res, next) {
-    //console.log("entered genre_delete_post controller");
     try {
         const deletedGenre = await Genre.destroy({
             where: {
@@ -68,7 +60,6 @@ exports.genre_delete_post = async function(req, res, next) {
         })
         res.json(deletedGenre);
     } catch(e) {
-        //console.log("entered catch block in delete_post controller")
         next(e);
     }
 };
@@ -81,7 +72,6 @@ exports.genre_update_get = async function(req, res, next) {
                 genre_id: req.params.id
             }
         })
-        //console.log('genreObject in controller: ' + JSON.stringify(genreObject));
         res.json(genreObject);
     } catch(e) {
         //console.log(e)
@@ -92,14 +82,6 @@ exports.genre_update_get = async function(req, res, next) {
 // Handle Genre update on POST.
 exports.genre_update_post = async function(req, res, next) {
     try {
-        /*const updatedGenre = await Genre.update({
-          name: req.body.genreName  
-        }, {
-            where: {
-                genre_id: req.params.id
-            }
-        })
-        res.json(updatedGenre);*/
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE genres SET name=?, updatedAt=NOW() WHERE genre_id=?'")
         const [results2, metadata2] = await db.query(`SET @a = '${req.body.genreName}'`)
         const [results3, metadata3] = await db.query(`SET @b = '${req.params.id}'`)

@@ -33,7 +33,6 @@ const NewAuthorForm = (props) => {
     async function newAuthorFormSubmitHandler(event) {
         event.preventDefault();
         setValidationErrors([]);
-        //console.log('newAuthorDeathDate: ' + newAuthorDeathDate);
         let newAuthorFormInfo = {
             first_name: newAuthorFirstName,
             family_name: newAuthorFamilyName,
@@ -43,11 +42,8 @@ const NewAuthorForm = (props) => {
         if (newAuthorDeathDate) {
             newAuthorFormInfo = {...newAuthorFormInfo, dateOfDeath: newAuthorDeathDate};
         }
-        //console.log('newAuthorFormInfo: ' + JSON.stringify(newAuthorFormInfo));
 
         props.passNewAuthorInfo(newAuthorFormInfo);
-
-        //console.log("newAuthorFormInfo: " + JSON.stringify(newAuthorFormInfo));
 
         try {
             const response = await fetch('catalog/author/create/one', {
@@ -58,38 +54,30 @@ const NewAuthorForm = (props) => {
                 },
                 body: JSON.stringify(newAuthorFormInfo)
             });
-            //props.hideNewAuthorForm();
+
             const data = await response.json();
-            //console.log("data: " + JSON.stringify(data));
-            //console.log("data: " + data);
-            /*if (data === "author already present in database") {
-                //console.log("yes, author is in database");
-                props.showDuplicateAuthorWarning();
-            } else {
-                //console.log("author not already in list, was inserted");
-                props.getAuthorList();*/
-                if (typeof data === 'object') {
-                    if (data.name === 'TokenExpiredError') {
-                        auth.setIsLoggedIn(false);
-                    }
-                    if (data.hasOwnProperty('errors')) {
-                        //console.log("data.errors: " + JSON.stringify(data.errors));
-                        const errorMessages = data.errors.map(element => element.msg);
-                        if (errorMessages.includes("author already in database")) {
-                            props.showDuplicateAuthorWarning(true);
-                        } else {
-                            //console.log("errorMessages: " + JSON.stringify(errorMessages));
-                            setValidationErrors(() => {
-                                return errorMessages.map(element => <li>{element}</li>);
-                            });
-                        }
-                        //console.log("errorMessages: " + JSON.stringify(errorMessages));
-                    } else {
-                        props.getAuthorList();
-                        props.hideNewAuthorForm();
-                        return response;
-                    }
+            if (typeof data === 'object') {
+                if (data.name === 'TokenExpiredError') {
+                    auth.setIsLoggedIn(false);
                 }
+                if (data.hasOwnProperty('errors')) {
+                    //console.log("data.errors: " + JSON.stringify(data.errors));
+                    const errorMessages = data.errors.map(element => element.msg);
+                    if (errorMessages.includes("author already in database")) {
+                        props.showDuplicateAuthorWarning(true);
+                    } else {
+                        //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                        setValidationErrors(() => {
+                            return errorMessages.map(element => <li>{element}</li>);
+                        });
+                    }
+                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
+                } else {
+                    props.getAuthorList();
+                    props.hideNewAuthorForm();
+                    return response;
+                }
+            }
         } catch(e) {
             //console.log(e);
         }

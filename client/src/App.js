@@ -4,7 +4,6 @@ import styles from './App.module.css';
 import BookComponent from './components/book_components/BookComponent';
 import AuthorComponent from './components/author_components/AuthorComponent';
 import GenreComponent from './components/genre_components/GenreComponent';
-import UserInfoComponent from './components/user_components/UserInfoComponent';
 import NavbarHeader from './components/NavbarHeader';
 import NavbarOptions from './components/NavbarOptions';
 import Login from './components/user_components/Login.js';
@@ -107,7 +106,6 @@ function App() {
               {displayBookComponent && !displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent && <BookComponent/>}
               {!displayBookComponent && displayAuthorComponent && !displayGenreComponent && !displayUserInfoComponent &&<AuthorComponent />}
               {!displayBookComponent && !displayAuthorComponent && displayGenreComponent && !displayUserInfoComponent &&<GenreComponent />}
-              {!displayBookComponent && !displayAuthorComponent && !displayGenreComponent && displayUserInfoComponent &&<UserInfoComponent/>}
             </AuthContext.Provider>
           </div>
         )}

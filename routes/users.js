@@ -48,10 +48,7 @@ function(req, res, next) {
   next()
 }, userController.user_login_post)
 
-router.post('/checkcookies', (req, res, next) => {
-  //console.log('entered cookie_login route')
-  next()
-}, userController.user_login_cookies)
+router.post('/checkcookies', userController.user_login_cookies)
 
 router.post('/logout', userController.user_logout_post)
 

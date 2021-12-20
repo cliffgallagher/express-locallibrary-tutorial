@@ -23,15 +23,3 @@ module.exports = db.define('Author', {
         type: DataTypes.DATEONLY
     }
 });
-
-/*const test = async () => {
-try {
-    await db.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-  db.close();
-};
-
-test();*/

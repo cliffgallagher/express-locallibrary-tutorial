@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import styles from './App.module.css';
 import BookComponent from './components/book_components/BookComponent';
 import AuthorComponent from './components/author_components/AuthorComponent';
@@ -20,8 +19,6 @@ function App() {
   const [displayUserInfoComponent, setDisplayUserInfoComponent] = useState(false);
   const [token, setToken] = useState();
   const [searchText, setSearchText] = useState();
-
-  //console.log('searchText: ' + searchText);
 
   function displayBookComponentFunction() {
     setDisplayBookComponent(true);
@@ -56,28 +53,15 @@ function App() {
     setToken(token);
   }
 
-/*  useEffect(() => {
-    setIsLoggedIn(true);
-  }, []);*/
-
   async function checkForTokenInCookies() {
-    /*if (token in cookie matches token in context) {
-      setIsLoggedIn(true);
-    }*/
-    //console.log('checkForTokenInCookies ran');
     const response = await fetch('users/checkcookies', {
       method: 'POST'
     });
     const data = await response.json();
-    //console.log('fetch in App: ' + JSON.stringify(data));
     if (data.hasOwnProperty('success')) {
       setToken(data.token);
       setIsLoggedIn(true);
     };
-    /*const data = await response.json();
-    if (data.hasOwnProperty('success')) {
-      setIsLoggedIn(true);
-    }*/
   }
 
   useEffect(() => {

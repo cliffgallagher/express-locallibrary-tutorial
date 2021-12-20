@@ -5,10 +5,8 @@ import {AuthContext} from '../../context/auth-context';
 const DuplicateBookWarning = (props) => {
     const auth = useContext(AuthContext);
 
-    //console.log("newBookInfo in DuplicateBookWarning: " + JSON.stringify(props.newBookInfo));
     async function duplicateBookWarningSubmitHandler(event) {
         event.preventDefault();
-        //console.log("submit handler: " + props.newBookInfo);
         const response = await fetch('catalog/book/create/two', {
             method: 'POST',
             headers: {
@@ -32,7 +30,6 @@ const DuplicateBookWarning = (props) => {
         props.isNotAddingDuplicate();
         props.setIsAddingNewBook(false);
     }
-
 
     return (
         <div className={styles.popup}>

@@ -191,34 +191,25 @@ router.post('/author/:id/delete', author_controller.author_delete_post);
 
 // GET request to update Author.
 
-router.get('/author/:id/update', function(req, res, next) {
-    //console.log('authorID in author_update_get: ' + req.params.id)
-    next()
-}, author_controller.author_update_get);
+router.get('/author/:id/update', author_controller.author_update_get);
 
 // POST request to update Author.
 router.post('/author/:id/update/one', binarySearchController.search_for_existing_author, 
 body('first_name').not().isEmpty().withMessage('First name cannot be empty'),
 body('family_name').not().isEmpty().withMessage('Family name cannot be empty'),
 body('birthDate').custom((value, {req}) => {
-    //console.log("value: " + value);
-    //console.log("req: " + JSON.stringify(req.body));
     if (!value) {
         throw new Error ('Date of birth cannot be empty');
     }
     return true;
 }),
 body('birthDate').custom((value, {req}) => {
-    //console.log('req.body: ' + req.body.dateOfBirth);
-    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
     if (req.body.birthDate > new Date().toISOString().slice(0, 10)) {
         throw new Error('Date of birth cannot be a future date')
     }
     return true;
 }),
 body('deathDate').custom((value, {req}) => {
-    //console.log('req.body: ' + req.body.dateOfBirth);
-    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
     if (value) {
         if (req.body.deathDate > new Date().toISOString().slice(0, 10)) {
             throw new Error('Date of death cannot be a future date')
@@ -246,26 +237,18 @@ function(req, res, next) {
 
 router.post('/author/:id/update/two',
 body('birthDate').custom((value, {req}) => {
-    //console.log(value.length);
-    //console.log("value in update/two: " + value);
-    //console.log("req: " + JSON.stringify(req.body));
     if (value === "" || !value ) {
-        //console.log("entered if statement");
         throw new Error ('Date of birth cannot be empty');
     }
     return true;
 }),
 body('birthDate').custom((value, {req}) => {
-    //console.log('req.body: ' + req.body.dateOfBirth);
-    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
     if (req.body.birthDate > new Date().toISOString().slice(0, 10)) {
         throw new Error('Date of birth cannot be a future date')
     }
     return true;
 }),
 body('deathDate').custom((value, {req}) => {
-    //console.log('req.body: ' + req.body.dateOfBirth);
-    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
     if (value) {
         if (req.body.deathDate > new Date().toISOString().slice(0, 10)) {
             throw new Error('Date of death cannot be a future date')

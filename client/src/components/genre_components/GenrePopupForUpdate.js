@@ -50,32 +50,21 @@ const GenrePopupForUpdate = (props) => {
                 body: JSON.stringify(genreName)
             });
             const data = await response.json();
-            /*if (data === "SequelizeUniqueConstraintError") {
-                //console.log("you did it again");
-                setUpdatedGenreNameAlreadyExists(true);
-            } else {
-                props.setDisplayGenrePopupForUpdate(false);
-                props.getGenreList();
-            }*/
+
             if (typeof data === 'object') {
                 if (data.name === 'TokenExpiredError') {
                     auth.setIsLoggedIn(false);
                 }
                 if (data.hasOwnProperty('errors')) {
-                    //console.log("data.errors: " + JSON.stringify(data.errors));
                     const errorMessages = data.errors.map(element => element.msg);
                     if (errorMessages.includes("SequelizeUniqueConstraintError")) {
                         setUpdatedGenreNameAlreadyExists(true);
                     } else {
-                        //console.log("errorMessages: " + JSON.stringify(errorMessages));
                         setValidationErrors(() => {
                             return errorMessages.map(element => <li>{element}</li>);
                         });
                     }
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                 } else {
-                    // figure out
-                    //console.log("book inserted");
                     props.setDisplayElementPopupForUpdate(false);
                     props.setDisplayChosenElement(false);
                     props.setHideChosenElement(false);

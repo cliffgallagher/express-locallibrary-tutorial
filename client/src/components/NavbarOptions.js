@@ -26,11 +26,6 @@ const NavbarOptions = (props) => {
         props.setDisplayNavbar(false);
     }
 
-    function userInfoOptionClickHandler() {
-        props.displayUserInfoComponentFunction();
-        props.setDisplayNavbar(false);
-    }
-
     async function logoutOptionClickHandler() {
         const response = await fetch('users/logout', {
             method: 'POST'

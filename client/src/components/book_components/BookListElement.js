@@ -5,27 +5,11 @@ import ChosenBook from './ChosenBook';
 import { AuthContext } from '../../context/auth-context';
 
 const BookListElement = (props) => {
-    //console.log(`book list element ${props.title} rendered.`);
     const auth = useContext(AuthContext);
-    //console.log('rendereing BookListElement');
     
-
-    const [displayUpdateAndDeleteButtons, setDisplayUpdateAndDeleteButtons] = useState(false);
     const [hideElement, setHideElement] = useState(false);
     const [displayElement, setDisplayElement] = useState(false);
     const [gridOrder, setGridOrder] = useState(false);
-
-    //console.log('displayElement: ' + displayElement);
-    //console.log('hideElement: ' + hideElement);
-    //console.log("bookID in BookListElement: " + props.bookID);
-
-    function showUpdateAndDeleteButtons() {
-        setDisplayUpdateAndDeleteButtons(true);
-    }
-
-    function hideUpdateAndDeleteButtons() {
-        setDisplayUpdateAndDeleteButtons(false);
-    }
 
     function updateBookButtonClickHandler() {
         props.setDisplayBookPopupForUpdate(true);
@@ -33,16 +17,10 @@ const BookListElement = (props) => {
         setHideElement(true);
     }
 
-    function deleteBookButtonClickHandler() {
-        props.setDisplayBookPopupForDelete(true);
-        props.bookPropsFromBookListElementToBookComponent(props.bookID, props.authorID, props.genreID);
-    }
-
     function clickElementHandler() {
         if (!displayElement) {
             setHideElement(true);
             setDisplayElement(true);
-            //console.log("i clicked the element");
         }
     }
 
@@ -51,7 +29,6 @@ const BookListElement = (props) => {
             if (auth.searchText.length > 0 ) {
                 const searchTextToLowerCase = auth.searchText.toLowerCase();
                 if (!(props.title.toLowerCase().includes(searchTextToLowerCase)) && !(props.author.toLowerCase().includes(searchTextToLowerCase)) && !(props.isbn.toLowerCase().includes(searchTextToLowerCase)) && !(props.genreName.toLowerCase().includes(searchTextToLowerCase)) && !(props.summary.toLowerCase().includes(searchTextToLowerCase))) {
-                    //console.log('no such text found');
                     setHideElement(true);
                     setGridOrder(true);
                 } else {
@@ -71,9 +48,6 @@ const BookListElement = (props) => {
     useEffect(() => {
         searchForSearchText();
     }, [auth.searchText]);
-
-
-
 
     return (
         <div className={`${styles.listElement} ${hideElement ? styles.hideElement : ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler}>

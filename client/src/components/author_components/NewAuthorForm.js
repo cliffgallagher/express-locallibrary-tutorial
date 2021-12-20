@@ -61,17 +61,14 @@ const NewAuthorForm = (props) => {
                     auth.setIsLoggedIn(false);
                 }
                 if (data.hasOwnProperty('errors')) {
-                    //console.log("data.errors: " + JSON.stringify(data.errors));
                     const errorMessages = data.errors.map(element => element.msg);
                     if (errorMessages.includes("author already in database")) {
                         props.showDuplicateAuthorWarning(true);
                     } else {
-                        //console.log("errorMessages: " + JSON.stringify(errorMessages));
                         setValidationErrors(() => {
                             return errorMessages.map(element => <li>{element}</li>);
                         });
                     }
-                    //console.log("errorMessages: " + JSON.stringify(errorMessages));
                 } else {
                     props.getAuthorList();
                     props.hideNewAuthorForm();

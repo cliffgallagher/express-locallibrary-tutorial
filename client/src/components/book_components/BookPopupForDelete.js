@@ -10,7 +10,6 @@ const BookPopupForDelete = (props) => {
 
     async function fetchDeleteBookInfo() {
         try {
-            //console.log("bookID in delete popup: " + props.bookID);
             const response = await fetch(`catalog/book/${props.bookID}/delete`, {
                 headers: {
                     'Authorization': `Bearer ${auth.token}`
@@ -22,7 +21,6 @@ const BookPopupForDelete = (props) => {
                     auth.setIsLoggedIn(false);
                 }
             }
-            //console.log("delete info in popup for delete: " + JSON.stringify(bodyOfResponse))
             setTitleToDelete(bodyOfResponse[0].title);
             setISBNToDelete(bodyOfResponse[0].isbn);
             setAuthorToDelete(`${bodyOfResponse[0].first_name} ${bodyOfResponse[0].family_name}`);
@@ -41,7 +39,6 @@ const BookPopupForDelete = (props) => {
 
     async function deleteBookHandler(event) {
         event.preventDefault();
-        //console.log("bookID in delete button handler: " + props.bookID);
         const bookIDAsObject = {
             bookIDattribute: props.bookID
         };
@@ -55,9 +52,7 @@ const BookPopupForDelete = (props) => {
         });
         props.setDisplayElementPopupForDelete(false);
         props.setDisplayElement(false);
-        props.getBookList();
-        //console.log("have received response from post in PopupForDelete");
-        
+        props.getBookList();        
 
         return response;
     }

@@ -71,7 +71,6 @@ router.post('/book/:book_id/delete', book_controller.book_delete_post);
 router.get('/book/:book_id/update', book_controller.book_update_get);
 
 // POST request to update Book.
-//router.post('/book/:book_id/update', book_controller.book_update_post);
 router.post('/book/:book_id/update/one',
 
 body('title').not().isEmpty().withMessage("Title cannot be blank"),
@@ -83,7 +82,6 @@ body('isbn').custom((value) => {
 }),
 body('isbn').custom((value) => {
     if ((value.length !== 0) && (value.length !== 10) && (value.length !== 13)) {
-        //console.log("entered if block of custom validator");
         throw new Error("ISBN must be 0, 10 or 13 numbers long");
     }
     return true;
@@ -96,7 +94,6 @@ body('authorID').not().isEmpty().withMessage("Must pick an author."),
 body('genreID').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
-    //console.log("inside book/update/one: " + JSON.stringify(req.body));
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -114,7 +111,6 @@ body('isbn').custom((value) => {
 }),
 body('isbn').custom((value) => {
     if ((value.length !== 0) && (value.length !== 10) && (value.length !== 13)) {
-        //console.log("entered if block of custom validator");
         throw new Error("ISBN must be 0, 10 or 13 numbers long");
     }
     return true;
@@ -127,9 +123,7 @@ body('authorID').not().isEmpty().withMessage("Must pick an author."),
 body('genreID').not().isEmpty().withMessage("Must pick a genre."),
 
 function(req, res, next) {
-    //console.log("inside book/update/two: " + JSON.stringify(req.body));
     const errors = validationResult(req);
-    //console.log("errors: " + JSON.stringify(errors));
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -152,23 +146,18 @@ router.post('/author/create/one',
 body('first_name').not().isEmpty().withMessage('First name cannot be empty'),
 body('family_name').not().isEmpty().withMessage('Family name cannot be empty'),
 body('dateOfBirth').custom((value) => {
-    //console.log("value: " + value);
     if (!value) {
         throw new Error ('Date of birth cannot be empty');
     }
     return true;
 }),
 body('dateOfBirth').custom((value, {req}) => {
-    //console.log('req.body: ' + req.body.dateOfBirth);
-    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
     if (req.body.dateOfBirth > new Date().toISOString().slice(0, 10)) {
         throw new Error('Date of birth cannot be a future date')
     }
     return true;
 }),
 body('dateOfDeath').custom((value, {req}) => {
-    //console.log('req.body: ' + req.body.dateOfBirth);
-    //console.log('Date(): ' + new Date().toISOString().slice(0, 10));
     if (value) {
         if (req.body.dateOfDeath > new Date().toISOString().slice(0, 10)) {
             throw new Error('Date of death cannot be a future date')
@@ -185,7 +174,6 @@ body('dateOfDeath').custom((value, {req}) => {
     return true;
 }),
 function(req, res, next) {
-    //console.log('made it past validation in author/create/one')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -193,10 +181,7 @@ function(req, res, next) {
     next()
 }, binarySearchController.search_for_existing_author, author_controller.author_create_post);
 
-router.post('/author/create/two', function(req, res, next) {
-    //console.log("request body in author/create: " + JSON.stringify(req.body))
-    next()
-}, author_controller.author_create_post);
+router.post('/author/create/two', author_controller.author_create_post);
 
 // GET request to delete Author.
 router.get('/author/:id/delete', author_controller.author_delete_get);

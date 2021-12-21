@@ -14,7 +14,8 @@ const NewGenreForm = (props) => {
     const newGenreFormSubmitHandler = async (event) => {
         event.preventDefault();
         const genreName = {
-            genreName: newGenreFormNameValue
+            genreName: newGenreFormNameValue,
+            escapedGenreName: newGenreFormNameValue.replaceAll('\'', '\\\'')
         }
         props.sendGenreNameUp(genreName.genreName);
         const response = await fetch('catalog/genre/create', {

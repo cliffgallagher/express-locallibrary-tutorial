@@ -25,7 +25,7 @@ exports.genre_create_get = function(req, res) {
 exports.genre_create_post = async function(req, res, next) {
     try {
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO genres (name, createdAt, updatedAt) VALUES (?, NOW(), NOW())'")
-        const [results2, metadata2] = await db.query(`SET @a = '${req.body.genreName}'`)
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.escapedGenreName}'`)
         const [results3, metadata3] = await db.query("EXECUTE stmt1 USING @a")
         const [results4, metadata4] = await db.query("DEALLOCATE PREPARE stmt1")
         res.json(results3)

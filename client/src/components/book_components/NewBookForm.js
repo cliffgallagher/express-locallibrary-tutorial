@@ -56,12 +56,14 @@ const NewBookForm = (props) => {
     async function bookFormSubmitHandler(event) {
         event.preventDefault();
         const userInputData = {
-            title: titleInput,
+            title: titleInput.replaceAll('\'', '\\\''),
             author_id: authorInput,
             summary: summaryInput,
             isbn: isbnInput,
             genre_id: genreInput
         }
+
+        console.log('escaped title: ' + userInputData.title);
 
         props.newBookInfoToNewBook(userInputData);
         

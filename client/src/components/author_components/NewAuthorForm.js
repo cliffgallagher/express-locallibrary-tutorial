@@ -34,8 +34,10 @@ const NewAuthorForm = (props) => {
         event.preventDefault();
         setValidationErrors([]);
         let newAuthorFormInfo = {
-            first_name: newAuthorFirstName.replaceAll('\'', '\\\''),
-            family_name: newAuthorFamilyName.replaceAll('\'', '\\\''),
+            first_name: newAuthorFirstName,
+            escaped_first_name: newAuthorFirstName.replaceAll('\'', '\\\''),
+            family_name: newAuthorFamilyName,
+            escaped_family_name: newAuthorFamilyName.replaceAll('\'', '\\\''),
             dateOfBirth: newAuthorBirthDate
         }
 

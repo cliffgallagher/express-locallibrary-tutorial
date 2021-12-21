@@ -29,11 +29,12 @@ exports.author_create_get = function(req, res) {
 
 // Handle Author create on POST
 exports.author_create_post = async function(req, res, next) {
+    console.log('req.body in author_create_post: ' + JSON.stringify(req.body))
     try {
         if (req.body.dateOfDeath) {
             const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO authors (first_name, family_name, date_of_birth, date_of_death, createdAt, updatedAt) VALUES (?, ?, ?, ?, NOW(), NOW())'")
-            const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
-            const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)
+            const [results2, metadata2] = await db.query(`SET @a = '${req.body.escaped_first_name}'`)
+            const [results3, metadata3] = await db.query(`SET @b = '${req.body.escaped_family_name}'`)
             const [results4, metadata4] = await db.query(`SET @c = '${req.body.dateOfBirth}'`)
             const [results5, metadata5] = await db.query(`SET @d = '${req.body.dateOfDeath}'`)
             const [results6, metadata6] = await db.query("EXECUTE stmt1 USING @a, @b, @c, @d")
@@ -41,8 +42,8 @@ exports.author_create_post = async function(req, res, next) {
             res.json(results6)
         } else {
             const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO authors (first_name, family_name, date_of_birth, createdAt, updatedAt) VALUES (?, ?, ?, NOW(), NOW())'")
-            const [results2, metadata2] = await db.query(`SET @a = '${req.body.first_name}'`)
-            const [results3, metadata3] = await db.query(`SET @b = '${req.body.family_name}'`)
+            const [results2, metadata2] = await db.query(`SET @a = '${req.body.escaped_first_name}'`)
+            const [results3, metadata3] = await db.query(`SET @b = '${req.body.escaped_family_name}'`)
             const [results4, metadata4] = await db.query(`SET @c = '${req.body.dateOfBirth}'`)
             const [results6, metadata6] = await db.query("EXECUTE stmt1 USING @a, @b, @c")
             const [results7, metadata7] = await db.query("DEALLOCATE PREPARE stmt1")

@@ -77,6 +77,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     const updateBookWithTitleCheck = async (updatedBookInfo) => {
+        //console.log('in title check: ' + JSON.stringify(updatedBookInfo));
         const response = await fetch(`catalog/book/${props.bookID}/update/one`, {
             method: 'POST',
             headers: {
@@ -152,13 +153,14 @@ const BookPopupForUpdate = (props) => {
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();
         const updatedBookInfo = {
-            title: updateFormTitleInput.replaceAll('\'', '\\\''),
+            title: updateFormTitleInput,
+            escapedTitle: updateFormTitleInput.replaceAll('\'', '\\\''),
             authorID: updateFormAuthorInput,
             isbn: updateFormISBNInput,
             genreID: updateFormGenreInput,
             summary: updateFormSummaryInput.replaceAll('\'', '\\\'')
         }
-
+        //console.log('updatedBookInfo: ' + JSON.stringify(updatedBookInfo))
         if (initialTitle === updatedBookInfo.title) {
             updateBookNoTitleCheck(updatedBookInfo);
         } else {
@@ -194,6 +196,7 @@ const BookPopupForUpdate = (props) => {
         event.preventDefault();
         const updatedBookInfo = {
             title: updateFormTitleInput,
+            escapedTitle: updateFormTitleInput.replaceAll('\'', '\\\''),
             authorID: updateFormAuthorInput,
             isbn: updateFormISBNInput,
             genreID: updateFormGenreInput,

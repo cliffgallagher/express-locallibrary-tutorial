@@ -149,10 +149,9 @@ exports.book_update_get = async function(req, res, next) {
 
 // Handle book update on POST.
 exports.book_update_post = async function(req, res, next) {
-
     try {
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'UPDATE books SET title=?, author_id=?, isbn=?, genre_id=?, summary=?, updatedAt=? WHERE book_id=?'")
-        const [results2, metadata2] = await db.query(`SET @a = '${req.body.title}'`)
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.escapedTitle}'`)
         const [results3, metadata3] = await db.query(`SET @b = '${req.body.authorID}'`)
         const [results4, metadata4] = await db.query(`SET @c = '${req.body.isbn}'`)
         const [results5, metadata5] = await db.query(`SET @d = '${req.body.genreID}'`)

@@ -38,7 +38,8 @@ const GenrePopupForUpdate = (props) => {
     async function genreUpdateFormSubmitHandler(event) {
         event.preventDefault();
         const genreName = {
-            genreName: genreUpdateFormNameValue
+            genreName: genreUpdateFormNameValue,
+            escapedGenreName: genreUpdateFormNameValue.replaceAll('\'', '\\\'')
         };
         try {
             const response = await fetch(`catalog/genre/${props.genreID}/update`, {

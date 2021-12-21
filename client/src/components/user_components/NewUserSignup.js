@@ -44,10 +44,10 @@ const NewUserSignup = (props) => {
     async function newUserSignupSubmitHandler(event) {
         event.preventDefault();
         const newUserInfo = {
-            newUserFirstName: newUserFirstName,
-            newUserLastName: newUserLastName,
-            newUserEmail: newUserEmail,
-            newUserUsername: newUserUsername,
+            newUserFirstName: newUserFirstName.replaceAll('\'', '\\\''),
+            newUserLastName: newUserLastName.replaceAll('\'', '\\\''),
+            newUserEmail: newUserEmail.replaceAll('\'', '\\\''),
+            newUserUsername: newUserUsername.replaceAll('\'', '\\\''),
             newUserPassword: newUserPassword,
             newUserConfirmedPassword: newUserConfirmedPassword
         }

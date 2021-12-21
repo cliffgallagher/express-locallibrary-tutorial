@@ -26,10 +26,9 @@ exports.user_create_post = async function(req, res, next) {
 exports.user_login_post = async function(req, res, next) {
     try {
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'SELECT username, password FROM users WHERE (username = ?)'")
-        const [results2, metadata2] = await db.query(`SET @a = '${req.body.loginUsername}'`)
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.escapedUsername}'`)
         const [results3, metadata3] = await db.query("EXECUTE stmt1 USING @a")
         const [results4, metadata4] = await db.query("DEALLOCATE PREPARE stmt1")
-
         if ((results3[0].username === req.body.loginUsername) && (await bcrypt.compare(req.body.loginPassword, results3[0].password))) {
                 const stringifiedUser = JSON.stringify(results3[0].username)
                 const accessToken = jwt.sign({

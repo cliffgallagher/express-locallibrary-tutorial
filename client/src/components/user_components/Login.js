@@ -15,6 +15,7 @@ const Login = (props) => {
         event.preventDefault();
         const loginInfo = {
             loginUsername: loginUsername,
+            escapedUsername: loginUsername.replaceAll('\'', '\\\''),
             loginPassword: loginPassword
         }
         const response = await fetch('users/login', {

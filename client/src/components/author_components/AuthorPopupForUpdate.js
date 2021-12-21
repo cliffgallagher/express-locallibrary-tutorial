@@ -114,8 +114,10 @@ const AuthorPopupForUpdate = (props) => {
     async function authorUpdateFormSubmitHandler(event) {
         event.preventDefault();
         let updatedAuthorData = {
-            first_name: authorUpdateFormFirstNameValue.replaceAll('\'', '\\\''),
-            family_name: authorUpdateFormFamilyNameValue.replaceAll('\'', '\\\''),
+            first_name: authorUpdateFormFirstNameValue,
+            escaped_first_name: authorUpdateFormFirstNameValue.replaceAll('\'', '\\\''),
+            family_name: authorUpdateFormFamilyNameValue,
+            escaped_family_name: authorUpdateFormFamilyNameValue.replaceAll('\'', '\\\''),
             birthDate: authorUpdateFormBirthValue,
         }
         if (authorUpdateFormDeathValue) {
@@ -156,7 +158,9 @@ const AuthorPopupForUpdate = (props) => {
         event.preventDefault();
         const updatedAuthorData = {
             first_name: authorUpdateFormFirstNameValue,
+            escaped_first_name: authorUpdateFormFirstNameValue.replaceAll('\'', '\\\''),
             family_name: authorUpdateFormFamilyNameValue,
+            escaped_family_name: authorUpdateFormFamilyNameValue.replaceAll('\'', '\\\''),
             birthDate: authorUpdateFormBirthValue,
             deathDate: authorUpdateFormDeathValue
         }

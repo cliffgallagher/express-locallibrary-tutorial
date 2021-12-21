@@ -58,12 +58,10 @@ const NewBookForm = (props) => {
         const userInputData = {
             title: titleInput.replaceAll('\'', '\\\''),
             author_id: authorInput,
-            summary: summaryInput,
+            summary: summaryInput.replaceAll('\'', '\\\''),
             isbn: isbnInput,
             genre_id: genreInput
         }
-
-        console.log('escaped title: ' + userInputData.title);
 
         props.newBookInfoToNewBook(userInputData);
         

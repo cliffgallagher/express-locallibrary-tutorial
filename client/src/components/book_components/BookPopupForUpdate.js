@@ -152,11 +152,11 @@ const BookPopupForUpdate = (props) => {
     async function popupForUpdateSubmitHandler(event) {
         event.preventDefault();
         const updatedBookInfo = {
-            title: updateFormTitleInput,
+            title: updateFormTitleInput.replaceAll('\'', '\\\''),
             authorID: updateFormAuthorInput,
             isbn: updateFormISBNInput,
             genreID: updateFormGenreInput,
-            summary: updateFormSummaryInput
+            summary: updateFormSummaryInput.replaceAll('\'', '\\\'')
         }
 
         if (initialTitle === updatedBookInfo.title) {

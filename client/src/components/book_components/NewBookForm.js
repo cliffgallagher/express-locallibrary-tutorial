@@ -56,7 +56,8 @@ const NewBookForm = (props) => {
     async function bookFormSubmitHandler(event) {
         event.preventDefault();
         const userInputData = {
-            title: titleInput.replaceAll('\'', '\\\''),
+            title: titleInput,
+            escapedTitle: titleInput.replaceAll('\'', '\\\''),
             author_id: authorInput,
             summary: summaryInput.replaceAll('\'', '\\\''),
             isbn: isbnInput,

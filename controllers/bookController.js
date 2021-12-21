@@ -65,7 +65,7 @@ exports.book_create_get = function(req, res) {
 exports.book_create_post = async function(req, res, next) {
     try {
         const [results, metadata] = await db.query("PREPARE stmt1 FROM 'INSERT INTO books (title, author_id, isbn, genre_id, createdAt, updatedAt, summary) VALUES (?, ?, ?, ?, NOW(), NOW(), ?)'")
-        const [results2, metadata2] = await db.query(`SET @a = '${req.body.title}'`)
+        const [results2, metadata2] = await db.query(`SET @a = '${req.body.escapedTitle}'`)
         const [results3, metadata3] = await db.query(`SET @b = '${req.body.author_id}'`)
         const [results4, metadata4] = await db.query(`SET @c = '${req.body.isbn}'`)
         const [results5, metadata5] = await db.query(`SET @d = '${req.body.genre_id}'`)

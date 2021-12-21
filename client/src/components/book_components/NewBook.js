@@ -26,9 +26,10 @@ const NewBook = (props) => {
 
     function newBookInfoToNewBook(newBookInfo) {
 
-        const {title, author_id, summary, isbn, genre_id} = newBookInfo;
+        const {title, escapedTitle, author_id, summary, isbn, genre_id} = newBookInfo;
         const objectForDuplicateWarning = {
             title: title,
+            escapedTitle: escapedTitle,
             author_id: author_id,
             summary: summary,
             isbn: isbn,

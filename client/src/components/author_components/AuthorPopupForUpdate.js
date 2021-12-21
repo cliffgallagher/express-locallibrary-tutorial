@@ -114,8 +114,8 @@ const AuthorPopupForUpdate = (props) => {
     async function authorUpdateFormSubmitHandler(event) {
         event.preventDefault();
         let updatedAuthorData = {
-            first_name: authorUpdateFormFirstNameValue,
-            family_name: authorUpdateFormFamilyNameValue,
+            first_name: authorUpdateFormFirstNameValue.replaceAll('\'', '\\\''),
+            family_name: authorUpdateFormFamilyNameValue.replaceAll('\'', '\\\''),
             birthDate: authorUpdateFormBirthValue,
         }
         if (authorUpdateFormDeathValue) {

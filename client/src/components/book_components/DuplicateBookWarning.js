@@ -7,6 +7,7 @@ const DuplicateBookWarning = (props) => {
 
     async function duplicateBookWarningSubmitHandler(event) {
         event.preventDefault();
+        console.log('props.newbookinfo: ' + JSON.stringify(props.newBookInfo));
         const response = await fetch('catalog/book/create/two', {
             method: 'POST',
             headers: {

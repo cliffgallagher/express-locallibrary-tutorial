@@ -9,12 +9,14 @@ function binarySearchBookObjects(arr, l, r, x, k){
 
         // If the element is present at the middle
         // itself
+        console.log('arrmidk: ' + arr[mid][k].toLowerCase())
+        console.log('x: ' + x.toLowerCase())
         if (arr[mid][k].toLowerCase() === x.toLowerCase())
             return mid;
  
         // If element is smaller than mid, then
         // it can only be present in left subarray
-        if (arr[mid][k] > x)
+        if (arr[mid][k].toLowerCase() > x.toLowerCase())
             return binarySearchBookObjects(arr, l, mid - 1, x, k);
  
         // Else the element can only be present

@@ -2,7 +2,7 @@ import React from "react";
 import styles from '../ElementInfo.module.css';
 
 const AuthorInfo = (props) => {
-
+    //console.log('name: ' + props.firstName + ' ' + props.familyName + ', props.dateOfBirth: ' + props.dateOfBirth);
     return (
         <div>
             <p>{`${props.familyName}, ${props.firstName}`}</p>

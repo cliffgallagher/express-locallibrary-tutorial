@@ -35,10 +35,16 @@ const NewAuthorForm = (props) => {
         setValidationErrors([]);
         let newAuthorFormInfo = {
             first_name: newAuthorFirstName,
-            escaped_first_name: newAuthorFirstName.replaceAll('\'', '\\\''),
             family_name: newAuthorFamilyName,
-            escaped_family_name: newAuthorFamilyName.replaceAll('\'', '\\\''),
             dateOfBirth: newAuthorBirthDate
+        }
+
+        if (newAuthorFirstName) {
+            newAuthorFormInfo = {...newAuthorFormInfo, escaped_first_name: newAuthorFirstName.replaceAll('\'', '\\\'')};
+        }
+
+        if (newAuthorFamilyName) {
+            newAuthorFormInfo = {...newAuthorFormInfo, escaped_family_name: newAuthorFamilyName.replaceAll('\'', '\\\'')};
         }
 
         if (newAuthorDeathDate) {

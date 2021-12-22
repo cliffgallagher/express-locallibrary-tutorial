@@ -9,8 +9,6 @@ function binarySearchBookObjects(arr, l, r, x, k){
 
         // If the element is present at the middle
         // itself
-        console.log('arrmidk: ' + arr[mid][k].toLowerCase())
-        console.log('x: ' + x.toLowerCase())
         if (arr[mid][k].toLowerCase() === x.toLowerCase())
             return mid;
  

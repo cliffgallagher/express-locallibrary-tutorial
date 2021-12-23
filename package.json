@@ -7,7 +7,8 @@
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart",
     "client": "node start-client.js",
-    "prodstart": "concurrently \"node ./bin/www\" \"node productionServe"
+    "prodstart": "concurrently \"node ./bin/www\" \"node productionServe",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "async": "^3.2.1",

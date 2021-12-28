@@ -23,6 +23,10 @@ describe('user_spec', () => {
         cy.findByRole('button', {
             name: /create user/i
           }).click()
+        
+          cy.expect('[data-cy=new_user_created]').to.exist
+        //cy.get('[data-cy=submit]').click()
+        
     })
 
     it('can login', () => {
@@ -35,4 +39,5 @@ describe('user_spec', () => {
             name: /login/i
           }).click()
     })
+
 })

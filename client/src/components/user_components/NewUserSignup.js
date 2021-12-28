@@ -135,7 +135,7 @@ const NewUserSignup = (props) => {
             </div>}
             {successfulSignup && 
                <div className={styles.popup_inner}>
-                   <p>New user created. Redirecting to login page...</p>
+                   <p data-cy="new_user_created">New user created. Redirecting to login page...</p>
                </div>  
             }
         </div>

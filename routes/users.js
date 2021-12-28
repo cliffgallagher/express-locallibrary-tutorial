@@ -37,7 +37,10 @@ function(req, res, next) {
   next()
 }, userController.user_create_post)
 
-router.post('/login', 
+router.post('/login', function(req, res, next) {
+  console.log('entered login route')
+  next()
+},
 body('loginUsername').not().isEmpty().withMessage('Please enter a username'),
 body('loginPassword').not().isEmpty().withMessage('Please enter a password'),
 function(req, res, next) {

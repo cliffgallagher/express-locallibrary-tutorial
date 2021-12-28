@@ -13,11 +13,15 @@ const Login = (props) => {
 
     async function loginFormSubmitHandler(event) {
         event.preventDefault();
-        const loginInfo = {
+        let loginInfo = {
             loginUsername: loginUsername,
-            escapedUsername: loginUsername.replaceAll('\'', '\\\''),
             loginPassword: loginPassword
         }
+
+        if (loginUsername) {
+            loginInfo = {...loginInfo, escapedUsername: loginUsername.replaceAll('\'', '\\\'')}
+        }
+
         const response = await fetch('users/login', {
             method: 'POST',
             headers: {

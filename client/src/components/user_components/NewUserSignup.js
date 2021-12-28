@@ -43,13 +43,29 @@ const NewUserSignup = (props) => {
 
     async function newUserSignupSubmitHandler(event) {
         event.preventDefault();
-        const newUserInfo = {
-            newUserFirstName: newUserFirstName.replaceAll('\'', '\\\''),
-            newUserLastName: newUserLastName.replaceAll('\'', '\\\''),
-            newUserEmail: newUserEmail.replaceAll('\'', '\\\''),
-            newUserUsername: newUserUsername.replaceAll('\'', '\\\''),
+        let newUserInfo = {
+            newUserFirstName: newUserFirstName,
+            newUserLastName: newUserLastName,
+            newUserEmail: newUserEmail,
+            newUserUsername: newUserUsername,
             newUserPassword: newUserPassword,
             newUserConfirmedPassword: newUserConfirmedPassword
+        }
+
+        if (newUserFirstName) {
+            newUserInfo = {...newUserInfo, replacedNewUserFirstName: newUserFirstName.replaceAll('\'', '\\\'')}
+        }
+
+        if (newUserLastName) {
+            newUserInfo = {...newUserInfo, replacedNewUserLastName: newUserLastName.replaceAll('\'', '\\\'')}
+        }
+
+        if (newUserEmail) {
+            newUserInfo = {...newUserInfo, replacedNewUserEmail: newUserEmail.replaceAll('\'', '\\\'')}
+        }
+
+        if (newUserUsername) {
+            newUserInfo = {...newUserInfo, replacedNewUserUsername: newUserUsername.replaceAll('\'', '\\\'')}
         }
 
         const response = await fetch('users/create', {

@@ -25,14 +25,14 @@ describe('user_spec', () => {
           }).click()
     })
 
-    /*it('can login', () => {
+    it('can login', () => {
         cy.visit('http://localhost:3000')
         cy.findByRole('textbox', {
             name: /username/i
           }).type("seanjones")
-        cy.findByLabelText(/password/i).type("SeanPassw#rd54")
+        cy.findByLabelText(/password/i).type("SeanPassw#rd54*")
         cy.findByRole('button', {
             name: /login/i
           }).click()
-    })*/
+    })
 })

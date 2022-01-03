@@ -178,4 +178,14 @@ describe('user_spec', () => {
       cy.get('ul').should('contain', 'Incorrect username/password')
   })
 
+  it('leaving username and password blank returns correct errors', () => {
+    cy.visit('/')
+    cy.findByRole('button', {
+        name: /login/i
+      }).click()
+    
+      cy.get('ul').should('contain', 'Please enter a username')
+          .should('contain', 'Please enter a password')
+  })
+
 })

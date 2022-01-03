@@ -1,7 +1,7 @@
 describe('user_spec', () => {
     it('user can create new user', () => {
         //create new user
-        cy.visit('http://localhost:3000')
+        cy.visit('/')
         cy.findByText(/create new user/i).click()
         cy.findByRole('textbox', {
             name: /first name/i
@@ -24,13 +24,14 @@ describe('user_spec', () => {
             name: /create user/i
           }).click()
         
-          cy.expect('[data-cy=new_user_created]').to.exist
+        cy.get('p').should('contain', 'New user created. Redirecting to login page...')
+        //cy.expect('[data-cy=new_user_created]').to.exist
         //cy.get('[data-cy=submit]').click()
         
     })
 
     it('can login', () => {
-        cy.visit('http://localhost:3000')
+        cy.visit('/')
         cy.findByRole('textbox', {
             name: /username/i
           }).type("seanjones")
@@ -39,7 +40,8 @@ describe('user_spec', () => {
             name: /login/i
           }).click()
         
-        cy.expect('[data-cy=book_component]').to.exist
+        //cy.getCookie('token').should('exist')
+        //cy.expect('[data-cy=book_component]').to.exist
     })
 
 })

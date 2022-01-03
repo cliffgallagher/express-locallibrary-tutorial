@@ -24,11 +24,23 @@ describe('user_spec', () => {
             name: /create user/i
           }).click()
         
-        cy.get('p').should('contain', 'New user created. Redirecting to login page...')
-        //cy.expect('[data-cy=new_user_created]').to.exist
-        //cy.get('[data-cy=submit]').click()
-        
+        cy.get('p').should('contain', 'New user created. Redirecting to login page...')        
     })
+
+    it('leaving fields blank in NewUserSignup returns validation errors', () => {
+      cy.visit('/')
+      cy.findByText(/create new user/i).click()
+      cy.findByRole('button', {
+          name: /create user/i
+        }).click()
+      
+      cy.get('ul')
+        .should('contain', 'First name cannot be blank')
+        .should('contain', 'Last name cannot be blank')
+        .should('contain', 'Please enter a valid email address')
+        .should('contain', 'Password must be between 8 and 16 characters long')
+        .should('contain', 'Password must contain 1 lowercase letter, 1 uppercase letter, 1 number and 1 special character') 
+  })
 
     it('can login', () => {
         cy.visit('/')

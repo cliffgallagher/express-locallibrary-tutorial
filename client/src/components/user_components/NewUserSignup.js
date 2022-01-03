@@ -77,12 +77,10 @@ const NewUserSignup = (props) => {
         })
 
         const data = await response.json();
-        console.log('data: ' + JSON.stringify(data))
         if (typeof data === 'object') {
             if (data.hasOwnProperty('errors')) {
                 setAreValidationErrors(true);
                 let errorMessages = data.errors.map(element => element.msg);
-                console.log('errorMessages before if/then: ' + errorMessages)
                 if (errorMessages.indexOf('SequelizeUniqueConstraintError') >= 0) {
                     errorMessages.pop();
                     if (data.errors[0].type === 'username') {
@@ -92,7 +90,6 @@ const NewUserSignup = (props) => {
                         errorMessages.push('That email already exists in the database. Please pick a different email.')
                     }
                 }
-                console.log('errorMessages after if/then: ' + errorMessages)
                 setValidationErrors(() => {
                     return errorMessages.map(element => <li>{element}</li>);
                 });

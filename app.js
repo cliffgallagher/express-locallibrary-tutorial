@@ -49,7 +49,7 @@ app.use((error, req, res, next) => {
 app.use((error, req, res, next) => {
   if (error.name === 'SequelizeUniqueConstraintError') {
     //console.log('entered error handler in app.js')
-    res.json({
+    res.status(409).json({
       "errors": [
         {
           'msg': 'SequelizeUniqueConstraintError',

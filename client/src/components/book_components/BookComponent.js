@@ -46,7 +46,7 @@ const BookComponent = (props) => {
         getBookList();
     }, []);
 
-    return (<div data-cy="book_component">
+    return (<div>
             <NewBook getBookListMyComponentNewToNewBook={getBookList} />
             <BookList bookArray={bookArray}/>
         </div>)

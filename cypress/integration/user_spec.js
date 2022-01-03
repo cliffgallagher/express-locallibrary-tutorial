@@ -42,6 +42,7 @@ describe('user_spec', () => {
         
         //cy.getCookie('token').should('exist')
         //cy.expect('[data-cy=book_component]').to.exist
+        cy.contains('Add New Book')
     })
 
 })

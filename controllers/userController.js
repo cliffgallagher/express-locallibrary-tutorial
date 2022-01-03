@@ -18,6 +18,7 @@ exports.user_create_post = async function(req, res, next) {
         const [results9, metadata9] = await db.query("DEALLOCATE PREPARE stmt1")
         res.json(results8)
     } catch(e) {
+        //console.log('error in user_create_post: ' + e)
         next(e);
     }
 

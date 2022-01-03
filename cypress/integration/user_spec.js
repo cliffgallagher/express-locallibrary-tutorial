@@ -38,6 +38,8 @@ describe('user_spec', () => {
         cy.findByRole('button', {
             name: /login/i
           }).click()
+        
+        cy.expect('[data-cy=book_component]').to.exist
     })
 
 })

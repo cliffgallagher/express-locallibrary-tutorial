@@ -41,14 +41,15 @@ describe('navigation_spec', () => {
     })
 
     it('after logging in, you are logged out if its been 15 minutes and you refresh page', () => {
+        cy.clock()
         cy.visit('/')
-        /*cy.tick(840000)
-        cy.visit('/')
-        //cy.get('button').should('contain', 'Add New Book')
-        cy.get('p').should('contain', 'Please log in below')
-        cy.tick(60000)
-        cy.visit('/')*/
-        cy.get('p').should('contain', 'Please log in below')
+        cy.tick(900001)
+        //cy.visit('/')
+        cy.findByRole('button', {
+            name: /add new book/i
+          }).click()
+        cy.get('#book_component').should('exist')
+        cy.get('#login_component').should('not.exist')
     })
 
 })

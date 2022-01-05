@@ -136,7 +136,9 @@ describe('user_spec', () => {
       cy.wait(1000)
       cy.getCookie('token').should('exist')
       //cy.expect('[data-cy=book_component]').to.exist
-      cy.get('button').should('contain', 'Add New Book')
+      //cy.get('button').should('contain', 'Add New Book')
+      cy.get('#book_component').should('exist')
+      cy.get('#login_component').should('not.exist')
   })
 
   it('entering nonexistent username returns correct error', () => {

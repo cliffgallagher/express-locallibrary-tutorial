@@ -46,7 +46,7 @@ const BookComponent = (props) => {
         getBookList();
     }, []);
 
-    return (<div>
+    return (<div id='book_component'>
             <NewBook getBookListMyComponentNewToNewBook={getBookList} />
             <BookList bookArray={bookArray}/>
         </div>)

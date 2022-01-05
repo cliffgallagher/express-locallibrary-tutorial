@@ -53,7 +53,7 @@ const Login = (props) => {
     }
     
     return (
-        <div className={styles.popup}>
+        <div className={styles.popup} id='login_component'>
             <div className={styles.popup_inner}>
                 {areValidationErrors && <ul>{validationErrors}</ul>}
                 <p>Please log in below</p>

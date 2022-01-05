@@ -16,32 +16,38 @@ describe('navigation_spec', () => {
 
     it('Clicking "Logout" logs you out, and you are still logged out if you try to refresh page', () => {
         cy.visit('/')
+        cy.get('#book_component').should('exist')
+        cy.get('#login_component').should('not.exist')
         cy.get('#root > div > div > div:nth-child(1) > svg').click()
         cy.findByText(/logout/i).click()
 
-        cy.get('p').should('contain', 'Please log in below')
-
+        cy.get('#book_component').should('not.exist')
+        cy.get('#login_component').should('exist')
+        
         cy.visit('/')
-        cy.get('p').should('contain', 'Please log in below')
+        cy.get('#book_component').should('not.exist')
+        cy.get('#login_component').should('exist')
     })
 
     it('After logging in, you stay logged in if you refresh page', () => {
         cy.visit('/')
         cy.visit('/')
-        cy.contains('Add New Book')
+        cy.get('#book_component').should('exist')
+        cy.get('#login_component').should('not.exist')
         cy.get('#root > div > div > div:nth-child(1) > svg').click()
         cy.findByText(/logout/i).click()
-        cy.get('p').should('contain', 'Please log in below')
+        cy.get('#book_component').should('not.exist')
+        cy.get('#login_component').should('exist')
     })
 
     it('after logging in, you are logged out if its been 15 minutes and you refresh page', () => {
-        cy.clock()
         cy.visit('/')
-        cy.tick(899990)
+        /*cy.tick(840000)
         cy.visit('/')
+        //cy.get('button').should('contain', 'Add New Book')
         cy.get('p').should('contain', 'Please log in below')
-        cy.tick(9)
-        cy.visit('/')
+        cy.tick(60000)
+        cy.visit('/')*/
         cy.get('p').should('contain', 'Please log in below')
     })
 

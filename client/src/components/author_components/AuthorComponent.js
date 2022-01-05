@@ -45,7 +45,7 @@ const AuthorComponent = () => {
     }
 
     return (
-        <div id='author_component'>
+        <div data-cy='author_component'>
             <NewAuthor getAuthorList={getAuthorList}/>
             <AuthorList authorArray={authorArray} />
         </div>

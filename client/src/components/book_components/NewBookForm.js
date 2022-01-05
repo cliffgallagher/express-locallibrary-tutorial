@@ -122,7 +122,7 @@ const NewBookForm = (props) => {
         setGenreInput(event.target.value);
     }
     
-    return <form id={styles.newElementForm} onSubmit={bookFormSubmitHandler}>
+    return <form id={styles.newElementForm} onSubmit={bookFormSubmitHandler} data-cy='new_book_form'>
             <ul>{validationErrors}</ul>
             <label>Title<input type='text' name='titleField' value={titleInput} onChange={titleInputChangeHandler} /></label>
             <label>ISBN<input type='text' name='isbnField' value={isbnInput} onChange={isbnInputChangeHandler}/></label>

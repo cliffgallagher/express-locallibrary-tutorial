@@ -1,5 +1,7 @@
 describe('navigation_spec', () => {
     beforeEach(() => {
+        cy.exec('npx sequelize-cli db:seed:undo --seed 20220105161937-cypress-test-seeder.js')
+        cy.exec('npx sequelize-cli db:seed --seed 20220105161937-cypress-test-seeder.js')
         
         cy.request('POST', 'users/login', {
             loginUsername: 'cliffgallagher',

@@ -16,6 +16,7 @@ module.exports = {
       title: 'A Visit From the Goon Squad',
       author_id: 34,
       summary: 'Winner of a Pulitzer in 2011, the book is a set of thirteen interrelated stories with a large set of characters all connected to Bennie Salazar, a record company executive, and his assistant, Sasha.',
+      isbn: '0307477479',
       genre_id: 47,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -31,7 +32,7 @@ module.exports = {
       title: 'Metamorphosis',
       author_id: 96,
       summary: 'A man turns into a fly.',
-      isbn: '',
+      isbn: '9781557427663',
       genre_id: 47,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -39,7 +40,7 @@ module.exports = {
       title: 'On Beauty',
       author_id: 71,
       summary: 'The story follows the lives of a mixed-race British/American family living in the U.S.',
-      isbn: '',
+      isbn: '9780143037743',
       genre_id: 47,
       createdAt: new Date(),
       updatedAt: new Date()

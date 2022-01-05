@@ -40,7 +40,7 @@ const GenreComponent = () => {
     }, []);
     
     return (
-        <div>
+        <div id='genre_component'>
             {!displayGenrePopupForUpdate && !displayGenrePopupForDelete && <div>
                 <NewGenre getGenreList={getGenreList}/>
                 <GenreList genreArray={genreArray}/>    

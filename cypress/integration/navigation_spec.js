@@ -40,7 +40,7 @@ describe('navigation_spec', () => {
         cy.get('#login_component').should('exist')
     })
 
-    it('after logging in, you are logged out if its been 15 minutes and you refresh page', () => {
+    /*it('after logging in, you are logged out if its been 15 minutes and you refresh page', () => {
         cy.clock()
         cy.visit('/')
         cy.tick(900001)
@@ -49,6 +49,36 @@ describe('navigation_spec', () => {
             name: /add new book/i
           }).click()
         cy.get('#book_component').should('exist')
+        cy.get('#login_component').should('not.exist')
+    })*/
+
+    it('Clicking on "books" brings you to Book Component', () => {
+        cy.visit('/')
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/books/i).click()
+        cy.get('#book_component').should('exist')
+        cy.get('#author_component').should('not.exist')
+        cy.get('#genre_component').should('not.exist')
+        cy.get('#login_component').should('not.exist')
+    })
+
+    it('Clicking on "authors" brings you to Author Component', () => {
+        cy.visit('/')
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/authors/i).click()
+        cy.get('#book_component').should('not.exist')
+        cy.get('#author_component').should('exist')
+        cy.get('#genre_component').should('not.exist')
+        cy.get('#login_component').should('not.exist')
+    })
+
+    it('Clicking on "genres" brings you to Genre Component', () => {
+        cy.visit('/')
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/genres/i).click()
+        cy.get('#book_component').should('not.exist')
+        cy.get('#author_component').should('not.exist')
+        cy.get('#genre_component').should('exist')
         cy.get('#login_component').should('not.exist')
     })
 

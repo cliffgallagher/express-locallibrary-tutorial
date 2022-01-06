@@ -50,7 +50,7 @@ const BookListElement = (props) => {
     }, [auth.searchText]);
 
     return (
-        <div className={`${styles.listElement} ${hideElement ? styles.hideElement : ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler}>
+        <div className={`${styles.listElement} ${hideElement ? styles.hideElement : ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler} data-cy='book_list_element'>
             {!displayElement && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>

@@ -33,7 +33,7 @@ const DuplicateBookWarning = (props) => {
     }
 
     return (
-        <div className={styles.popup}>
+        <div className={styles.popup} data-cy='duplicate_book_warning'>
             <div className={styles.popup_inner}>
                 <form onSubmit={duplicateBookWarningSubmitHandler}>
                     <p>A book with title '{props.newBookInfo.title}' already exists in the database. Insert anyway?</p>

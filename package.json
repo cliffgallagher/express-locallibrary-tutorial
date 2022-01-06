@@ -29,8 +29,6 @@
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
-    "@testing-library/cypress": "^8.0.2",
-    "cypress": "^9.2.0",
     "nodemon": "^2.0.13",
     "sequelize-cli": "^6.3.0"
   }

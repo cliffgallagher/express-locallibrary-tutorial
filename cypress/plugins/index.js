@@ -15,8 +15,21 @@
 /**
  * @type {Cypress.PluginConfig}
  */
+
+ const shell = require('shell-exec');
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+  on('task', {
+    'env': () => {
+      return new Promise(resolve => {
+        resolve(process.env);
+      });
+    },
+    // relevant part
+    'db:reset': () => {
+      return shell('npx sequelize-cli db:seed:undo --seed 20220105161937-cypress-test-seeder.js && npx sequelize-cli db:seed --seed 20220105161937-cypress-test-seeder.js');
+    }
+  })
 }

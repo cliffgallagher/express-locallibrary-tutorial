@@ -180,6 +180,8 @@ describe('book_spec', () => {
       name: /yes/i
     }).click()
 
+    cy.wait(1000)
+
     //check that the warning went away and there are two instances of Pachinko in database
     cy.get('[data-cy=duplicate_book_warning]').should('not.exist')
 
@@ -192,6 +194,53 @@ describe('book_spec', () => {
       cy.log(titles)
 
       expect(titles.get().filter(el => el === "Title: Pachinko")).to.have.length(2)
+    })
+
+    //Create the duplicate book
+    cy.findByRole('button', {
+      name: /add new book/i
+    }).click()
+    cy.findByRole('textbox', {
+        name: /title/i
+      }).type('Pachinko')
+    cy.findByRole('textbox', {
+        name: /isbn/i
+      }).type('1455563927')
+    cy.findByRole('textbox', {
+        name: /summary/i
+      }).type('Published in 2017, Pachinko is an epic historical fiction novel following a Korean family that immigrates to Japan.')
+    cy.findByRole('combobox', {
+        name: /author/i
+      }).select('Lee, Min Jin')
+    cy.findByRole('combobox', {
+        name: /genre/i
+      }).select('Fiction')
+    cy.findByRole('button', {
+        name: /submit/i
+      }).click()
+    
+    //test that the warning popped up
+    cy.get('[data-cy=duplicate_book_warning]').should('exist')
+
+    //click yes on the duplicate warning
+    cy.findByRole('button', {
+      name: /yes/i
+    }).click()
+
+    cy.wait(1000)
+
+    //check that the warning went away and there are three instances of Pachinko in database
+    cy.get('[data-cy=duplicate_book_warning]').should('not.exist')
+
+    //return array of titles
+    cy.get('[data-cy=book_info_title]').then(($element) => {
+
+      const titles = $element.map((i, el) => {
+        return Cypress.$(el).prop('innerHTML')
+      })
+      cy.log(titles)
+
+      expect(titles.get().filter(el => el === "Title: Pachinko")).to.have.length(3)
     })
   })
 

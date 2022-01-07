@@ -121,9 +121,9 @@ describe('book_spec', () => {
 
   /*
   *
-  * gets duplicate warning but adds second copy
+  * gets duplicate warning and adds second and third copies
   */
-  it.only('gets duplicate warning when adding a duplicate book, and does add new book by clicking "yes" on warning', () => {
+  it.only('adds three copies of Pachinko, then deletes one', () => {
     
     //create first book
     cy.visit('/')
@@ -196,7 +196,7 @@ describe('book_spec', () => {
       expect(titles.get().filter(el => el === "Title: Pachinko")).to.have.length(2)
     })
 
-    //Create the duplicate book
+    //Create another duplicate book
     cy.findByRole('button', {
       name: /add new book/i
     }).click()
@@ -242,6 +242,36 @@ describe('book_spec', () => {
 
       expect(titles.get().filter(el => el === "Title: Pachinko")).to.have.length(3)
     })
+
+    //Delete one book, check that there are now two copies of Pachinko
+    cy.contains('Pachinko').click()
+
+    cy.findByRole('button', {
+      name: /delete/i
+    }).click()
+
+    cy.findByRole('button', {
+      name: /delete/i
+    }).click()
+
+    cy.wait(1000)
+
+    //check that the warning went away and there are two instances of Pachinko in database
+    cy.get('[data-cy=duplicate_book_warning]').should('not.exist')
+
+    //return array of titles
+    cy.get('[data-cy=book_info_title]').then(($element) => {
+
+      const titles = $element.map((i, el) => {
+        return Cypress.$(el).prop('innerHTML')
+      })
+      cy.log(titles)
+
+      expect(titles.get().filter(el => el === "Title: Pachinko")).to.have.length(2)
+    })
+
+
+
   })
 
 })

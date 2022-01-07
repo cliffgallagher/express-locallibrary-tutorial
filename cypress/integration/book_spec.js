@@ -123,7 +123,7 @@ describe('book_spec', () => {
   *
   * gets duplicate warning and adds second and third copies
   */
-  it.only('adds three copies of Pachinko, then deletes one', () => {
+  it('adds three copies of Pachinko, then deletes one', () => {
     
     //create first book
     cy.visit('/')
@@ -269,9 +269,29 @@ describe('book_spec', () => {
 
       expect(titles.get().filter(el => el === "Title: Pachinko")).to.have.length(2)
     })
+  })
 
-
-
+  it.only('triggers validation warnings on NewBookForm', () => {
+    cy.visit('/')
+    cy.findByRole('button', {
+      name: /add new book/i
+    }).click()
+    cy.findByRole('button', {
+      name: /submit/i
+    }).click()
+    cy.get('ul')
+      .should('contain', 'Title cannot be blank')
+      .should('contain', 'Summary must be between 1 and 250 characters.')
+      .should('contain', 'Must pick an author.')
+      .should('contain', 'Must pick a genre.')
+    cy.findByRole('textbox', {
+      name: /isbn/i
+    }).type('123')
+    cy.findByRole('button', {
+      name: /submit/i
+    }).click()
+    cy.get('ul')
+      .should('contain', 'ISBN must be 0, 10 or 13 numbers long')
   })
 
 })

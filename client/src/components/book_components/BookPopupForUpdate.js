@@ -211,10 +211,10 @@ const BookPopupForUpdate = (props) => {
     }
 
     return <div className={styles.popup}>
-        <div >
+        <div>
             {!displayDuplicateWarning && <form className={styles.popupInner} onSubmit={popupForUpdateSubmitHandler}>
                 <ul>{validationErrors}</ul>
-                <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} /></label>
+                <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} data-cy='book_update_title_field'/></label>
                 <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
                 <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
                 <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput} onChange={updateFormGenreInputChangeHandler}>{updateFormGenreOptions}</select></label>

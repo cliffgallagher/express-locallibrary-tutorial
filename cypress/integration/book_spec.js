@@ -271,7 +271,7 @@ describe('book_spec', () => {
     })
   })
 
-  it.only('triggers validation warnings on NewBookForm', () => {
+  it('triggers validation warnings on NewBookForm', () => {
     cy.visit('/')
     cy.findByRole('button', {
       name: /add new book/i
@@ -292,6 +292,20 @@ describe('book_spec', () => {
     }).click()
     cy.get('ul')
       .should('contain', 'ISBN must be 0, 10 or 13 numbers long')
+  })
+
+  it.only('can update books without triggering a Duplicate warning, if book has a unique title', () => {
+    cy.visit('/')
+    cy.contains('Metamorphosis').click()
+
+    cy.findByRole('button', {
+      name: /update/i
+    }).click()
+
+    //Make sure BookUpdateForm populates with fields
+    cy.get('[data-cy=book_update_title_field]').then(($titleField) => {
+      cy.log($titleField)
+    })
   })
 
 })

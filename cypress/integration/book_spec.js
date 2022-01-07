@@ -1,3 +1,5 @@
+import { forEach } from "async"
+
 describe('book_spec', () => {
   beforeEach(() => {
 
@@ -113,9 +115,13 @@ describe('book_spec', () => {
       })
     })*/
 
-    cy.get('[data-cy=book_info_title]').should(($element) => {
-      expect($element).to.have.length(6)
-
+    cy.get('[data-cy=book_info_title]').then(($element) => {
+      //const title = $element.prop('innerHTML')
+      //cy.log(title)
+      const titles = $element.map((i, el) => {
+        return Cypress.$(el).prop('innerHTML')
+      })
+      cy.log(titles)
     })
   })
 

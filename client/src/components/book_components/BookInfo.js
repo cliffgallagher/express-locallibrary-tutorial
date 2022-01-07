@@ -7,7 +7,7 @@ const BookInfo = (props) => {
             <p data-cy='book_info_title'>Title: {props.title}</p>
             <p>Author: {props.author}</p>
             <p>ISBN: {props.isbn}</p>
-            <p>Genre: {props.genreName}</p>
+            <p data-cy='book_info_genre'>Genre: {props.genreName}</p>
             <p>Summary: {props.summary}</p>
         </div>
     )

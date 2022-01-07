@@ -107,21 +107,16 @@ describe('book_spec', () => {
 
     //check that the warning went away and there is still only one instance of Pachinko in database
     cy.get('[data-cy=duplicate_book_warning]').should('not.exist')
-    /*cy.get('[data-cy=booklist]').should('contain.at.most(1)', 'Pachinko')
-    cy.get('[data-cy=booklist]').within(() => {
-      //cy.get('[p="Title: Pachinko"]').should('have.length', 1)
-      cy.get('ul').within(() => {
-        expect('[title="Pachinko"]').to.have.length(1)
-      })
-    })*/
 
+    //return array of titles
     cy.get('[data-cy=book_info_title]').then(($element) => {
-      //const title = $element.prop('innerHTML')
-      //cy.log(title)
+
       const titles = $element.map((i, el) => {
         return Cypress.$(el).prop('innerHTML')
       })
       cy.log(titles)
+
+      expect(titles.get().filter(el => el === "Title: Pachinko")).to.have.length(1)
     })
   })
 

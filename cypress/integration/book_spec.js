@@ -113,8 +113,9 @@ describe('book_spec', () => {
       })
     })*/
 
-    cy.get('[data-cy=book_list_element]').should(($element) => {
+    cy.get('[data-cy=book_info_title]').should(($element) => {
       expect($element).to.have.length(6)
+
     })
   })
 

@@ -307,11 +307,44 @@ describe('book_spec', () => {
     //Make sure BookUpdateForm populates with correct fields
     //Make sure title equals "Metamorphosis"
     cy.get('[data-cy=book_update_title_field]').then(($titleInput) => {
-      const defaultValue = $titleInput.prop('defaultValue')
+      const defaultValue = $titleInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
       cy.log(defaultValue)
       expect(defaultValue).to.equal('Metamorphosis')
+    })
+
+    //Make sure author is Franz Kafka
+    cy.get('[data-cy=book_update_author_field]').then(($authorInput) => {
+      const defaultValue = $authorInput.prop('value')
+      return defaultValue
+    }).then((defaultValue) => {
+      expect(defaultValue).to.equal('96')
+    })
+
+    //Make sure ISBN is 9781557427663
+    cy.get('[data-cy=book_update_isbn_field]').then(($isbnInput) => {
+      const defaultValue = $isbnInput.prop('value')
+      return defaultValue
+    }).then((defaultValue) => {
+      //cy.log(defaultValue)
+      expect(defaultValue).to.equal('9781557427663')
+    })
+
+    //Make sure genre is Fiction
+    cy.get('[data-cy=book_update_genre_field]').then(($genreInput) => {
+      const defaultValue = $genreInput.prop('value')
+      return defaultValue
+    }).then((defaultValue) => {
+      expect(defaultValue).to.equal('47')
+    })
+
+    //Make sure summary is accurate
+    cy.get('[data-cy=book_update_summary_field]').then(($summaryInput) => {
+      const defaultValue = $summaryInput.prop('value')
+      return defaultValue
+    }).then((defaultValue) => {
+      expect(defaultValue).to.equal('A man turns into a fly.')
     })
   })
 

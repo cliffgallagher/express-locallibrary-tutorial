@@ -215,10 +215,10 @@ const BookPopupForUpdate = (props) => {
             {!displayDuplicateWarning && <form className={styles.popupInner} onSubmit={popupForUpdateSubmitHandler}>
                 <ul>{validationErrors}</ul>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} data-cy='book_update_title_field'/></label>
-                <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler}>{updateFormAuthorOptions}</select></label>
-                <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler}/></label>
-                <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput} onChange={updateFormGenreInputChangeHandler}>{updateFormGenreOptions}</select></label>
-                <label>Summary<textarea id={styles.summary_input} name='updateFormSummaryField' value={updateFormSummaryInput} rows="5" cols="25" onChange={updateFormSummaryInputChangeHandler}></textarea></label>
+                <label>Author<select name='updateFormAuthorField' value={updateFormAuthorInput} onChange={updateFormAuthorInputChangeHandler} data-cy='book_update_author_field'>{updateFormAuthorOptions}</select></label>
+                <label>ISBN<input type='text' name='updateFormISBNField' value={updateFormISBNInput} onChange={updateFormISBNInputChangeHandler} data-cy='book_update_isbn_field'/></label>
+                <label>Genre<select name='updateFormGenreField' value={updateFormGenreInput} onChange={updateFormGenreInputChangeHandler} data-cy='book_update_genre_field'>{updateFormGenreOptions}</select></label>
+                <label>Summary<textarea id={styles.summary_input} name='updateFormSummaryField' value={updateFormSummaryInput} rows="5" cols="25" onChange={updateFormSummaryInputChangeHandler} data-cy='book_update_summary_field'></textarea></label>
                 <div id={styles.button_div}>
                     <button type="submit">Update Book</button>
                     <button className='close-button' onClick={popupForUpdateCloseButtonHandler} id={styles.right_most_button}>Close</button>

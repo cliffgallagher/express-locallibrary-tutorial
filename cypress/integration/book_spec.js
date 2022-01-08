@@ -303,16 +303,15 @@ describe('book_spec', () => {
     }).click()
 
     cy.wait(1000)
-    //Make sure BookUpdateForm populates with fields
-    /*cy.get('[data-cy=book_update_title_field]').then(($titleField) => {
-      cy.log($titleField)
-    })*/
+    
+    //Make sure BookUpdateForm populates with correct fields
+    //Make sure title equals "Metamorphosis"
     cy.get('[data-cy=book_update_title_field]').then(($titleInput) => {
       const defaultValue = $titleInput.prop('defaultValue')
       return defaultValue
     }).then((defaultValue) => {
       cy.log(defaultValue)
-      //expect(defaultValue.get()).to.equal('Metamorphosis')
+      expect(defaultValue).to.equal('Metamorphosis')
     })
   })
 

@@ -1,7 +1,7 @@
 describe('book_spec', () => {
   beforeEach(() => {
 
-      cy.task('db:reset')
+      cy.task('db:reset_books')
       
       cy.request('POST', 'users/login', {
           loginUsername: 'cliffgallagher',

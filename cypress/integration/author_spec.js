@@ -44,9 +44,10 @@ describe('author_spec', () => {
         cy.get('[data-cy=new_author_form]').should('not.exist')
 
         cy.get('[data-cy=author_list_element]').then(($listElement) => {
-            expect($listElement)
+            expect($listElement[3])
                 .to.contain('Hornby, Nick')
                 .to.contain('Born: 04-17-1957')
+                .to.not.contain('Died: ' + /\d/)
         })
 
     })

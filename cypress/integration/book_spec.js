@@ -465,7 +465,7 @@ describe('book_spec', () => {
   *
   * will trigger Duplicate warning if you update book with duplicate title, will not update book if you click no on warning
   */
-  it.only('will trigger Duplicate warning if you update book with duplicate title, will not update book if you click no on warning', () => {
+  it('will trigger Duplicate warning if you update book with duplicate title, will not update book if you click no on warning', () => {
     cy.visit('/')
     cy.contains('Metamorphosis').click()
 
@@ -525,6 +525,44 @@ describe('book_spec', () => {
       cy.log(titles)
 
       expect(titles.get().filter(el => el === "Title: On Beauty")).to.have.length(1)
+    })
+  })
+
+  /*
+  *
+  * Delete a book
+  */
+  it.only('can delete a book', () => {
+    cy.visit('/')
+    cy.contains('A Visit From the Goon Squad').click()
+  
+    cy.findByRole('button', {
+      name: /delete/i
+    }).click()
+  
+    cy.get('[data-cy=book_popup_for_delete]').then(($popupForDelete) => {
+      expect($popupForDelete)
+        .to.contain('Are you sure you want to delete this book?')
+        .to.contain('Title: A Visit From the Goon Squad')
+        .to.contain('Author: Jennifer Egan')
+        .to.contain('ISBN: 0307477479')
+    })
+
+    cy.findByRole('button', {
+      name: /delete/i
+    }).click()
+
+    cy.wait(1000)
+
+    // make sure the book was deleted
+    cy.get('[data-cy=book_info_title]').then(($element) => {
+
+      const titles = $element.map((i, el) => {
+        return Cypress.$(el).prop('innerHTML')
+      })
+      cy.log(titles)
+
+      expect(titles.get().filter(el => el === "Title: A Visit From the Goon Squad")).to.have.length(0)
     })
   })
 

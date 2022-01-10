@@ -509,7 +509,7 @@ describe('book_spec', () => {
       expect($html).to.contain('A book with the title On Beauty already exists in the database. Are you sure you want to update this book to have that title?')
     })
 
-    //click yes on the duplicate warning
+    //click cancel on the duplicate warning
     cy.findByRole('button', {
       name: /cancel/i
     }).click()
@@ -566,8 +566,11 @@ describe('book_spec', () => {
     })
   })
   
-  
-  it.only('can add a new book that contains apostrophes', () => {
+  /*
+  *
+  * add a new book that contains apostrophes
+  */
+  it('can add a new book that contains apostrophes', () => {
     cy.visit('/')
     cy.findByRole('button', {
         name: /add new book/i
@@ -596,4 +599,85 @@ describe('book_spec', () => {
       .should('contain', 'Summary: Published in 2017, Pach\'inko is an epic historical fiction novel following a Korean family that immigrates to Japan.')
   })
 
+  /*
+  *
+  * update a book to contain apostrophes, then delete the book
+  */
+  it.only('updates a book that contains apostrophes, then deletes it', () => {
+    cy.visit('/')
+    cy.contains('Metamorphosis').click()
+
+    cy.findByRole('button', {
+      name: /update/i
+    }).click()
+
+    cy.wait(1000)
+
+    //Update the title to something that is a duplicate
+    cy.findByRole('textbox', {
+      name: /title/i
+    }).clear().type('O\'n Beauty')
+
+    //Update the author to someone else
+    cy.findByRole('combobox', {
+      name: /author/i
+    }).select('Mandel, Emily St. John')
+
+    //Update the ISBN
+    cy.findByRole('textbox', {
+      name: /isbn/i
+    }).clear()
+
+    //Update the genre
+    cy.findByRole('combobox', {
+      name: /genre/i
+    }).select('Cooking')
+
+    //Update the summary
+    cy.findByRole('textbox', {
+      name: /summary/i
+    }).clear().type('This is the updated summary')
+
+    cy.findByRole('button', {
+      name: /update book/i
+    }).click()
+
+    //Check that the book has been updated
+    cy.get('[data-cy=booklist]')
+      .should('contain', 'Title: O\'n Beauty')
+      .should('contain', 'Author: Emily St. John Mandel')
+      .should('contain', 'Genre: Cooking')
+      .should('contain', 'ISBN: ')
+      .should('contain', 'Summary: This is the updated summary')
+
+    // Delete the book
+    cy.contains('O\'n Beauty').click()
+    cy.findByRole('button', {
+      name: /delete/i
+    }).click()
+
+    cy.get('[data-cy=book_popup_for_delete]').then(($popupForDelete) => {
+      expect($popupForDelete)
+        .to.contain('Are you sure you want to delete this book?')
+        .to.contain('Title: O\'n Beauty')
+        .to.contain('Author: Emily St. John Mandel')
+        .to.contain('ISBN: ')
+    })
+
+    cy.findByRole('button', {
+      name: /delete/i
+    }).click()
+
+    cy.wait(1000)
+
+    // make sure the book was deleted
+    cy.get('[data-cy=book_info_title]').then(($element) => {
+      const titles = $element.map((i, el) => {
+        return Cypress.$(el).prop('innerHTML')
+      })
+      cy.log(titles)
+
+      expect(titles.get().filter(el => el === "Title: O\'n Beauty")).to.have.length(0)
+    })  
+  }) 
 })

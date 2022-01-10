@@ -532,7 +532,7 @@ describe('book_spec', () => {
   *
   * Delete a book
   */
-  it.only('can delete a book', () => {
+  it('can delete a book', () => {
     cy.visit('/')
     cy.contains('A Visit From the Goon Squad').click()
   
@@ -564,6 +564,36 @@ describe('book_spec', () => {
 
       expect(titles.get().filter(el => el === "Title: A Visit From the Goon Squad")).to.have.length(0)
     })
+  })
+  
+  
+  it.only('can add a new book that contains apostrophes', () => {
+    cy.visit('/')
+    cy.findByRole('button', {
+        name: /add new book/i
+      }).click()
+    cy.findByRole('textbox', {
+        name: /title/i
+      }).type('Pach\'inko')
+    cy.findByRole('textbox', {
+        name: /isbn/i
+      }).type('1455563927')
+    cy.findByRole('textbox', {
+        name: /summary/i
+      }).type('Published in 2017, Pach\'inko is an epic historical fiction novel following a Korean family that immigrates to Japan.')
+    cy.findByRole('combobox', {
+        name: /author/i
+      }).select('Lee, Min Jin')
+    cy.findByRole('combobox', {
+        name: /genre/i
+      }).select('Fiction')
+    cy.findByRole('button', {
+        name: /submit/i
+      }).click()
+
+    cy.get('[data-cy=booklist')
+      .should('contain', 'Title: Pach\'inko')
+      .should('contain', 'Summary: Published in 2017, Pach\'inko is an epic historical fiction novel following a Korean family that immigrates to Japan.')
   })
 
 })

@@ -27,7 +27,7 @@ const ChosenBook = (props) => {
         <div>
             {!displayElementPopupForUpdate && !displayElementPopupForDelete && (
                 <div className={styles.chosen_element_popup}>
-                <div className={styles.chosen_element_popup_inner}>
+                <div className={styles.chosen_element_popup_inner} data-cy='chosen_book'>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
                     <div id={styles.button_div}>
                         <button onClick={updateBookButtonClickHandler}>Update</button>

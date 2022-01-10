@@ -1,5 +1,3 @@
-import { forEach } from "async"
-
 describe('book_spec', () => {
   beforeEach(() => {
 
@@ -294,6 +292,10 @@ describe('book_spec', () => {
       .should('contain', 'ISBN must be 0, 10 or 13 numbers long')
   })
 
+  /*
+  *
+  * can update books without triggering a Duplicate warning, if book has a unique title
+  */
   it.only('can update books without triggering a Duplicate warning, if book has a unique title', () => {
     cy.visit('/')
     cy.contains('Metamorphosis').click()
@@ -345,6 +347,50 @@ describe('book_spec', () => {
       return defaultValue
     }).then((defaultValue) => {
       expect(defaultValue).to.equal('A man turns into a fly.')
+    })
+
+    //Update the title to something that's not a duplicate
+    cy.findByRole('textbox', {
+      name: /title/i
+    }).clear().type('The Metamorphosis')
+
+    //Update the author to someone else
+    cy.findByRole('combobox', {
+      name: /author/i
+    }).select('Mandel, Emily St. John')
+
+    //Update the ISBN
+    cy.findByRole('textbox', {
+      name: /isbn/i
+    }).clear().type('1234567890')
+
+    //Update the genre
+    cy.findByRole('combobox', {
+      name: /genre/i
+    }).select('Cooking')
+
+    //Update the summary
+    cy.findByRole('textbox', {
+      name: /summary/i
+    }).clear().type('This is the updated summary')
+
+    //Click 'Update' and test that the updated values have been set
+    cy.findByRole('button', {
+      name: /update book/i
+    }).click()
+
+    cy.contains('Metamorphosis').click()
+
+    // Expect the updated title to be "The Metamorphosis"
+
+    // Expect ChosenBook to contain the updated values
+    cy.get('[data-cy=chosen_book]').then(($chosenBook) => {
+      expect($chosenBook)
+        .to.contain('Title: The Metamorphosis')
+        .to.contain('Author: Emily St. John Mandel')
+        .to.contain('ISBN: 1234567890')
+        .to.contain('Genre: Cooking')
+        .to.contain('Summary: This is the updated summary')
     })
   })
 

@@ -296,7 +296,7 @@ describe('book_spec', () => {
   *
   * can update books without triggering a Duplicate warning, if book has a unique title
   */
-  it.only('can update books without triggering a Duplicate warning, if book has a unique title', () => {
+  it('can update books without triggering a Duplicate warning, if book has a unique title', () => {
     cy.visit('/')
     cy.contains('Metamorphosis').click()
 
@@ -391,6 +391,140 @@ describe('book_spec', () => {
         .to.contain('ISBN: 1234567890')
         .to.contain('Genre: Cooking')
         .to.contain('Summary: This is the updated summary')
+    })
+  })
+
+  /*
+  *
+  * will trigger Duplicate warning if you update book with duplicate title
+  */
+  it('will trigger Duplicate warning if you update book with duplicate title, will update book if you click through warning', () => {
+    cy.visit('/')
+    cy.contains('Metamorphosis').click()
+
+    cy.findByRole('button', {
+      name: /update/i
+    }).click()
+
+    cy.wait(1000)
+
+    //Update the title to something that is a duplicate
+    cy.findByRole('textbox', {
+      name: /title/i
+    }).clear().type('On Beauty')
+
+    //Update the author to someone else
+    cy.findByRole('combobox', {
+      name: /author/i
+    }).select('Mandel, Emily St. John')
+
+    //Update the ISBN
+    cy.findByRole('textbox', {
+      name: /isbn/i
+    }).clear().type('1234567890')
+
+    //Update the genre
+    cy.findByRole('combobox', {
+      name: /genre/i
+    }).select('Cooking')
+
+    //Update the summary
+    cy.findByRole('textbox', {
+      name: /summary/i
+    }).clear().type('This is the updated summary')
+
+    //Click 'Update' and test that the updated values have been set
+    cy.findByRole('button', {
+      name: /update book/i
+    }).click()
+
+    cy.get('html').then(($html) => {
+      expect($html).to.contain('A book with the title On Beauty already exists in the database. Are you sure you want to update this book to have that title?')
+    })
+
+    //click yes on the duplicate warning
+    cy.findByRole('button', {
+      name: /update/i
+    }).click()
+
+    cy.wait(1000)
+
+    //Make sure there are two copies of On Beauty in the database
+    cy.get('[data-cy=book_info_title]').then(($element) => {
+
+      const titles = $element.map((i, el) => {
+        return Cypress.$(el).prop('innerHTML')
+      })
+      cy.log(titles)
+
+      expect(titles.get().filter(el => el === "Title: On Beauty")).to.have.length(4)
+    })
+  })
+
+  /*
+  *
+  * will trigger Duplicate warning if you update book with duplicate title, will not update book if you click no on warning
+  */
+  it.only('will trigger Duplicate warning if you update book with duplicate title, will not update book if you click no on warning', () => {
+    cy.visit('/')
+    cy.contains('Metamorphosis').click()
+
+    cy.findByRole('button', {
+      name: /update/i
+    }).click()
+
+    cy.wait(1000)
+
+    //Update the title to something that is a duplicate
+    cy.findByRole('textbox', {
+      name: /title/i
+    }).clear().type('On Beauty')
+
+    //Update the author to someone else
+    cy.findByRole('combobox', {
+      name: /author/i
+    }).select('Mandel, Emily St. John')
+
+    //Update the ISBN
+    cy.findByRole('textbox', {
+      name: /isbn/i
+    }).clear().type('1234567890')
+
+    //Update the genre
+    cy.findByRole('combobox', {
+      name: /genre/i
+    }).select('Cooking')
+
+    //Update the summary
+    cy.findByRole('textbox', {
+      name: /summary/i
+    }).clear().type('This is the updated summary')
+
+    //Click 'Update' and test that the updated values have been set
+    cy.findByRole('button', {
+      name: /update book/i
+    }).click()
+
+    cy.get('html').then(($html) => {
+      expect($html).to.contain('A book with the title On Beauty already exists in the database. Are you sure you want to update this book to have that title?')
+    })
+
+    //click yes on the duplicate warning
+    cy.findByRole('button', {
+      name: /cancel/i
+    }).click()
+
+    cy.wait(1000)
+
+    //Make sure there is only one copy of On Beauty in the database
+    cy.get('[data-cy=book_info_title]').then(($element) => {
+
+      const titles = $element.map((i, el) => {
+        return Cypress.$(el).prop('innerHTML')
+      })
+      cy.log(titles)
+
+      expect(titles.get().filter(el => el === "Title: On Beauty")).to.have.length(1)
     })
   })
 

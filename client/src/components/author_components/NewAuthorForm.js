@@ -90,7 +90,7 @@ const NewAuthorForm = (props) => {
     
     return (
         <div>
-            <form id={styles.newElementForm} onSubmit={newAuthorFormSubmitHandler}>
+            <form id={styles.newElementForm} onSubmit={newAuthorFormSubmitHandler} data-cy='new_author_form'>
                 <ul>{validationErrors}</ul>
                 <label>First Name<input type='text' name='newAuthorFormFirstNameInput' onChange={newAuthorFormFirstNameChangeHandler} value={newAuthorFirstName}/></label>
                 <label>Family Name<input type='text' name='newAuthorFormFamilyNameInput' onChange={newAuthorFormFamilyNameChangeHandler} value={newAuthorFamilyName}/></label>

@@ -39,7 +39,7 @@ describe('book_spec', () => {
         name: /submit/i
       }).click()
     cy.get('[data-cy=new_book_form]').should('not.exist')
-    cy.get('[data-cy=booklist').should('contain', 'Pachinko')
+    cy.get('[data-cy=booklist]').should('contain', 'Pachinko')
     })
   
   /*

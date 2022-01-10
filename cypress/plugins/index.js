@@ -32,7 +32,7 @@ module.exports = (on, config) => {
       return shell('npx sequelize-cli db:seed:undo --seed 20220105161937-cypress-test-seeder.js && npx sequelize-cli db:seed --seed 20220105161937-cypress-test-seeder.js');
     },
     'db:reset_authors': () => {
-      return shell('npx sequelize-cli db:seed:undo --seed 20220110181053-cypress-author-test-seeder && npx sequelize-cli db:seed --seed 20220110181053-cypress-author-test-seeder.js');
+      return shell('npx sequelize-cli db:seed:undo --seed 20220110181053-cypress-author-test-seeder.js && npx sequelize-cli db:seed --seed 20220110181053-cypress-author-test-seeder.js');
     }
   })
 }

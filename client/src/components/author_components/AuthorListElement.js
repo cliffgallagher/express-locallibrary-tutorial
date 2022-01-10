@@ -60,7 +60,7 @@ const AuthorListElement = (props) => {
     }, [auth.searchText]);
     
     return (
-        <div className={`${styles.listElement} ${hideChosenElement ? styles.hideElement: ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler}>
+        <div className={`${styles.listElement} ${hideChosenElement ? styles.hideElement: ''} ${gridOrder ? styles.gridOrder : ''}`} onClick={clickElementHandler} data-cy='author_list_element'>
             {!displayChosenElement && (
                 <div>
                     <AuthorInfo firstName={props.firstName} familyName={props.familyName} dateOfBirth={props.dateOfBirth} dateOfDeath={props.dateOfDeath}/>

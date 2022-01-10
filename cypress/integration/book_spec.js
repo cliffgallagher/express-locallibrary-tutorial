@@ -379,7 +379,9 @@ describe('book_spec', () => {
       name: /update book/i
     }).click()
 
-    cy.contains('Metamorphosis').click()
+    cy.wait(1000)
+
+    cy.contains('The Metamorphosis').click()
 
     // Expect the updated title to be "The Metamorphosis"
 
@@ -457,7 +459,7 @@ describe('book_spec', () => {
       })
       cy.log(titles)
 
-      expect(titles.get().filter(el => el === "Title: On Beauty")).to.have.length(4)
+      expect(titles.get().filter(el => el === "Title: On Beauty")).to.have.length(2)
     })
   })
 
@@ -603,7 +605,7 @@ describe('book_spec', () => {
   *
   * update a book to contain apostrophes, then delete the book
   */
-  it.only('updates a book that contains apostrophes, then deletes it', () => {
+  it('updates a book that contains apostrophes, then deletes it', () => {
     cy.visit('/')
     cy.contains('Metamorphosis').click()
 
@@ -642,6 +644,8 @@ describe('book_spec', () => {
       name: /update book/i
     }).click()
 
+    cy.wait(1000)
+
     //Check that the book has been updated
     cy.get('[data-cy=booklist]')
       .should('contain', 'Title: O\'n Beauty')
@@ -655,6 +659,8 @@ describe('book_spec', () => {
     cy.findByRole('button', {
       name: /delete/i
     }).click()
+
+    cy.wait(1000)
 
     cy.get('[data-cy=book_popup_for_delete]').then(($popupForDelete) => {
       expect($popupForDelete)

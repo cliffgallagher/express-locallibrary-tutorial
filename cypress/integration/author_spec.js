@@ -35,6 +35,7 @@ describe('author_spec', () => {
             name: /family name/i
           }).type('Hornby')
         cy.findByLabelText(/date of birth/i).type('1957-04-17')
+        cy.findByLabelText(/date of death/i).type('1957-04-18')
         cy.findByRole('button', {
             name: /submit/i
         }).click()
@@ -47,8 +48,9 @@ describe('author_spec', () => {
             expect($listElement[3])
                 .to.contain('Hornby, Nick')
                 .to.contain('Born: 04-17-1957')
-                .to.not.contain('Died: ' + /\d/)
         })
-
+        cy.get('[data-cy=author_info_death_date]').contains(/\d/).then(($deadAuthors) => {
+            cy.log($deadAuthors)
+        })
     })
 })

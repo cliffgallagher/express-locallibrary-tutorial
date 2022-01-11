@@ -92,9 +92,9 @@ describe('genre_spec', () => {
 
    /*
    *
-   * update a genre that won't trigger a duplicate warning
+   * update a genre that will trigger a duplicate warning
    */
-    it.only('can update a genre that will not trigger a duplicate warning', () => {
+    it('can update a genre that will trigger a duplicate warning', () => {
         cy.contains('Fiction').click()
 
         cy.findByRole('button', {
@@ -133,6 +133,43 @@ describe('genre_spec', () => {
             //cy.log(names)
       
             expect(names.get().filter(el => el === "Mystery")).to.have.length(1)
+        })
+    })
+
+    /*
+   *
+   * update a genre that will not trigger a duplicate warning
+   */
+    it.only('can update a genre that will not trigger a duplicate warning', () => {
+        cy.contains('Fiction').click()
+
+        cy.findByRole('button', {
+                name: /update/i
+        }).click()
+
+        cy.findByRole('textbox', {
+            name: /genre name/i
+        }).clear().type('Young Adult')
+
+        cy.findByRole('button', {
+            name: /update/i
+        }).click()
+
+        cy.wait(1000)
+
+        //warning should not appear
+        cy.get('[data-cy=genre_popup_for_update]').should('not.exist')
+
+        //GenreList should containt Young Adult, not contain Fiction
+        cy.get('[data-cy=genre_list]').should('contain', 'Young Adult')
+
+        cy.get('[data-cy=genre_info_name_field]').then(($element) => {
+
+            const names = $element.map((i, el) => {
+              return Cypress.$(el).prop('innerHTML')
+            })
+      
+            expect(names.get().filter(el => el === "Fiction")).to.have.length(0)
         })
     })
 

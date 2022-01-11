@@ -5,7 +5,7 @@ const AuthorList = (props) => {
     
     return (
         <div>
-            <ul className={styles.ulGrid}>{props.authorArray}</ul>
+            <ul className={styles.ulGrid} data-cy='author_list'>{props.authorArray}</ul>
         </div>
     )
 }

@@ -220,5 +220,29 @@ describe('author_spec', () => {
         }).then((defaultValue) => {
             expect(defaultValue).to.equal(null)
         })
+
+        //update the Zadie Smith entry to have new values
+        cy.findByRole('textbox', {
+            name: /first name/i
+        }).clear().type('Agatha')
+        
+        cy.findByRole('textbox', {
+            name: /family name/i
+        }).clear().type('Christie')
+
+        cy.findByLabelText(/date of birth/i).type('1890-09-15')
+
+        cy.findByLabelText(/date of death/i).type('1976-01-12')
+
+        cy.findByRole('button', {
+            name: /update author/i
+        }).click()
+
+        // Make sure AuthorList no longer includes Zadie Smith and does include Agatha Christie
+        cy.get('[data-cy=author_list]')
+            .should('not.contain', 'Smith, Zadie')
+            .should('contain', 'Christie, Agatha')
+            .should('contain', 'Born: 09-15-1890')
+            .should('contain', 'Died: 01-12-1976')
     })
 })

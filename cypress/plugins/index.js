@@ -33,6 +33,9 @@ module.exports = (on, config) => {
     },
     'db:reset_authors': () => {
       return shell('npx sequelize-cli db:seed:undo --seed 20220110181053-cypress-author-test-seeder.js && npx sequelize-cli db:seed --seed 20220110181053-cypress-author-test-seeder.js');
+    },
+    'db:reset_genres': () => {
+      return shell('npx sequelize-cli db:seed:undo --seed 20220111195953-cypress-genre-test-seeder.js && npx sequelize-cli db:seed --seed 20220111195953-cypress-genre-test-seeder.js');
     }
   })
 }

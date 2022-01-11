@@ -252,7 +252,7 @@ describe('author_spec', () => {
     *
     *   update an author that will trigger a duplicate warning, and add the author
     */
-    it.only('will trigger a duplicate author warning, but can add the author if the user wants', () => {
+    it('will trigger a duplicate author warning, but can add the author if the user wants', () => {
         cy.contains('Smith, Zadie').click()
 
         cy.findByRole('button', {
@@ -301,7 +301,7 @@ describe('author_spec', () => {
     *
     *   update an author that will trigger a duplicate warning, decline to add author
     */
-    it.only('will trigger a duplicate author warning, declining to add duplicate will not add duplicate', () => {
+    it('will trigger a duplicate author warning, declining to add duplicate will not add duplicate', () => {
         cy.contains('Smith, Zadie').click()
 
         cy.findByRole('button', {
@@ -348,5 +348,75 @@ describe('author_spec', () => {
             expect(names.get().filter(el => el === "Lee, Min Jin")).to.have.length(1)
             expect(names.get().filter(el => el === "Smith, Zadie")).to.have.length(1)
         })
+    })
+
+    /*
+    *
+    *   Create an author who has apostrophe in their name, update author, create a book by that author, attempt to delete that author, delete the book, then delete the author
+    */
+    it.only('can create an author who has apostrophe in their name, update author, create a book by that author, attempt to delete that author, delete the book, then delete the author', () => {
+        /*
+        * Create the author
+        */
+        cy.findByRole('button', {
+            name: /add new author/i
+            }).click()
+        
+        cy.wait(1000)
+
+        cy.get('[data-cy=new_author_form]').should('exist')
+
+        cy.findByRole('textbox', {
+            name: /first name/i
+            }).type('Ni\'ck')
+        cy.findByRole('textbox', {
+            name: /family name/i
+            }).type('Ho\'rnby')
+        cy.findByLabelText(/date of birth/i).type('1957-04-17')
+        cy.findByRole('button', {
+            name: /submit/i
+        }).click()
+
+        cy.wait(1000)
+
+        // NewAuthorForm should be gone
+        cy.get('[data-cy=new_author_form]').should('not.exist')
+
+        // AuthorList should include Nick Hornby now
+        cy.get('[data-cy=author_list_element]').then(($listElement) => {
+            expect($listElement[3])
+                .to.contain('Ho\'rnby, Ni\'ck')
+                .to.contain('Born: 04-17-1957')
+        })
+
+        /*
+        * update the author
+        */
+        cy.contains('Ho\'rnby, Ni\'ck').click()
+
+        cy.findByRole('button', {
+            name: /update/i
+        }).click()
+
+        cy.findByRole('textbox', {
+            name: /first name/i
+        }).clear().type('Jo\'nah')
+        
+        cy.findByRole('textbox', {
+            name: /family name/i
+        }).clear().type('Hi\'ll')
+
+        cy.findByLabelText(/date of birth/i).type('1890-09-15')
+
+        cy.findByRole('button', {
+            name: /update author/i
+        }).click()
+
+        cy.wait(1000)
+
+        // Make sure AuthorList no longer includes Ni'ck Ho'rnby and does include Jo'nah Hill
+        cy.get('[data-cy=author_list]')
+        .should('not.contain', 'Ho\'rnby, Ni\'ck')
+        .should('contain', 'Hi\'ll, Jo\'nah')
     })
 })

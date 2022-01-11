@@ -62,7 +62,7 @@ const NewGenreForm = (props) => {
 
     return (
         <div>
-            <form id={styles.newElementForm} onSubmit={newGenreFormSubmitHandler}>
+            <form id={styles.newElementForm} onSubmit={newGenreFormSubmitHandler} data-cy='new_genre_form'>
                 <ul>{validationErrors}</ul>
                 <label>New Genre Name<input type='text' name='newGenreFormNameField' value={newGenreFormNameValue} onChange={newGenreFormNameChangeHandler}/></label>
                 <button type='submit'>Submit Genre</button>

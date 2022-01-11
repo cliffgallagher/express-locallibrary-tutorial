@@ -3,7 +3,7 @@ import styles from '../List.module.css';
 
 const GenreList = (props) => {
     return (
-        <div>
+        <div data-cy='genre_list'>
             <ul className={styles.ulGrid}>{props.genreArray}</ul>
         </div>
     )

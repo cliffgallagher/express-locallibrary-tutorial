@@ -179,7 +179,7 @@ describe('author_spec', () => {
     *
     * update an author that won't trigger a duplicate warning
     */
-    it.only('can update an author that will not trigger a duplicate warning', () => {
+    it('can update an author that will not trigger a duplicate warning', () => {
         cy.contains('Smith, Zadie').click()
 
         cy.findByRole('button', {
@@ -238,11 +238,61 @@ describe('author_spec', () => {
             name: /update author/i
         }).click()
 
+        cy.wait(1000)
+
         // Make sure AuthorList no longer includes Zadie Smith and does include Agatha Christie
         cy.get('[data-cy=author_list]')
             .should('not.contain', 'Smith, Zadie')
             .should('contain', 'Christie, Agatha')
             .should('contain', 'Born: 09-15-1890')
             .should('contain', 'Died: 01-12-1976')
+    })
+
+    /*
+    *
+    *   update an author that will trigger a duplicate warning, and add the author
+    */
+    it.only('will trigger a duplicate author warning, but can add the author if the user wants', () => {
+        cy.contains('Smith, Zadie').click()
+
+        cy.findByRole('button', {
+            name: /update/i
+          }).click()
+
+        cy.findByRole('textbox', {
+            name: /first name/i
+        }).clear().type('Min Jin')
+        
+        cy.findByRole('textbox', {
+            name: /family name/i
+        }).clear().type('Lee')
+
+        cy.findByLabelText(/date of birth/i).type('1890-09-15')
+
+        cy.findByRole('button', {
+            name: /update author/i
+        }).click()
+
+        cy.wait(1000)
+
+        //duplicate warning should appear
+        cy.get('[data-cy=author_popup_for_update]').should('contain', 'An author named Min Jin Lee already exists in the database. Are you sure you want to update this author to have that name?')
+
+        cy.findByRole('button', {
+            name: /update/i
+        }).click()
+
+        cy.wait(1000)
+
+        //check that there are two Min Jin Lees in the database now
+        cy.get('[data-cy=author_info_name_field]').then(($element) => {
+
+            const names = $element.map((i, el) => {
+              return Cypress.$(el).prop('innerHTML')
+            })
+            cy.log(names)
+      
+            expect(names.get().filter(el => el === "Lee, Min Jin")).to.have.length(2)
+        })
     })
 })

@@ -448,5 +448,75 @@ describe('author_spec', () => {
           }).click()
         cy.get('[data-cy=new_book_form]').should('not.exist')
         cy.get('[data-cy=booklist]').should('contain', 'Jo\'nah Hi\'ll')
+
+        /*
+        * attempt to delete the author and trigger the warning, delete the book first, then delete the author
+        */
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/authors/i).click()
+
+        cy.contains('Jo\'nah').click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.wait(1000)
+
+        // first warning should display
+        cy.get('[data-cy=author_popup_for_delete]').should('contain', 'Are you sure you want to delete this author?')
+
+        cy.findByRole('button', {
+            name: /delete author/i
+        }).click()
+
+        // warning should display
+        cy.get('[data-cy=author_popup_for_delete]').should('contain', 'You\'re attempting to delete an author who wrote a book currently stored in the database.')
+
+        cy.findByRole('button', {
+            name: /close/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /cancel/i
+        }).click()
+
+        // delete the book first
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        
+        cy.findByText(/books/i).click()
+       
+        cy.contains('Jo\'nah').click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.wait(1000)
+
+        cy.get('[data-cy=booklist]').should('not.contain', 'Jo\'nah')
+
+        //now, delete the author
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        
+        cy.findByText(/authors/i).click()
+       
+        cy.contains('Jo\'nah').click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /delete author/i
+        }).click()
+
+        cy.wait(1000)
+
+        cy.get('[data-cy=author_list]').should('not.contain', 'Jo\'nah')
     })
 })

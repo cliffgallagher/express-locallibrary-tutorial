@@ -83,7 +83,7 @@ const AuthorPopupForDelete = (props) => {
     }
     
     return <div className={styles.popup}>
-    <div className={styles.popup_inner} id={styles.popup_for_delete}>
+    <div className={styles.popup_inner} id={styles.popup_for_delete} data-cy='author_popup_for_delete'>
         {!receivedForeignKeyConstraintError && <form onSubmit={deleteAuthorFormSubmitHandler} >
             <h1>Are you sure you want to delete this author?</h1>
             <h3>Name: {authorNameOnDeleteForm}</h3>

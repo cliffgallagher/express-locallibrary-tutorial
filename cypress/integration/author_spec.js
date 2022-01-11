@@ -293,6 +293,60 @@ describe('author_spec', () => {
             cy.log(names)
       
             expect(names.get().filter(el => el === "Lee, Min Jin")).to.have.length(2)
+            expect(names.get().filter(el => el === "Smith, Zadie")).to.have.length(0)
+        })
+    })
+
+    /*
+    *
+    *   update an author that will trigger a duplicate warning, decline to add author
+    */
+    it.only('will trigger a duplicate author warning, declining to add duplicate will not add duplicate', () => {
+        cy.contains('Smith, Zadie').click()
+
+        cy.findByRole('button', {
+            name: /update/i
+          }).click()
+
+        cy.findByRole('textbox', {
+            name: /first name/i
+        }).clear().type('Min Jin')
+        
+        cy.findByRole('textbox', {
+            name: /family name/i
+        }).clear().type('Lee')
+
+        cy.findByLabelText(/date of birth/i).type('1890-09-15')
+
+        cy.findByRole('button', {
+            name: /update author/i
+        }).click()
+
+        cy.wait(1000)
+
+        //duplicate warning should appear
+        cy.get('[data-cy=author_popup_for_update]').should('contain', 'An author named Min Jin Lee already exists in the database. Are you sure you want to update this author to have that name?')
+
+        cy.findByRole('button', {
+            name: /cancel/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /cancel/i
+        }).click()
+
+        cy.wait(1000)
+
+        //check that there is only one Min Jin Lee in database, and one Zadie Smith
+        cy.get('[data-cy=author_info_name_field]').then(($element) => {
+
+            const names = $element.map((i, el) => {
+              return Cypress.$(el).prop('innerHTML')
+            })
+            cy.log(names)
+      
+            expect(names.get().filter(el => el === "Lee, Min Jin")).to.have.length(1)
+            expect(names.get().filter(el => el === "Smith, Zadie")).to.have.length(1)
         })
     })
 })

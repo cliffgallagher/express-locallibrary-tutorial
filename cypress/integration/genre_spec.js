@@ -64,7 +64,7 @@ describe('genre_spec', () => {
     *
     * creating new genre instance that is already in database triggers duplicate warning
     */
-    it.only('can warn user if they are creating a duplicate genre', () => {
+    it('can warn user if they are creating a duplicate genre', () => {
         cy.findByRole('button', {
             name: /add new genre/i
         }).click()
@@ -80,5 +80,60 @@ describe('genre_spec', () => {
         cy.wait(1000)
 
         cy.get('[data-cy=duplicate_genre_form]').should('exist')
+
+        cy.findByRole('button', {
+            name: /close/i
+        }).click()
+
+        cy.wait(1000)
+
+        cy.get('[data-cy=duplicate_genre_form]').should('not.exist')
    })
+
+   /*
+   *
+   * update a genre that won't trigger a duplicate warning
+   */
+    it.only('can update a genre that will not trigger a duplicate warning', () => {
+        cy.contains('Fiction').click()
+
+        cy.findByRole('button', {
+                name: /update/i
+        }).click()
+
+        cy.findByRole('textbox', {
+            name: /genre name/i
+        }).clear().type('Mystery')
+
+        cy.findByRole('button', {
+            name: /update/i
+        }).click()
+
+        cy.wait(1000)
+
+        //warning should appear
+        cy.get('[data-cy=genre_popup_for_update]').should('contain', 'Genre name Mystery already exists in the database.')
+
+        cy.findByRole('button', {
+            name: /close/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /cancel/i
+        }).click()
+
+        //element should not have updated. Fiction and Mystery should still exist in database
+        cy.get('[data-cy=genre_list]').should('contain', 'Fiction')
+
+        cy.get('[data-cy=genre_info_name_field]').then(($element) => {
+
+            const names = $element.map((i, el) => {
+              return Cypress.$(el).prop('innerHTML')
+            })
+            //cy.log(names)
+      
+            expect(names.get().filter(el => el === "Mystery")).to.have.length(1)
+        })
+    })
+
 })

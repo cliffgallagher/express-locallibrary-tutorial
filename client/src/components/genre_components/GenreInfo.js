@@ -4,7 +4,7 @@ import styles from '../ElementInfo.module.css';
 const GenreInfo = (props) => {
     return (
         <div>
-            <p>{props.genreName}</p>
+            <p data-cy='genre_info_name_field'>{props.genreName}</p>
         </div>
     )
 }

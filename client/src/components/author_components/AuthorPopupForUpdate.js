@@ -176,10 +176,10 @@ const AuthorPopupForUpdate = (props) => {
         <div className={styles.popupInner}>
             {!displayDuplicateWarning && <form onSubmit={authorUpdateFormSubmitHandler}>
                 <ul>{validationErrors}</ul>
-                <label>First Name<input type='text' name='authorUpdateFormFirstNameInput' value={authorUpdateFormFirstNameValue} onChange={authorUpdateFormFirstNameChangeHandler}/></label>
-                <label>Family Name<input type='text' name='authorUpdateFormFamilyNameInput' value={authorUpdateFormFamilyNameValue} onChange={authorUpdateFormFamilyNameChangeHandler}/></label>
-                <label>Date of Birth<input type='date' name='authorUpdateFormBirthInput' value={authorUpdateFormBirthValue} onChange={authorUpdateFormBirthDateChangeHandler}/></label>
-                <label>Date of Death<input type='date' name='authorUpdateFormDeathInput'value={authorUpdateFormDeathValue} onChange={authorUpdateFormDeathDateChangeHandler}/></label>
+                <label>First Name<input type='text' name='authorUpdateFormFirstNameInput' value={authorUpdateFormFirstNameValue} onChange={authorUpdateFormFirstNameChangeHandler} data-cy='author_update_first_name'/></label>
+                <label>Family Name<input type='text' name='authorUpdateFormFamilyNameInput' value={authorUpdateFormFamilyNameValue} onChange={authorUpdateFormFamilyNameChangeHandler} data-cy='author_update_family_name'/></label>
+                <label>Date of Birth<input type='date' name='authorUpdateFormBirthInput' value={authorUpdateFormBirthValue} onChange={authorUpdateFormBirthDateChangeHandler} data-cy='author_update_date_of_birth'/></label>
+                <label>Date of Death<input type='date' name='authorUpdateFormDeathInput'value={authorUpdateFormDeathValue} onChange={authorUpdateFormDeathDateChangeHandler} data-cy='author_update_date_of_death'/></label>
                 <div id={styles.button_div}>
                     <button type="submit">Update Author</button>
                     <button className='close-button' id={styles.right_most_button} onClick={popupForUpdateCloseButtonHandler}>Close</button>

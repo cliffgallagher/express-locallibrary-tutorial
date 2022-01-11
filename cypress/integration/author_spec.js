@@ -112,7 +112,7 @@ describe('author_spec', () => {
     *
     * adding new author with empty fields will trigger validation warnings. Also, adding incorrect date of death     * will trigger various warnings
     */
-   it.only('can trigger validation warnings on NewAuthorForm', () => {
+   it('can trigger validation warnings on NewAuthorForm', () => {
         cy.findByRole('button', {
             name: /add new author/i
         }).click()
@@ -175,4 +175,50 @@ describe('author_spec', () => {
             .should('contain', 'Date of death cannot be a future date')
    })
 
+    /*
+    *
+    * update an author that won't trigger a duplicate warning
+    */
+    it.only('can update an author that will not trigger a duplicate warning', () => {
+        cy.contains('Smith, Zadie').click()
+
+        cy.findByRole('button', {
+            name: /update/i
+          }).click()
+
+        cy.wait(1000)
+
+        //make sure correct  values populated on PopupForUpdate
+        //Make sure first name equals Zadie
+        cy.get('[data-cy=author_update_first_name]').then(($firstName) => {
+            const defaultValue = $firstName.prop('value')
+            return defaultValue
+        }).then((defaultValue) => {
+            expect(defaultValue).to.equal('Zadie')
+        })
+
+        //Make sure family name equals Smith
+        cy.get('[data-cy=author_update_family_name]').then(($familyName) => {
+            const defaultValue = $familyName.prop('value')
+            return defaultValue
+        }).then((defaultValue) => {
+            expect(defaultValue).to.equal('Smith')
+        })
+
+        //Make sure date of birth is 1975-10-25
+        cy.get('[data-cy=author_update_date_of_birth]').then(($dateOfBirth) => {
+            const defaultValue = $dateOfBirth.prop('value')
+            return defaultValue
+        }).then((defaultValue) => {
+            expect(defaultValue).to.equal('1975-10-25')
+        })
+
+        //Make sure date of death is blank
+        cy.get('[data-cy=author_update_date_of_death]').then(($dateOfDeath) => {
+            const defaultValue = $dateOfDeath.prop('valueAsDate')
+            return defaultValue
+        }).then((defaultValue) => {
+            expect(defaultValue).to.equal(null)
+        })
+    })
 })

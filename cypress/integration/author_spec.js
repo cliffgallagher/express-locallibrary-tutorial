@@ -418,5 +418,35 @@ describe('author_spec', () => {
         cy.get('[data-cy=author_list]')
         .should('not.contain', 'Ho\'rnby, Ni\'ck')
         .should('contain', 'Hi\'ll, Jo\'nah')
+
+        /*
+        * create a book by that author
+        */
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/books/i).click()
+
+        cy.findByRole('button', {
+            name: /add new book/i
+          }).click()
+        cy.findByRole('textbox', {
+            name: /title/i
+          }).type('Pachinko')
+        cy.findByRole('textbox', {
+            name: /isbn/i
+          }).type('1455563927')
+        cy.findByRole('textbox', {
+            name: /summary/i
+          }).type('Published in 2017, Pachinko is an epic historical fiction novel following a Korean family that immigrates to Japan.')
+        cy.findByRole('combobox', {
+            name: /author/i
+          }).select('Hi\'ll, Jo\'nah')
+        cy.findByRole('combobox', {
+            name: /genre/i
+          }).select('Cooking')
+        cy.findByRole('button', {
+            name: /submit/i
+          }).click()
+        cy.get('[data-cy=new_book_form]').should('not.exist')
+        cy.get('[data-cy=booklist]').should('contain', 'Jo\'nah Hi\'ll')
     })
 })

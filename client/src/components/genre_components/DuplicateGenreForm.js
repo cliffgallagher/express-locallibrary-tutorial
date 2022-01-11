@@ -12,7 +12,7 @@ const DuplicateGenreForm = (props) => {
     return (
         <div className={styles.popup}>
             <div className={styles.popup_inner}>
-                <form>
+                <form data-cy='duplicate_genre_form'>
                     <p>A genre named {props.duplicateGenreName} already exists in the database</p>
                     <div id={styles.button_div}>
                         <button onClick={duplicateGenreWarningCloseHandler}>Close</button>

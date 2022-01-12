@@ -175,7 +175,7 @@ describe('genre_spec', () => {
 
     /*
     *
-    * Create new genre with an apostrophe, update it to something else with an apostrophe, create a new book of this * genre, attempt to delete the book to trigger the warning, delete the genre, then delete the book
+    * Create new genre with an apostrophe, update it to something else with an apostrophe, create a new book of this * genre, attempt to delete the genre to trigger the warning, delete the genre, then delete the book
     */
     it.only('can create a new genre with an apostrophe, update the name to something else with an apostrophe, create a new book of this genre, attempt to delete the book to trigger the warning, delete the genre, then delete the book', () => {
 
@@ -224,6 +224,103 @@ describe('genre_spec', () => {
         //GenreList should contain Young Adult, not contain Thri'ller
         cy.get('[data-cy=genre_list]').should('contain', 'You\'ng Adult')
         cy.get('[data-cy=genre_list]').should('not.contain', 'Thri\'ller')
+
+        /*
+        * Create a new book with this genre
+        */
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/books/i).click()
+
+        cy.findByRole('button', {
+            name: /add new book/i
+          }).click()
+        cy.findByRole('textbox', {
+            name: /title/i
+          }).type('Pachinko')
+        cy.findByRole('textbox', {
+            name: /isbn/i
+          }).type('1455563927')
+        cy.findByRole('textbox', {
+            name: /summary/i
+          }).type('Published in 2017, Pachinko is an epic historical fiction novel following a Korean family that immigrates to Japan.')
+        cy.findByRole('combobox', {
+            name: /author/i
+          }).select('Austen, Jane')
+        cy.findByRole('combobox', {
+            name: /genre/i
+          }).select('You\'ng Adult')
+        cy.findByRole('button', {
+            name: /submit/i
+          }).click()
+        cy.get('[data-cy=new_book_form]').should('not.exist')
+        cy.get('[data-cy=booklist]').should('contain', 'You\'ng Adult')
+
+        /*
+        * Attempt to delete the genre
+        */
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/genres/i).click()
+
+        cy.contains('You\'ng Adult').click()
+        
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        //warning should appear
+        cy.get('[data-cy=genre_popup_for_delete]').should('contain', 'You\'re attempting to delete the genre of a book currently stored in the database.')
+
+        /*
+        * delete the book first
+        */
+        cy.findByRole('button', {
+            name: /close/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /cancel/i
+        }).click()
+
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        
+        cy.findByText(/books/i).click()
+       
+        cy.contains('You\'ng Adult').click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.wait(1000)
+
+        cy.get('[data-cy=booklist]').should('not.contain', 'You\'ng Adult')
+
+        /*
+        * Delete the genre
+        */
+        cy.get('#root > div > div > div:nth-child(1) > svg').click()
+        cy.findByText(/genres/i).click()
+
+        cy.contains('You\'ng Adult').click()
+        
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        cy.findByRole('button', {
+            name: /delete/i
+        }).click()
+
+        //You'ng Adult should not exist anymore
+        cy.get('[data-cy=genre_list]').should('not.contain', 'You\'ng Adult')
     })
 
 })

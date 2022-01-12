@@ -140,7 +140,7 @@ describe('genre_spec', () => {
    *
    * update a genre that will not trigger a duplicate warning
    */
-    it.only('can update a genre that will not trigger a duplicate warning', () => {
+    it('can update a genre that will not trigger a duplicate warning', () => {
         cy.contains('Fiction').click()
 
         cy.findByRole('button', {
@@ -160,7 +160,7 @@ describe('genre_spec', () => {
         //warning should not appear
         cy.get('[data-cy=genre_popup_for_update]').should('not.exist')
 
-        //GenreList should containt Young Adult, not contain Fiction
+        //GenreList should contain Young Adult, not contain Fiction
         cy.get('[data-cy=genre_list]').should('contain', 'Young Adult')
 
         cy.get('[data-cy=genre_info_name_field]').then(($element) => {
@@ -171,6 +171,59 @@ describe('genre_spec', () => {
       
             expect(names.get().filter(el => el === "Fiction")).to.have.length(0)
         })
+    })
+
+    /*
+    *
+    * Create new genre with an apostrophe, update it to something else with an apostrophe, create a new book of this * genre, attempt to delete the book to trigger the warning, delete the genre, then delete the book
+    */
+    it.only('can create a new genre with an apostrophe, update the name to something else with an apostrophe, create a new book of this genre, attempt to delete the book to trigger the warning, delete the genre, then delete the book', () => {
+
+        /*
+        * create a new genre with an apostrophe
+        */
+        cy.findByRole('button', {
+            name: /add new genre/i
+        }).click()
+    
+        cy.findByRole('textbox', {
+            name: /new genre name/i
+        }).type('Thri\'ller')
+    
+        cy.findByRole('button', {
+            name: /submit genre/i
+        }).click()
+
+        cy.wait(1000)
+    
+        //GenreList should contain Thriller
+        cy.get('[data-cy=genre_list]').should('contain', 'Thri\'ller')
+
+        /*
+        * update it to something else with an apostrophe
+        */
+        cy.contains('Thri\'ller').click()
+
+        cy.findByRole('button', {
+                name: /update/i
+        }).click()
+
+        cy.findByRole('textbox', {
+            name: /genre name/i
+        }).clear().type('You\'ng Adult')
+
+        cy.findByRole('button', {
+            name: /update/i
+        }).click()
+
+        cy.wait(1000)
+
+        //warning should not appear
+        cy.get('[data-cy=genre_popup_for_update]').should('not.exist')
+
+        //GenreList should contain Young Adult, not contain Thri'ller
+        cy.get('[data-cy=genre_list]').should('contain', 'You\'ng Adult')
+        cy.get('[data-cy=genre_list]').should('not.contain', 'Thri\'ller')
     })
 
 })

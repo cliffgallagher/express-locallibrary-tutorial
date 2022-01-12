@@ -211,7 +211,7 @@ const BookPopupForUpdate = (props) => {
     }
 
     return <div className={styles.popup}>
-        <div>
+        <div data-cy='book_popup_for_update'>
             {!displayDuplicateWarning && <form className={styles.popupInner} onSubmit={popupForUpdateSubmitHandler}>
                 <ul>{validationErrors}</ul>
                 <label>Title<input type='text' name='updateFormTitleField' value={updateFormTitleInput} onChange={updateFormTitleInputChangeHandler} data-cy='book_update_title_field'/></label>

@@ -354,7 +354,7 @@ describe('author_spec', () => {
     *
     *   Create an author who has apostrophe in their name, update author, create a book by that author, attempt to delete that author, delete the book, then delete the author
     */
-    it.only('can create an author who has apostrophe in their name, update author, create a book by that author, attempt to delete that author, delete the book, then delete the author', () => {
+    it('can create an author who has apostrophe in their name, update author, create a book by that author, attempt to delete that author, delete the book, then delete the author', () => {
         /*
         * Create the author
         */

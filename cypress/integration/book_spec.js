@@ -321,7 +321,7 @@ describe('book_spec', () => {
       const defaultValue = $authorInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
-      expect(defaultValue).to.equal('96')
+      expect(defaultValue).to.equal('882')
     })
 
     //Make sure ISBN is 9781557427663
@@ -338,7 +338,7 @@ describe('book_spec', () => {
       const defaultValue = $genreInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
-      expect(defaultValue).to.equal('47')
+      expect(defaultValue).to.equal('352')
     })
 
     //Make sure summary is accurate
@@ -440,7 +440,7 @@ describe('book_spec', () => {
       name: /update book/i
     }).click()
 
-    cy.get('html').then(($html) => {
+    cy.get('[data-cy=book_popup_for_update]').then(($html) => {
       expect($html).to.contain('A book with the title On Beauty already exists in the database. Are you sure you want to update this book to have that title?')
     })
 
@@ -507,7 +507,9 @@ describe('book_spec', () => {
       name: /update book/i
     }).click()
 
-    cy.get('html').then(($html) => {
+    cy.wait(1000)
+
+    cy.get('[data-cy=book_popup_for_update]').then(($html) => {
       expect($html).to.contain('A book with the title On Beauty already exists in the database. Are you sure you want to update this book to have that title?')
     })
 
@@ -534,13 +536,15 @@ describe('book_spec', () => {
   *
   * Delete a book
   */
-  it('can delete a book', () => {
+  it.only('can delete a book', () => {
     cy.visit('/')
     cy.contains('A Visit From the Goon Squad').click()
   
     cy.findByRole('button', {
       name: /delete/i
     }).click()
+
+    cy.wait(1000)
   
     cy.get('[data-cy=book_popup_for_delete]').then(($popupForDelete) => {
       expect($popupForDelete)

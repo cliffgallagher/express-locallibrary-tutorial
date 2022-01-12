@@ -177,7 +177,7 @@ describe('genre_spec', () => {
     *
     * Create new genre with an apostrophe, update it to something else with an apostrophe, create a new book of this * genre, attempt to delete the genre to trigger the warning, delete the genre, then delete the book
     */
-    it.only('can create a new genre with an apostrophe, update the name to something else with an apostrophe, create a new book of this genre, attempt to delete the book to trigger the warning, delete the genre, then delete the book', () => {
+    it('can create a new genre with an apostrophe, update the name to something else with an apostrophe, create a new book of this genre, attempt to delete the book to trigger the warning, delete the genre, then delete the book', () => {
 
         /*
         * create a new genre with an apostrophe

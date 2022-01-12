@@ -321,7 +321,7 @@ describe('book_spec', () => {
       const defaultValue = $authorInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
-      expect(defaultValue).to.equal('882')
+      expect(defaultValue).to.equal('1042')
     })
 
     //Make sure ISBN is 9781557427663
@@ -338,7 +338,7 @@ describe('book_spec', () => {
       const defaultValue = $genreInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
-      expect(defaultValue).to.equal('352')
+      expect(defaultValue).to.equal('430')
     })
 
     //Make sure summary is accurate
@@ -536,7 +536,7 @@ describe('book_spec', () => {
   *
   * Delete a book
   */
-  it.only('can delete a book', () => {
+  it('can delete a book', () => {
     cy.visit('/')
     cy.contains('A Visit From the Goon Squad').click()
   

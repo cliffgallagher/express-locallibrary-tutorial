@@ -38,7 +38,6 @@ function(req, res, next) {
 }, userController.user_create_post)
 
 router.post('/login', function(req, res, next) {
-  console.log('entered login route')
   next()
 },
 body('loginUsername').not().isEmpty().withMessage('Please enter a username'),

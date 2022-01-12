@@ -1,11 +1,14 @@
 require('dotenv').config()
 const express = require('express');
+const helmet = require("helmet");
 var cookieParser = require('cookie-parser');
 const path = require('path');
 const catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
 const usersRouter = require('./routes/users');
 const { cookie } = require('express-validator');
+
 const app = express();
+app.use(helmet());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

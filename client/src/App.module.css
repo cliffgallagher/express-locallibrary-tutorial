@@ -3,3 +3,9 @@
   min-height: 100vh;
   font-family: Arial;
 }
+
+@media screen and (max-width: 56.25em) {
+  .appClass {
+    font-size:calc(12px + 1vw);
+  }
+}

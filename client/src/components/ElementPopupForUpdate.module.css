@@ -20,6 +20,7 @@
     display: grid;
     grid-auto-flow: column;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .popupInner ul {
@@ -33,7 +34,7 @@
 .popupInner label {
     grid-column: 1;
     display: grid;
-    grid-template-columns: 30% 1fr;
+    grid-template-columns: 33% 1fr;
 }
 
 .popupInner input {
@@ -74,3 +75,23 @@
     resize: none;
 }
 
+@media screen and (max-width: 315px) {
+    .popupInner input {
+        grid-column: 1;
+    
+    }
+    
+    .popupInner select {
+        grid-column: 1; 
+    }
+
+    .popupInner textArea {
+        grid-column: 1;
+    }
+
+    .popupInner label {
+        grid-column: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}

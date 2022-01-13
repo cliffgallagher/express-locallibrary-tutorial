@@ -400,7 +400,7 @@ describe('book_spec', () => {
   *
   * will trigger Duplicate warning if you update book with duplicate title
   */
-  it('will trigger Duplicate warning if you update book with duplicate title, will update book if you click through warning', () => {
+  it.only('will trigger Duplicate warning if you update book with duplicate title, will update book if you click through warning', () => {
     cy.visit('/')
     cy.contains('Metamorphosis').click()
 
@@ -439,6 +439,8 @@ describe('book_spec', () => {
     cy.findByRole('button', {
       name: /update book/i
     }).click()
+
+    cy.wait(1000)
 
     cy.get('[data-cy=book_popup_for_update]').then(($html) => {
       expect($html).to.contain('A book with the title On Beauty already exists in the database. Are you sure you want to update this book to have that title?')

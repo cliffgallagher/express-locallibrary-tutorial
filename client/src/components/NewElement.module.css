@@ -16,3 +16,21 @@
     border-color: #000000;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+
+@media screen and (max-width: 75em) {
+    #addElementButtonContainer {
+        grid-template-columns: repeat(3, minmax(auto,33%));
+    }
+}
+
+@media screen and (max-width: 56.25em) {
+    #addElementButtonContainer {
+        grid-template-columns: repeat(2, minmax(auto,50%));
+    }
+}
+
+@media screen and (max-width: 37.5em) {
+    #addElementButtonContainer {
+        grid-template-columns: repeat(3, minmax(auto,100%));
+    }
+}

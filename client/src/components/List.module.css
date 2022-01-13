@@ -7,3 +7,21 @@
     padding: 0;
     margin: 0;
 }
+
+@media screen and (max-width: 75em) {
+    .ulGrid {
+        grid-template-columns: repeat(3, minmax(auto,33%));
+    }
+}
+
+@media screen and (max-width: 56.25em) {
+    .ulGrid {
+        grid-template-columns: repeat(2, minmax(auto,50%));
+    }
+}
+
+@media screen and (max-width: 37.5em) {
+    .ulGrid {
+        grid-template-columns: repeat(1, minmax(auto,100%));
+    }
+}

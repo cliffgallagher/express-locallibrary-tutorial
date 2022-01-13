@@ -73,4 +73,32 @@
     #buttonDiv {
         margin-top: .75rem;
     }
+
+}
+
+@media screen and (max-width: 19em) {
+    #newElementForm {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #newElementForm label {
+        display: grid;
+        grid-template-columns: 5rem 8rem;
+    }
+
+    #newElementForm label input {
+        grid-column: 2;  
+    }
+    
+    #newElementForm label select {
+        grid-column: 2;
+    }
+    #newElementForm label textarea {
+        grid-column: 2;
+    }
+
+    #buttonDiv {
+        margin-top: .75rem;
+    }
 }

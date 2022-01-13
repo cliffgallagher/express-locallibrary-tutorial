@@ -129,8 +129,11 @@ const NewBookForm = (props) => {
             <label id={styles.newBookSummaryLabel}>Summary<textarea id={styles.newBookSummaryInput} name='summaryField' value={summaryInput} rows="5" cols="25" onChange={summaryInputChangeHandler}/></label>
             <label>Author<select name='authors' value ={authorInput} onChange={authorInputChangeHandler}>{authorOptions}</select></label>
             <label>Genre<select name='genres' value={genreInput} onChange={genreInputChangeHandler}>{genreOptions}</select></label>
-            <button type='submit'>Submit</button>
-            <button onClick={props.onCancel}>Cancel</button>
+            <div id={styles.buttonDiv}>
+                <button type='submit'>Submit</button>
+                <button onClick={props.onCancel}>Cancel</button>
+            </div>
+
         </form>
 }
 

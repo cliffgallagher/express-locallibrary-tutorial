@@ -60,7 +60,7 @@ const BookPopupForDelete = (props) => {
     return <div className={styles.popup}>
         <div className={styles.popup_inner}>
             <form onSubmit={deleteBookHandler} id={styles.popup_for_delete} data-cy='book_popup_for_delete'>
-                <h1>Are you sure you want to delete this book?</h1>
+                <h2>Are you sure you want to delete this book?</h2>
                 <h3>Title: {titleToDelete}</h3>
                 <h3>Author: {authorToDelete}</h3>
                 <h3>ISBN: {isbnToDelete}</h3>

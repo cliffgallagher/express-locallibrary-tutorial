@@ -76,7 +76,7 @@ const GenrePopupForDelete = (props) => {
             <div className={styles.popup_inner} id={styles.popup_for_delete} data-cy='genre_popup_for_delete'>
                 {!receivedForeignKeyConstraintError && (
                     <form onSubmit={genreDeleteFormSubmitHandler}>
-                        <h1>Are you sure you wish to delete this genre?</h1>
+                        <h2>Are you sure you wish to delete this genre?</h2>
                         <h3>{genreToDelete}</h3>
                         <div id={styles.button_div}>
                             <button type='submit'>Delete</button><button onClick={genreDeleteFormCancelHandler} id={styles.right_most_button}>Cancel</button>

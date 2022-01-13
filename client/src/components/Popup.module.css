@@ -39,3 +39,9 @@
 #popup_for_delete {
     color: black;
 }
+
+@media screen and (max-width: 708px) {
+    .popup_inner {
+        width: 60%;
+    }
+}

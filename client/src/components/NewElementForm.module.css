@@ -46,3 +46,25 @@
     font-family: Arial;
     resize: none;
 }
+
+@media screen and (max-width: 45em) {
+    #newElementForm {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-auto-flow: column;
+    }
+    
+    #newElementForm label {
+        grid-column: 1;
+    }
+
+    #newElementForm label input {
+        grid-column: 2;
+    
+    }
+    
+    #newElementForm label select {
+        grid-column: 2;
+    }
+}

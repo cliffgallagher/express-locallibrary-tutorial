@@ -45,3 +45,9 @@
 #right_most_button {
     margin-left: .5rem;
 }
+
+@media screen and (orientation: landscape) {
+    .chosen_element_popup_inner {
+        width: 75%;
+    }
+}

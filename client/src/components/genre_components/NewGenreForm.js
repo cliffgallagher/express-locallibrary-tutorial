@@ -65,8 +65,10 @@ const NewGenreForm = (props) => {
             <form id={styles.newElementForm} onSubmit={newGenreFormSubmitHandler} data-cy='new_genre_form'>
                 <ul>{validationErrors}</ul>
                 <label>New Genre Name<input type='text' name='newGenreFormNameField' value={newGenreFormNameValue} onChange={newGenreFormNameChangeHandler}/></label>
-                <button type='submit'>Submit Genre</button>
-                <button onClick={newGenreFormCancelButtonHandler}>Cancel</button>
+                <div id={styles.buttonDiv}>
+                    <button type='submit'>Submit Genre</button>
+                    <button onClick={newGenreFormCancelButtonHandler}>Cancel</button>
+                </div>
             </form>
         </div>
     )

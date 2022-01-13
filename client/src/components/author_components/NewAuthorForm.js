@@ -96,8 +96,10 @@ const NewAuthorForm = (props) => {
                 <label>Family Name<input type='text' name='newAuthorFormFamilyNameInput' onChange={newAuthorFormFamilyNameChangeHandler} value={newAuthorFamilyName}/></label>
                 <label>Date of Birth<input type='date' name='newAuthorFormBirthInput' onChange={newAuthorFormBirthChangeHandler} value={newAuthorBirthDate}/></label>
                 <label>Date of Death<input type='date' name='newAuthorFormDeathInput' onChange={newAuthorFormDeathChangeHandler} value={newAuthorDeathDate}/></label>
-                <button type='submit'>Submit</button>
-                <button onClick={newAuthorCancelButtonClickHandler}>Cancel</button>
+                <div id={styles.buttonDiv}>
+                    <button type='submit'>Submit</button>
+                    <button onClick={newAuthorCancelButtonClickHandler}>Cancel</button>
+                </div>
             </form> 
         </div>
     )

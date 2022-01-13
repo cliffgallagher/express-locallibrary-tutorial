@@ -74,7 +74,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  console.log('error in default handler: ' + JSON.stringify(err))
+  //console.log('error in default handler: ' + JSON.stringify(err))
   if (err.name.toLowerCase().includes('error')) {
     res.json({
       "errors": [

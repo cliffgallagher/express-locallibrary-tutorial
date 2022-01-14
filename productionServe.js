@@ -79,7 +79,7 @@ app.use(function(err, req, res, next) {
     res.json({
       "errors": [
         {
-          'msg': 'Invalid input'
+          'msg': JSON.stringify(err)
         }
       ]
     });

@@ -79,7 +79,7 @@ app.use(function(err, req, res, next) {
     res.json({
       "errors": [
         {
-          'msg': JSON.stringify(err)
+          'msg': JSON.stringify(err.message)
         }
       ]
     });

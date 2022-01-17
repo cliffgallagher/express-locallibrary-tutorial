@@ -32,7 +32,7 @@ const ChosenBook = (props) => {
                     <div id={styles.button_div}>
                         <button onClick={updateBookButtonClickHandler}>Update</button>
                         <button onClick={deleteBookButtonClickHandler}>Delete</button>
-                        <button onClick={chosenElementCancelHandler} onTouchStart={chosenElementCancelHandler}>Cancel</button>
+                        <button onClick={chosenElementCancelHandler} >Cancel</button>
                     </div>
                 </div>
             </div>

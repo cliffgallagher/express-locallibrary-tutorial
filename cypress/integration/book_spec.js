@@ -321,7 +321,7 @@ describe('book_spec', () => {
       const defaultValue = $authorInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
-      expect(defaultValue).to.equal('1101')
+      expect(defaultValue).to.equal('1160')
     })
 
     //Make sure ISBN is 9781557427663

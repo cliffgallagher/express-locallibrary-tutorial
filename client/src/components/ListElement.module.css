@@ -23,6 +23,8 @@
       color: #7DB4B5;
       box-shadow: none;
       transition: .1s;
+      pointer-events: none;
+      user-select: none;
   }
 
   .listElement.hideElement.gridOrder {

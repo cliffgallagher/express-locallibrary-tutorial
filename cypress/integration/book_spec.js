@@ -400,7 +400,7 @@ describe('book_spec', () => {
   *
   * will trigger Duplicate warning if you update book with duplicate title
   */
-  it.only('will trigger Duplicate warning if you update book with duplicate title, will update book if you click through warning', () => {
+  it('will trigger Duplicate warning if you update book with duplicate title, will update book if you click through warning', () => {
     cy.visit('/')
     cy.contains('Metamorphosis').click()
 

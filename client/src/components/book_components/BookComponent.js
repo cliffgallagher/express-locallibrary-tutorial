@@ -5,7 +5,7 @@ import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
 import {AuthContext} from '../../context/auth-context';
-import MetaTags from 'react-meta-tags';
+import {Helmet} from 'react-helmet';
 
 const BookComponent = (props) => {
     const [displayBooks, setDisplayBooks] = useState(true);
@@ -48,9 +48,9 @@ const BookComponent = (props) => {
     }, []);
 
     return (<div data-cy='book_component'>
-            <MetaTags>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-            </MetaTags>
+            <Helmet>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            </Helmet>
             <NewBook getBookListMyComponentNewToNewBook={getBookList} />
             <BookList bookArray={bookArray}/>
         </div>)

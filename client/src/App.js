@@ -71,8 +71,9 @@ function App() {
 
   return (
     <div className={styles.appClass}>
-      <MetaTags>
-        <meta name="viewport" content="initial-scale=1.0"/>
+        <MetaTags>
+          <meta name="viewport" content="initial-scale=1.0"/>
+        </MetaTags>
         {!isLoggedIn && !isNewUser && (
           <div>
             <Login setIsNewUser={setIsNewUser} setIsLoggedIn={setIsLoggedIn} sendLoggedInUserToApp={receiveLoggedInUserFromLogin}/>
@@ -96,7 +97,6 @@ function App() {
             </AuthContext.Provider>
           </div>
         )}
-      </MetaTags>
     </div>
   );
 }

@@ -72,7 +72,7 @@ function App() {
   return (
     <div className={styles.appClass}>
       <MetaTags>
-        <meta name="viewport" content="width=1000"/>
+        <meta name="viewport" content="initial-scale=1.0"/>
         {!isLoggedIn && !isNewUser && (
           <div>
             <Login setIsNewUser={setIsNewUser} setIsLoggedIn={setIsLoggedIn} sendLoggedInUserToApp={receiveLoggedInUserFromLogin}/>

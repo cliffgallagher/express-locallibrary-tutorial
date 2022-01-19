@@ -49,7 +49,7 @@ const BookComponent = (props) => {
 
     return (<div data-cy='book_component'>
             <MetaTags>
-                <meta name="viewport" content="initial-scale=1.0"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </MetaTags>
             <NewBook getBookListMyComponentNewToNewBook={getBookList} />
             <BookList bookArray={bookArray}/>

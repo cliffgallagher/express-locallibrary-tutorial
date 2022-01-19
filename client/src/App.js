@@ -8,6 +8,7 @@ import NavbarOptions from './components/NavbarOptions';
 import Login from './components/user_components/Login.js';
 import NewUserSignup from './components/user_components/NewUserSignup.js';
 import {AuthContext} from './context/auth-context';
+import {Helmet} from 'react-helmet';
 
 function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
@@ -70,6 +71,9 @@ function App() {
 
   return (
     <div className={styles.appClass}>
+        <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-react-helmet="true"/>
+        </Helmet>
         {!isLoggedIn && !isNewUser && (
           <div>
             <Login setIsNewUser={setIsNewUser} setIsLoggedIn={setIsLoggedIn} sendLoggedInUserToApp={receiveLoggedInUserFromLogin}/>

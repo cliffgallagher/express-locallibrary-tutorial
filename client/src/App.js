@@ -8,6 +8,7 @@ import NavbarOptions from './components/NavbarOptions';
 import Login from './components/user_components/Login.js';
 import NewUserSignup from './components/user_components/NewUserSignup.js';
 import {AuthContext} from './context/auth-context';
+import MetaTags from 'react-meta-tags';
 
 function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
@@ -70,6 +71,8 @@ function App() {
 
   return (
     <div className={styles.appClass}>
+      <MetaTags>
+        <meta name="viewport" content="width=1000"/>
         {!isLoggedIn && !isNewUser && (
           <div>
             <Login setIsNewUser={setIsNewUser} setIsLoggedIn={setIsLoggedIn} sendLoggedInUserToApp={receiveLoggedInUserFromLogin}/>
@@ -93,6 +96,7 @@ function App() {
             </AuthContext.Provider>
           </div>
         )}
+      </MetaTags>
     </div>
   );
 }

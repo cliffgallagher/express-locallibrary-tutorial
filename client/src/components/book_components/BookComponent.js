@@ -5,7 +5,7 @@ import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
 import {AuthContext} from '../../context/auth-context';
-import {Helmet} from 'react-helmet';
+
 
 const BookComponent = (props) => {
     const [displayBooks, setDisplayBooks] = useState(true);
@@ -45,6 +45,7 @@ const BookComponent = (props) => {
 
     useEffect(() => {
         getBookList();
+        document.body.style.zoom = "100%";
     }, []);
 
     return (<div data-cy='book_component'>

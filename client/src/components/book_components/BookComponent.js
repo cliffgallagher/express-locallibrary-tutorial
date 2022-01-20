@@ -45,7 +45,6 @@ const BookComponent = (props) => {
 
     useEffect(() => {
         getBookList();
-        document.body.style.zoom = "100%";
     }, []);
 
     return (<div data-cy='book_component'>

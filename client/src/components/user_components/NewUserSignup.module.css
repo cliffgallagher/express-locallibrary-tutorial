@@ -18,6 +18,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
 .popup_inner form {
@@ -91,7 +92,7 @@
 
 @media screen and (orientation: landscape) {
     .popup_inner {
-        max-height: 75%;
+        max-height:100%;
         overflow: scroll; 
     }
 }

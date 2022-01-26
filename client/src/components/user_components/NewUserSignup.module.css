@@ -89,7 +89,7 @@
     margin-bottom: 0rem;
 }
 
-@media screen and (orientation: landscape) {
+@media screen and (orientation: landscape) and (max-width: 56.25em) {
     .popup_inner {
         max-height:100%;
         overflow: scroll; 

@@ -91,7 +91,7 @@
 }
 
 @media screen and (orientation: landscape) {
-    .chosen_element_popup_inner {
+    .popup_inner {
         overflow: scroll; 
     }
 }

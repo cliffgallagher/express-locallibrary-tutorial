@@ -89,5 +89,9 @@
     margin-bottom: 0rem;
 }
 
-
+@media screen and (orientation: landscape) {
+    .popup_inner {
+        max-height: 75%;
+    }
+}
 

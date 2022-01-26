@@ -19,7 +19,6 @@
     flex-direction: column;
     align-items: center;
     max-height: 100%;
-    overflow: scroll;
 }
 
 .popup_inner form {
@@ -91,5 +90,9 @@
     margin-bottom: 0rem;
 }
 
-
+@media screen and (orientation: landscape) {
+    .chosen_element_popup_inner {
+        overflow: scroll; 
+    }
+}
 

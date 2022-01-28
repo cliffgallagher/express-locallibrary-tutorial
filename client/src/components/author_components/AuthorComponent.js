@@ -38,6 +38,8 @@ const AuthorComponent = () => {
     }
 
     useEffect(() => {
+        ReactGA.initialize('UA-218818511-1');
+        ReactGA.pageview('/author_component');
         getAuthorList();
     }, [])
 

@@ -44,6 +44,8 @@ const BookComponent = (props) => {
     }
 
     useEffect(() => {
+        ReactGA.initialize('UA-218818511-1');
+        ReactGA.pageview('/book_component');
         getBookList();
     }, []);
 

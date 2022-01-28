@@ -9,6 +9,7 @@ import Login from './components/user_components/Login.js';
 import NewUserSignup from './components/user_components/NewUserSignup.js';
 import {AuthContext} from './context/auth-context';
 import {Helmet} from 'react-helmet';
+import ReactGA from 'react-ga';
 
 function App() {
   const [displayBookComponent, setDisplayBookComponent] = useState(true);
@@ -66,6 +67,8 @@ function App() {
   }
 
   useEffect(() => {
+    ReactGA.initialize('UA-218818511-1');
+    ReactGA.pageview('/');
     checkForTokenInCookies();
   }, [])
 

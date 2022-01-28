@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './NewUserSignup.module.css';
+import ReactGA from 'react-ga';
 
 const NewUserSignup = (props) => {
     const [newUserFirstName, setNewUserFirstName] = useState();

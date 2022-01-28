@@ -5,6 +5,7 @@ import AuthorListElement from './AuthorListElement';
 import AuthorPopupForUpdate from './AuthorPopupForUpdate';
 import AuthorPopupForDelete from './AuthorPopupForDelete';
 import { AuthContext } from '../../context/auth-context';
+import ReactGA from 'react-ga';
 
 const AuthorComponent = () => {
     const [displayAuthors, setDisplayAuthors] = useState(true);

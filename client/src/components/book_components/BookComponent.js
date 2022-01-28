@@ -5,7 +5,7 @@ import BookListElement from './BookListElement';
 import BookPopupForUpdate from './BookPopupForUpdate';
 import BookPopupForDelete from './BookPopupForDelete';
 import {AuthContext} from '../../context/auth-context';
-
+import ReactGA from 'react-ga';
 
 const BookComponent = (props) => {
     const [displayBooks, setDisplayBooks] = useState(true);

@@ -5,6 +5,7 @@ import GenreListItem from './GenreListItem';
 import GenrePopupForUpdate from './GenrePopupForUpdate';
 import GenrePopupForDelete from './GenrePopupForDelete';
 import { AuthContext } from '../../context/auth-context';
+import ReactGA from 'react-ga';
 
 const GenreComponent = () => {
     const [genreArray, setGenreArray] = useState();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Login.module.css';
 import ReactGA from 'react-ga';
 
@@ -52,6 +52,11 @@ const Login = (props) => {
     function loginPasswordChangeHandler(event) {
         setLoginPassword(event.target.value);
     }
+
+    useEffect(() => {
+        ReactGA.initialize('UA-218818511-1');
+        ReactGA.pageview('/login');
+    })
     
     return (
         <div className={styles.popup} data-cy='login_component'>

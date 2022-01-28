@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './NewUserSignup.module.css';
 import ReactGA from 'react-ga';
 
@@ -110,6 +110,11 @@ const NewUserSignup = (props) => {
             setPasswordState('password');
         }
     }
+
+    useEffect(() => {
+        ReactGA.initialize('UA-218818511-1');
+        ReactGA.pageview('/new_user_signup');
+    })
     
     return (
         <div className={styles.popup}>

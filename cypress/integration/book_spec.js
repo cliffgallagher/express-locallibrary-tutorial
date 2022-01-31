@@ -321,7 +321,11 @@ describe('book_spec', () => {
       const defaultValue = $authorInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
+<<<<<<< HEAD
       expect(defaultValue).to.equal('1337')
+=======
+      expect(defaultValue).to.equal('1396')
+>>>>>>> integrating-google-analytics
     })
 
     //Make sure ISBN is 9781557427663
@@ -338,7 +342,11 @@ describe('book_spec', () => {
       const defaultValue = $genreInput.prop('value')
       return defaultValue
     }).then((defaultValue) => {
+<<<<<<< HEAD
       expect(defaultValue).to.equal('554')
+=======
+      expect(defaultValue).to.equal('592')
+>>>>>>> integrating-google-analytics
     })
 
     //Make sure summary is accurate

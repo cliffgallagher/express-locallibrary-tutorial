@@ -12,7 +12,9 @@ const app = express();
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      scriptSrc: ["'self'", "'sha256-OvqKZ9cjYHWKUBBRfJn1jQUTQQkkM00VwLgFsOnDAXM='"],
+      scriptSrc: ["'self'", "'sha256-OvqKZ9cjYHWKUBBRfJn1jQUTQQkkM00VwLgFsOnDAXM='", "https://www.google-analytics.com", "https://ssl.google-analytics.com"],
+      "img-src": ["'self'", "data:", "https://www.google-analytics.com"],
+      "connect-src": ["'self'", "https://www.google-analytics.com"]
     },
   })
 );

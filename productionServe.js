@@ -8,7 +8,14 @@ const usersRouter = require('./routes/users');
 const { cookie } = require('express-validator');
 
 const app = express();
-app.use(helmet());
+//app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      scriptSrc: ["'self'", "'sha256-OvqKZ9cjYHWKUBBRfJn1jQUTQQkkM00VwLgFsOnDAXM='"],
+    },
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

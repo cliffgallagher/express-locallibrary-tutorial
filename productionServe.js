@@ -9,11 +9,10 @@ const { cookie } = require('express-validator');
 
 
 const app = express();
-app.use((req, res, next) => {
-  if (req.secure) {
-    next()
+app.use((req, res) => {
+  if (!req.secure) {
+    res.redirect(`https://${req.hostname}${req.url}`)
   }
-  res.redirect(`https://${req.hostname}${req.url}`)
 })
 
 //app.use(helmet());

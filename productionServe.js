@@ -6,17 +6,16 @@ const path = require('path');
 const catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
 const usersRouter = require('./routes/users');
 const { cookie } = require('express-validator');
-const { config } = require('dotenv');
+
 
 const app = express();
-if (config.env === 'production') {
-  app.use((req, res, next) => {
-    if (req.secure) {
-      return next()
-    }
-    res.redirect(`https://${req.hostname}${req.url}`)
-  })
-}
+app.use((req, res, next) => {
+  if (req.secure) {
+    return next()
+  }
+  res.redirect(`https://${req.hostname}${req.url}`)
+})
+
 //app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({

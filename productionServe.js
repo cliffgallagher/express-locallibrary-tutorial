@@ -9,10 +9,6 @@ const { cookie } = require('express-validator');
 
 
 const app = express();
-<<<<<<< HEAD
-app.use(helmet());
-
-=======
 
 /*app.use((req, res, next) => {
   console.log(JSON.stringify(req.headers))
@@ -47,7 +43,6 @@ app.use(
     },
   })
 );
->>>>>>> reconcile-analytics-and-iphone
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

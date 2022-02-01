@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 /*app.set('trust proxy', 'true')*/
 app.use((req, res, next) => {
   console.log('x-forwarded-proto header value: ' + req.get('x-forwarded-proto'))
-  if (req.get('x-forwarded-proto') == "https") {
+  if (req.get('x-forwarded-proto') === "https") {
     console.log('entered if statement')
     return next()
   }

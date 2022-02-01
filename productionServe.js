@@ -18,8 +18,10 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   console.log('x-forwarded-proto header value: ' + req.get('x-forwarded-proto'))
   if (req.get('x-forwarded-proto') === "https") {
+    console.log('entered if statement')
     next()
   }
+  console.log('exited if statement')
   res.redirect(`https://${req.hostname}${req.url}`)
 })
 

@@ -9,14 +9,14 @@ const { cookie } = require('express-validator');
 
 
 const app = express();
-app.set('trust proxy', 'true')
 
+/*app.set('trust proxy', 'true')
 app.use((req, res, next) => {
   if (req.secure) {
     return next()
   }
   res.redirect(`https://${req.hostname}${req.url}`)
-})
+})*/
 
 /*app.use((req, res) => {
   console.log('protocol: ' + req.protocol + ', hostname: ' + req.hostname + ', path: ' + req.path);

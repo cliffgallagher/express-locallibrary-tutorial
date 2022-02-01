@@ -7,9 +7,47 @@ const catalogRouter = require('./routes/catalog');  //Import routes for "catalog
 const usersRouter = require('./routes/users');
 const { cookie } = require('express-validator');
 
+
 const app = express();
+<<<<<<< HEAD
 app.use(helmet());
 
+=======
+
+/*app.use((req, res, next) => {
+  console.log(JSON.stringify(req.headers))
+  next()
+})*/
+/*app.set('trust proxy', 'true')*/
+app.use((req, res, next) => {
+  //console.log('x-forwarded-proto header value: ' + req.get('x-forwarded-proto'))
+  if (req.get('x-forwarded-proto') == "https") {
+    //console.log('entered if statement')
+    return next()
+  }
+  //console.log('exited if statement')
+  res.redirect(`https://${req.hostname}${req.url}`)
+})
+
+/*app.use((req, res) => {
+  console.log('protocol: ' + req.protocol + ', hostname: ' + req.hostname + ', path: ' + req.path);
+  if (!req.secure) {
+    //res.redirect(`https://${req.hostname}${req.path}`)
+    res.redirect(`https://cliffgallagher-express-project.herokuapp.com`)
+  } 
+})*/
+
+//app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      scriptSrc: ["'self'", "'sha256-OvqKZ9cjYHWKUBBRfJn1jQUTQQkkM00VwLgFsOnDAXM='", "https://www.google-analytics.com", "https://ssl.google-analytics.com"],
+      "img-src": ["'self'", "data:", "https://www.google-analytics.com"],
+      "connect-src": ["'self'", "https://www.google-analytics.com"]
+    },
+  })
+);
+>>>>>>> reconcile-analytics-and-iphone
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

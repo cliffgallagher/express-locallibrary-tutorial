@@ -19,7 +19,8 @@ const app = express();
 
 app.use((req, res) => {
   if (req.protocol === 'http') {
-    res.redirect(`https://${req.hostname}${req.path}`)
+    //res.redirect(`https://${req.hostname}${req.path}`)
+    res.redirect(`https://cliffgallagher-express-project.herokuapp.com`)
   } 
 })
 

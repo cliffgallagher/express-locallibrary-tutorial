@@ -10,20 +10,20 @@ const { cookie } = require('express-validator');
 
 const app = express();
 
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
   if (req.secure) {
     return next()
   }
   res.redirect(`https://${req.hostname}${req.url}`)
-})*/
+})
 
-app.use((req, res) => {
+/*app.use((req, res) => {
   console.log('protocol: ' + req.protocol + ', hostname: ' + req.hostname + ', path: ' + req.path);
-  if (req.protocol === 'http') {
+  if (!req.secure) {
     //res.redirect(`https://${req.hostname}${req.path}`)
     res.redirect(`https://cliffgallagher-express-project.herokuapp.com`)
   } 
-})
+})*/
 
 //app.use(helmet());
 app.use(

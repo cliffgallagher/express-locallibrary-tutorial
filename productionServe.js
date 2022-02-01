@@ -10,6 +10,10 @@ const { cookie } = require('express-validator');
 
 const app = express();
 
+app.use((req, res, next) => {
+  console.log(JSON.stringify(req.headers))
+  next()
+})
 /*app.set('trust proxy', 'true')
 app.use((req, res, next) => {
   if (req.secure) {

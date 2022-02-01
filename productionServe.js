@@ -14,13 +14,13 @@ app.use((req, res, next) => {
   console.log(JSON.stringify(req.headers))
   next()
 })
-/*app.set('trust proxy', 'true')
+/*app.set('trust proxy', 'true')*/
 app.use((req, res, next) => {
-  if (req.secure) {
-    return next()
+  if (req.get('x-forwarded-proto') === "https") {
+    next()
   }
   res.redirect(`https://${req.hostname}${req.url}`)
-})*/
+})
 
 /*app.use((req, res) => {
   console.log('protocol: ' + req.protocol + ', hostname: ' + req.hostname + ', path: ' + req.path);

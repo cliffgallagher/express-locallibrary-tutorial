@@ -59,7 +59,7 @@ const BookListElement = (props) => {
             {displayElement && (
                 <div>
                     <BookInfo title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary}/>
-                    <ChosenBook title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary} setDisplayElement={setDisplayElement} setHideElement={setHideElement} getBookList={props.getBookList} updateBookButtonClickHandler={updateBookButtonClickHandler} bookID={props.bookID} authorID={props.authorID} genreID={props.genreID} getBookList={props.getBookList}/>
+                    <ChosenBook title={props.title} author={props.author} isbn={props.isbn} genreName={props.genreName} summary={props.summary} setDisplayElement={setDisplayElement} setHideElement={setHideElement} getBookList={props.getBookList} updateBookButtonClickHandler={updateBookButtonClickHandler} bookID={props.bookID} authorID={props.authorID} genreID={props.genreID}/>
                 </div>    
             )}
         </div>
